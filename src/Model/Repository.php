@@ -27,19 +27,4 @@ abstract class Repository {
 
 	abstract protected function hydrate(array $data);
 
-	protected function parseDocComment($comment)
-	{
-		$doc = [];
-
-		if (preg_match_all('/@(\w+)(?:[ ]+(.*))?/', $comment, $matches))
-		{
-			$doc = array_combine(
-				array_map('trim', $matches[1]),
-				array_map('trim', $matches[2])
-			);
-		}
-
-		return $doc;
-	}
-
 }

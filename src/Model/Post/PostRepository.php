@@ -2,7 +2,7 @@
 
 namespace Fire\Model\Post;
 
-use Collection;
+use Fire\Foundation\Collection;
 
 class PostRepository extends \Fire\Model\Repository {
 
@@ -32,10 +32,10 @@ class PostRepository extends \Fire\Model\Repository {
 		return $post;
 	}
 
-	public function query(array $args = [])
+	public function find(array $args = [])
 	{
 		$args = array_replace_recursive([
-			'post_type'        => 'post',
+			'post_type'        => PostPostType::TYPE,
 			'posts_per_page'   => -1,
 			'suppress_filters' => false,
 		], $args);
@@ -96,56 +96,61 @@ class PostRepository extends \Fire\Model\Repository {
 
 	protected function hydrate(array $data)
 	{
-		$ref    = $this->em->getReflection('Post');
+		$ref    = $this->em->getEntityReflection('Post');
 		$entity = $this->em->getEntityFromReflection($ref);
 		
 		foreach ($ref->getProperties() as $prop)
 		{
 			$name  = $prop->getName();
-			$doc   = $this->parseDocComment($prop->getDocComment());
-			$value = null;
-			$skip  = true;
+			$meta  = $this->em->getMetaData($prop->getDocComment());
+			$value = false;
 
-			//if ( ! isset($doc['column']) and ! isset($doc['meta']))
-				//continue;
+			if ( ! $meta->get('Column'))
+				continue;
 
-			if (isset($doc['column']))
+			// Maps property to post table column
+			if ($column = $meta->get('Column'))
 			{
-				$skip  = false;
-				$name  = $doc['column'] ?: $name;
-				$value = isset($data[$name]) ? $data[$name] : null;
+				$name  = $column->get('name', $name);
+				$value = isset($data[$name]) ? $data[$name] : false;
 			}
 
-			if (isset($doc['meta']))
+			// Maps property to meta table
+			if ($_meta = $meta->get('Meta'))
 			{
-				$skip = false;
+				$name = $_meta->get('key', $name);
 
 				if (function_exists('get_field'))
 				{
-					$value = get_field($doc['meta'], $data['ID']);
+					$value = get_field($name, $data['ID']);
 				}
 				else
 				{
-					$value = get_post_meta($data['ID'], $doc['meta'], true);
+					$value = get_post_meta($data['ID'], $name, true);
 				}
 			}
 
-			if (isset($doc['belongsToPost']))
+			// Maps to one to many relationship
+			if ($oneToMany = $meta->get('OneToMany'))
 			{
-				$skip = false;
-				$id   = $data[$doc['belongsToPost']];
-
-				$value = function() use ($id)
+				if (isset($data[$name]) and $data[$name])
 				{
-					return $this->em->getRepository('Post')->postOfId($id);
-				};
+					$id         = $data[$name];
+					$entityName = $oneToMany->get('entityName');
+					$method     = $oneToMany->get('method');
+
+					$value = function() use ($id, $entityName, $method)
+					{
+						return $this->em->getRepository($entityName)->$method($id);
+					};
+				}
 			}
 
-			if ($skip)
-				continue;
-
-			$prop->setAccessible(true);
-			$prop->setValue($entity, $value);
+			if ($value)
+			{
+				$prop->setAccessible(true);
+				$prop->setValue($entity, $value);
+			}
 		}
 
 		$entity->setNative($data);

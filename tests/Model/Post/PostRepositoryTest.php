@@ -1,5 +1,6 @@
 <?php
 
+use Fire\Foundation\MetaDataParser;
 use Fire\Model\RepositoryFactory;
 use Fire\Model\EntityManager;
 use Fire\Model\Post\PostRepository;
@@ -16,7 +17,7 @@ class PostRepositoryTest extends WP_UnitTestCase {
 		$factory = new RepositoryFactory;
 		$factory->registerRepository('Post', 'Fire\Model\Post\PostRepository');
 
-		$this->repo = new PostRepository(new EntityManager($factory));
+		$this->repo = new PostRepository(new EntityManager($factory, new MetaDataParser));
 	}
 
 	public function testLoadsPostOfId()
@@ -62,6 +63,18 @@ class PostRepositoryTest extends WP_UnitTestCase {
 		$child = $this->repo->postOfId($childId);
 
 		$this->assertEquals($parentId, $child->parent()->id());
+	}
+
+	public function testFind()
+	{
+		$id = $this->factory->post->create();
+
+		$this->factory->post->create();
+
+		$results = $this->repo->find();
+
+		$this->assertEquals(2, $results->count());
+		$this->assertEquals($id, $results->first()->id());
 	}
 
 }

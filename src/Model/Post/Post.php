@@ -7,79 +7,81 @@ use Fire\Model\Identity\UserInterface;
 class Post implements PostInterface {
 
 	/**
-	 * @column  ID
+	 * @Column(name='ID')
 	 */
 	protected $id;
 
 	/**
-	 * @column  post_author
-	 * @var     Fire\Model\Identity\UserInterface
+	 * @Column(name='post_author')
+	 * @OneToMany(entityName='User', method='userOfId')
+	 * @var  Fire\Model\Identity\UserInterface
 	 */
 	protected $author;
 
 	/**
-	 * @column  post_date
+	 * @Column(name='post_date')
 	 */
 	protected $date;
 
 	/**
-	 * @column  post_content
+	 * @Column(name='post_content')
 	 */
 	protected $content;
 
 	/**
-	 * @column  post_title
+	 * @Column(name='post_title')
 	 */
 	protected $title;
 
 	/**
-	 * @column  post_excerpt
+	 * @Column(name='post_excerpt')
 	 */
 	protected $excerpt;
 
 	/**
-	 * @column  post_status
+	 * @Column(name='post_status')
 	 */
 	protected $status;
 
 	/**
-	 * @column  comment_status
+	 * @Column(name='comment_status')
 	 */
 	protected $commentStatus;
 
 	/**
-	 * @column  ping_status
+	 * @Column(name='ping_status')
 	 */
 	protected $pingStatus;
 
 	/**
-	 * @column  post_password
+	 * @Column(name='post_password')
 	 */
 	protected $password;
 
 	/**
-	 * @column  post_name
+	 * @Column(name='post_name')
 	 */
 	protected $slug;
 
 	/**
-	 * @column  post_modified
+	 * @Column(name='post_modified')
 	 */
 	protected $modified;
 
 	/**
-	 * @belongsToPost  post_parent
-	 * @var            Fire\Model\Post\PostInterface
+	 * @Column(name='post_parent')
+	 * @OneToMany(entityName='Post', method='postOfId')
+	 * @var  Fire\Model\Post\PostInterface
 	 */
 	protected $parent;
 
 	/**
-	 * @column  menu_order
+	 * @Column(name='menu_order')
 	 */
 	protected $menuOrder;
 
 	/**
-	 * @column  post_type
+	 * @Column(name='post_type')
 	 */
 	protected $type;
 
