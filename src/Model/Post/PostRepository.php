@@ -12,7 +12,7 @@ class PostRepository extends \Fire\Model\Repository {
 	{
 		$post = get_post($id, ARRAY_A);
 
-		if ($post and $post['post_type'] === PostPostType::TYPE)
+		if ($post and $post['post_type'] === Post::TYPE)
 		{
 			$post = $this->hydrate($post);
 		}
@@ -22,7 +22,7 @@ class PostRepository extends \Fire\Model\Repository {
 
 	public function postOfSlug($slug)
 	{
-		$post = get_page_by_path($slug, ARRAY_A, PostPostType::TYPE);
+		$post = get_page_by_path($slug, ARRAY_A, Post::TYPE);
 
 		if ($post)
 		{
@@ -35,7 +35,7 @@ class PostRepository extends \Fire\Model\Repository {
 	public function find(array $args = [])
 	{
 		$args = array_replace_recursive([
-			'post_type'        => PostPostType::TYPE,
+			'post_type'        => Post::TYPE,
 			'posts_per_page'   => -1,
 			'suppress_filters' => false,
 		], $args);
@@ -48,50 +48,6 @@ class PostRepository extends \Fire\Model\Repository {
 		}
 
 		return $posts;
-	}
-
-	public function add(Post $post)
-	{
-		if ($post->id())
-		{
-			throw new Exception("Can't create a post with an ID already set");
-		}
-
-		wp_insert_post($this->transformPost($post));
-	}
-
-	public function update(Post $post)
-	{
-		if ( ! $post->id())
-		{
-			return $this->add($post);
-		}
-
-		$data = $this->transformPost($post);
-
-		$data['ID'] = $post->id();
-
-		wp_update_post($data);
-	}
-
-	protected function transformPost($post)
-	{
-		return [
-			'post_type'      => PostPostType::TYPE,
-			'post_author'    => $post->author() ? $post->author()->id() : null,
-			'post_date'      => $post->date('Y-m-d H:i:s'),
-			'post_content'   => $post->content(),
-			'post_title'     => $post->title(),
-			'post_excerpt'   => $post->excerpt(),
-			'post_status'    => $post->status(),
-			'comment_status' => $post->commentStatus(),
-			'ping_status'    => $post->pingStatus(),
-			'post_password'  => $post->password(),
-			'post_name'      => $post->slug(),
-			'post_modified'  => $post->modified(),
-			'post_parent'    => $post->parent() ? $post->parent()->id() : null,
-			'menu_order'     => $post->menuOrder(),
-		];
 	}
 
 	protected function hydrate(array $data)

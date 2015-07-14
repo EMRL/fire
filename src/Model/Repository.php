@@ -25,6 +25,4 @@ abstract class Repository {
 		$this->em = $em;
 	}
 
-	abstract protected function hydrate(array $data);
-
 }

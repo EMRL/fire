@@ -2,9 +2,12 @@
 
 namespace Fire\Model\Post;
 
+use Fire\Model\Entity;
 use Fire\Model\Identity\UserInterface;
 
-class Post implements PostInterface {
+class Post extends Entity implements PostInterface {
+
+	const TYPE = '';
 
 	/**
 	 * @Column(name='ID')
@@ -13,7 +16,6 @@ class Post implements PostInterface {
 
 	/**
 	 * @Column(name='post_author')
-	 * @OneToMany(entityName='User', method='userOfId')
 	 * @var  Fire\Model\Identity\UserInterface
 	 */
 	protected $author;
@@ -70,7 +72,6 @@ class Post implements PostInterface {
 
 	/**
 	 * @Column(name='post_parent')
-	 * @OneToMany(entityName='Post', method='postOfId')
 	 * @var  Fire\Model\Post\PostInterface
 	 */
 	protected $parent;
@@ -137,10 +138,7 @@ class Post implements PostInterface {
 	 */
 	public function author()
 	{
-		if ($this->author instanceof UserInterface)
-			return $this->author;
-
-		return $this->author = call_user_func($this->author);
+		return $this->lazyLoad($this->author);
 	}
 
 	/**
@@ -414,10 +412,7 @@ class Post implements PostInterface {
 	 */
 	public function parent()
 	{
-		if ($this->parent instanceof PostInterface)
-			return $this->parent;
-
-		return $this->parent = call_user_func($this->parent);
+		return $this->lazyLoad($this->parent);
 	}
 
 	/**
