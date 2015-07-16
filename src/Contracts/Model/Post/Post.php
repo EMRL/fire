@@ -1,16 +1,14 @@
 <?php
 
-namespace Fire\Model\Post;
+namespace Fire\Contracts\Model\Post;
 
-use Fire\Model\Identity\UserInterface;
-
-interface PostInterface {
+interface Post {
 
 	public function id();
 	public function setId($id);
 
 	public function author();
-	public function setAuthor(UserInterface $user);
+	public function setAuthor($user);
 
 	public function date();
 	public function setDate($date);
@@ -34,7 +32,7 @@ interface PostInterface {
 	public function setSlug($slug);
 
 	public function parent();
-	public function setParent(PostInterface $parent);
+	public function setParent($parent);
 
 	public function type();
 	public function setType($type);

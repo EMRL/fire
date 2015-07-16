@@ -2,34 +2,30 @@
 
 namespace Fire\Model;
 
-class RepositoryFactory implements RepositoryFactoryInterface {
+use Fire\Contracts\Model\RepositoryFactory as RepositoryFactoryContract;
+use Fire\Contracts\Model\EntityManager as EntityManagerContract;
+
+class RepositoryFactory implements RepositoryFactoryContract {
 
 	protected $repositories = [];
 
 	protected $instances = [];
 
-	public function registerRepository($entityName, $className)
+	public function registerRepository($entityName, $class)
 	{
-		$this->repositories[$entityName] = $className;
+		$this->repositories[$entityName] = $class;
 
 		return $this;
 	}
 
-	public function getRepository(EntityManagerInterface $entityManager, $entityName)
+	public function getRepository(EntityManagerContract $entityManager, $entityName)
 	{
 		$hash = $entityName.spl_object_hash($entityManager);
 
 		if (isset($this->instances[$hash]))
 			return $this->instances[$hash];
 
-		return $this->instances[$hash] = $this->createRepository($entityManager, $entityName);
-	}
-
-	protected function createRepository(EntityManagerInterface $entityManager, $entityName)
-	{
-		$class = $this->repositories[$entityName];
-
-		return new $class($entityManager);
+		return $this->instances[$hash] = $this->repositories[$entityName];
 	}
 
 }

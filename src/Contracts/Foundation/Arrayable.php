@@ -1,6 +1,6 @@
 <?php
 
-namespace Fire\Foundation;
+namespace Fire\Contracts\Foundation;
 
 interface Arrayable {
 

@@ -3,11 +3,10 @@
 namespace Fire\Model\Post;
 
 use Fire\Model\Entity;
-use Fire\Model\Identity\UserInterface;
+use Fire\Contracts\Model\Post\Post as PostContract;
+use Fire\Contracts\Model\Identity\User;
 
-class Post extends Entity implements PostInterface {
-
-	const TYPE = '';
+class Post extends Entity implements PostContract {
 
 	/**
 	 * @Column(name='ID')
@@ -16,7 +15,7 @@ class Post extends Entity implements PostInterface {
 
 	/**
 	 * @Column(name='post_author')
-	 * @var  Fire\Model\Identity\UserInterface
+	 * @var  Fire\Contracts\Model\Identity\User
 	 */
 	protected $author;
 
@@ -72,7 +71,7 @@ class Post extends Entity implements PostInterface {
 
 	/**
 	 * @Column(name='post_parent')
-	 * @var  Fire\Model\Post\PostInterface
+	 * @var  Fire\Contracts\Model\Post\Post
 	 */
 	protected $parent;
 
@@ -134,7 +133,7 @@ class Post extends Entity implements PostInterface {
 	/**
 	 * Get the author
 	 * 
-	 * @return  Fire\Model\Identity\UserInterface
+	 * @return  Fire\Contracts\Model\Identity\User
 	 */
 	public function author()
 	{
@@ -144,10 +143,10 @@ class Post extends Entity implements PostInterface {
 	/**
 	 * Set the author
 	 * 
-	 * @param   $user  Fire\Model\Identity\UserInterface
+	 * @param   $user  Fire\Contracts\Model\Identity\User|Closure
 	 * @return  void
 	 */
-	public function setAuthor(UserInterface $user)
+	public function setAuthor($user)
 	{
 		$this->author = $user;
 	}
@@ -408,7 +407,7 @@ class Post extends Entity implements PostInterface {
 	/**
 	 * Get the parent post
 	 *
-	 * @return  Fire\Model\Post\PostInterface
+	 * @return  Fire\Contracts\Model\Post\Post
 	 */
 	public function parent()
 	{
@@ -418,10 +417,10 @@ class Post extends Entity implements PostInterface {
 	/**
 	 * Set the parent post
 	 * 
-	 * @param   $parent  Fire\Model\Post\PostInterface
+	 * @param   $parent  Fire\Contracts\Model\Post\Post|Closure
 	 * @return  void
 	 */
-	public function setParent(PostInterface $parent)
+	public function setParent($parent)
 	{
 		$this->parent = $parent;
 	}

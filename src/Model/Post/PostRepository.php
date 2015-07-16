@@ -2,19 +2,26 @@
 
 namespace Fire\Model\Post;
 
+use Fire\Model\Repository;
 use Fire\Foundation\Collection;
 
-class PostRepository extends \Fire\Model\Repository {
+class PostRepository extends Repository {
 
-	public $entityClass = 'Fire\Model\Post\Post';
+	protected $postType = 'post';
+
+	protected $entityClass = 'Fire\Model\Post\Post';
 
 	public function postOfId($id)
 	{
 		$post = get_post($id, ARRAY_A);
 
-		if ($post and $post['post_type'] === Post::TYPE)
+		if ($post and $post['post_type'] === $this->postType)
 		{
-			$post = $this->hydrate($post);
+			$post = $this->mapData($post);
+		}
+		else
+		{
+			$post = null;
 		}
 
 		return $post;
@@ -22,11 +29,11 @@ class PostRepository extends \Fire\Model\Repository {
 
 	public function postOfSlug($slug)
 	{
-		$post = get_page_by_path($slug, ARRAY_A, Post::TYPE);
+		$post = get_page_by_path($slug, ARRAY_A, $this->postType);
 
 		if ($post)
 		{
-			$post = $this->hydrate($post);
+			$post = $this->mapData($post);
 		}
 
 		return $post;
@@ -35,7 +42,7 @@ class PostRepository extends \Fire\Model\Repository {
 	public function find(array $args = [])
 	{
 		$args = array_replace_recursive([
-			'post_type'        => Post::TYPE,
+			'post_type'        => $this->postType,
 			'posts_per_page'   => -1,
 			'suppress_filters' => false,
 		], $args);
@@ -48,70 +55,6 @@ class PostRepository extends \Fire\Model\Repository {
 		}
 
 		return $posts;
-	}
-
-	protected function hydrate(array $data)
-	{
-		$ref    = $this->em->getEntityReflection('Post');
-		$entity = $this->em->getEntityFromReflection($ref);
-		
-		foreach ($ref->getProperties() as $prop)
-		{
-			$name  = $prop->getName();
-			$meta  = $this->em->getMetaData($prop->getDocComment());
-			$value = false;
-
-			if ( ! $meta->get('Column'))
-				continue;
-
-			// Maps property to post table column
-			if ($column = $meta->get('Column'))
-			{
-				$name  = $column->get('name', $name);
-				$value = isset($data[$name]) ? $data[$name] : false;
-			}
-
-			// Maps property to meta table
-			if ($_meta = $meta->get('Meta'))
-			{
-				$name = $_meta->get('key', $name);
-
-				if (function_exists('get_field'))
-				{
-					$value = get_field($name, $data['ID']);
-				}
-				else
-				{
-					$value = get_post_meta($data['ID'], $name, true);
-				}
-			}
-
-			// Maps to one to many relationship
-			if ($oneToMany = $meta->get('OneToMany'))
-			{
-				if (isset($data[$name]) and $data[$name])
-				{
-					$id         = $data[$name];
-					$entityName = $oneToMany->get('entityName');
-					$method     = $oneToMany->get('method');
-
-					$value = function() use ($id, $entityName, $method)
-					{
-						return $this->em->getRepository($entityName)->$method($id);
-					};
-				}
-			}
-
-			if ($value)
-			{
-				$prop->setAccessible(true);
-				$prop->setValue($entity, $value);
-			}
-		}
-
-		$entity->setNative($data);
-
-		return $entity;
 	}
 
 }

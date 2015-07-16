@@ -2,41 +2,21 @@
 
 namespace Fire\Model;
 
-use ReflectionClass;
-use Fire\Foundation\MetaDataParserInterface;
+use Fire\Contracts\Model\EntityManager as EntityManagerContract;
+use Fire\Contracts\Model\RepositoryFactory as RepositoryFactoryContract;
 
-class EntityManager implements EntityManagerInterface {
+class EntityManager implements EntityManagerContract {
 
 	protected $repositoryFactory;
 
-	protected $metaDataParser;
-
-	public function __construct(
-		RepositoryFactoryInterface $repositoryFactory,
-		MetaDataParserInterface $metaDataParser)
+	public function __construct(RepositoryFactoryContract $repositoryFactory)
 	{
 		$this->repositoryFactory = $repositoryFactory;
-		$this->metaDataParser    = $metaDataParser;
 	}
 
 	public function getRepository($entityName)
 	{
 		return $this->repositoryFactory->getRepository($this, $entityName);
-	}
-
-	public function getEntityReflection($entityName)
-	{
-		return new ReflectionClass($this->getRepository($entityName)->entityClass);
-	}
-
-	public function getEntityFromReflection(ReflectionClass $reflection)
-	{
-		return $reflection->newInstanceWithoutConstructor();
-	}
-
-	public function getMetaData($docBlock)
-	{
-		return $this->metaDataParser->parse($docBlock);
 	}
 
 }

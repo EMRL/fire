@@ -2,13 +2,13 @@
 
 namespace Fire\Foundation;
 
-use Closure;
 use Countable;
 use ArrayAccess;
 use ArrayIterator;
 use CachingIterator;
 use JsonSerializable;
 use IteratorAggregate;
+use Fire\Contracts\Foundation\Arrayable;
 
 class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate, JsonSerializable {
 

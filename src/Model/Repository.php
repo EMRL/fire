@@ -2,27 +2,37 @@
 
 namespace Fire\Model;
 
-use ReflectionClass;
+use Fire\Contracts\Model\EntityMapper;
 
 abstract class Repository {
 
 	/**
 	 * @var  string
 	 */
-	public $entityClass;
+	protected $entityClass;
 
 	/**
-	 * @var  Fire\Model\EntityManager
+	 * @var  Fire\Contracts\Model\EntityMapper
 	 */
-	protected $em;
+	protected $entityMapper;
 
 	/**
-	 * @param   $em  Fire\Model\EntityManager
+	 * @param   $entityMapper  Fire\Contracts\Model\EntityMapper
 	 * @return  void
 	 */
-	public function __construct($em)
+	public function __construct(EntityMapper $entityMapper)
 	{
-		$this->em = $em;
+		$this->entityMapper = $entityMapper;
+	}
+
+	protected function mapData(array $data)
+	{
+		return $this->entityMapper->map($data, $this->createEntityClass());
+	}
+
+	protected function createEntityClass()
+	{
+		return new $this->entityClass;
 	}
 
 }
