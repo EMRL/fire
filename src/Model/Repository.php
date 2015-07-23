@@ -2,7 +2,7 @@
 
 namespace Fire\Model;
 
-use Fire\Contracts\Model\EntityMapper;
+use Fire\Contracts\Model\EntityMapper as EntityMapperContract;
 
 abstract class Repository {
 
@@ -20,7 +20,7 @@ abstract class Repository {
 	 * @param   $entityMapper  Fire\Contracts\Model\EntityMapper
 	 * @return  void
 	 */
-	public function __construct(EntityMapper $entityMapper)
+	public function __construct(EntityMapperContract $entityMapper)
 	{
 		$this->entityMapper = $entityMapper;
 	}

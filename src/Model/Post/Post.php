@@ -4,7 +4,6 @@ namespace Fire\Model\Post;
 
 use Fire\Model\Entity;
 use Fire\Contracts\Model\Post\Post as PostContract;
-use Fire\Contracts\Model\Identity\User;
 
 class Post extends Entity implements PostContract {
 

@@ -2,23 +2,12 @@
 
 namespace Fire\Model\Post;
 
-use Fire\Contracts\Model\EntityMapper;
-use Fire\Contracts\Model\EntityManager;
-use Fire\Contracts\Model\Entity;
+use Fire\Model\EntityMapper;
+use Fire\Contracts\Model\Entity as EntityContract;
 
-class PostEntityMapper implements EntityMapper {
+class PostEntityMapper extends EntityMapper {
 
-	/**
-	 * @var  Fire\Contracts\Model\EntityManager
-	 */
-	protected $em;
-
-	public function __construct(EntityManager $em)
-	{
-		$this->em = $em;
-	}
-
-	public function map(array $data, Entity $entity)
+	public function map(array $data, EntityContract $entity)
 	{
 		$entity->setId($data['ID']);
 		$entity->setDate($data['post_date']);
@@ -36,10 +25,10 @@ class PostEntityMapper implements EntityMapper {
 		$entity->setNative($data);
 
 		// Relations
-		/*$entity->setAuthor(function() use ($data)
+		$entity->setAuthor(function() use ($data)
 		{
 			return $this->em->getRepository('user')->userOfId($data['post_author']);
-		});*/
+		});
 
 		$entity->setParent(function() use ($data)
 		{

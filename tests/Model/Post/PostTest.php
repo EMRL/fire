@@ -2,9 +2,9 @@
 
 use Fire\Model\Post\Post;
 
-class PostTest extends WP_UnitTestCase {
+class PostTest extends PHPUnit_Framework_TestCase {
 
-	public function testCanInstanciate()
+	public function testCreateEmptyPost()
 	{
 		$this->assertInstanceOf('Fire\Model\Post\Post', new Post);
 	}

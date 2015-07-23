@@ -2,6 +2,8 @@
 
 use Fire\Model\RepositoryFactory;
 use Fire\Model\EntityManager;
+use Fire\Model\Page\PagePostType;
+use Fire\Model\Post\PostPostType;
 use Fire\Model\Post\PostEntityMapper;
 use Fire\Model\Post\PostRepository;
 use Fire\Model\Post\Post;
@@ -17,9 +19,9 @@ class PostRepositoryTest extends WP_UnitTestCase {
 		$factory = new RepositoryFactory;
 		$em      = new EntityManager($factory);
 		$mapper  = new PostEntityMapper($em);
-		$repo    = new PostRepository($mapper);
+		$repo    = new PostRepository($mapper, PostPostType::TYPE);
 
-		$factory->registerRepository('post', $repo);
+		$factory->registerRepository(PostPostType::TYPE, $repo);
 
 		$this->repo = $repo;
 	}
@@ -41,6 +43,15 @@ class PostRepositoryTest extends WP_UnitTestCase {
 		$post = $this->repo->postOfSlug('testing');
 
 		$this->assertEquals('testing', $post->slug());
+	}
+
+	public function testLoadsOnlyPosts()
+	{
+		$id = $this->factory->post->create(['post_type' => PagePostType::TYPE]);
+
+		$post = $this->repo->postOfId($id);
+
+		$this->assertEmpty($post);
 	}
 
 	public function testInvalidIdReturnsNull()
