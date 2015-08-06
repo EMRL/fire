@@ -4,8 +4,9 @@ namespace Fire\Model\User;
 
 use Fire\Model\Repository;
 use Fire\Foundation\Collection;
+use Fire\Contracts\Model\User\UserRepository as UserRepositoryContract;
 
-class UserRepository extends Repository {
+class UserRepository extends Repository implements UserRepositoryContract {
 
 	protected $entityClass = 'Fire\Model\User\User';
 
@@ -45,7 +46,7 @@ class UserRepository extends Repository {
 		return $user;
 	}
 
-	public function find(array $args = [])
+	public function find($args = [])
 	{
 		$users = new Collection;
 

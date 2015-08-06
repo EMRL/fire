@@ -2,10 +2,10 @@
 
 namespace Fire\Model\Page;
 
-use Fire\Model\Post\Post;
+use Fire\Model\AbstractPost\AbstractPost;
 use Fire\Contracts\Model\Page\Page as PageContract;
 
-class Page extends Post implements PageContract {
+class Page extends AbstractPost implements PageContract {
 
 	
 

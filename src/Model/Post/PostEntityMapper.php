@@ -2,37 +2,69 @@
 
 namespace Fire\Model\Post;
 
-use Fire\Model\EntityMapper;
+use Fire\Foundation\Collection;
+use Fire\Model\AbstractPost\AbstractPostEntityMapper;
 use Fire\Contracts\Model\Entity as EntityContract;
+use Fire\Contracts\Model\User\UserRepository as UserRepositoryContract;
+use Fire\Contracts\Model\Category\CategoryRepository as CategoryRepositoryContract;
+use Fire\Contracts\Model\Tag\TagRepository as TagRepositoryContract;
+use Fire\Contracts\Model\Repository as RepositoryContract;
 
-class PostEntityMapper extends EntityMapper {
+class PostEntityMapper extends AbstractPostEntityMapper {
 
-	public function map(array $data, EntityContract $entity)
+	protected $categoryRepository;
+
+	protected $tagRepository;
+
+	public function __construct(
+		UserRepositoryContract $userRepository,
+		CategoryRepositoryContract $categoryRepository,
+		TagRepositoryContract $tagRepository
+	)
 	{
-		$entity->setId($data['ID']);
-		$entity->setDate($data['post_date']);
-		$entity->setContent($data['post_content']);
-		$entity->setTitle($data['post_title']);
-		$entity->setExcerpt($data['post_excerpt']);
-		$entity->setStatus($data['post_status']);
-		$entity->setCommentStatus($data['comment_status']);
-		$entity->setPingStatus($data['ping_status']);
-		$entity->setPassword($data['post_password']);
-		$entity->setSlug($data['post_name']);
-		$entity->setModified($data['post_modified']);
-		$entity->setMenuOrder($data['menu_order']);
-		$entity->setType($data['post_type']);
-		$entity->setNative($data);
+		parent::__construct($userRepository);
 
-		// Relations
-		$entity->setAuthor(function() use ($data)
+		$this->categoryRepository = $categoryRepository;
+		$this->tagRepository      = $tagRepository;
+	}
+
+	public function map(
+	  array $data,
+	  EntityContract $entity,
+	  RepositoryContract $postRepository
+	)
+	{
+		$entity = parent::map($data, $entity, $postRepository);
+
+		$id = $data['post_parent'];
+
+		$entity->setParent(function() use ($id, $postRepository)
 		{
-			return $this->em->getRepository('user')->userOfId($data['post_author']);
+			return $postRepository->postOfId($id);
 		});
 
-		$entity->setParent(function() use ($data)
+		$entity->setCategories(function() use ($data)
 		{
-			return $this->em->getRepository($data['post_type'])->postOfId($data['post_parent']);
+			$categories = new Collection;
+
+			foreach (wp_get_post_categories($data['ID']) as $id)
+			{
+				$categories->push($this->categoryRepository->categoryOfId($id));
+			}
+
+			return $categories;
+		});
+
+		$entity->setTags(function() use ($data)
+		{
+			$tags = new Collection;
+
+			foreach (wp_get_post_tags($data['ID']) as $id)
+			{
+				$tags->push($this->tagRepository->tagOfId($id));
+			}
+
+			return $tags;
 		});
 
 		return $entity;

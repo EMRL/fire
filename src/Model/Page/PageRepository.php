@@ -2,9 +2,10 @@
 
 namespace Fire\Model\Page;
 
-use Fire\Model\Post\PostRepository;
+use Fire\Model\AbstractPost\AbstractPostRepository;
+use Fire\Contracts\Model\Page\PageRepository;
 
-class PageRepository extends PostRepository {
+class PageRepository extends AbstractPostRepository implements PageRepositoryContract {
 
 	protected $entityClass = 'Fire\Model\Page\Page';
 

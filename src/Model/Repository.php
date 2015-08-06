@@ -3,8 +3,9 @@
 namespace Fire\Model;
 
 use Fire\Contracts\Model\EntityMapper as EntityMapperContract;
+use Fire\Contracts\Model\Repository as RepositoryContract;
 
-abstract class Repository {
+abstract class Repository implements RepositoryContract {
 
 	/**
 	 * @var  string
@@ -27,7 +28,7 @@ abstract class Repository {
 
 	protected function mapData(array $data)
 	{
-		return $this->entityMapper->map($data, $this->createEntityClass());
+		return $this->entityMapper->map($data, $this->createEntityClass(), $this);
 	}
 
 	protected function createEntityClass()

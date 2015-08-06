@@ -2,9 +2,9 @@
 
 namespace Fire\Model\Page;
 
-use Fire\Model\Post\PostPostType;
+use Fire\Model\AbstractPost\AbstractPostPostType;
 
-class PagePostType extends PostPostType {
+class PagePostType extends AbstractPostPostType {
 
 	const TYPE = 'page';	
 

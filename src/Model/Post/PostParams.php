@@ -2,24 +2,22 @@
 
 namespace Fire\Model\Post;
 
-use Fire\Foundation\Params;
+use Fire\Model\AbstractPost\AbstractPostParams;
 
-class PostParams extends Params {
+class PostParams extends AbstractPostParams {
 
-	protected $postType;
-
-	public function __construct($postType)
+	public function inCategory($id)
 	{
-		$this->postType = $postType;
+		$this->add([
+			'category__in' => (array) $id,
+		]);
 	}
 
-	protected function defaultParams()
+	public function tagged($id)
 	{
-		return [
-			'post_type'        => $this->postType,
-			'posts_per_page'   => -1,
-			'suppress_filters' => false,
-		];
+		$this->add([
+			'tag__in' => (array) $id,
+		]);
 	}
 
 }

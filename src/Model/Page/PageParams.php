@@ -2,9 +2,9 @@
 
 namespace Fire\Model\Page;
 
-use Fire\Model\Post\PostParams;
+use Fire\Model\AbstractPost\AbstractPostParams;
 
-class PageParams extends PostParams {
+class PageParams extends AbstractPostParams {
 
 
 
