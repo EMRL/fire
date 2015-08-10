@@ -141,10 +141,14 @@ abstract class AbstractPost extends Entity {
 		if ($native = $this->getNative())
 		{
 			// This is why I hate WordPress
-			setup_postdata($native);
+			global $post;
+			$_post = $post;
+			$post  = get_post($native['ID']);
+			setup_postdata($post);
 
 			$content = get_the_content();
 
+			$post = $_post;
 			wp_reset_postdata();
 		}
 		else

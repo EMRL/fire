@@ -2,34 +2,44 @@
 
 namespace Fire\Model\Tag;
 
-use Fire\Model\Term\TermEntityMapper;
+use Fire\Contracts\Model\EntityMapper as EntityMapperContract;
 use Fire\Contracts\Model\Entity as EntityContract;
+use Fire\Contracts\Model\Tag\TagRepository as TagRepositoryContract;
 use Fire\Contracts\Model\Post\PostRepository as PostRepositoryContract;
-use Fire\Contracts\Model\Repository as RepositoryContract;
 
-class TagEntityMapper extends TermEntityMapper {
+class TagEntityMapper implements EntityMapperContract {
+
+	protected $tagRepository;	
 
 	protected $postRepository;
 
-	public function __construct(PostRepositoryContract $postRepository)
+	public function __construct(
+	  TagRepositoryContract $tagRepository,
+	  PostRepositoryContract $postRepository
+	)
 	{
+		$this->tagRepository  = $tagRepository;
 		$this->postRepository = $postRepository;
 	}
 
-	public function map(
-	  array $data,
-	  EntityContract $entity,
-	  RepositoryContract $tagRepository
-	)
+	public function map(EntityContract $entity, array $data)
 	{
-		$entity = parent::map($data, $entity, $tagRepository);
-
 		$entity->setPosts(function() use ($data)
 		{
 			return $this->postRepository->postsTagged($data['term_id']);
 		});
 
-		return $entity;
+		$entity->setParent(function() use ($data)
+		{
+			$parent = null;
+
+			if ($data['parent'])
+			{
+				$parent = $this->tagRepository->tagOfId($data['parent']);
+			}
+
+			return $parent;
+		});
 	}
 
 }

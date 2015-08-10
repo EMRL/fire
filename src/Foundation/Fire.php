@@ -10,6 +10,9 @@ class Fire extends Container {
 	{
 		$this->registerBaseBindings();
 		$this->loadBaseFiles();
+		
+		do_action('fire/services', $this);
+		do_action('fire/ignite', $this);
 	}
 
 	protected function registerBaseBindings()
@@ -30,23 +33,17 @@ class Fire extends Container {
 	protected function loadBaseFiles()
 	{
 		$files = [
-			'src/Model/services.php',
+			'src/Model/Post/services.php',
+			'src/Model/Page/services.php',
+			'src/Model/Category/services.php',
+			'src/Model/Tag/services.php',
+			'src/Model/User/services.php',
 		];
 
 		foreach ($files as $file)
 		{
 			include $this['path.fire'].$file;
 		}
-	}
-
-	public function registerServices()
-	{
-		do_action('fire/services', $this);
-	}
-
-	public function ignite()
-	{
-		do_action('fire/ignite', $this);
 	}
 
 }

@@ -21,10 +21,8 @@ abstract class TermRepository extends Repository {
 	 */
 	protected $currentTerm;
 
-	public function __construct(EntityMapperContract $entityMapper, $taxonomy)
+	public function __construct($taxonomy)
 	{
-		parent::__construct($entityMapper);
-
 		$this->taxonomy = $taxonomy;
 	}
 

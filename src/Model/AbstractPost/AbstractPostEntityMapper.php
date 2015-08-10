@@ -2,12 +2,12 @@
 
 namespace Fire\Model\AbstractPost;
 
-use Fire\Model\EntityMapper;
+use Fire\Contracts\Model\EntityMapper as EntityMapperContract;
 use Fire\Contracts\Model\Entity as EntityContract;
 use Fire\Contracts\Model\User\UserRepository as UserRepositoryContract;
 use Fire\Contracts\Model\Repository as RepositoryContract;
 
-abstract class AbstractPostEntityMapper extends EntityMapper {
+class AbstractPostEntityMapper implements EntityMapperContract {
 
 	protected $userRepository;
 
@@ -16,11 +16,7 @@ abstract class AbstractPostEntityMapper extends EntityMapper {
 		$this->userRepository = $userRepository;
 	}
 
-	public function map(
-	  array $data,
-	  EntityContract $entity,
-	  RepositoryContract $repository
-	)
+	public function map(EntityContract $entity, array $data)
 	{
 		$entity->setId($data['ID']);
 		$entity->setDate($data['post_date']);
@@ -44,8 +40,6 @@ abstract class AbstractPostEntityMapper extends EntityMapper {
 		{
 			return $this->userRepository->userOfId($id);
 		});
-
-		return $entity;
 	}
 
 }

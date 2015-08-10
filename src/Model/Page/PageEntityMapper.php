@@ -2,28 +2,34 @@
 
 namespace Fire\Model\Page;
 
-use Fire\Model\AbstractPost\AbstractPostEntityMapper;
-use Fire\Contracts\Model\User\UserRepository as UserRepositoryContract;
-use Fire\Contracts\Model\Repository as RepositoryContract;
+use Fire\Contracts\Model\EntityMapper as EntityMapperContract;
+use Fire\Contracts\Model\Page\PageRepository as PageRepositoryContract;
+use Fire\Contracts\Model\Entity as EntityContract;
 
-class PageEntityMapper extends PostEntityMapper {
+class PageEntityMapper implements EntityMapperContract {
 
-	public function map(
-	  array $data,
-	  EntityContract $entity,
-	  RepositoryContract $pageRepository
-	)
+	protected $pageRepository;
+
+	public function __construct(PageRepositoryContract $pageRepository)
 	{
-		$entity = parent::map($data, $entity, $pageRepository);
+		$this->pageRepository = $pageRepository;
+	}
 
+	public function map(EntityContract $entity, array $data)
+	{
 		$id = $data['post_parent'];
 
-		$entity->setParent(function() use ($id, $pageRepository)
+		$entity->setParent(function() use ($id)
 		{
-			return $pageRepository->pageOfId($id);
-		});
+			$parent = null;
 
-		return $entity;
+			if ($id)
+			{
+				$parent = $this->pageRepository->pageOfId($id);
+			}
+
+			return $parent;
+		});
 	}
 
 }

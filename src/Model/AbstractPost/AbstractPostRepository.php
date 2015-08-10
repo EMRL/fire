@@ -19,10 +19,8 @@ class AbstractPostRepository extends Repository {
 	 */
 	protected $currentPost;
 
-	public function __construct(EntityMapperContract $entityMapper, $postType)
+	public function __construct($postType)
 	{
-		parent::__construct($entityMapper);
-
 		$this->postType = $postType;
 	}
 

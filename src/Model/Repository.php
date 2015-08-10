@@ -2,7 +2,7 @@
 
 namespace Fire\Model;
 
-use Fire\Contracts\Model\EntityMapper as EntityMapperContract;
+use Closure;
 use Fire\Contracts\Model\Repository as RepositoryContract;
 
 abstract class Repository implements RepositoryContract {
@@ -13,27 +13,40 @@ abstract class Repository implements RepositoryContract {
 	protected $entityClass;
 
 	/**
-	 * @var  Fire\Contracts\Model\EntityMapper
+	 * @var  [Fire\Contracts\Model\EntityMapper]
 	 */
-	protected $entityMapper;
+	protected $entityMappers = [];
 
-	/**
-	 * @param   $entityMapper  Fire\Contracts\Model\EntityMapper
-	 * @return  void
-	 */
-	public function __construct(EntityMapperContract $entityMapper)
+	public function registerEntityMapper(Closure $closure)
 	{
-		$this->entityMapper = $entityMapper;
+		$this->entityMappers[] = $closure;
 	}
 
 	protected function mapData(array $data)
 	{
-		return $this->entityMapper->map($data, $this->createEntityClass(), $this);
+		$entity = $this->createEntity();
+
+		foreach ($this->entityMappers as $key => $mapper)
+		{
+			if ($mapper instanceof Closure)
+			{
+				$this->entityMappers[$key] = $mapper = $mapper();
+			}
+
+			$mapper->map($entity, $data);
+		}
+
+		return $entity;
 	}
 
-	protected function createEntityClass()
+	protected function createEntity()
 	{
 		return new $this->entityClass;
+	}
+
+	public function setEntityClass($class)
+	{
+		$this->entityClass = $class;
 	}
 
 }
