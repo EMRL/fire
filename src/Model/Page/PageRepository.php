@@ -3,7 +3,7 @@
 namespace Fire\Model\Page;
 
 use Fire\Model\AbstractPost\AbstractPostRepository;
-use Fire\Contracts\Model\Page\PageRepository;
+use Fire\Contracts\Model\Page\PageRepository as PageRepositoryContract;
 
 class PageRepository extends AbstractPostRepository implements PageRepositoryContract {
 

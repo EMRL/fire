@@ -2,7 +2,7 @@
 
 namespace Fire\Model\Term;
 
-use Fire\Contract\Model\EntityMapper as EntityMapperContract;
+use Fire\Contracts\Model\EntityMapper as EntityMapperContract;
 use Fire\Contracts\Model\Entity as EntityContract;
 use Fire\Contracts\Model\Repository as RepositoryContract;
 
