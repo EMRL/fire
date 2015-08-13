@@ -8,14 +8,14 @@ class PostParams extends AbstractPostParams {
 
 	public function inCategory($id)
 	{
-		$this->add([
+		return $this->add([
 			'category__in' => (array) $id,
 		]);
 	}
 
 	public function tagged($id)
 	{
-		$this->add([
+		return $this->add([
 			'tag__in' => (array) $id,
 		]);
 	}

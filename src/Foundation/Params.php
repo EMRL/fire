@@ -35,6 +35,8 @@ class Params implements Arrayable {
 	public function reset()
 	{
 		$this->params = $this->defaultParams();
+
+		return $this;
 	}
 
 	public function toArray()

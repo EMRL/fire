@@ -4,17 +4,13 @@ use Fire\Model\Post\Post;
 
 class PostTest extends PHPUnit_Framework_TestCase {
 
-	public function testCreateEmptyPost()
-	{
-		$this->assertInstanceOf('Fire\Model\Post\Post', new Post);
-	}
-
-	public function testCanSetValuesInConstruct()
+	public function testSettingValues()
 	{
 		$post = new Post([
 			'title'   => 'This is the "title"',
-			'content' => 'Content here',
 		]);
+
+		$post->setContent('Content here');
 
 		$this->assertEquals('This is the &#8220;title&#8221;', $post->title());
 		$this->assertEquals("<p>Content here</p>\n", $post->content());
