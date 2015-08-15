@@ -3,6 +3,8 @@
 namespace Fire\Foundation;
 
 use Fire\Container\Container;
+use Fire\Admin\Admin;
+use Fire\Admin\RelativeUrls;
 
 class Fire extends Container {
 
@@ -33,6 +35,10 @@ class Fire extends Container {
 	protected function loadBaseFiles()
 	{
 		$files = [
+			'src/Foundation/helpers.php',
+			'src/Admin/services.php',
+			'src/Filesystem/services.php',
+			'src/Template/services.php',
 			'src/Model/Post/services.php',
 			'src/Model/Page/services.php',
 			'src/Model/Category/services.php',

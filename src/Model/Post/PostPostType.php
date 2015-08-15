@@ -8,4 +8,6 @@ class PostPostType extends AbstractPostPostType {
 
 	const TYPE = 'post';
 
+	const BUILTIN = true;
+
 }

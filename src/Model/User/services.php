@@ -1,7 +1,6 @@
 <?php
 
-use Fire\Model\User\UserRepository;
-use Fire\Model\User\UserEntityMapper;
+namespace Fire\Model\User;
 
 add_action('fire/services', function($fire)
 {

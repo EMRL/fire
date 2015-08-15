@@ -1,9 +1,8 @@
 <?php
 
+namespace Fire\Model\Page;
+
 use Fire\Model\AbstractPost\AbstractPostEntityMapper;
-use Fire\Model\Page\PageRepository;
-use Fire\Model\Page\PageEntityMapper;
-use Fire\Model\Page\PagePostType;
 
 add_action('fire/services', function($fire)
 {

@@ -1,9 +1,8 @@
 <?php
 
+namespace Fire\Model\Tag;
+
 use Fire\Model\Term\TermEntityMapper;
-use Fire\Model\Tag\TagRepository;
-use Fire\Model\Tag\TagEntityMapper;
-use Fire\Model\Tag\TagTaxonomy;
 
 add_action('fire/services', function($fire)
 {

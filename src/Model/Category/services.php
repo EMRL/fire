@@ -1,9 +1,8 @@
 <?php
 
+namespace Fire\Model\Category;
+
 use Fire\Model\Term\TermEntityMapper;
-use Fire\Model\Category\CategoryRepository;
-use Fire\Model\Category\CategoryEntityMapper;
-use Fire\Model\Category\CategoryTaxonomy;
 
 add_action('fire/services', function($fire)
 {

@@ -1,9 +1,8 @@
 <?php
 
+namespace Fire\Model\Post;
+
 use Fire\Model\AbstractPost\AbstractPostEntityMapper;
-use Fire\Model\Post\PostRepository;
-use Fire\Model\Post\PostEntityMapper;
-use Fire\Model\Post\PostPostType;
 
 add_action('fire/services', function($fire)
 {

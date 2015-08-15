@@ -1,9 +1,8 @@
 <?php
 
+use Fire\Model\Upload;
+
 use Fire\Model\AbstractPost\AbstractPostEntityMapper;
-use Fire\Model\Upload\UploadRepository;
-use Fire\Model\Upload\UploadEntityMapper;
-use Fire\Model\Upload\UploadPostType;
 
 add_action('fire/services', function($fire)
 {
