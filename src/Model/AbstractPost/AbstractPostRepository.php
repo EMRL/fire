@@ -18,6 +18,11 @@ class AbstractPostRepository extends Repository
      */
     protected $currentPost;
 
+    /**
+     * @var  Fire\Foundation\Collection([Fire\Contracts\Model\Post\Post])
+     */
+    protected $currentPosts;
+
     public function __construct($postType)
     {
         $this->postType = $postType;
@@ -72,6 +77,16 @@ class AbstractPostRepository extends Repository
     public function setCurrentPost(AbstractPostContract $post)
     {
         $this->currentPost = $post;
+    }
+
+    public function currentPosts()
+    {
+        return $this->currentPosts;
+    }
+
+    public function setCurrentPosts($posts)
+    {
+        $this->currentPosts = $posts;
     }
 
     protected function newParams()

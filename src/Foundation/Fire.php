@@ -35,6 +35,7 @@ class Fire extends Container
     protected function loadBaseFiles()
     {
         $files = [
+            'src/Foundation/services.php',
             'src/Foundation/helpers.php',
             'src/Admin/services.php',
             'src/Filesystem/services.php',

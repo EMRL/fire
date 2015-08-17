@@ -4,6 +4,7 @@ namespace Fire\Model\Page;
 
 use Fire\Model\AbstractPost\AbstractPostRepository;
 use Fire\Contracts\Model\Page\PageRepository as PageRepositoryContract;
+use Fire\Contracts\Model\AbstractPost\AbstractPost as AbstractPostContract;
 
 class PageRepository extends AbstractPostRepository implements PageRepositoryContract
 {
@@ -17,6 +18,16 @@ class PageRepository extends AbstractPostRepository implements PageRepositoryCon
     public function pageOfSlug($slug)
     {
         return $this->postOfSlug($slug);
+    }
+
+    public function currentPage()
+    {
+        return $this->currentPost();
+    }
+
+    public function setCurrentPage(AbstractPostContract $page)
+    {
+        $this->currentPost = $page;
     }
 
     protected function newParams()
