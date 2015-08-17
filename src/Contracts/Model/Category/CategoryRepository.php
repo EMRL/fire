@@ -2,12 +2,11 @@
 
 namespace Fire\Contracts\Model\Category;
 
-interface CategoryRepository {
+interface CategoryRepository
+{
+    public function categoryOfId($id);
 
-	public function categoryOfId($id);
+    public function categoryOfSlug($slug);
 
-	public function categoryOfSlug($slug);
-
-	public function find($args = null);
-
+    public function find($args = null);
 }

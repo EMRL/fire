@@ -4,10 +4,9 @@ namespace Fire\Model\Post;
 
 use Fire\Model\AbstractPost\AbstractPostPostType;
 
-class PostPostType extends AbstractPostPostType {
+class PostPostType extends AbstractPostPostType
+{
+    const TYPE = 'post';
 
-	const TYPE = 'post';
-
-	const BUILTIN = true;
-
+    const BUILTIN = true;
 }

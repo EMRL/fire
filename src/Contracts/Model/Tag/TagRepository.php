@@ -2,12 +2,11 @@
 
 namespace Fire\Contracts\Model\Tag;
 
-interface TagRepository {
+interface TagRepository
+{
+    public function tagOfId($id);
 
-	public function tagOfId($id);
+    public function tagOfSlug($slug);
 
-	public function tagOfSlug($slug);
-
-	public function find($args = null);
-
+    public function find($args = null);
 }

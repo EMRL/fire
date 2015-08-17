@@ -2,12 +2,11 @@
 
 namespace Fire\Contracts\Model\Page;
 
-interface PageRepository {
+interface PageRepository
+{
+    public function pageOfId($id);
 
-	public function pageOfId($id);
+    public function pageOfSlug($slug);
 
-	public function pageOfSlug($slug);
-
-	public function find($args = null);
-
+    public function find($args = null);
 }

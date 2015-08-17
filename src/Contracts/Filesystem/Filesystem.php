@@ -2,8 +2,7 @@
 
 namespace Fire\Contracts\Filesystem;
 
-interface Filesystem {
-
+interface Filesystem
+{
 	
-
 }

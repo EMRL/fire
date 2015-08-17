@@ -5,66 +5,65 @@ namespace Fire\Template;
 use Fire\Contracts\Template\Template as TemplateContract;
 use Fire\Contracts\Template\TemplateFinder as TemplateFinderContract;
 
-class Template implements TemplateContract {
+class Template implements TemplateContract
+{
+    protected $finder;
 
-	protected $finder;
+    protected $partialPath = 'partials/';
 
-	public function __construct(TemplateFinderContract $finder)
-	{
-		$this->finder = $finder;
-	}
+    public function __construct(TemplateFinderContract $finder)
+    {
+        $this->finder = $finder;
+    }
 
-	public function render($key, $suffix = null, $data = [])
-	{
-		global $posts, $post, $wp_did_header,$wp_query, $wp_rewrite, $wpdb,
-		       $wp_version, $wp, $id, $comment, $user_ID;
+    public function render($key, $suffix = null, $data = [])
+    {
+        global $posts, $post, $wp_did_header,$wp_query, $wp_rewrite, $wpdb,
+               $wp_version, $wp, $id, $comment, $user_ID;
 
-		if (is_array($suffix))
-		{
-			$data   = $suffix;
-			$suffix = null;
-		}
+        if (is_array($suffix)) {
+            $data   = $suffix;
+            $suffix = null;
+        }
 
-		$path = $this->finder->find($key, $suffix);
+        $path = $this->finder->find($key, $suffix);
 
-		if (is_array($wp_query->query_vars))
-		{
-			extract($wp_query->query_vars, EXTR_SKIP);
-		}
+        if (is_array($wp_query->query_vars)) {
+            extract($wp_query->query_vars, EXTR_SKIP);
+        }
 
-		extract($data, EXTR_SKIP);
+        extract($data, EXTR_SKIP);
 
-		ob_start();
-		include $path;
-		return ob_get_clean();
-	}
+        ob_start();
+        include $path;
+        return ob_get_clean();
+    }
 
-	public function partial($key, $suffix = null, $data = [])
-	{
-		$partialPath = apply_filters('fire/template/partialPath', 'partials');
+    public function partial($key, $suffix = null, $data = [])
+    {
+        return $this->render($this->partialPath.$key, $suffix, $data);
+    }
 
-		return $this->render(trailingslashit($partialPath).$key, $suffix, $data);
-	}
+    public function find($key, $suffix = null)
+    {
+        $templates = [$key];
 
-	public function find($key, $suffix = null)
-	{
-		$templates = [$key];
+        if ($suffix) {
+            array_unshift($templates, "{$key}-{$suffix}");
+            array_unshift($templates, "{$key}.{$suffix}");
+        }
 
-		if ($suffix)
-		{
-			array_unshift($templates, "{$key}-{$suffix}");
-			array_unshift($templates, "{$key}.{$suffix}");
-		}
+        foreach ($templates as $template) {
+            if ($found = $this->finder->find($template)) {
+                break;
+            }
+        }
 
-		foreach ($templates as $template)
-		{
-			if ($found = $this->finder->find($template))
-			{
-				break;
-			}
-		}
+        return $found;
+    }
 
-		return $found;
-	}
-
+    public function setPartialPath($path)
+    {
+        $this->partialPath = trailingslashit($path);
+    }
 }

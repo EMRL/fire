@@ -5,48 +5,45 @@ namespace Fire\Model;
 use Closure;
 use Fire\Contracts\Model\Repository as RepositoryContract;
 
-abstract class Repository implements RepositoryContract {
+abstract class Repository implements RepositoryContract
+{
+    /**
+     * @var  string
+     */
+    protected $entityClass;
 
-	/**
-	 * @var  string
-	 */
-	protected $entityClass;
+    /**
+     * @var  [Fire\Contracts\Model\EntityMapper]
+     */
+    protected $entityMappers = [];
 
-	/**
-	 * @var  [Fire\Contracts\Model\EntityMapper]
-	 */
-	protected $entityMappers = [];
+    public function registerEntityMapper(Closure $closure)
+    {
+        $this->entityMappers[] = $closure;
+    }
 
-	public function registerEntityMapper(Closure $closure)
-	{
-		$this->entityMappers[] = $closure;
-	}
+    protected function mapData(array $data)
+    {
+        $entity = $this->createEntity();
 
-	protected function mapData(array $data)
-	{
-		$entity = $this->createEntity();
+        foreach ($this->entityMappers as $key => $mapper) {
+            if ($mapper instanceof Closure) {
+                $this->entityMappers[$key] = $mapper = $mapper();
+            }
 
-		foreach ($this->entityMappers as $key => $mapper)
-		{
-			if ($mapper instanceof Closure)
-			{
-				$this->entityMappers[$key] = $mapper = $mapper();
-			}
+            $mapper->map($entity, $data);
+        }
 
-			$mapper->map($entity, $data);
-		}
+        return $entity;
+    }
 
-		return $entity;
-	}
+    protected function createEntity()
+    {
+        return new $this->entityClass;
+    }
 
-	protected function createEntity()
-	{
-		return new $this->entityClass;
-	}
-
-	public function setEntityClass($class)
-	{
-		$this->entityClass = $class;
-	}
-
+    public function setEntityClass($class)
+    {
+        $this->entityClass = $class;
+    }
 }

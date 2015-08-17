@@ -6,62 +6,61 @@ use Fire\Model\User\UserEntityMapper;
 use Fire\Model\User\UserRepository;
 use Fire\Model\User\User;
 
-class UserRepositoryTest extends WP_UnitTestCase {
+class UserRepositoryTest extends WP_UnitTestCase
+{
+    protected $repo;
 
-	protected $repo;
+    public function setUp()
+    {
+        parent::setUp();
 
-	public function setUp()
-	{
-		parent::setUp();
+        $factory = new RepositoryFactory;
+        $em      = new EntityManager($factory);
+        $mapper  = new UserEntityMapper($em);
+        $repo    = new UserRepository($mapper);
 
-		$factory = new RepositoryFactory;
-		$em      = new EntityManager($factory);
-		$mapper  = new UserEntityMapper($em);
-		$repo    = new UserRepository($mapper);
+        $factory->registerRepository('user', $repo);
 
-		$factory->registerRepository('user', $repo);
+        $this->repo = $repo;
+    }
 
-		$this->repo = $repo;
-	}
+    public function testLoadsUserOfId()
+    {
+        $id = $this->factory->user->create();
 
-	public function testLoadsUserOfId()
-	{
-		$id = $this->factory->user->create();
+        $user = $this->repo->userOfId($id);
 
-		$user = $this->repo->userOfId($id);
+        $this->assertInstanceOf('Fire\Model\User\User', $user);
+        $this->assertEquals($id, $user->id());
+    }
 
-		$this->assertInstanceOf('Fire\Model\User\User', $user);
-		$this->assertEquals($id, $user->id());
-	}
+    public function testLoadsUserOfUsername()
+    {
+        $this->factory->user->create(['user_login' => 'testing']);
 
-	public function testLoadsUserOfUsername()
-	{
-		$this->factory->user->create(['user_login' => 'testing']);
+        $user = $this->repo->userOfUsername('testing');
 
-		$user = $this->repo->userOfUsername('testing');
+        $this->assertEquals('testing', $user->username());
+    }
 
-		$this->assertEquals('testing', $user->username());
-	}
+    public function testLoadsUserOfEmail()
+    {
+        $this->factory->user->create(['user_email' => 'test@test.com']);
 
-	public function testLoadsUserOfEmail()
-	{
-		$this->factory->user->create(['user_email' => 'test@test.com']);
+        $user = $this->repo->userOfEmail('test@test.com');
 
-		$user = $this->repo->userOfEmail('test@test.com');
+        $this->assertEquals('test@test.com', $user->email());
+    }
 
-		$this->assertEquals('test@test.com', $user->email());
-	}
+    public function testFind()
+    {
+        $id = $this->factory->user->create();
 
-	public function testFind()
-	{
-		$id = $this->factory->user->create();
+        $this->factory->user->create();
 
-		$this->factory->user->create();
+        $results = $this->repo->find();
 
-		$results = $this->repo->find();
-
-		// There is always an admin user, so we add one more to our created
-		$this->assertEquals(3, $results->count());
-	}
-
+        // There is always an admin user, so we add one more to our created
+        $this->assertEquals(3, $results->count());
+    }
 }

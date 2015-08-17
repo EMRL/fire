@@ -9,66 +9,58 @@ use Fire\Contracts\Model\Post\PostRepository as PostRepositoryContract;
 use Fire\Contracts\Model\Category\CategoryRepository as CategoryRepositoryContract;
 use Fire\Contracts\Model\Tag\TagRepository as TagRepositoryContract;
 
-class PostEntityMapper implements EntityMapperContract {
+class PostEntityMapper implements EntityMapperContract
+{
+    protected $postRepository;
 
-	protected $postRepository;
+    protected $categoryRepository;
 
-	protected $categoryRepository;
+    protected $tagRepository;
 
-	protected $tagRepository;
+    public function __construct(
+        PostRepositoryContract $postRepository,
+        CategoryRepositoryContract $categoryRepository,
+        TagRepositoryContract $tagRepository
+    ) {
+        $this->postRepository     = $postRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->tagRepository      = $tagRepository;
+    }
 
-	public function __construct(
-		PostRepositoryContract $postRepository,
-		CategoryRepositoryContract $categoryRepository,
-		TagRepositoryContract $tagRepository
-	)
-	{
-		$this->postRepository     = $postRepository;
-		$this->categoryRepository = $categoryRepository;
-		$this->tagRepository      = $tagRepository;
-	}
+    public function map(EntityContract $entity, array $data)
+    {
+        $id = $data['post_parent'];
 
-	public function map(EntityContract $entity, array $data)
-	{
-		$id = $data['post_parent'];
+        $entity->setParent(function () use ($id) {
+            $parent = null;
 
-		$entity->setParent(function() use ($id)
-		{
-			$parent = null;
+            if ($id) {
+                $parent = $this->postRepository->postOfId($id);
+            }
 
-			if ($id)
-			{
-				$parent = $this->postRepository->postOfId($id);
-			}
-			
-			return $parent;
-		});
+            return $parent;
+        });
 
-		$id = $data['ID'];
+        $id = $data['ID'];
 
-		$entity->setCategories(function() use ($id)
-		{
-			$categories = new Collection;
+        $entity->setCategories(function () use ($id) {
+            $categories = new Collection;
 
-			foreach (wp_get_post_categories($id) as $termId)
-			{
-				$categories->push($this->categoryRepository->categoryOfId($termId));
-			}
+            foreach (wp_get_post_categories($id) as $termId) {
+                $categories->push($this->categoryRepository->categoryOfId($termId));
+            }
 
-			return $categories;
-		});
+            return $categories;
+        });
 
-		$entity->setTags(function() use ($id)
-		{
-			$tags = new Collection;
+        $entity->setTags(function () use ($id) {
+            $tags = new Collection;
 
-			foreach (wp_get_post_tags($id) as $termId)
-			{
-				$tags->push($this->tagRepository->tagOfId($termId));
-			}
+            foreach (wp_get_post_tags($id) as $termId) {
+                $tags->push($this->tagRepository->tagOfId($termId));
+            }
 
-			return $tags;
-		});
-	}
-
+            return $tags;
+        });
+    }
 }

@@ -4,8 +4,7 @@ namespace Fire\Contracts\Model\Category;
 
 use Fire\Contracts\Model\Term\Term;
 
-interface Category extends Term {
-
-	
+interface Category extends Term
+{
 
 }

@@ -2,12 +2,11 @@
 
 namespace Fire\Contracts\Model\Post;
 
-interface PostRepository {
+interface PostRepository
+{
+    public function postOfId($id);
 
-	public function postOfId($id);
+    public function postOfSlug($slug);
 
-	public function postOfSlug($slug);
-
-	public function find($args = null);
-
+    public function find($args = null);
 }

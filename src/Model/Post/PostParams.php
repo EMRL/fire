@@ -4,20 +4,19 @@ namespace Fire\Model\Post;
 
 use Fire\Model\AbstractPost\AbstractPostParams;
 
-class PostParams extends AbstractPostParams {
+class PostParams extends AbstractPostParams
+{
+    public function inCategory($id)
+    {
+        return $this->add([
+            'category__in' => (array) $id,
+        ]);
+    }
 
-	public function inCategory($id)
-	{
-		return $this->add([
-			'category__in' => (array) $id,
-		]);
-	}
-
-	public function tagged($id)
-	{
-		return $this->add([
-			'tag__in' => (array) $id,
-		]);
-	}
-
+    public function tagged($id)
+    {
+        return $this->add([
+            'tag__in' => (array) $id,
+        ]);
+    }
 }

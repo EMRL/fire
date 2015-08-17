@@ -2,8 +2,7 @@
 
 namespace Fire\Contracts\Model;
 
-interface Entity {
+interface Entity
+{
 
-	
-	
 }

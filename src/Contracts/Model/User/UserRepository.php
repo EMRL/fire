@@ -2,14 +2,13 @@
 
 namespace Fire\Contracts\Model\User;
 
-interface UserRepository {
+interface UserRepository
+{
+    public function userOfId($id);
 
-	public function userOfId($id);
+    public function userOfUsername($username);
 
-	public function userOfUsername($username);
+    public function userOfEmail($email);
 
-	public function userOfEmail($email);
-
-	public function find($args = []);
-
+    public function find($args = []);
 }

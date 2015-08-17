@@ -2,8 +2,7 @@
 
 namespace Fire\Contracts\Model;
 
-interface Repository {
-
-	
+interface Repository
+{
 
 }

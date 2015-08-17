@@ -2,8 +2,7 @@
 
 namespace Fire\Model\Category;
 
-class CategoryTaxonomy {
-
-	const NAME = 'category';
-
+class CategoryTaxonomy
+{
+    const NAME = 'category';
 }

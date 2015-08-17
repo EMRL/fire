@@ -2,8 +2,7 @@
 
 namespace Fire\Contracts\Foundation;
 
-interface Arrayable {
-
-	public function toArray();
-
+interface Arrayable
+{
+    public function toArray();
 }

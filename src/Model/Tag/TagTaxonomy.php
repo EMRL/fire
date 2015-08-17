@@ -2,8 +2,7 @@
 
 namespace Fire\Model\Tag;
 
-class TagTaxonomy {
-
-	const NAME = 'post_tag';
-
+class TagTaxonomy
+{
+    const NAME = 'post_tag';
 }

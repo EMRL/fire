@@ -2,12 +2,11 @@
 
 namespace Fire\Contracts\Model\Upload;
 
-interface UploadRepository {
+interface UploadRepository
+{
+    public function uploadOfId($id);
 
-	public function uploadOfId($id);
+    public function uploadOfSlug($slug);
 
-	public function uploadOfSlug($slug);
-
-	public function find($args = null);
-
+    public function find($args = null);
 }

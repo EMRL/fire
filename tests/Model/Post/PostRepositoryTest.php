@@ -8,86 +8,84 @@ use Fire\Model\Post\PostEntityMapper;
 use Fire\Model\Post\PostRepository;
 use Fire\Model\Post\Post;
 
-class PostRepositoryTest extends WP_UnitTestCase {
+class PostRepositoryTest extends WP_UnitTestCase
+{
+    protected $repo;
 
-	protected $repo;
+    public function setUp()
+    {
+        parent::setUp();
 
-	public function setUp()
-	{
-		parent::setUp();
+        $repo = new PostRepository(PostPostType::TYPE);
 
-		$repo = new PostRepository(PostPostType::TYPE);
+        $repo->registerEntityMapper(function () use ($repo) {
+            return new PostEntityMapperMock($repo);
+        });
 
-		$repo->registerEntityMapper(function() use ($repo)
-		{
-			return new PostEntityMapperMock($repo);
-		});
+        $this->repo = $repo;
+    }
 
-		$this->repo = $repo;
-	}
+    public function testLoadsPostOfId()
+    {
+        $id = $this->factory->post->create();
 
-	public function testLoadsPostOfId()
-	{
-		$id = $this->factory->post->create();
+        $post = $this->repo->postOfId($id);
 
-		$post = $this->repo->postOfId($id);
+        $this->assertInstanceOf('Fire\Model\Post\Post', $post);
+        $this->assertEquals($id, $post->id());
+    }
 
-		$this->assertInstanceOf('Fire\Model\Post\Post', $post);
-		$this->assertEquals($id, $post->id());
-	}
+    public function testLoadsPostofSlug()
+    {
+        $this->factory->post->create(['post_name' => 'testing']);
 
-	public function testLoadsPostofSlug()
-	{
-		$this->factory->post->create(['post_name' => 'testing']);
+        $post = $this->repo->postOfSlug('testing');
 
-		$post = $this->repo->postOfSlug('testing');
+        $this->assertEquals('testing', $post->slug());
+    }
 
-		$this->assertEquals('testing', $post->slug());
-	}
+    public function testLoadsOnlyPosts()
+    {
+        $id = $this->factory->post->create(['post_type' => PagePostType::TYPE]);
 
-	public function testLoadsOnlyPosts()
-	{
-		$id = $this->factory->post->create(['post_type' => PagePostType::TYPE]);
+        $post = $this->repo->postOfId($id);
 
-		$post = $this->repo->postOfId($id);
+        $this->assertEmpty($post);
+    }
 
-		$this->assertEmpty($post);
-	}
+    public function testInvalidIdReturnsNull()
+    {
+        $post1 = $this->repo->postOfId(0);
+        $post2 = $this->repo->postOfSlug('non-existant');
 
-	public function testInvalidIdReturnsNull()
-	{
-		$post1 = $this->repo->postOfId(0);
-		$post2 = $this->repo->postOfSlug('non-existant');
+        $this->assertEmpty($post1);
+        $this->assertEmpty($post2);
+    }
 
-		$this->assertEmpty($post1);
-		$this->assertEmpty($post2);
-	}
+    public function testParentLoads()
+    {
+        $parentId = $this->factory->post->create([
+            'post_title' => 'Parent'
+        ]);
 
-	public function testParentLoads()
-	{
-		$parentId = $this->factory->post->create([
-			'post_title' => 'Parent'
-		]);
-		
-		$childId = $this->factory->post->create([
-			'post_title'  => 'Child',
-			'post_parent' => $parentId,
-		]);
+        $childId = $this->factory->post->create([
+            'post_title'  => 'Child',
+            'post_parent' => $parentId,
+        ]);
 
-		$child = $this->repo->postOfId($childId);
+        $child = $this->repo->postOfId($childId);
 
-		$this->assertEquals($parentId, $child->parent()->id());
-	}
+        $this->assertEquals($parentId, $child->parent()->id());
+    }
 
-	public function testFind()
-	{
-		$id = $this->factory->post->create();
+    public function testFind()
+    {
+        $id = $this->factory->post->create();
 
-		$this->factory->post->create();
+        $this->factory->post->create();
 
-		$results = $this->repo->find();
+        $results = $this->repo->find();
 
-		$this->assertEquals(2, $results->count());
-	}
-
+        $this->assertEquals(2, $results->count());
+    }
 }

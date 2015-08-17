@@ -2,10 +2,9 @@
 
 namespace Fire\Contracts\Template;
 
-interface Template {
+interface Template
+{
+    public function render($key, $suffix = null, $data = []);
 
-	public function render($key, $suffix = null, $data = []);
-
-	public function find($key, $suffix = null);
-
+    public function find($key, $suffix = null);
 }
