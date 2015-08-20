@@ -64,75 +64,38 @@ abstract class AbstractPost extends Entity
         }
     }
 
-    /**
-     * Return the ID
-     *
-     * @return  integer
-     */
     public function id()
     {
         return $this->id;
     }
 
-    /**
-     * Set the ID
-     *
-     * @param   $id  string|integer
-     * @return  void
-     */
     public function setId($id)
     {
         $this->id = (int) $id;
     }
 
-    /**
-     * Get the author
-     *
-     * @return  Fire\Contracts\Model\Identity\User
-     */
     public function author()
     {
         return $this->lazyLoad($this->author);
     }
 
-    /**
-     * Set the author
-     *
-     * @param   $user  Fire\Contracts\Model\Identity\User|Closure
-     * @return  void
-     */
     public function setAuthor($user)
     {
         $this->author = $user;
     }
 
-    /**
-     * Get the formatted date
-     *
-     * @param   $format  string  http://php.net/date
-     * @return  string
-     */
     public function date($format = 'F j, Y')
     {
         return date($format, strtotime($this->date));
     }
 
-    /**
-     * Set the date
-     *
-     * @param   $date  string
-     * @return  void
-     */
     public function setDate($date)
     {
         $this->date = $date;
     }
 
     /**
-     * Get the content
-     *
-     * @filter  the_content
-     * @return  string
+     * @filter the_content
      */
     public function content()
     {
@@ -154,34 +117,19 @@ abstract class AbstractPost extends Entity
         return str_replace(']]>', ']]&gt;', apply_filters('the_content', $content));
     }
 
-    /**
-     * Set the content
-     *
-     * @param   $content  string
-     * @return  void
-     */
     public function setContent($content)
     {
         $this->content = $content;
     }
 
     /**
-     * Get the title
-     *
-     * @filter  the_title
-     * @return  string
+     * @filter the_title
      */
     public function title()
     {
         return apply_filters('the_title', $this->title, $this->id());
     }
 
-    /**
-     * Set the title
-     *
-     * @param   $title  string
-     * @return  void
-     */
     public function setTitle($title)
     {
         $this->title = $title;
@@ -190,15 +138,14 @@ abstract class AbstractPost extends Entity
     /**
      * Get the excerpt
      *
-     * @filter  the_excerpt
-     * @filter  get_the_excerpt
-     * @filter  fire/model/post/excerpt
-     * @param   $limit          int      Number of words/characters to limit to
-     * @param   $append         string   String to append to trimmed excerpt
-     * @param   $words          boolean  Whether to limit to words (true) or characters (false)
-     * @param   $preserveWords  boolean  Limit to character number, but preserve full words
-     * @param   $force          boolean  Use excerpt without stripping tags
-     * @return  string
+     * @filter the_excerpt
+     * @filter get_the_excerpt
+     * @filter fire/model/post/excerpt
+     * @param  integer  $limit          Number of words/characters to limit to
+     * @param  string   $append         String to append to trimmed excerpt
+     * @param  boolean  $words          Whether to limit to words (true) or characters (false)
+     * @param  boolean  $preserveWords  Limit to character number, but preserve full words
+     * @param  boolean  $force          Use excerpt without stripping tags
      */
     public function excerpt($limit = null, $append = null, $words = true, $preserveWords = null, $force = false)
     {
@@ -219,33 +166,16 @@ abstract class AbstractPost extends Entity
         return apply_filters('fire/model/post/excerpt', $excerpt, $this);
     }
 
-    /**
-     * Set the excerpt
-     *
-     * @param   $excerpt  string
-     * @return  void
-     */
     public function setExcerpt($excerpt)
     {
         $this->excerpt = $excerpt;
     }
 
-    /**
-     * Get the status
-     *
-     * @return  string
-     */
     public function status()
     {
         return $this->status;
     }
 
-    /**
-     * Set the status
-     *
-     * @param   $status  string
-     * @return  void
-     */
     public function setStatus($status)
     {
         $this->status = $status;
@@ -293,43 +223,21 @@ abstract class AbstractPost extends Entity
         $this->pingStatus = $status;
     }
 
-    /**
-     * Get the password
-     *
-     * @return  string
-     */
     public function password()
     {
         return $this->password;
     }
 
-    /**
-     * Set the password
-     *
-     * @param   $password  string
-     * @return  void
-     */
     public function setPassword($password)
     {
         $this->password = $password;
     }
 
-    /**
-     * Get the slug
-     *
-     * @return  string
-     */
     public function slug()
     {
         return $this->slug;
     }
 
-    /**
-     * Set the slug
-     *
-     * @param   $slug  string
-     * @return  void
-     */
     public function setSlug($slug)
     {
         $this->slug = $slug;
@@ -357,22 +265,11 @@ abstract class AbstractPost extends Entity
         $this->modified = $date;
     }
 
-    /**
-     * Get the parent post
-     *
-     * @return  Fire\Contracts\Model\Post\Post
-     */
     public function parent()
     {
         return $this->lazyLoad($this->parent);
     }
 
-    /**
-     * Set the parent post
-     *
-     * @param   $parent  Fire\Contracts\Model\Post\Post|Closure
-     * @return  void
-     */
     public function setParent($parent)
     {
         $this->parent = $parent;
@@ -399,22 +296,11 @@ abstract class AbstractPost extends Entity
         $this->menuOrder = $order;
     }
 
-    /**
-     * Get the type
-     *
-     * @return  string
-     */
     public function type()
     {
         return $this->type;
     }
 
-    /**
-     * Set the type
-     *
-     * @param   $type  string
-     * @return  void
-     */
     public function setType($type)
     {
         $this->type = $type;
@@ -512,9 +398,9 @@ abstract class AbstractPost extends Entity
      */
     public function featuredImageUrl($size = null)
     {
-        $image = wp_get_attachment_image_src(get_post_thumbnail_id($this->id()), $size);
+        list($url) = wp_get_attachment_image_src(get_post_thumbnail_id($this->id()), $size);
 
-        return $image[0];
+        return $url;
     }
 
     /**

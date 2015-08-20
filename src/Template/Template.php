@@ -26,7 +26,7 @@ class Template implements TemplateContract
             $suffix = null;
         }
 
-        $path = $this->finder->find($key, $suffix);
+        $path = $this->find($key, $suffix);
 
         if (is_array($wp_query->query_vars)) {
             extract($wp_query->query_vars, EXTR_SKIP);

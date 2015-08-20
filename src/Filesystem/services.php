@@ -2,8 +2,8 @@
 
 namespace Fire\Filesystem;
 
-add_action('fire/services', function ($fire) {
+add_action('fire/services/core', function ($fire) {
 	$fire->singleton('filesystem', function () {
 		return new Filesystem;
 	});
-}, 5);
+});

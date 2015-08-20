@@ -1,15 +1,27 @@
 <?php
 
-if ( ! function_exists('content'))
-{
+if ( ! function_exists('template')) {
+    function template($key, $suffix = null, $data = [])
+    {
+        return fire('template')->render($key, $suffix, $data);
+    }
+}
+
+if ( ! function_exists('partial')) {
+    function partial($key, $suffix = null, $data = [])
+    {
+        return fire('template')->partial($key, $suffix, $data);
+    }
+}
+
+if ( ! function_exists('content')) {
     function content()
     {
         return fire('template.layout')->content();
     }
 }
 
-if ( ! function_exists('head'))
-{
+if ( ! function_exists('head')) {
     function head()
     {
         ob_start();
@@ -18,8 +30,7 @@ if ( ! function_exists('head'))
     }
 }
 
-if ( ! function_exists('foot'))
-{
+if ( ! function_exists('foot')) {
     function foot()
     {
         ob_start();
@@ -28,16 +39,14 @@ if ( ! function_exists('foot'))
     }
 }
 
-if ( ! function_exists('documentTitle'))
-{
+if ( ! function_exists('documentTitle')) {
     function documentTitle($sep = null, $display = false, $seplocation = null)
     {
         return wp_title($sep, $display, $seplocation);
     }
 }
 
-if ( ! function_exists('documentClass'))
-{
+if ( ! function_exists('documentClass')) {
     function documentClass($extra = null)
     {
         ob_start();
@@ -46,8 +55,7 @@ if ( ! function_exists('documentClass'))
     }
 }
 
-if ( ! function_exists('menu'))
-{
+if ( ! function_exists('menu')) {
     function menu($options = [])
     {
         $defaults = [
@@ -87,8 +95,7 @@ if ( ! function_exists('menu'))
     }
 }
 
-if ( ! function_exists('menuAtLocation'))
-{
+if ( ! function_exists('menuAtLocation')) {
     function menuAtLocation($location, $options = [])
     {
         $options['menu_location'] = $location;
@@ -97,8 +104,7 @@ if ( ! function_exists('menuAtLocation'))
     }
 }
 
-if ( ! function_exists('menuItems'))
-{
+if ( ! function_exists('menuItems')) {
     function menuItems($options = [])
     {
         $options['items_wrap'] = '%3$s';
@@ -107,8 +113,7 @@ if ( ! function_exists('menuItems'))
     }
 }
 
-if ( ! function_exists('menuItemsAtLocation'))
-{
+if ( ! function_exists('menuItemsAtLocation')) {
     function menuItemsAtLocation($location, $options = [])
     {
         $options['menu_location'] = $location;
@@ -117,8 +122,7 @@ if ( ! function_exists('menuItemsAtLocation'))
     }
 }
 
-if ( ! function_exists('menuObjectAtLocation'))
-{
+if ( ! function_exists('menuObjectAtLocation')) {
     function menuObjectAtLocation($location)
     {
         $menus         = wp_get_nav_menus();

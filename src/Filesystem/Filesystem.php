@@ -1,5 +1,27 @@
 <?php
-
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) <Taylor Otwell>
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 namespace Fire\Filesystem;
 
 use ErrorException;
@@ -10,25 +32,11 @@ use Fire\Contracts\Filesystem\Filesystem as FilesystemContract;
 
 class Filesystem implements FilesystemContract
 {
-    /**
-     * Determine if a file exists.
-     *
-     * @param  string  $path
-     * @return bool
-     */
     public function exists($path)
     {
         return file_exists($path);
     }
 
-    /**
-     * Get the contents of a file.
-     *
-     * @param  string  $path
-     * @return string
-     *
-     * @throws \ErrorException
-     */
     public function get($path)
     {
         if ($this->isFile($path)) {
@@ -66,26 +74,11 @@ class Filesystem implements FilesystemContract
         require_once $file;
     }
 
-    /**
-     * Write the contents of a file.
-     *
-     * @param  string  $path
-     * @param  string  $contents
-     * @param  bool  $lock
-     * @return int
-     */
     public function put($path, $contents, $lock = false)
     {
         return file_put_contents($path, $contents, $lock ? LOCK_EX : 0);
     }
 
-    /**
-     * Prepend to a file.
-     *
-     * @param  string  $path
-     * @param  string  $data
-     * @return int
-     */
     public function prepend($path, $data)
     {
         if ($this->exists($path)) {
@@ -95,24 +88,11 @@ class Filesystem implements FilesystemContract
         return $this->put($path, $data);
     }
 
-    /**
-     * Append to a file.
-     *
-     * @param  string  $path
-     * @param  string  $data
-     * @return int
-     */
     public function append($path, $data)
     {
         return file_put_contents($path, $data, FILE_APPEND);
     }
 
-    /**
-     * Delete the file at a given path.
-     *
-     * @param  string|array  $paths
-     * @return bool
-     */
     public function delete($paths)
     {
         $paths = is_array($paths) ? $paths : func_get_args();
@@ -133,25 +113,11 @@ class Filesystem implements FilesystemContract
         return $success;
     }
 
-    /**
-     * Move a file to a new location.
-     *
-     * @param  string  $path
-     * @param  string  $target
-     * @return bool
-     */
     public function move($path, $target)
     {
         return rename($path, $target);
     }
 
-    /**
-     * Copy a file to a new location.
-     *
-     * @param  string  $path
-     * @param  string  $target
-     * @return bool
-     */
     public function copy($path, $target)
     {
         return copy($path, $target);
@@ -201,23 +167,11 @@ class Filesystem implements FilesystemContract
         return finfo_file(finfo_open(FILEINFO_MIME_TYPE), $path);
     }
 
-    /**
-     * Get the file size of a given file.
-     *
-     * @param  string  $path
-     * @return int
-     */
     public function size($path)
     {
         return filesize($path);
     }
 
-    /**
-     * Get the file's last modification time.
-     *
-     * @param  string  $path
-     * @return int
-     */
     public function lastModified($path)
     {
         return filemtime($path);
@@ -268,12 +222,6 @@ class Filesystem implements FilesystemContract
         return glob($pattern, $flags);
     }
 
-    /**
-     * Get an array of all files in a directory.
-     *
-     * @param  string  $directory
-     * @return array
-     */
     public function files($directory)
     {
         $glob = glob($directory.'/*');
@@ -286,16 +234,10 @@ class Filesystem implements FilesystemContract
         // out any "files" that are not truly files so we do not end up with any
         // directories in our list, but only true files within the directory.
         return array_filter($glob, function ($file) {
-            return filetype($file) == 'file';
+            return filetype($file) === 'file';
         });
     }
 
-    /**
-    * Get all of the files from the given directory (recursive).
-    *
-    * @param  string  $directory
-    * @return array
-    */
     public function allFiles($directory)
     {
         $files = [];
@@ -309,13 +251,27 @@ class Filesystem implements FilesystemContract
         return $files;
     }
 
+    public function directories($directory)
+    {
+        $glob = glob($directory.'/*');
+
+        if ($glob === false) {
+            return [];
+        }
+
+        return array_filter($glob, function ($file) {
+            $base = basename($file);
+            return (filetype($file) === 'dir' and $base !== '.' and $base !== '..');
+        })
+    }
+
     /**
-     * Get all of the directories within a given directory.
+     * Get all (recursive) of the directories within a given directory.
      *
      * @param  string  $directory
      * @return array
      */
-    public function directories($directory)
+    public function allDirectories($directory)
     {
         $directories = [];
 

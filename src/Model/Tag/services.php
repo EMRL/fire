@@ -4,7 +4,7 @@ namespace Fire\Model\Tag;
 
 use Fire\Model\Term\TermEntityMapper;
 
-add_action('fire/services', function ($fire) {
+add_action('fire/services/core', function ($fire) {
     $fire->singleton('tag.repository', function ($fire) {
         $repo = new TagRepository(TagTaxonomy::NAME);
 
@@ -21,4 +21,4 @@ add_action('fire/services', function ($fire) {
 
         return $repo;
     });
-}, 5);
+});

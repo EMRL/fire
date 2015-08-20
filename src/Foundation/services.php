@@ -2,9 +2,9 @@
 
 namespace Fire\Foundation;
 
-add_action('fire/services', function ($fire) {
+add_action('fire/services/core', function ($fire) {
     $fire->instance('request', new Request(
         $fire['post.repository'],
         $fire['page.repository']
     ));
-}, '5.1');
+}, 11);

@@ -4,8 +4,21 @@ namespace Fire\Admin;
 
 class RelativeUrls
 {
+    /**
+     * The current domain
+     *
+     * @var string
+     */
     protected $domain;
 
+    /**
+     * Sets up hooks to remove the domain from content before saving to the
+     * database. This makes migrations simple as there are much less absolute
+     * paths in the database.
+     *
+     * Not all absolute paths are fixed, some plugins and cached settings could
+     * potentially have full URLs still, but we fix the ones that matter most.
+     */
     public function __construct()
     {
         $this->domain = $_SERVER['SERVER_NAME'];
@@ -56,6 +69,15 @@ class RelativeUrls
         }, null, 3);
     }
 
+    /**
+     * Replace the domain in meta tables
+     *
+     * @param  string   $type
+     * @param  integer  $id
+     * @param  integer  $objectId
+     * @param  string   $key
+     * @param  mixed    $value
+     */
     public function replaceDomainInMeta($type, $id, $objectId, $key, $value)
     {
         global $wpdb;
@@ -80,6 +102,12 @@ class RelativeUrls
         }
     }
 
+    /**
+     * Replace the domain in options table
+     *
+     * @param  string  $option
+     * @param  mixed   $value
+     */
     public function replaceDomainInOption($option, $value)
     {
         global $wpdb;
@@ -99,6 +127,13 @@ class RelativeUrls
         }
     }
 
+    /**
+     * Recursively replace the domain for cases where options have arrays
+     * of arrays where the domain could be anywhere
+     *
+     * @param  mixed  $value
+     * @return mixed
+     */
     protected function replaceDomainRecursive($value)
     {
         if (is_array($value)) {
@@ -114,6 +149,12 @@ class RelativeUrls
         return $value;
     }
 
+    /**
+     * Replace the domain in a string
+     *
+     * @param  string  $value
+     * @return string
+     */
     public function replaceDomain($value)
     {
         $normal_urls = 'http://'.$this->domain;

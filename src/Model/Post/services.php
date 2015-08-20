@@ -4,7 +4,7 @@ namespace Fire\Model\Post;
 
 use Fire\Model\AbstractPost\AbstractPostEntityMapper;
 
-add_action('fire/services', function ($fire) {
+add_action('fire/services/core', function ($fire) {
     $fire->singleton('post.repository', function ($fire) {
         $repo = new PostRepository(PostPostType::TYPE);
 
@@ -22,4 +22,4 @@ add_action('fire/services', function ($fire) {
 
         return $repo;
     });
-}, 5);
+});

@@ -2,7 +2,7 @@
 
 namespace Fire\Model\User;
 
-add_action('fire/services', function ($fire) {
+add_action('fire/services/core', function ($fire) {
     $fire->singleton('user.repository', function ($fire) {
         $repo = new UserRepository;
 
@@ -12,4 +12,4 @@ add_action('fire/services', function ($fire) {
 
         return $repo;
     });
-}, 5);
+});

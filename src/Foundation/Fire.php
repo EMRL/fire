@@ -13,7 +13,10 @@ class Fire extends Container
         $this->registerBaseBindings();
         $this->loadBaseFiles();
 
-        do_action('fire/services', $this);
+        do_action('fire/services/core', $this);
+        do_action('fire/services/plugin', $this);
+        do_action('fire/services/parent', $this);
+        do_action('fire/services/theme', $this);
         do_action('fire/ignite', $this);
     }
 
@@ -38,6 +41,8 @@ class Fire extends Container
             'src/Foundation/services.php',
             'src/Foundation/helpers.php',
             'src/Admin/services.php',
+            'src/Asset/services.php',
+            'src/Asset/helpers.php',
             'src/Filesystem/services.php',
             'src/Template/services.php',
             'src/Template/helpers.php',
