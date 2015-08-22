@@ -7,31 +7,46 @@ use Fire\Contracts\Model\Term\Term as TermContract;
 
 abstract class Term extends Entity implements TermContract
 {
+    /**
+     * @var integer
+     */
     protected $id;
 
+    /**
+     * @var string
+     */
     protected $name;
 
+    /**
+     * @var string
+     */
     protected $slug;
 
+    /**
+     * @var string
+     */
     protected $description;
 
+    /**
+     * @var stdClass
+     */
     protected $taxonomy;
 
     /**
-     * @var  Fire\Contracts\Model\Term\Term
+     * @var Fire\Contracts\Model\Term\Term
      */
     protected $parent;
 
     /**
-     * @var  array
+     * @var array
      */
     protected $native;
 
     /**
      * Create a new post
      *
-     * @param   $data  array
-     * @return  void
+     * @param  array  $data
+     * @return void
      */
     public function __construct(array $data = [])
     {
@@ -108,7 +123,7 @@ abstract class Term extends Entity implements TermContract
     /**
      * Get the original term array returned by WordPress
      *
-     * @return  array
+     * @return array
      */
     public function getNative()
     {
@@ -118,7 +133,7 @@ abstract class Term extends Entity implements TermContract
     /**
      * Set the original term array returned by WordPress
      *
-     * @param  $term  array
+     * @param array  $term
      */
     public function setNative(array $term)
     {

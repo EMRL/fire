@@ -4,6 +4,14 @@ use Fire\Container\Container;
 
 if ( ! function_exists('add_hooks'))
 {
+    /**
+     * Add function to multiple hooks at once
+     * @param string    $hooks
+     * @param callable  $callback
+     * @param integer   $priority
+     * @param integer   $accepted_args
+     * @param string    $type
+     */
     function add_hooks($hooks, $callback, $priority, $accepted_args, $type = 'filter')
     {
         $function = "add_$type";
@@ -20,6 +28,13 @@ if ( ! function_exists('add_hooks'))
 
 if ( ! function_exists('add_actions'))
 {
+    /**
+     * Add function to multiple actions at once
+     * @param string    $actions
+     * @param callable  $callback
+     * @param integer   $priority
+     * @param integer   $accepted_args
+     */
     function add_actions($actions, $callback, $priority = NULL, $accepted_args = 1)
     {
         add_hooks($actions, $callback, $priority, $accepted_args, 'action');
@@ -28,6 +43,13 @@ if ( ! function_exists('add_actions'))
 
 if ( ! function_exists('add_filters'))
 {
+    /**
+     * Add function to multiple filters at once
+     * @param string    $filters
+     * @param callable  $callback
+     * @param integer   $priority
+     * @param integer   $accepted_args
+     */
     function add_filters($filters, $callback, $priority = NULL, $accepted_args = 1)
     {
         add_hooks($filters, $callback, $priority, $accepted_args, 'filter');
@@ -36,6 +58,13 @@ if ( ! function_exists('add_filters'))
 
 if ( ! function_exists('fire'))
 {
+    /**
+     * Return instance of Fire
+     *
+     * @param  string  $make
+     * @param  array   $parameters
+     * @return mixed|\Fire\Foundation\Fire
+     */
     function fire($make = null, $parameters = [])
     {
         if (is_null($make)) {
@@ -48,6 +77,11 @@ if ( ! function_exists('fire'))
 
 if ( ! function_exists('currentUrl'))
 {
+    /**
+     * Return the full current URL
+     *
+     * @return string
+     */
     function currentUrl()
     {
         global $wp;

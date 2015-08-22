@@ -7,10 +7,19 @@ use Fire\Contracts\Template\TemplateFinder as TemplateFinderContract;
 
 class Template implements TemplateContract
 {
+    /**
+     * @var Fire\Contracts\Template\TemplateFinder
+     */
     protected $finder;
 
+    /**
+     * @var string
+     */
     protected $partialPath = 'partials/';
 
+    /**
+     * @param Fire\Contracts\Template\TemplateFinder  $finder
+     */
     public function __construct(TemplateFinderContract $finder)
     {
         $this->finder = $finder;

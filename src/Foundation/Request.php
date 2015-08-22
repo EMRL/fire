@@ -9,12 +9,25 @@ use Fire\Foundation\Collection;
 
 class Request
 {
+    /**
+     * @var Fire\Contracts\Model\Post\PostRepository
+     */
     protected $postRepository;
 
+    /**
+     * @var Fire\Contracts\Model\Page\PageRepository
+     */
     protected $pageRepository;
 
+    /**
+     * @var array
+     */
     protected $errors404 = [];
 
+    /**
+     * @param Fire\Contracts\Model\Post\PostRepository $postRepository
+     * @param Fire\Contracts\Model\Page\PageRepository $pageRepository
+     */
     public function __construct(
         PostRepositoryContract $postRepository,
         PageRepositoryContract $pageRepository
@@ -26,6 +39,11 @@ class Request
         add_action('template_redirect', function () { $this->setCurrentEntities(); });
     }
 
+    /**
+     * Set WordPress conditionals that should resolve as 404s
+     *
+     * @param string|array  $param,...
+     */
     public function resolveAs404()
     {
         foreach (func_get_args() as $arg) {
@@ -37,6 +55,10 @@ class Request
         }
     }
 
+    /**
+     * Loop through all conditionals set and if any match the current request
+     * then set a 404 response
+     */
     protected function resolve404s()
     {
         global $wp_query;
@@ -60,6 +82,9 @@ class Request
         }
     }
 
+    /**
+     * Set the current entities for use in templates
+     */
     protected function setCurrentEntities()
     {
         global $wp_query;

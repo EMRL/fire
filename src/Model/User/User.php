@@ -54,6 +54,11 @@ class User extends WP_User implements EntityContract, UserContract, Arrayable
         return $this->display_name;
     }
 
+    /**
+     * Alias to_array
+     *
+     * @return array
+     */
     public function toArray()
     {
         return $this->to_array();

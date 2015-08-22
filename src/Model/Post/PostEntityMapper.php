@@ -11,12 +11,26 @@ use Fire\Contracts\Model\Tag\TagRepository as TagRepositoryContract;
 
 class PostEntityMapper implements EntityMapperContract
 {
+    /**
+     * @var Fire\Contracts\Model\Post\PostRepository
+     */
     protected $postRepository;
 
+    /**
+     * @var Fire\Contracts\Model\Category\CategoryRepository
+     */
     protected $categoryRepository;
 
+    /**
+     * @var Fire\Contracts\Model\Tag\TagRepository
+     */
     protected $tagRepository;
 
+    /**
+     * @param Fire\Contracts\Model\Post\PostRepository          $postRepository
+     * @param Fire\Contracts\Model\Category\CategoryRepository  $categoryRepository
+     * @param Fire\Contracts\Model\Tag\TagRepository            $tagRepository
+     */
     public function __construct(
         PostRepositoryContract $postRepository,
         CategoryRepositoryContract $categoryRepository,

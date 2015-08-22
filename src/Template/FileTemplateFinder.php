@@ -8,12 +8,25 @@ use InvalidArgumentException;
 
 class FileTemplateFinder implements TemplateFinderContract
 {
+    /**
+     * @var Fire\Contracts\Filesystem\Filesystem
+     */
     protected $filesystem;
 
+    /**
+     * @var array
+     */
     protected $paths;
 
+    /**
+     * @var array
+     */
     protected $templates;
 
+    /**
+     * @param Fire\Contracts\Filesystem\Filesystem  $filesystem
+     * @param array  $paths
+     */
     public function __construct(FilesystemContract $filesystem, array $paths)
     {
         $this->filesystem = $filesystem;

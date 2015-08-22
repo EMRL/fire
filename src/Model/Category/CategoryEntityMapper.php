@@ -9,10 +9,20 @@ use Fire\Contracts\Model\Post\PostRepository as PostRepositoryContract;
 
 class CategoryEntityMapper implements EntityMapperContract
 {
+    /**
+     * @var Fire\Contracts\Model\Category\CategoryRepository
+     */
     protected $categoryRepository;
 
+    /**
+     * @var Fire\Contracts\Model\Post\PostRepository
+     */
     protected $postRepository;
 
+    /**
+     * @param Fire\Contracts\Model\Category\CategoryRepository  $categoryRepository
+     * @param Fire\Contracts\Model\Post\PostRepository          $postRepository
+     */
     public function __construct(
         CategoryRepositoryContract $categoryRepository,
         PostRepositoryContract $postRepository

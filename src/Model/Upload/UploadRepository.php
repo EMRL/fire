@@ -19,6 +19,11 @@ class UploadRepository extends AbstractPostRepository implements UploadRepositor
         return $this->postOfSlug($slug);
     }
 
+    /**
+     * Return image uploads
+     *
+     * @return Fire\Foundation\Collection
+     */
     public function imageUploads()
     {
         $args = $this->newParams()->images();
@@ -26,6 +31,11 @@ class UploadRepository extends AbstractPostRepository implements UploadRepositor
         return $this->find($args);
     }
 
+    /**
+     * Return video uploads
+     *
+     * @return Fire\Foundation\Collection
+     */
     public function videoUploads()
     {
         $args = $this->newParams()->videos();
@@ -33,6 +43,11 @@ class UploadRepository extends AbstractPostRepository implements UploadRepositor
         return $this->find($args);
     }
 
+    /**
+     * Return text uploads
+     *
+     * @return Fire\Foundation\Collection
+     */
     public function textUploads()
     {
         $args = $this->newParams()->texts();

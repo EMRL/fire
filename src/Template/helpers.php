@@ -1,6 +1,13 @@
 <?php
 
 if ( ! function_exists('template')) {
+    /**
+     * Render a template
+     * @param  string  $key
+     * @param  string  $suffix
+     * @param  array   $data
+     * @return string
+     */
     function template($key, $suffix = null, $data = [])
     {
         return fire('template')->render($key, $suffix, $data);
@@ -8,6 +15,13 @@ if ( ! function_exists('template')) {
 }
 
 if ( ! function_exists('partial')) {
+    /**
+     * Render a template partial
+     * @param  string  $key
+     * @param  string  $suffix
+     * @param  array   $data
+     * @return string
+     */
     function partial($key, $suffix = null, $data = [])
     {
         return fire('template')->partial($key, $suffix, $data);
@@ -15,6 +29,11 @@ if ( ! function_exists('partial')) {
 }
 
 if ( ! function_exists('content')) {
+    /**
+     * Returns the template for the current request
+     *
+     * @return string
+     */
     function content()
     {
         return fire('template.layout')->content();
@@ -22,6 +41,11 @@ if ( ! function_exists('content')) {
 }
 
 if ( ! function_exists('head')) {
+    /**
+     * Wrapper for `wp_head`
+     *
+     * @return string
+     */
     function head()
     {
         ob_start();
@@ -31,6 +55,11 @@ if ( ! function_exists('head')) {
 }
 
 if ( ! function_exists('foot')) {
+    /**
+     * Wrapper for `wp_footer`
+     *
+     * @return string
+     */
     function foot()
     {
         ob_start();
@@ -40,6 +69,13 @@ if ( ! function_exists('foot')) {
 }
 
 if ( ! function_exists('documentTitle')) {
+    /**
+     * Wrapper for `wp_title`
+     * @param  string   $sep
+     * @param  boolean  $display
+     * @param  string   $seplocation
+     * @return string
+     */
     function documentTitle($sep = null, $display = false, $seplocation = null)
     {
         return wp_title($sep, $display, $seplocation);
@@ -47,6 +83,12 @@ if ( ! function_exists('documentTitle')) {
 }
 
 if ( ! function_exists('documentClass')) {
+    /**
+     * Wrapper for `body_class`
+     *
+     * @param  string  $extra
+     * @return string
+     */
     function documentClass($extra = null)
     {
         ob_start();
@@ -56,6 +98,12 @@ if ( ! function_exists('documentClass')) {
 }
 
 if ( ! function_exists('menu')) {
+    /**
+     * Wrapper for `wp_nav_menu` with more sane defaults
+     *
+     * @param  array  $options
+     * @return string
+     */
     function menu($options = [])
     {
         $defaults = [
@@ -96,6 +144,13 @@ if ( ! function_exists('menu')) {
 }
 
 if ( ! function_exists('menuAtLocation')) {
+    /**
+     * Get the menu for a location
+     *
+     * @param  string  $location
+     * @param  array   $options
+     * @return string
+     */
     function menuAtLocation($location, $options = [])
     {
         $options['menu_location'] = $location;
@@ -105,6 +160,12 @@ if ( ! function_exists('menuAtLocation')) {
 }
 
 if ( ! function_exists('menuItems')) {
+    /**
+     * Get just the menu items without any wrapper elements
+     *
+     * @param  array  $options
+     * @return string
+     */
     function menuItems($options = [])
     {
         $options['items_wrap'] = '%3$s';
@@ -114,6 +175,12 @@ if ( ! function_exists('menuItems')) {
 }
 
 if ( ! function_exists('menuItemsAtLocation')) {
+    /**
+     * Get just the menu items from a location without any wrapper elements
+     * @param  string  $location
+     * @param  array   $options
+     * @return string
+     */
     function menuItemsAtLocation($location, $options = [])
     {
         $options['menu_location'] = $location;
@@ -122,7 +189,27 @@ if ( ! function_exists('menuItemsAtLocation')) {
     }
 }
 
+if ( ! function_exists('menuObject'))
+{
+    /**
+     * Get the menu object
+     *
+     * @param  integer|string  $id
+     * @return string
+     */
+    function menuObject($id)
+    {
+        return wp_get_nav_menu_object($id);
+    }
+}
+
 if ( ! function_exists('menuObjectAtLocation')) {
+    /**
+     * Get the menu object for a location
+     *
+     * @param  string  $location
+     * @return stdClass
+     */
     function menuObjectAtLocation($location)
     {
         $menus         = wp_get_nav_menus();

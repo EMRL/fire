@@ -3,9 +3,13 @@
 namespace Fire\Model\AbstractPost;
 
 use Fire\Model\Entity;
+use Fire\Contracts\Model\AbstractPost\AbstractPost as AbstractPostContract;
 
-abstract class AbstractPost extends Entity
+abstract class AbstractPost extends Entity implements AbstractPostContract
 {
+    /**
+     * @var integer
+     */
     protected $id;
 
     /**
@@ -13,33 +17,69 @@ abstract class AbstractPost extends Entity
      */
     protected $author;
 
+    /**
+     * @var string
+     */
     protected $date;
 
+    /**
+     * @var string
+     */
     protected $content;
 
+    /**
+     * @var string
+     */
     protected $title;
 
+    /**
+     * @var string
+     */
     protected $excerpt;
 
+    /**
+     * @var string
+     */
     protected $status;
 
+    /**
+     * @var string
+     */
     protected $commentStatus;
 
+    /**
+     * @var string
+     */
     protected $pingStatus;
 
+    /**
+     * @var string
+     */
     protected $password;
 
+    /**
+     * @var string
+     */
     protected $slug;
 
+    /**
+     * @var string
+     */
     protected $modified;
 
     /**
-     * @var  Fire\Contracts\Model\Post\Post
+     * @var  Fire\Contracts\Model\AbstractPost\AbstractPost
      */
     protected $parent;
 
+    /**
+     * @var integer
+     */
     protected $menuOrder;
 
+    /**
+     * @var string
+     */
     protected $type;
 
     /**

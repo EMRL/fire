@@ -9,8 +9,14 @@ use Fire\Contracts\Model\Repository as RepositoryContract;
 
 class AbstractPostEntityMapper implements EntityMapperContract
 {
+    /**
+     * @var Fire\Contracts\Model\User\UserRepository
+     */
     protected $userRepository;
 
+    /**
+     * @param Fire\Contracts\Model\User\UserRepository  $userRepository
+     */
     public function __construct(UserRepositoryContract $userRepository)
     {
         $this->userRepository = $userRepository;

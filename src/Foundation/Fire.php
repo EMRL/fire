@@ -8,6 +8,11 @@ use Fire\Admin\RelativeUrls;
 
 class Fire extends Container
 {
+    /**
+     * Create new instance of Fire
+     *
+     * Loads required files and binds services to container
+     */
     public function __construct()
     {
         $this->registerBaseBindings();
@@ -20,6 +25,9 @@ class Fire extends Container
         do_action('fire/ignite', $this);
     }
 
+    /**
+     * Register core services
+     */
     protected function registerBaseBindings()
     {
         static::setInstance($this);
@@ -35,6 +43,9 @@ class Fire extends Container
         $this->instance('url.theme', trailingslashit(get_stylesheet_directory_uri()));
     }
 
+    /**
+     * Load service providers and helpers
+     */
     protected function loadBaseFiles()
     {
         $files = [

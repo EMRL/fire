@@ -6,8 +6,14 @@ use Fire\Foundation\Params;
 
 class AbstractPostParams extends Params
 {
+    /**
+     * @var string
+     */
     protected $postType;
 
+    /**
+     * @param string  $postType
+     */
     public function __construct($postType)
     {
         $this->postType = $postType;

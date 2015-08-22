@@ -262,7 +262,7 @@ class Filesystem implements FilesystemContract
         return array_filter($glob, function ($file) {
             $base = basename($file);
             return (filetype($file) === 'dir' and $base !== '.' and $base !== '..');
-        })
+        });
     }
 
     /**

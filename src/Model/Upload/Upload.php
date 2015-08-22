@@ -48,16 +48,31 @@ class Upload extends AbstractPost implements UploadContract
         return $path;
     }
 
+    /**
+     * Test if upload is an image
+     *
+     * @return boolean
+     */
     public function isImage()
     {
         return preg_match('/^image\//i', $this->mimeType());
     }
 
+    /**
+     * Test if upload is a video
+     *
+     * @return boolean
+     */
     public function isVideo()
     {
         return preg_match('/^video\//i', $this->mimeType());
     }
 
+    /**
+     * Test is upload is a text file
+     *
+     * @return boolean
+     */
     public function isText()
     {
         return preg_match('/^text\//i', $this->mimeType());

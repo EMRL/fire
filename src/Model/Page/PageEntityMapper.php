@@ -8,8 +8,14 @@ use Fire\Contracts\Model\Entity as EntityContract;
 
 class PageEntityMapper implements EntityMapperContract
 {
+    /**
+     * @var Fire\Contracts\Model\Page\PageRepository
+     */
     protected $pageRepository;
 
+    /**
+     * @param Fire\Contracts\Model\Page\PageRepository  $pageRepository
+     */
     public function __construct(PageRepositoryContract $pageRepository)
     {
         $this->pageRepository = $pageRepository;

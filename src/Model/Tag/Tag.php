@@ -8,14 +8,14 @@ use Fire\Contracts\Model\Tag\Tag as TagContract;
 class Tag extends Term implements TagContract
 {
     /**
-     * @var  Fire\Foundation\Collection
+     * @var Fire\Foundation\Collection
      */
     protected $posts;
 
     /**
      * Get posts
      *
-     * @return  Fire\Foundation\Collection
+     * @return Fire\Foundation\Collection
      */
     public function posts()
     {
@@ -25,8 +25,8 @@ class Tag extends Term implements TagContract
     /**
      * Set posts
      *
-     * @param   $posts  Fire\Foundation\Collection|Closure
-     * @return  void
+     * @param  Fire\Foundation\Collection|Closure  $posts
+     * @return void
      */
     public function setPosts($posts)
     {

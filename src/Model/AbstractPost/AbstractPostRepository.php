@@ -9,25 +9,40 @@ use Fire\Contracts\Model\AbstractPost\AbstractPost as AbstractPostContract;
 
 class AbstractPostRepository extends Repository
 {
+    /**
+     * @var string
+     */
     protected $postType;
 
+    /**
+     * @var string
+     */
     protected $entityClass;
 
     /**
-     * @var  Fire\Contracts\Model\Post\Post
+     * @var  Fire\Contracts\Model\AbstractPost\AbstractPost
      */
     protected $currentPost;
 
     /**
-     * @var  Fire\Foundation\Collection([Fire\Contracts\Model\Post\Post])
+     * @var  Fire\Foundation\Collection
      */
     protected $currentPosts;
 
+    /**
+     * @param string  $postType
+     */
     public function __construct($postType)
     {
         $this->postType = $postType;
     }
 
+    /**
+     * Return a post for the specified ID
+     *
+     * @param  integer  $id
+     * @return Fire\Contracts\AbstractPost\AbstractPost
+     */
     public function postOfId($id)
     {
         $post = get_post($id, ARRAY_A);
@@ -41,6 +56,12 @@ class AbstractPostRepository extends Repository
         return $post;
     }
 
+    /**
+     * Return a post for the specified slug
+     *
+     * @param  string  $slug
+     * @return Fire\Contracts\AbstractPost\AbstractPost
+     */
     public function postOfSlug($slug)
     {
         $post = get_page_by_path($slug, ARRAY_A, $this->postType);
@@ -52,6 +73,12 @@ class AbstractPostRepository extends Repository
         return $post;
     }
 
+    /**
+     * Return a collection of posts
+     *
+     * @param  Fire\Contracts\Foundation\Arrayable|array|null  $args
+     * @return Fire\Foundation\Collection
+     */
     public function find($args = null)
     {
         if (is_null($args)) {
@@ -69,31 +96,51 @@ class AbstractPostRepository extends Repository
         return $posts;
     }
 
+    /**
+     * @return Fire\Contracts\Model\AbstractPost\AbstractPost
+     */
     public function currentPost()
     {
         return $this->currentPost;
     }
 
+    /**
+     * @param Fire\Contracts\Model\AbstractPost\AbstractPost  $post
+     */
     public function setCurrentPost(AbstractPostContract $post)
     {
         $this->currentPost = $post;
     }
 
+    /**
+     * @return Fire\Foundation\Collection
+     */
     public function currentPosts()
     {
         return $this->currentPosts;
     }
 
+    /**
+     * @param Fire\Foundation\Collection  $posts
+     */
     public function setCurrentPosts($posts)
     {
         $this->currentPosts = $posts;
     }
 
+    /**
+     * Return a new params object
+     *
+     * @return Fire\Contracts\Foundation\Arrayable
+     */
     protected function newParams()
     {
         return new AbstractPostParams($this->postType);
     }
 
+    /**
+     * @param string  $type
+     */
     public function setPostType($type)
     {
         $this->postType = $type;

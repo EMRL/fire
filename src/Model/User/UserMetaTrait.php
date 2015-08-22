@@ -4,6 +4,14 @@ namespace Fire\Model\User;
 
 trait UserMetaTrait
 {
+    /**
+     * Get user meta values
+     * @param  integer  $id
+     * @param  string   $key
+     * @param  mixed    $default
+     * @param  boolean  $format
+     * @return mixed
+     */
     protected function meta($id, $key, $default = null, $format = true)
     {
         if (function_exists('get_field')) {

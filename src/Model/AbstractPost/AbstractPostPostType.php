@@ -6,17 +6,41 @@ use Closure;
 
 abstract class AbstractPostPostType
 {
+    /**
+     * Post type
+     *
+     * @var string
+     */
     const TYPE = '';
 
+    /**
+     * Flag to set whether this is a custom or built-in post type
+     *
+     * @var boolean
+     */
     const BUILTIN = false;
 
+    /**
+     * @var stdClass
+     */
     protected $config;
 
+    /**
+     * Get the post type configuration
+     *
+     * @return stdClass
+     */
     public function config()
     {
         return $this->config;
     }
 
+    /**
+     * Register the post type
+     *
+     * @param  array|callable  $config
+     * @return $this
+     */
     protected function register($config)
     {
         add_action('init', function () use ($config) {
@@ -67,6 +91,11 @@ abstract class AbstractPostPostType
         return $this;
     }
 
+    /**
+     * Set the title placeholder on post edit screen
+     *
+     * @param string  $placeholder
+     */
     protected function setTitlePlaceholder($placeholder)
     {
         add_filter('enter_title_here', function ($title, $post) use ($placeholder) {
@@ -79,11 +108,15 @@ abstract class AbstractPostPostType
     }
 
     /**
+     * Modify the list table column headings
+     *
      * Callback gets passed column array:
      *
      *     $callback(array(
      *         [column-key] => Heading Text
      *     ));
+     *
+     * @param callable  $callback
      */
     protected function modifyColumnHeadings(callable $callback)
     {
@@ -91,11 +124,15 @@ abstract class AbstractPostPostType
     }
 
     /**
+     * Modify the list table sortable columns
+     *
      * Callback gets passed numeric column array
      *
      *     $callback(array(
      *         [0] => 'column-key'
      *     ))
+     *
+     * @param callable  $callback
      */
     protected function modifySortableColumns(callable $callback)
     {
@@ -103,15 +140,25 @@ abstract class AbstractPostPostType
     }
 
     /**
+     * Modify the list table column content
+     *
      * Callback gets passed column key and post ID
      *
      *     $callback(column-key, 12);
+     *
+     * @param callable  $callback
      */
     protected function modifyColumns(callable $callback)
     {
         add_action(sprintf('manage_%s_posts_custom_column', static::TYPE), $callback, null, 2);
     }
 
+    /**
+     * "Register" a built-in post type, this just adds our config to the default
+     * already registered config
+     *
+     * @param  array  $config
+     */
     protected function registerBuiltin($config)
     {
         global $wp_post_types;

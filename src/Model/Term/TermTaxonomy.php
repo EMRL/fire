@@ -4,17 +4,42 @@ namespace Fire\Model\Term;
 
 abstract class TermTaxonomy
 {
+    /**
+     * Taxonomy name
+     *
+     * @var string
+     */
     const NAME = '';
 
+    /**
+     * Flag to set whether this is a custom or built-in taxonomy
+     *
+     * @var boolean
+     */
     const BUILTIN = false;
 
+    /**
+     * @var stdClass
+     */
     protected $config;
 
+    /**
+     * Get the post type configuration
+     *
+     * @return stdClass
+     */
     public function config()
     {
         return $this->config;
     }
 
+    /**
+     * Register the taxonomy
+     *
+     * @param  string|array    $postTypes
+     * @param  array|callable  $config
+     * @return $this
+     */
     protected function register($postTypes, $config)
     {
         add_action('init', function () use ($postTypes, $config) {
@@ -74,11 +99,15 @@ abstract class TermTaxonomy
     }
 
     /**
+     * Modify the list able column headings
+     *
      * Callback gets passed column array:
      *
      *     $callback(array(
      *         [column-key] => Heading Text
      *     ));
+     *
+     * @param callable  $callback
      */
     protected function modifyColumnHeadings(callable $callback)
     {
@@ -86,11 +115,15 @@ abstract class TermTaxonomy
     }
 
     /**
+     * Modify the list table sortable columns
+     *
      * Callback gets passed numeric column array
      *
      *     $callback(array(
      *         [0] => 'column-key'
      *     ))
+     *
+     * @param callable  $callback
      */
     protected function modifySortableColumns(callable $callback)
     {
@@ -98,15 +131,25 @@ abstract class TermTaxonomy
     }
 
     /**
+     * Modify the list table column content
+     *
      * Callback gets passed content, column key, and post ID
      *
      *     $callback($content, column-key, 12);
+     *
+     * @param callable  $callback
      */
     protected function modifyColumns(callable $callback)
     {
         add_filter(sprintf('manage_%s_custom_column', static::NAME), $callback, null, 3);
     }
 
+    /**
+     * "Register" a built-in taxonomy, this just adds our config to the default
+     * already registered config
+     *
+     * @param  array  $config
+     */
     protected function registerBuiltin($config)
     {
         global $wp_taxonomies;

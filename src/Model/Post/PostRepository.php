@@ -9,6 +9,12 @@ class PostRepository extends AbstractPostRepository implements PostRepositoryCon
 {
     protected $entityClass = 'Fire\Model\Post\Post';
 
+    /**
+     * Get posts in category or categories
+     *
+     * @param  integer|array  $id
+     * @return Fire\Foundation\Collection
+     */
     public function postsInCategory($id)
     {
         $args = $this->newParams()->inCategory($id);
@@ -16,6 +22,12 @@ class PostRepository extends AbstractPostRepository implements PostRepositoryCon
         return $this->find($args);
     }
 
+    /**
+     * Get posts tagged with this ID or IDs
+     *
+     * @param  integer|array  $id
+     * @return Fire\Foundation\Collection
+     */
     public function postsTagged($id)
     {
         $args = $this->newParams()->tagged($id);
