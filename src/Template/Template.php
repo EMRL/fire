@@ -27,7 +27,7 @@ class Template implements TemplateContract
 
     public function render($key, $suffix = null, $data = [])
     {
-        global $posts, $post, $wp_did_header,$wp_query, $wp_rewrite, $wpdb,
+        global $posts, $post, $wp_did_header, $wp_query, $wp_rewrite, $wpdb,
                $wp_version, $wp, $id, $comment, $user_ID;
 
         if (is_array($suffix)) {
