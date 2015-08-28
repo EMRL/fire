@@ -4,7 +4,7 @@ use Fire\Contracts\Model\EntityMapper as EntityMapperContract;
 use Fire\Contracts\Model\Entity as EntityContract;
 use Fire\Contracts\Model\Post\PostRepository as PostRepositoryContract;
 
-class PostEntityMapperMock implements EntityMapperContract
+class PostEntityMapper implements EntityMapperContract
 {
     protected $postRepository;
 

@@ -1,10 +1,9 @@
 <?php
 
-include 'PostEntityMapperMock.php';
+include 'PostEntityMapper.php';
 
 use Fire\Model\Page\PagePostType;
 use Fire\Model\Post\PostPostType;
-use Fire\Model\Post\PostEntityMapper;
 use Fire\Model\Post\PostRepository;
 use Fire\Model\Post\Post;
 
@@ -19,7 +18,7 @@ class PostRepositoryTest extends WP_UnitTestCase
         $repo = new PostRepository(PostPostType::TYPE);
 
         $repo->registerEntityMapper(function () use ($repo) {
-            return new PostEntityMapperMock($repo);
+            return new PostEntityMapper($repo);
         });
 
         $this->repo = $repo;
