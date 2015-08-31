@@ -10,15 +10,24 @@
 define('FIRE_PATH', trailingslashit(__DIR__));
 define('FIRE_URL', trailingslashit(WP_PLUGIN_URL.basename(__DIR__)));
 
-add_action('after_setup_theme', function () {
-    include __DIR__.'/src/Foundation/Psr4Autoloader.php';
+include __DIR__.'/src/Foundation/Psr4Autoloader.php';
 
-    $loader = new Fire\Foundation\Psr4Autoloader;
-    $loader->register();
-    $loader->addNamespace('Fire', __DIR__.'/src');
+$loader = new Fire\Foundation\Psr4Autoloader;
+$loader->register();
+$loader->addNamespace('Fire', __DIR__.'/src');
 
-    do_action('fire/autoload', $loader);
+add_action('muplugins_loaded', function () use ($loader) {
+    do_action('fire/autoload/required', $loader);
+});
 
-    $fire = new Fire\Foundation\Fire;
-    $fire->instance('psr4.autoloader', $loader);
-}, 1000);
+add_action('plugins_loaded', function () use ($loader) {
+    do_action('fire/autoload/plugin', $loader);
+});
+
+add_action('after_setup_theme', function () use ($loader) {
+    do_action('fire/autoload/parent', $loader);
+    do_action('fire/autoload/theme', $loader);
+});
+
+$fire = new Fire\Foundation\Fire;
+$fire->instance('psr4.autoloader', $loader);

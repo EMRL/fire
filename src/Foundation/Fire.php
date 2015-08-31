@@ -19,10 +19,20 @@ class Fire extends Container
         $this->loadBaseFiles();
 
         do_action('fire/services/core', $this);
-        do_action('fire/services/plugin', $this);
-        do_action('fire/services/parent', $this);
-        do_action('fire/services/theme', $this);
-        do_action('fire/ignite', $this);
+
+        add_action('muplugins_loaded', function () {
+            do_action('fire/services/required', $this);
+        });
+
+        add_action('plugins_loaded', function () {
+            do_action('fire/services/plugin', $this);
+        });
+
+        add_action('after_setup_theme', function () {
+            do_action('fire/services/parent', $this);
+            do_action('fire/services/theme', $this);
+            do_action('fire/ignite', $this);
+        }, 20);
     }
 
     /**

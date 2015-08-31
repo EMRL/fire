@@ -2,8 +2,7 @@
 
 use Fire\Container\Container;
 
-if ( ! function_exists('add_hooks'))
-{
+if ( ! function_exists('add_hooks')) {
     /**
      * Add function to multiple hooks at once
      * @param string    $hooks
@@ -26,8 +25,7 @@ if ( ! function_exists('add_hooks'))
     }
 }
 
-if ( ! function_exists('add_actions'))
-{
+if ( ! function_exists('add_actions')) {
     /**
      * Add function to multiple actions at once
      * @param string    $actions
@@ -41,8 +39,7 @@ if ( ! function_exists('add_actions'))
     }
 }
 
-if ( ! function_exists('add_filters'))
-{
+if ( ! function_exists('add_filters')) {
     /**
      * Add function to multiple filters at once
      * @param string    $filters
@@ -56,8 +53,7 @@ if ( ! function_exists('add_filters'))
     }
 }
 
-if ( ! function_exists('fire'))
-{
+if ( ! function_exists('fire')) {
     /**
      * Return instance of Fire
      *
@@ -75,8 +71,7 @@ if ( ! function_exists('fire'))
     }
 }
 
-if ( ! function_exists('currentUrl'))
-{
+if ( ! function_exists('currentUrl')) {
     /**
      * Return the full current URL
      *
@@ -86,5 +81,123 @@ if ( ! function_exists('currentUrl'))
     {
         global $wp;
         return esc_url(add_query_arg($_GET, home_url($wp->request)));
+    }
+}
+
+if ( ! function_exists('url')) {
+    /**
+     * Return a WordPress URL
+     *
+     * @param  string  $path
+     * @return string
+     */
+    function url($path = null)
+    {
+        return home_url($path);
+    }
+}
+
+if ( ! function_exists('option')) {
+    /**
+     * Get the value of an ACF option
+     *
+     * @param  string  $key
+     * @param  mixed   $default
+     * @return mixed
+     */
+    function option($key, $default = null)
+    {
+        $value = null;
+
+        if (function_exists('get_field')) {
+            $value = get_field($key, 'option');
+        }
+
+        if (is_null($value) or $value === false or $value === '') {
+            $value = get_option($key, $default);
+        }
+
+        return $value;
+    }
+}
+
+if ( ! function_exists('site')) {
+    /**
+     * Get website info
+     *
+     * @param  string  $key
+     * @param  string  $filter
+     * @return mixed
+     */
+    function site($key, $filter = null)
+    {
+        return get_bloginfo($key, $filter);
+    }
+}
+
+if ( ! function_exists('array_get')) {
+    /**
+     * Get an item from an array using "dot" notation.
+     *
+     * @param  array   $array
+     * @param  string  $key
+     * @param  mixed   $default
+     * @return mixed
+     */
+    function array_get($array, $key, $default = null)
+    {
+        if (is_null($key)) {
+            return $array;
+        }
+
+        if (isset($array[$key])) {
+            return $array[$key];
+        }
+
+        foreach (explode('.', $key) as $segment) {
+            if ( ! is_array($array) or ! array_key_exists($segment, $array)) {
+                return $default;
+            }
+
+            $array = $array[$segment];
+        }
+
+        return $array;
+    }
+}
+
+if ( ! function_exists('d')) {
+    /**
+     * Debug variables
+     *
+     * @param mixed ...$args
+     */
+    function d()
+    {
+        array_map(function($x) { echo '<pre>'.print_r($x, TRUE).'</pre>'; }, func_get_args());
+    }
+}
+
+if ( ! function_exists('dd')) {
+    /**
+     * Debug variables and then die
+     *
+     * @param mixed ...$args
+     */
+    function dd()
+    {
+        array_map(function($x) { echo '<pre>'.print_r($x, TRUE).'</pre>'; }, func_get_args()); die;
+    }
+}
+
+if ( ! function_exists('dump')) {
+    /**
+     * var_dump variables
+     *
+     * @param mixed  ...$args
+     */
+    function dump()
+    {
+        array_map(function($x) { echo '<pre>'; var_dump($x); echo '</pre>'; }, func_get_args()); die;
     }
 }

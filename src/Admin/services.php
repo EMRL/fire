@@ -2,8 +2,8 @@
 
 namespace Fire\Admin;
 
-add_action('fire/services/core', function ($fire) {
-    if (current_theme_supports('relative-urls')) {
+add_action('fire/ignite', function ($fire) {
+    if (apply_filters('fire/relative-urls', true)) {
         new RelativeUrls;
     }
 });
