@@ -1,6 +1,6 @@
 <?php
 
-use Fire\Model\Upload;
+namespace Fire\Model\Upload;
 
 use Fire\Model\AbstractPost\AbstractPostEntityMapper;
 

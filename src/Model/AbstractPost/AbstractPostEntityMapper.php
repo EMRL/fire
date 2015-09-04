@@ -46,5 +46,4 @@ class AbstractPostEntityMapper implements EntityMapperContract
             return $this->userRepository->userOfId($id);
         });
     }
-
 }
