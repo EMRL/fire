@@ -227,3 +227,72 @@ if ( ! function_exists('menuObjectAtLocation')) {
         return false;
     }
 }
+
+if ( ! function_exists('limitWords'))
+{
+    /**
+     * Limit a string to certain number of words
+     *
+     * @param  string   $str
+     * @param  integer  $limit
+     * @param  string   $end
+     * @return string
+     */
+    function limitWords($str, $limit = 100, $end = null)
+    {
+        $limit = (int) $limit;
+        $end = (is_null($end)) ? '…' : $end;
+
+        if (trim($str) === '') {
+            return $str;
+        }
+
+        if ($limit <= 0) {
+            return $end;
+        }
+
+        preg_match('/^\s*+(?:\S++\s*+){1,'.$limit.'}/u', $str, $matches);
+
+        // Only attach the end character if the matched string is shorter
+        // than the starting string.
+        return rtrim($matches[0]).((strlen($matches[0]) === strlen($str)) ? '' : $end);
+    }
+}
+
+if ( ! function_exists('limitChars'))
+{
+    /**
+     * Limit a string to a certain number of characters, optionally only splitting at full words
+     * @param  string   $str
+     * @param  integer  $limit
+     * @param  string   $end
+     * @param  boolean  $preserveWords
+     * @return string
+     */
+    function limitChars($str, $limit = 100, $end = null, $preserveWords = false)
+    {
+        $end = (is_null($end)) ? '…' : $end;
+
+        $limit = (int) $limit;
+
+        if (trim($str) === '' or strlen($str) <= $limit) {
+            return $str;
+        }
+
+        if ($limit <= 0) {
+            return $end;
+        }
+
+        if ($preserve_words === false) {
+            return rtrim(substr($str, 0, $limit)).$end;
+        }
+
+        // Don't preserve words. The limit is considered the top limit.
+        // No strings with a length longer than $limit should be returned.
+        if ( ! preg_match('/^.{0,'.$limit.'}\s/us', $str, $matches)) {
+            return $end;
+        }
+
+        return rtrim($matches[0]).((strlen($matches[0]) === strlen($str)) ? '' : $end);
+    }
+}

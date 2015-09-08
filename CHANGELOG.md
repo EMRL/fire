@@ -2,6 +2,10 @@
 
 ## [Unreleased][unreleased]
 
+## [2.0.2] - 2015-09-08
+### Added
+- Added `limitWords` and `limitChars` helper functions
+
 ## [2.0.1] - 2015-09-04
 ### Fixed
 - Fixed typo in Upload services file

@@ -199,8 +199,8 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
 
         if ($limit and strlen($excerpt) > $limit) {
             $excerpt = $words
-                     ? limit_words($excerpt, $limit, $append)
-                     : limit_chars($excerpt, $limit, $append, $preserveWords);
+                     ? limitWords($excerpt, $limit, $append)
+                     : limitChars($excerpt, $limit, $append, $preserveWords);
         }
 
         return apply_filters('fire/model/post/excerpt', $excerpt, $this);
