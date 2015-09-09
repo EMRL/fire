@@ -19,7 +19,7 @@ class CategoryRepository extends TermRepository implements CategoryRepositoryCon
         return $this->termOfSlug($slug);
     }
 
-    protected function newParams()
+    public function newParams()
     {
         return new CategoryParams($this->taxonomy);
     }

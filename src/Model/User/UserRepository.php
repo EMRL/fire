@@ -43,8 +43,14 @@ class UserRepository extends Repository implements UserRepositoryContract
         return $user;
     }
 
-    public function find($args = [])
+    public function find($args = null)
     {
+        if (is_null($args)) {
+            $args = $this->newParams();
+        }
+
+        $args = ($args instanceof Arrayable) ? $args->toArray() : $args;
+
         $users = new Collection;
 
         foreach (get_users($args) as $user) {
@@ -52,5 +58,10 @@ class UserRepository extends Repository implements UserRepositoryContract
         }
 
         return $users;
+    }
+
+    public function newParams()
+    {
+        return new UserParams;
     }
 }

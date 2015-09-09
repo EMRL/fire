@@ -55,7 +55,7 @@ class UploadRepository extends AbstractPostRepository implements UploadRepositor
         return $this->find($args);
     }
 
-    protected function newParams()
+    public function newParams()
     {
         return new UploadParams($this->postType);
     }

@@ -19,7 +19,7 @@ class TagRepository extends TermRepository implements TagRepositoryContract
         return $this->termOfSlug($slug);
     }
 
-    protected function newParams()
+    public function newParams()
     {
         return new TagParams($this->taxonomy);
     }

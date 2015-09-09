@@ -133,7 +133,7 @@ class AbstractPostRepository extends Repository
      *
      * @return Fire\Contracts\Foundation\Arrayable
      */
-    protected function newParams()
+    public function newParams()
     {
         return new AbstractPostParams($this->postType);
     }

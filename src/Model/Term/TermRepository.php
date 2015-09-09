@@ -112,7 +112,7 @@ abstract class TermRepository extends Repository
      *
      * @return Fire\Contracts\Foundation\Arrayable
      */
-    protected function newParams()
+    public function newParams()
     {
         return new Params;
     }

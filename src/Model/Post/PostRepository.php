@@ -35,7 +35,7 @@ class PostRepository extends AbstractPostRepository implements PostRepositoryCon
         return $this->find($args);
     }
 
-    protected function newParams()
+    public function newParams()
     {
         return new PostParams($this->postType);
     }

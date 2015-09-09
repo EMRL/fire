@@ -40,7 +40,7 @@ class PageRepository extends AbstractPostRepository implements PageRepositoryCon
         $this->currentPost = $page;
     }
 
-    protected function newParams()
+    public function newParams()
     {
         return new PageParams($this->postType);
     }
