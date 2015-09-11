@@ -5,6 +5,7 @@ namespace Fire\Model\AbstractPost;
 use Fire\Contracts\Model\EntityMapper as EntityMapperContract;
 use Fire\Contracts\Model\Entity as EntityContract;
 use Fire\Contracts\Model\User\UserRepository as UserRepositoryContract;
+use Fire\Contracts\Model\Upload\UploadRepository as UploadRepositoryContract;
 use Fire\Contracts\Model\Repository as RepositoryContract;
 
 class AbstractPostEntityMapper implements EntityMapperContract
@@ -15,11 +16,20 @@ class AbstractPostEntityMapper implements EntityMapperContract
     protected $userRepository;
 
     /**
-     * @param Fire\Contracts\Model\User\UserRepository  $userRepository
+     * @var Fire\Contracts\Model\Upload\UploadRepository
      */
-    public function __construct(UserRepositoryContract $userRepository)
-    {
-        $this->userRepository = $userRepository;
+    protected $uploadRepository;
+
+    /**
+     * @param Fire\Contracts\Model\User\UserRepository      $userRepository
+     * @param Fire\Contracts\Model\Upload\UploadRepository  $uploadRepository
+     */
+    public function __construct(
+        UserRepositoryContract $userRepository,
+        UploadRepositoryContract $uploadRepository
+    ) {
+        $this->userRepository   = $userRepository;
+        $this->uploadRepository = $uploadRepository;
     }
 
     public function map(EntityContract $entity, array $data)
@@ -44,6 +54,18 @@ class AbstractPostEntityMapper implements EntityMapperContract
 
         $entity->setAuthor(function () use ($id) {
             return $this->userRepository->userOfId($id);
+        });
+
+        $id = $data['ID'];
+
+        $entity->setFeaturedImage(function () use ($id) {
+            $upload = null;
+
+            if ($uId = get_post_thumbnail_id($id)) {
+                $upload = $this->uploadRepository->uploadOfId($uId);
+            }
+
+            return $upload;
         });
     }
 }

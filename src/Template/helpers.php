@@ -283,7 +283,7 @@ if ( ! function_exists('limitChars'))
             return $end;
         }
 
-        if ($preserve_words === false) {
+        if ($preserveWords === false) {
             return rtrim(substr($str, 0, $limit)).$end;
         }
 

@@ -83,6 +83,11 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     protected $type;
 
     /**
+     * @var Fire\Contracts\Model\Upload\Upload
+     */
+    protected $featuredImage;
+
+    /**
      * @var  array
      */
     protected $native;
@@ -347,6 +352,36 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     }
 
     /**
+     * Get the featured image
+     *
+     * @return Fire\Contracts\Model\Upload\Upload
+     */
+    public function featuredImage()
+    {
+        return $this->lazyLoad($this->featuredImage);
+    }
+
+    /**
+     * Set the featured image
+     *
+     * @param Fire\Contracts\Model\Upload\Upload|Closure $image
+     */
+    public function setFeaturedImage($image)
+    {
+        $this->featuredImage = $image;
+    }
+
+    /**
+     * Check if a featured image is set
+     *
+     * @return  boolean
+     */
+    public function hasFeaturedImage()
+    {
+        return has_post_thumbnail($this->id());
+    }
+
+    /**
      * Get the comment count
      *
      * @return  integer
@@ -418,29 +453,6 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     public function isPingable()
     {
         return pings_open($this->id());
-    }
-
-    /**
-     * Check if a featured image is set
-     *
-     * @return  boolean
-     */
-    public function hasFeaturedImage()
-    {
-        return has_post_thumbnail($this->id());
-    }
-
-    /**
-     * Get the featured image URL
-     *
-     * @param   $size  string|array  String keyword or array for width and height
-     * @return  string
-     */
-    public function featuredImageUrl($size = null)
-    {
-        list($url) = wp_get_attachment_image_src(get_post_thumbnail_id($this->id()), $size);
-
-        return $url;
     }
 
     /**

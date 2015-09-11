@@ -121,6 +121,16 @@ abstract class Term extends Entity implements TermContract
     }
 
     /**
+     * Get the URL to term archive
+     *
+     * @return  string
+     */
+    public function url()
+    {
+        return get_term_link($this->id(), $this->taxonomy()->name);
+    }
+
+    /**
      * Get the original term array returned by WordPress
      *
      * @return array

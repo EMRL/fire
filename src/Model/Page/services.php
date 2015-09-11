@@ -9,7 +9,10 @@ add_action('fire/services/core', function ($fire) {
         $repo = new PageRepository(PagePostType::TYPE);
 
         $repo->registerEntityMapper(function () use ($fire) {
-            return new AbstractPostEntityMapper($fire['user.repository']);
+            return new AbstractPostEntityMapper(
+                $fire['user.repository'],
+                $fire['upload.repository']
+            );
         });
 
         $repo->registerEntityMapper(function () use ($fire) {

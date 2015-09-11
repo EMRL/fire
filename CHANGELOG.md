@@ -2,6 +2,16 @@
 
 ## [Unreleased][unreleased]
 
+## [2.0.4] - 2015-09-11
+### Fixed
+- Fixed typo in `limitChars` function
+
+### Added
+- Added `url` method to Term objects
+
+### Changed
+- Make AbstractPost::featuredImage return an Upload object
+
 ## [2.0.3] - 2015-09-09
 ### Changed
 - Changed repository `newParams` method to public visibility
@@ -21,6 +31,7 @@
 ### Added
 - Initial public release
 
+[2.0.4]: https://github.com/emrl/fire/compare/2.0.3...2.0.4
 [2.0.3]: https://github.com/emrl/fire/compare/2.0.2...2.0.3
 [2.0.2]: https://github.com/emrl/fire/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/emrl/fire/compare/2.0.0...2.0.1
