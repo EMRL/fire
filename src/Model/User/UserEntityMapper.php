@@ -10,7 +10,5 @@ class UserEntityMapper implements EntityMapperContract
     public function map(EntityContract $entity, array $data)
     {
         $entity->init((object) $data);
-
-        return $entity;
     }
 }

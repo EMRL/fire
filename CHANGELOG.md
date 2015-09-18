@@ -2,6 +2,14 @@
 
 ## [Unreleased][unreleased]
 
+## [2.0.5] - 2015-09-18
+### Added
+- Added `pageUrl` method to `User` object
+- Added `postOlderThan` and `postNewerThan` methods to `AbstractPost` object
+
+### Fixed
+- Fixed bug in `Request` class that tried loading post types other than `post`
+
 ## [2.0.4] - 2015-09-11
 ### Fixed
 - Fixed typo in `limitChars` function
@@ -31,6 +39,7 @@
 ### Added
 - Initial public release
 
+[2.0.5]: https://github.com/emrl/fire/compare/2.0.4...2.0.5
 [2.0.4]: https://github.com/emrl/fire/compare/2.0.3...2.0.4
 [2.0.3]: https://github.com/emrl/fire/compare/2.0.2...2.0.3
 [2.0.2]: https://github.com/emrl/fire/compare/2.0.1...2.0.2

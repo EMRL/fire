@@ -4,6 +4,7 @@ namespace Fire\Foundation;
 
 use Fire\Contracts\Model\Post\PostRepository as PostRepositoryContract;
 use Fire\Contracts\Model\Page\PageRepository as PageRepositoryContract;
+use Fire\Model\Post\PostPostType;
 use Fire\Model\Page\PagePostType;
 use Fire\Foundation\Collection;
 
@@ -92,7 +93,7 @@ class Request
         if ($post = $wp_query->post) {
             if ($post->post_type === PagePostType::TYPE) {
                 $this->pageRepository->setCurrentPage($this->pageRepository->pageOfId($post->ID));
-            } else {
+            } elseif ($post->post_type === PostPostType::TYPE) {
                 $this->postRepository->setCurrentPost($this->postRepository->postOfId($post->ID));
             }
         }

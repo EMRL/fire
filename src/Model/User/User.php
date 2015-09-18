@@ -55,6 +55,16 @@ class User extends WP_User implements EntityContract, UserContract, Arrayable
     }
 
     /**
+     * Get the URL of the author page
+     *
+     * @return string
+     */
+    public function pageUrl()
+    {
+        return get_author_posts_url($this->id());
+    }
+
+    /**
      * Alias to_array
      *
      * @return array
@@ -62,5 +72,20 @@ class User extends WP_User implements EntityContract, UserContract, Arrayable
     public function toArray()
     {
         return $this->to_array();
+    }
+
+    /**
+     * Resolve a value from a Closure
+     *
+     * @param  mixed  $property
+     * @return mixed
+     */
+    protected function lazyLoad(& $property)
+    {
+        if ($property instanceof Closure) {
+            return $this->$property = $property();
+        }
+
+        return $property;
     }
 }

@@ -97,6 +97,51 @@ class AbstractPostRepository extends Repository
     }
 
     /**
+     * Get a post older than the given date
+     *
+     * @param  string|integer  $date
+     * @return Fire\Contracts\Model\AbstractPost\AbstractPost
+     */
+    public function postOlderThan($date)
+    {
+        $args = $this->newParams()->add([
+            'posts_per_page' => 1,
+
+            'date_query' => [
+                [
+                    'before'    => $date,
+                    'inclusive' => false,
+                ],
+            ],
+        ]);
+
+        return $this->find($args)->first();
+    }
+
+    /**
+     * Get a post newer than the given date
+     *
+     * @param  string|integer  $date
+     * @return Fire\Contracts\Model\AbstractPost\AbstractPost
+     */
+    public function postNewerThan($date)
+    {
+        $args = $this->newParams()->add([
+            'posts_per_page' => 1,
+            'order'          => 'asc',
+
+            'date_query' => [
+                [
+                    'after'     => $date,
+                    'inclusive' => false,
+                ],
+            ],
+        ]);
+
+        return $this->find($args)->first();
+    }
+
+    /**
      * @return Fire\Contracts\Model\AbstractPost\AbstractPost
      */
     public function currentPost()
