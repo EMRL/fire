@@ -1,6 +1,9 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+### Added
+- When passing an array to repository `find` method it will now include default
+  arguments that were specified by the `newParams` method
 
 ## [2.0.5] - 2015-09-18
 ### Added
