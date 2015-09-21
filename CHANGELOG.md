@@ -1,9 +1,15 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+
+## [2.0.6] - 2015-09-21
 ### Added
 - When passing an array to repository `find` method it will now include default
   arguments that were specified by the `newParams` method
+
+### Changed
+- `AbstractPost::excerpt` method uses `$this->content` property instead of
+  method because the `the_content` filter is so slow. Not sure how to fix?
 
 ## [2.0.5] - 2015-09-18
 ### Added
@@ -42,6 +48,7 @@
 ### Added
 - Initial public release
 
+[2.0.6]: https://github.com/emrl/fire/compare/2.0.5...2.0.6
 [2.0.5]: https://github.com/emrl/fire/compare/2.0.4...2.0.5
 [2.0.4]: https://github.com/emrl/fire/compare/2.0.3...2.0.4
 [2.0.3]: https://github.com/emrl/fire/compare/2.0.2...2.0.3

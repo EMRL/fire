@@ -197,7 +197,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
         if ($this->excerpt and ! $force) {
             $excerpt = $this->excerpt;
         } else {
-            $excerpt = $this->excerpt ? $this->excerpt : $this->content();
+            $excerpt = $this->excerpt ? $this->excerpt : $this->content;
             $excerpt = apply_filters('the_excerpt', apply_filters('get_the_excerpt', $excerpt));
             $excerpt = strip_tags(wp_kses_no_null(trim(strip_shortcodes($excerpt))));
         }
