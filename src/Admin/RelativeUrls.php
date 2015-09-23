@@ -21,6 +21,11 @@ class RelativeUrls
      */
     public function __construct()
     {
+        // Probably running in CLI mode
+        if ( ! isset($_SERVER['SERVER_NAME'])) {
+            return;
+        }
+
         $this->domain = $_SERVER['SERVER_NAME'];
 
         // Posts
