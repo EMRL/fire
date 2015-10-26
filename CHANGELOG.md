@@ -1,6 +1,12 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+### Added
+- Added check in `Admin\RelativeUrls` class to check for existence of server
+  variable adding actions
+
+### Fixed
+- Fixed bug in TermTaxonomy where default labels weren't being set correctly.
 
 ## [2.0.6] - 2015-09-21
 ### Added

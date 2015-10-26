@@ -68,22 +68,24 @@ abstract class TermTaxonomy
             }
 
             $defaults = [
-                'name'                       => _x($plural, static::NAME.' general name'),
-                'singular_name'              => _x($singular, static::NAME.' singular name'),
-                'all_items'                  => __(sprintf('All %s', $plural), 'fire'),
-                'edit_item'                  => __(sprintf('Edit %s', $singular), 'fire'),
-                'view_item'                  => __(sprintf('View %s', $singular), 'fire'),
-                'update_item'                => __(sprintf('Update %s', $singular), 'fire'),
-                'add_new_item'               => __(sprintf('Add New %s', $singular), 'fire'),
-                'new_item_name'              => __(sprintf('New %s Name', $singular), 'fire'),
-                'parent_item'                => __(sprintf('Parent %s', $singular), 'fire'),
-                'parent_item_colon'          => __(sprintf('Parent %s:', $singular), 'fire'),
-                'search_items'               => __(sprintf('Search %s', $plural), 'fire'),
-                'popular_items'              => __(sprintf('Popular %s', $plural), 'fire'),
-                'separate_items_with_commas' => __(sprintf('Separate %s with commas', strtolower($plural)), 'fire'),
-                'add_or_remove_items'        => __(sprintf('Add or remove %s', strtolower($plural)), 'fire'),
-                'choose_from_most_used'      => __(sprintf('Choose from the most used %s', strtolower($plural)), 'fire'),
-                'not_found'                  => __(sprintf('No %s found', strtolower($plural)), 'fire'),
+                'labels' => [
+                    'name'                       => _x($plural, static::NAME.' general name'),
+                    'singular_name'              => _x($singular, static::NAME.' singular name'),
+                    'all_items'                  => __(sprintf('All %s', $plural), 'fire'),
+                    'edit_item'                  => __(sprintf('Edit %s', $singular), 'fire'),
+                    'view_item'                  => __(sprintf('View %s', $singular), 'fire'),
+                    'update_item'                => __(sprintf('Update %s', $singular), 'fire'),
+                    'add_new_item'               => __(sprintf('Add New %s', $singular), 'fire'),
+                    'new_item_name'              => __(sprintf('New %s Name', $singular), 'fire'),
+                    'parent_item'                => __(sprintf('Parent %s', $singular), 'fire'),
+                    'parent_item_colon'          => __(sprintf('Parent %s:', $singular), 'fire'),
+                    'search_items'               => __(sprintf('Search %s', $plural), 'fire'),
+                    'popular_items'              => __(sprintf('Popular %s', $plural), 'fire'),
+                    'separate_items_with_commas' => __(sprintf('Separate %s with commas', strtolower($plural)), 'fire'),
+                    'add_or_remove_items'        => __(sprintf('Add or remove %s', strtolower($plural)), 'fire'),
+                    'choose_from_most_used'      => __(sprintf('Choose from the most used %s', strtolower($plural)), 'fire'),
+                    'not_found'                  => __(sprintf('No %s found', strtolower($plural)), 'fire'),
+                ],
             ];
 
             $config = array_replace_recursive($defaults, $config);
