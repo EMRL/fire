@@ -8,6 +8,10 @@
 ### Fixed
 - Fixed bug in TermTaxonomy where default labels weren't being set correctly.
 
+### Changed
+- Repository default params are now replaced with passed params instead of
+  merged.
+
 ## [2.0.6] - 2015-09-21
 ### Added
 - When passing an array to repository `find` method it will now include default
