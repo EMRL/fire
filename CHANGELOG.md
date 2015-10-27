@@ -2,6 +2,12 @@
 
 ## [Unreleased][unreleased]
 
+## [2.1.1] - 2015-10-27
+### Fixed
+- Fixing a backwards incompatible change introduced in 2.1.0 where
+  `AbstractPostEntityMapper` required an instance of
+  `CommentRepositoryContract`; that is now optional and backward compatible
+
 ## [2.1.0] - 2015-10-27
 ### Added
 - Added check in `Admin\RelativeUrls` class to check for existence of server
@@ -63,6 +69,7 @@
 ### Added
 - Initial public release
 
+[2.1.1]: https://github.com/emrl/fire/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/emrl/fire/compare/2.0.6...2.1.0
 [2.0.6]: https://github.com/emrl/fire/compare/2.0.5...2.0.6
 [2.0.5]: https://github.com/emrl/fire/compare/2.0.4...2.0.5

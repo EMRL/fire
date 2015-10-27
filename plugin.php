@@ -4,7 +4,7 @@
  *
  * @author  Corey Worrell, EMRL
  * @link    http://emrl.com
- * @version 2.1.0
+ * @version 2.1.1
  */
 
 define('FIRE_PATH', trailingslashit(__DIR__));

@@ -33,7 +33,7 @@ class AbstractPostEntityMapper implements EntityMapperContract
     public function __construct(
         UserRepositoryContract $userRepository,
         UploadRepositoryContract $uploadRepository,
-        CommentRepositoryContract $commentRepository
+        CommentRepositoryContract $commentRepository = null
     ) {
         $this->userRepository     = $userRepository;
         $this->uploadRepository   = $uploadRepository;
@@ -76,8 +76,10 @@ class AbstractPostEntityMapper implements EntityMapperContract
             return $upload;
         });
 
-        $entity->setComments(function () use ($id) {
-            return $this->commentRepository->commentsForPost($id);
-        });
+        if ($this->commentRepository) {
+            $entity->setComments(function () use ($id) {
+                return $this->commentRepository->commentsForPost($id);
+            });
+        }
     }
 }
