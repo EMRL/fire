@@ -144,6 +144,19 @@ class AbstractPostRepository extends Repository
     }
 
     /**
+     * Get posts by author or authors
+     *
+     * @param  integer|array  $id
+     * @return Fire\Foundation\Collection
+     */
+    public function postsByAuthor($id)
+    {
+        $args = $this->newParams()->byAuthor($id);
+
+        return $this->find($args);
+    }
+
+    /**
      * @return Fire\Contracts\Model\AbstractPost\AbstractPost
      */
     public function currentPost()

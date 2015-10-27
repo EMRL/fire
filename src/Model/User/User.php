@@ -9,6 +9,12 @@ use Fire\Contracts\Model\User\User as UserContract;
 
 class User extends WP_User implements EntityContract, UserContract, Arrayable
 {
+    protected $posts;
+
+    protected $pages;
+
+    protected $comments;
+
     public function id()
     {
         return $this->ID;
@@ -52,6 +58,66 @@ class User extends WP_User implements EntityContract, UserContract, Arrayable
     public function displayName()
     {
         return $this->display_name;
+    }
+
+    /**
+     * Return posts belonging to user
+     *
+     * @return Fire\Foundation\Collection
+     */
+    public function posts()
+    {
+        return $this->lazyLoad($this->posts);
+    }
+
+    /**
+     * Set posts belonging to user
+     *
+     * @param Fire\Foundation\Collection|Closure  $posts
+     */
+    public function setPosts($posts)
+    {
+        $this->posts = $posts;
+    }
+
+    /**
+     * Return pages belonging to user
+     *
+     * @return Fire\Foundation\Collection
+     */
+    public function pages()
+    {
+        return $this->lazyLoad($this->pages);
+    }
+
+    /**
+     * Set pages belonging to user
+     *
+     * @param Fire\Foundation\Collection|Closure  $pages
+     */
+    public function setPages($pages)
+    {
+        $this->pages = $pages;
+    }
+
+    /**
+     * Return comments belonging to user
+     *
+     * @return Fire\Foundation\Collection
+     */
+    public function comments()
+    {
+        return $this->lazyLoad($this->comments);
+    }
+
+    /**
+     * Set comments belonging to user
+     *
+     * @param Fire\Foundation\Collection|Closure  $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
     }
 
     /**

@@ -13,6 +13,11 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     protected $id;
 
     /**
+     * @var integer
+     */
+    protected $authorId;
+
+    /**
      * @var  Fire\Contracts\Model\Identity\User
      */
     protected $author;
@@ -68,7 +73,12 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     protected $modified;
 
     /**
-     * @var  Fire\Contracts\Model\AbstractPost\AbstractPost
+     * @var integer
+     */
+    protected $parentId;
+
+    /**
+     * @var Fire\Contracts\Model\AbstractPost\AbstractPost
      */
     protected $parent;
 
@@ -86,6 +96,11 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
      * @var Fire\Contracts\Model\Upload\Upload
      */
     protected $featuredImage;
+
+    /**
+     * @var Fire\Foundation\Collection
+     */
+    protected $comments;
 
     /**
      * @var  array
@@ -119,6 +134,16 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
         $this->id = (int) $id;
     }
 
+    public function authorId()
+    {
+        return $this->authorId;
+    }
+
+    public function setAuthorId($id)
+    {
+        $this->authorId = $id;
+    }
+
     public function author()
     {
         return $this->lazyLoad($this->author);
@@ -129,6 +154,12 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
         $this->author = $user;
     }
 
+    /**
+     * Get the formatted date
+     *
+     * @param  string  $format  http://php.net/date
+     * @return string
+     */
     public function date($format = 'F j, Y')
     {
         return date($format, strtotime($this->date));
@@ -310,6 +341,16 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
         $this->modified = $date;
     }
 
+    public function parentId()
+    {
+        return $this->parentId;
+    }
+
+    public function setParentId($id)
+    {
+        $this->parentId = $id;
+    }
+
     public function parent()
     {
         return $this->lazyLoad($this->parent);
@@ -379,6 +420,26 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     public function hasFeaturedImage()
     {
         return has_post_thumbnail($this->id());
+    }
+
+    /**
+     * Get the post comments
+     *
+     * @return Fire\Foundation\Collection
+     */
+    public function comments()
+    {
+        return $this->lazyLoad($this->comments);
+    }
+
+    /**
+     * Set the post comments
+     *
+     * @param Fire\Foundation\Collection|Closure  $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
     }
 
     /**

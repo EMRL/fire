@@ -1,12 +1,17 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+
+## [2.1.0] - 2015-10-27
 ### Added
 - Added check in `Admin\RelativeUrls` class to check for existence of server
   variable adding actions
+- Added `Comment` model and repository
+- Added more relationships to models
 
 ### Fixed
 - Fixed bug in TermTaxonomy where default labels weren't being set correctly.
+- Fixed some typos and weird formatting
 
 ### Changed
 - Repository default params are now replaced with passed params instead of
@@ -58,6 +63,7 @@
 ### Added
 - Initial public release
 
+[2.1.0]: https://github.com/emrl/fire/compare/2.0.6...2.1.0
 [2.0.6]: https://github.com/emrl/fire/compare/2.0.5...2.0.6
 [2.0.5]: https://github.com/emrl/fire/compare/2.0.4...2.0.5
 [2.0.4]: https://github.com/emrl/fire/compare/2.0.3...2.0.4

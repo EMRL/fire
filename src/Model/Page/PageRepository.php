@@ -20,6 +20,11 @@ class PageRepository extends AbstractPostRepository implements PageRepositoryCon
         return $this->postOfSlug($slug);
     }
 
+    public function pagesByAuthor($id)
+    {
+        return $this->postsByAuthor($id);
+    }
+
     /**
      * Get the current requested page
      *

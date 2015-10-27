@@ -18,7 +18,7 @@ class Post extends AbstractPost implements PostContract
     protected $tags;
 
     /**
-     * Get the post's categories
+     * Get the post categories
      *
      * @return Fire\Foundation\Collection
      */
@@ -28,7 +28,7 @@ class Post extends AbstractPost implements PostContract
     }
 
     /**
-     * Set the post's categories
+     * Set the post categories
      *
      * @param Fire\Foundation\Collection|Closure  $categories
      */
@@ -38,7 +38,7 @@ class Post extends AbstractPost implements PostContract
     }
 
     /**
-     * Get the post's tags
+     * Get the post tags
      *
      * @return Fire\Foundation\Collection
      */
@@ -48,7 +48,7 @@ class Post extends AbstractPost implements PostContract
     }
 
     /**
-     * Set the post's tags
+     * Set the post tags
      *
      * @param Fire\Foundation\Collection|Closure  $tags
      */

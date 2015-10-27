@@ -19,6 +19,19 @@ class AbstractPostParams extends Params
         $this->postType = $postType;
     }
 
+    /**
+     * Set param for author
+     *
+     * @param  integer
+     * @return $this
+     */
+    public function byAuthor($id)
+    {
+        return $this->add([
+            'author__in' => (array) $id,
+        ]);
+    }
+
     protected function defaultParams()
     {
         return [

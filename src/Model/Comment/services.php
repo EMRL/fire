@@ -1,15 +1,16 @@
 <?php
 
-namespace Fire\Model\User;
+namespace Fire\Model\Comment;
 
 add_action('fire/services/core', function ($fire) {
-    $fire->singleton('user.repository', function ($fire) {
-        $repo = new UserRepository;
+    $fire->singleton('comment.repository', function ($fire) {
+        $repo = new CommentRepository;
 
         $repo->registerEntityMapper(function () use ($fire) {
-            return new UserEntityMapper(
+            return new CommentEntityMapper(
                 $fire['post.repository'],
-                $fire['page.repository'],
+                $fire['comment.repository'],
+                $fire['user.repository'],
                 $fire['comment.repository']
             );
         });

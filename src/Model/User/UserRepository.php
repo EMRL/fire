@@ -4,6 +4,7 @@ namespace Fire\Model\User;
 
 use Fire\Model\Repository;
 use Fire\Foundation\Collection;
+use Fire\Contracts\Foundation\Arrayable;
 use Fire\Contracts\Model\User\UserRepository as UserRepositoryContract;
 
 class UserRepository extends Repository implements UserRepositoryContract

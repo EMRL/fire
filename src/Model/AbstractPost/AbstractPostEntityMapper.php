@@ -6,7 +6,7 @@ use Fire\Contracts\Model\EntityMapper as EntityMapperContract;
 use Fire\Contracts\Model\Entity as EntityContract;
 use Fire\Contracts\Model\User\UserRepository as UserRepositoryContract;
 use Fire\Contracts\Model\Upload\UploadRepository as UploadRepositoryContract;
-use Fire\Contracts\Model\Repository as RepositoryContract;
+use Fire\Contracts\Model\Comment\CommentRepository as CommentRepositoryContract;
 
 class AbstractPostEntityMapper implements EntityMapperContract
 {
@@ -21,15 +21,23 @@ class AbstractPostEntityMapper implements EntityMapperContract
     protected $uploadRepository;
 
     /**
-     * @param Fire\Contracts\Model\User\UserRepository      $userRepository
-     * @param Fire\Contracts\Model\Upload\UploadRepository  $uploadRepository
+     * @var Fire\Contracts\Model\Comment\CommentRepository
+     */
+    protected $commentRepository;
+
+    /**
+     * @param Fire\Contracts\Model\User\UserRepository        $userRepository
+     * @param Fire\Contracts\Model\Upload\UploadRepository    $uploadRepository
+     * @param Fire\Contracts\Model\Comment\CommentRepository  $commentRepository
      */
     public function __construct(
         UserRepositoryContract $userRepository,
-        UploadRepositoryContract $uploadRepository
+        UploadRepositoryContract $uploadRepository,
+        CommentRepositoryContract $commentRepository
     ) {
-        $this->userRepository   = $userRepository;
-        $this->uploadRepository = $uploadRepository;
+        $this->userRepository     = $userRepository;
+        $this->uploadRepository   = $uploadRepository;
+        $this->commentRepository  = $commentRepository;
     }
 
     public function map(EntityContract $entity, array $data)
@@ -50,7 +58,7 @@ class AbstractPostEntityMapper implements EntityMapperContract
         $entity->setNative($data);
 
         // Relations
-        $id = $data['post_author'];
+        $entity->setAuthorId($id = $data['post_author']);
 
         $entity->setAuthor(function () use ($id) {
             return $this->userRepository->userOfId($id);
@@ -66,6 +74,10 @@ class AbstractPostEntityMapper implements EntityMapperContract
             }
 
             return $upload;
+        });
+
+        $entity->setComments(function () use ($id) {
+            return $this->commentRepository->commentsForPost($id);
         });
     }
 }

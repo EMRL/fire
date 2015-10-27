@@ -14,9 +14,23 @@ interface AbstractPost
     /**
      * Set the ID
      *
-     * @param string|integer $id
+     * @param string|integer  $id
      */
     public function setId($id);
+
+    /**
+     * Get the author ID
+     *
+     * @return integer
+     */
+    public function authorId();
+
+    /**
+     * Set the author ID
+     *
+     * @param integer  $id
+     */
+    public function setAuthorId($id);
 
     /**
      * Get the author
@@ -35,7 +49,6 @@ interface AbstractPost
     /**
      * Get the formatted date
      *
-     * @param  string  $format  http://php.net/date
      * @return string
      */
     public function date();
@@ -130,6 +143,20 @@ interface AbstractPost
      * @param string  $slug
      */
     public function setSlug($slug);
+
+    /**
+     * Get the parent ID
+     *
+     * @return integer
+     */
+    public function parentId();
+
+    /**
+     * Set the parent ID
+     *
+     * @param integer  $id
+     */
+    public function setParentId($id);
 
     /**
      * Get the parent post

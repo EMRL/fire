@@ -23,7 +23,7 @@ class PageEntityMapper implements EntityMapperContract
 
     public function map(EntityContract $entity, array $data)
     {
-        $id = $data['post_parent'];
+        $entity->setParentId($id = $data['post_parent']);
 
         $entity->setParent(function () use ($id) {
             $parent = null;

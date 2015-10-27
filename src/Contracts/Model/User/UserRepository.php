@@ -8,7 +8,7 @@ interface UserRepository
      * Return a user of the specified ID
      *
      * @param  integer  $id
-     * @return Fire\Contracts\User\User
+     * @return Fire\Contracts\Model\User\User
      */
     public function userOfId($id);
 
@@ -16,7 +16,7 @@ interface UserRepository
      * Return a user of the specified username
      *
      * @param  string  $username
-     * @return Fire\Contracts\User\User
+     * @return Fire\Contracts\Model\User\User
      */
     public function userOfUsername($username);
 
@@ -24,7 +24,7 @@ interface UserRepository
      * Return a user of the specified email address
      *
      * @param  string  $email
-     * @return Fire\Contracts\User\User
+     * @return Fire\Contracts\Model\User\User
      */
     public function userOfEmail($email);
 

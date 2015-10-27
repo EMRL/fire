@@ -73,6 +73,7 @@ class Fire extends Container
             'src/Model/Tag/services.php',
             'src/Model/User/services.php',
             'src/Model/Upload/services.php',
+            'src/Model/Comment/services.php',
         ];
 
         foreach ($files as $file) {
