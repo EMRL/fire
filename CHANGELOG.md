@@ -1,6 +1,9 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+### Changed
+- Bound `AbstractPostEntityMapper` to container to ease process of creating new
+  post types and to reuse the same instance across all post types
 
 ## [2.1.1] - 2015-10-27
 ### Fixed

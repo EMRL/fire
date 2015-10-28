@@ -8,13 +8,7 @@ add_action('fire/services/core', function ($fire) {
     $fire->singleton('page.repository', function ($fire) {
         $repo = new PageRepository(PagePostType::TYPE);
 
-        $repo->registerEntityMapper(function () use ($fire) {
-            return new AbstractPostEntityMapper(
-                $fire['user.repository'],
-                $fire['upload.repository'],
-                $fire['comment.repository']
-            );
-        });
+        $repo->registerEntityMapper($fire['abstractpost.entitymapper']);
 
         $repo->registerEntityMapper(function () use ($fire) {
             return new PageEntityMapper($fire['page.repository']);

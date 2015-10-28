@@ -67,6 +67,8 @@ class Fire extends Container
             'src/Filesystem/services.php',
             'src/Template/services.php',
             'src/Template/helpers.php',
+            'src/Model/AbstractPost/services.php',
+            'src/Model/Term/services.php',
             'src/Model/Post/services.php',
             'src/Model/Page/services.php',
             'src/Model/Category/services.php',
