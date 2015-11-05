@@ -206,6 +206,16 @@ class Comment extends Entity implements CommentContract
     }
 
     /**
+     * Return the URL to the comment
+     *
+     * @return string
+     */
+    public function url()
+    {
+        return get_comment_link($this->id());
+    }
+
+    /**
      * Test if comment is approved
      *
      * @return boolean
