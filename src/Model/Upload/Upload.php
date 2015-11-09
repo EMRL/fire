@@ -49,6 +49,17 @@ class Upload extends AbstractPost implements UploadContract
     }
 
     /**
+     * Get the `srcset` attribute value
+     *
+     * @param  string  $size  Size to determine ratio from
+     * @return string
+     */
+    public function srcset($size = null)
+    {
+        return wp_get_attachment_image_srcset($this->id(), $size);
+    }
+
+    /**
      * Test if upload is an image
      *
      * @return boolean
