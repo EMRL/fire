@@ -101,8 +101,7 @@ class Request
         $collection = new Collection;
 
         if ($posts = $wp_query->posts) {
-            foreach ($posts as $post)
-            {
+            foreach ($posts as $post) {
                 $collection->push($this->postRepository->postOfId($post->ID));
             }
         }

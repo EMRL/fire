@@ -42,7 +42,7 @@ class PageRepository extends AbstractPostRepository implements PageRepositoryCon
      */
     public function setCurrentPage(Page $page)
     {
-        $this->currentPost = $page;
+        $this->setCurrentPost($page);
     }
 
     public function newParams()
