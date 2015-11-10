@@ -17,6 +17,7 @@ class Fire extends Container
     {
         $this->registerBaseBindings();
         $this->loadBaseFiles();
+        $this->debug();
 
         do_action('fire/services/core', $this);
 
@@ -80,6 +81,17 @@ class Fire extends Container
 
         foreach ($files as $file) {
             include $this['path.fire'].$file;
+        }
+    }
+
+    protected function debug()
+    {
+        if (isset($_GET['debug'])) {
+            add_action('shutdown', function () {
+                global $wpdb;
+
+                d($wpdb->queries);
+            });
         }
     }
 }
