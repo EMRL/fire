@@ -156,7 +156,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      */
     public function implode($glue = null)
     {
-        return implode($value, $this->items);
+        return implode($glue, $this->items);
     }
 
     /**
