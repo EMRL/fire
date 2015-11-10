@@ -8,6 +8,7 @@
 ### Added
 - Added `url` method to `Comment` model
 - Added `srcset` method to `Upload` model
+- Added `implode` method to `Collection` object
 
 ## [2.1.1] - 2015-10-27
 ### Fixed
