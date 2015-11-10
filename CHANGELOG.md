@@ -5,6 +5,10 @@
 - Bound `AbstractPostEntityMapper` to container to ease process of creating new
   post types and to reuse the same instance across all post types
 
+### Fixed
+- Fixed incorrect variable name in `menuAtLocation` and `menuItemsAtLocation`
+  functions.
+
 ### Added
 - Added `url` method to `Comment` model
 - Added `srcset` method to `Upload` model

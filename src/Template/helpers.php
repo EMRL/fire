@@ -153,7 +153,7 @@ if ( ! function_exists('menuAtLocation')) {
      */
     function menuAtLocation($location, $options = [])
     {
-        $options['menu_location'] = $location;
+        $options['theme_location'] = $location;
 
         return menu($options);
     }
@@ -183,7 +183,7 @@ if ( ! function_exists('menuItemsAtLocation')) {
      */
     function menuItemsAtLocation($location, $options = [])
     {
-        $options['menu_location'] = $location;
+        $options['theme_location'] = $location;
 
         return menuItems($options);
     }
