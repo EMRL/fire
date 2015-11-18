@@ -93,14 +93,12 @@ class RelativeUrls
         $newValue = $this->replaceDomainRecursive($value);
 
         if ($value !== $newValue) {
-            $newValue = maybe_serialize($newValue);
-
-            $data = ['meta_value' => $newValue];
+            $data = ['meta_value' => maybe_serialize($newValue)];
 
             $where = [
                 $column      => $objectId,
                 'meta_key'   => $key,
-                'meta_value' => $value,
+                'meta_value' => maybe_serialize($value),
             ];
 
             $wpdb->update($table, $data, $where);

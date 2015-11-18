@@ -8,6 +8,7 @@
 ### Fixed
 - Fixed incorrect variable name in `menuAtLocation` and `menuItemsAtLocation`
   functions.
+- Fixed bug when replacing absolute URLs inside of serialized data
 
 ### Added
 - Added `url` method to `Comment` model
