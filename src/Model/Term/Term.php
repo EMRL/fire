@@ -33,6 +33,11 @@ abstract class Term extends Entity implements TermContract
     protected $taxonomy;
 
     /**
+     * @var integer
+     */
+    protected $parentId;
+
+    /**
      * @var Fire\Contracts\Model\Term\Term
      */
     protected $parent;
@@ -108,6 +113,16 @@ abstract class Term extends Entity implements TermContract
     public function setTaxonomy($taxonomy)
     {
         $this->taxonomy = $taxonomy;
+    }
+
+    public function parentId()
+    {
+        return $this->parentId;
+    }
+
+    public function setParentId($id)
+    {
+        $this->parentId = $id;
     }
 
     public function parent()

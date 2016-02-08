@@ -37,11 +37,15 @@ class CategoryEntityMapper implements EntityMapperContract
             return $this->postRepository->postsInCategory($data['term_id']);
         });
 
-        $entity->setParent(function () use ($data) {
+        $id = $data['parent'];
+
+        $entity->setParentId($id);
+
+        $entity->setParent(function () use ($id) {
             $parent = null;
 
-            if ($data['parent']) {
-                $parent = $this->categoryRepository->categoryOfId($data['parent']);
+            if ($id) {
+                $parent = $this->categoryRepository->categoryOfId($id);
             }
 
             return $parent;
