@@ -28,6 +28,11 @@ abstract class Term extends Entity implements TermContract
     protected $description;
 
     /**
+     * @var integer
+     */
+    protected $count;
+
+    /**
      * @var stdClass
      */
     protected $taxonomy;
@@ -103,6 +108,16 @@ abstract class Term extends Entity implements TermContract
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    public function count()
+    {
+        return $this->count;
+    }
+
+    public function setCount($count)
+    {
+        return $this->count = $count;
     }
 
     public function taxonomy()

@@ -1,6 +1,9 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+### Added
+- Added `count` method to `Term` model
+
 ### Changed
 - Bound `AbstractPostEntityMapper` to container to ease process of creating new
   post types and to reuse the same instance across all post types

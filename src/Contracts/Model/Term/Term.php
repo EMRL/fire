@@ -61,6 +61,20 @@ interface Term
     public function setDescription($description);
 
     /**
+     * Get the count
+     *
+     * @return int
+     */
+    public function count();
+
+    /**
+     * Set the count
+     *
+     * @param int  $count
+     */
+    public function setCount($count);
+
+    /**
      * Get the taxonomy
      *
      * @return stdClass
