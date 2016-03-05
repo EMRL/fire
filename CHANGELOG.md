@@ -9,6 +9,9 @@
   post types and to reuse the same instance across all post types
 
 ### Fixed
+- RSS feeds now use absolute URLs instead of relative
+
+### Fixed
 - Fixed incorrect variable name in `menuAtLocation` and `menuItemsAtLocation`
   functions.
 - Fixed bug when replacing absolute URLs inside of serialized data

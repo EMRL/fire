@@ -72,6 +72,15 @@ class RelativeUrls
         add_action('updated_option', function ($option, $old_value, $value) {
             $this->replaceDomainInOption($option, $value);
         }, null, 3);
+
+        // Feeds need absolute URLs
+        add_filter('the_excerpt_rss', function ($excerpt) {
+            return $this->relativeToAbsolute($excerpt);
+        });
+
+        add_filter('the_content_feed', function ($content) {
+            return $this->relativeToAbsolute($content);
+        });
     }
 
     /**
@@ -150,6 +159,36 @@ class RelativeUrls
         }
 
         return $value;
+    }
+
+    /**
+     * Convert all relative URLs in a string to absolute URLs
+     *
+     * @param  string  $string
+     * @return string
+     */
+    protected function relativeToAbsolute($string)
+    {
+        // I'm not proud of this, but that's WordPress for ya :)
+        $string = preg_replace('/(src|href)=(["\'])\/(?!\/)/', '$1=$2'.url().'/', $string);
+
+        $string = preg_replace_callback('/srcset=(["\'])([^"\']+)\\1/', function ($matches) {
+            if (isset($matches[2])) {
+                $parts = array_map('trim', explode(',', $matches[2]));
+
+                foreach ($parts as $key => $part) {
+                    if ($part[0] === '/' and $part[1] !== '/') {
+                        $parts[$key] = url($part);
+                    }
+                }
+
+                return 'srcset='.$matches[1].implode(', ', $parts).$matches[1];
+            }
+
+            return $matches[0];
+        }, $string);
+
+        return $string;
     }
 
     /**
