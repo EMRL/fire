@@ -31,3 +31,5 @@ add_action('after_setup_theme', function () use ($loader) {
 
 $fire = new Fire\Foundation\Fire;
 $fire->instance('psr4.autoloader', $loader);
+
+unset($loader, $fire);
