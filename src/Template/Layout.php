@@ -32,23 +32,23 @@ class Layout
     {
         $this->themePath = $themePath;
 
-        add_action('after_setup_theme', function () {
-            if (apply_filters('fire/use-layout', true)) {
-                add_filter('template_include', function ($template) {
-                    $this->template = $template;
-
-                    $name = str_replace($this->themePath, '', $template);
-
-                    $layouts = ['layout.php'];
-
-                    if (isset($this->layouts[$name])) {
-                        array_unshift($layouts, $this->layouts[$name]);
-                    }
-
-                    return locate_template($layouts);
-                }, 1000);
+        add_filter('template_include', function ($template) {
+            if ( ! current_theme_supports('fire/layouts')) {
+                return $template;
             }
-        });
+
+            $this->template = $template;
+
+            $name = str_replace($this->themePath, '', $template);
+
+            $layouts = ['layout.php'];
+
+            if (isset($this->layouts[$name])) {
+                array_unshift($layouts, $this->layouts[$name]);
+            }
+
+            return locate_template($layouts);
+        }, 1000);
     }
 
     /**
