@@ -56,7 +56,13 @@ class Upload extends AbstractPost implements UploadContract
      */
     public function srcset($size = null)
     {
-        return wp_get_attachment_image_srcset($this->id(), $size);
+        if ($size) {
+            $srcset = wp_get_attachment_image_srcset($this->id(), $size);
+        } else {
+            $srcset = wp_get_attachment_image_srcset($this->id());
+        }
+
+        return $srcset;
     }
 
     /**
