@@ -17,6 +17,7 @@
   functions.
 - Fixed bug when replacing absolute URLs inside of serialized data
 - Layout functionality is now optional
+- Upload `srcset` method now correctly passes size value to WP function
 
 ## [2.1.1] - 2015-10-27
 ### Fixed
