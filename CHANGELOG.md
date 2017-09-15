@@ -10,6 +10,7 @@
 ### Changed
 - Bound `AbstractPostEntityMapper` to container to ease process of creating new
   post types and to reuse the same instance across all post types
+- `AbstractPost::content` uses simpler method to get the content
 
 ### Fixed
 - RSS feeds now use absolute URLs instead of relative
