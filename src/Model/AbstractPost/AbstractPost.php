@@ -178,6 +178,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
         if ($native = $this->getNative()) {
             // This is why I hate WordPress
             setup_postdata((object) $native);
+            $GLOBALS['post'] = (object) $native;
             ob_start();
             the_content();
             $content = ob_get_clean();
