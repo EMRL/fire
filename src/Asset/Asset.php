@@ -52,7 +52,7 @@ class Asset implements AssetContract
             $root = substr(ABSPATH, 0, $diff - 1);
         }
 
-        return str_replace($root, '', $this->path($key));
+        return str_replace('\\', '/', str_replace($root, '', $this->path($key)));
     }
 
     /**
