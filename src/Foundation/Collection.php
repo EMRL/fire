@@ -529,7 +529,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return array
      */
-    public function JsonSerialize()
+    public function jsonSerialize()
     {
         return $this->toArray();
     }
