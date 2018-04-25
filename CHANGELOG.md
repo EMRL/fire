@@ -6,6 +6,7 @@
 - Added `url` method to `Comment` model
 - Added `srcset` method to `Upload` model
 - Added `implode` method to `Collection` object
+- Added `hasChildren` method to `AbstractPost` model
 
 ### Changed
 - Bound `AbstractPostEntityMapper` to container to ease process of creating new

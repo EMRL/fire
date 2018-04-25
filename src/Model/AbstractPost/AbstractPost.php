@@ -359,6 +359,24 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     }
 
     /**
+     * Check if post has any children
+     *
+     * @return  boolean
+     */
+    public function hasChildren()
+    {
+        global $wpdb;
+        return (bool) $wpdb->get_var($wpdb->prepare("
+            select count(*)
+            from $wpdb->posts
+            where post_type = '%s'
+            and post_status = 'publish'
+            and post_parent = %d
+            limit 1
+        ", $this->type(), $this->id()));
+    }
+
+    /**
      * Get the menu order
      *
      * @return  string
