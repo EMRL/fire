@@ -43,16 +43,7 @@ class Asset implements AssetContract
             return $this->hashedUrl($key);
         }
 
-        $root = ABSPATH;
-        $home = trailingslashit(set_url_scheme(get_option('home'), 'http'));
-        $site = trailingslashit(set_url_scheme(get_option('siteurl'), 'http'));
-        $diff = strcasecmp($home, $site);
-
-        if ($diff !== 0) {
-            $root = substr(ABSPATH, 0, $diff - 1);
-        }
-
-        return str_replace('\\', '/', str_replace($root, '', $this->path($key)));
+        return str_replace('\\', '/', str_replace(WP_CONTENT_DIR, WP_CONTENT_URL, $this->path($key)));
     }
 
     /**

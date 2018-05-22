@@ -22,6 +22,7 @@
 - Upload `srcset` method now correctly passes size value to WP function
 - `Asset::url` fix for Windows path separator issue
 - Typo in `Collection::jsonSerialize` method name
+- `Asset::url` works when `WP_CONTENT_URL` uses a full URL
 
 ## [2.1.1] - 2015-10-27
 ### Fixed
