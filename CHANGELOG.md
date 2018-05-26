@@ -1,12 +1,15 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+
+## [2.2.0] - 2018-05-25
 ### Added
 - Added `count` method to `Term` model
 - Added `url` method to `Comment` model
 - Added `srcset` method to `Upload` model
 - Added `implode` method to `Collection` object
 - Added `hasChildren` method to `AbstractPost` model
+- Added `AbstractPostType::modifyQuery` to modify query for post types
 
 ### Changed
 - Bound `AbstractPostEntityMapper` to container to ease process of creating new
@@ -91,6 +94,7 @@
 ### Added
 - Initial public release
 
+[2.2.0]: https://github.com/emrl/fire/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/emrl/fire/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/emrl/fire/compare/2.0.6...2.1.0
 [2.0.6]: https://github.com/emrl/fire/compare/2.0.5...2.0.6

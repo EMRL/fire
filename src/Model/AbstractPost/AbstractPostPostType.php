@@ -154,6 +154,24 @@ abstract class AbstractPostPostType
     }
 
     /**
+     * Modify the WordPress query for this post type
+     *
+     * Callback gets passed the `WP_Query` object
+     *
+     *     $callback($wp_query);
+     *
+     * @param callable $callback
+     */
+    protected function modifyQuery(callable $callback)
+    {
+        add_action('pre_get_posts', function ($query) use ($callback) {
+            if ($query->is_main_query() && $query->get('post_type') === static::TYPE) {
+                $callback($query);
+            }
+        });
+    }
+
+    /**
      * "Register" a built-in post type, this just adds our config to the default
      * already registered config
      *
