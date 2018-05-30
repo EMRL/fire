@@ -43,7 +43,11 @@ class Asset implements AssetContract
             return $this->hashedUrl($key);
         }
 
-        return str_replace('\\', '/', str_replace(WP_CONTENT_DIR, WP_CONTENT_URL, $this->path($key)));
+        $dir = wp_normalize_path(WP_CONTENT_DIR);
+        $url = wp_normalize_path(WP_CONTENT_URL);
+        $file = wp_normalize_path($this->path($key));
+
+        return str_replace($dir, $url, $file);
     }
 
     /**
