@@ -1,6 +1,9 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+### Added
+- Added `AbstractPostType::modifyPostUrl`
+- Added `AbstractPostType::modifyArchiveTitle`
 
 ## [2.2.0] - 2018-05-25
 ### Added

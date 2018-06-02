@@ -172,6 +172,47 @@ abstract class AbstractPostPostType
     }
 
     /**
+     * Modify the post type link
+     *
+     * Callback gets passed the default URL and the post object
+     *
+     *    $callback($url, $post);
+     *
+     * @param callable $callback
+     */
+    protected function modifyPostUrl(callable $callback)
+    {
+        add_filter('post_type_link', function ($url, $post) use ($callback) {
+            if ($post->post_type === static::TYPE) {
+                $url = $callback($url, $post);
+            }
+
+            return $url;
+        }, 10, 2);
+    }
+
+    /**
+     * Modify the post type archive title
+     *
+     * If string is passed, it will set the archive title.
+     * If a callable is passed, it gets passed the default title and the post type string
+     *
+     *    $callback($title, $type);
+     *
+     * @param mixed $value
+     */
+    protected function modifyArchiveTitle($value)
+    {
+        add_filter('post_type_archive_title', function ($title, $type) use ($value) {
+            if ($type === static::TYPE) {
+                $title = is_callable($value) ? $value($title, $type) : $value;
+            }
+
+            return $title;
+        }, 10, 2);
+    }
+
+    /**
      * "Register" a built-in post type, this just adds our config to the default
      * already registered config
      *
