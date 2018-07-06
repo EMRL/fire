@@ -211,6 +211,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Get the excerpt
      *
+     * @deprecated 2.2.0 use `summary` method instead
      * @filter the_excerpt
      * @filter get_the_excerpt
      * @filter fire/model/post/excerpt
@@ -242,6 +243,43 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     public function setExcerpt($excerpt)
     {
         $this->excerpt = $excerpt;
+    }
+
+    /**
+     * Get the summary/excerpt
+     *
+     * This method replaces the now deprecated `excerpt` method and handles excerpts
+     * the way WordPress normally does, allowing the <!--more--> tag and the
+     * custom excerpt field to be used.
+     *
+     * @param integer $limit Number of words to limit
+     * @param string $append String to append to trimmed excerpt
+     * @return string
+     */
+    public function summary($limit = null, $append = null)
+    {
+        $limitFilter = function () use ($limit) { return (int) $limit; };
+        $appendFilter = function () use ($append) { return $append; };
+
+        if ($limit) {
+            add_filter('excerpt_length', $limitFilter);
+        }
+
+        if ($append) {
+            add_filter('excerpt_more', $appendFilter);
+        }
+
+        setup_postdata((object) $this->getNative());
+        $GLOBALS['post'] = (object) $this->getNative();
+        ob_start();
+        the_excerpt();
+        $excerpt = ob_get_clean();
+        wp_reset_postdata();
+
+        remove_filter('excerpt_length', $limitFilter);
+        remove_filter('excerpt_more', $appendFilter);
+
+        return $excerpt;
     }
 
     public function status()
