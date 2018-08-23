@@ -4,7 +4,6 @@ namespace Fire\Asset;
 
 use Fire\Contracts\Asset\AssetFinder as AssetFinderContract;
 use Fire\Contracts\Filesystem\Filesystem as FilesystemContract;
-use InvalidArgumentException;
 
 class FileAssetFinder implements AssetFinderContract
 {
@@ -30,16 +29,30 @@ class FileAssetFinder implements AssetFinderContract
     protected $found = [];
 
     /**
+     * Path to manifest.json file
+     *
+     * @var string
+     */
+    protected $manifestPath;
+
+    /**
+     * Manifest data
+     *
+     * @var array
+     */
+    protected $manifestData;
+
+    /**
      * Create a new asset finder
      *
-     * @param  \Fire\Contracts\Filesystem\Filesystem  $filesystem
-     * @param  array  $paths
+     * @param \Fire\Contracts\Filesystem\Filesystem $filesystem
+     * @param array $paths
      * @return void
      */
     public function __construct(FilesystemContract $filesystem, array $paths)
     {
         $this->filesystem = $filesystem;
-        $this->paths      = array_map('trailingslashit', $paths);
+        $this->paths = array_map('trailingslashit', $paths);
     }
 
     public function find($key)
@@ -54,13 +67,14 @@ class FileAssetFinder implements AssetFinderContract
     /**
      * Search through all bound paths to find the asset file
      *
-     * @param  string  $key
-     * @param  array   $paths
+     * @param string $key
+     * @param array $paths
      * @return string
      */
     protected function findInPaths($key, array $paths)
     {
         $found = false;
+        $key = $this->applyManifest($key);
 
         foreach ($paths as $path) {
             if ($this->filesystem->isFile($asset = $path.$key)) {
@@ -75,5 +89,33 @@ class FileAssetFinder implements AssetFinderContract
     public function addPath($path)
     {
         array_unshift($this->paths, trailingslashit($path));
+        return $this;
+    }
+
+    /**
+     * Search manifest file for path
+     *
+     * @param string $key
+     * @return string
+     */
+    protected function applyManifest($key)
+    {
+        if ( ! $this->manifestData && is_file($this->manifestPath)) {
+            $this->manifestData = json_decode(file_get_contents($this->manifestPath), true);
+        }
+
+        return isset($this->manifestData[$key]) ? $this->manifestData[$key] : $key;
+    }
+
+    /**
+     * Set the manifest.json file location
+     *
+     * @param string $file
+     * @return $this
+     */
+    public function setManifestPath($path)
+    {
+        $this->manifestPath = $path;
+        return $this;
     }
 }

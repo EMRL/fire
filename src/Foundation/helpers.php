@@ -84,6 +84,13 @@ if ( ! function_exists('currentUrl')) {
     }
 }
 
+if ( ! function_exists('current_url')) {
+    function current_url()
+    {
+        return currentUrl();
+    }
+}
+
 if ( ! function_exists('url')) {
     /**
      * Return a WordPress URL

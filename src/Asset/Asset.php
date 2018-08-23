@@ -17,7 +17,7 @@ class Asset implements AssetContract
     /**
      * Create a new Asset
      *
-     * @param  \Fire\Contracts\Asset\AssetFinder  $finder
+     * @param \Fire\Contracts\Asset\AssetFinder $finder
      * @return void
      */
     public function __construct(AssetFinderContract $finder)
@@ -33,9 +33,12 @@ class Asset implements AssetContract
     /**
      * Get the root-relative URL to an asset, and optionally use cache-busting hash
      *
-     * @inheritDoc
+     * As of 2.3.0, passing a value to `$hash` is deprecated in favor of using
+     * a manifest.json file
      *
-     * @param  boolean  $hash  Flag to use cache busting or not
+     * {@inheritdoc}
+     *
+     * @param boolean $hash Flag to use cache busting or not
      */
     public function url($key, $hash = false)
     {
@@ -55,15 +58,15 @@ class Asset implements AssetContract
      * to the filename. This is used for busting the cache and making sure browsers
      * can cache the asset until it changes.
      *
-     * @param  string  $key
+     * @deprecated 2.3.0 Use manifest.json file instead
+     * @param string $key
      * @return string
      */
     public function hashedUrl($key)
     {
-        $file  = $this->path($key);
-        $hash  = substr(sha1_file($file), 0, 8);
+        $file = $this->path($key);
+        $hash = substr(sha1_file($file), 0, 8);
         $parts = preg_split('/\.(?=[^\.]+$)/', $this->url($key));
-
         return sprintf('%s.%s.%s', $parts[0], $hash, $parts[1]);
     }
 }
