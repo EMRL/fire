@@ -385,10 +385,10 @@ if ( ! function_exists('limit_chars'))
      * @param string $str
      * @param integer $limit
      * @param string $end
-     * @param boolean $preserve_words
+     * @param boolean $preserveWords
      * @return string
      */
-    function limit_chars($str, $limit = 100, $end = null, $preserve_words = false)
+    function limit_chars($str, $limit = 100, $end = null, $preserveWords = false)
     {
         $end = (is_null($end)) ? '…' : $end;
 
@@ -402,7 +402,7 @@ if ( ! function_exists('limit_chars'))
             return $end;
         }
 
-        if ($preserve_words === false) {
+        if ($preserveWords === false) {
             return rtrim(substr($str, 0, $limit)).$end;
         }
 

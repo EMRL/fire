@@ -10,7 +10,7 @@ abstract class Entity implements EntityContract
     /**
      * Resolve a value from a Closure
      *
-     * @param  mixed  $property
+     * @param mixed $property
      * @return mixed
      */
     protected function lazyLoad(& $property)

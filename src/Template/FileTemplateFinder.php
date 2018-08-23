@@ -24,13 +24,13 @@ class FileTemplateFinder implements TemplateFinderContract
     protected $templates;
 
     /**
-     * @param Fire\Contracts\Filesystem\Filesystem  $filesystem
-     * @param array  $paths
+     * @param Fire\Contracts\Filesystem\Filesystem $filesystem
+     * @param array $paths
      */
     public function __construct(FilesystemContract $filesystem, array $paths)
     {
         $this->filesystem = $filesystem;
-        $this->paths      = array_map('trailingslashit', $paths);
+        $this->paths = array_map('trailingslashit', $paths);
     }
 
     public function find($key)

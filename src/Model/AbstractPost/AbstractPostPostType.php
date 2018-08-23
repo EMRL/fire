@@ -38,7 +38,7 @@ abstract class AbstractPostPostType
     /**
      * Register the post type
      *
-     * @param  array|callable  $config
+     * @param array|callable $config
      * @return $this
      */
     protected function register($config)
@@ -54,7 +54,7 @@ abstract class AbstractPostPostType
             }
 
             $singular = ucfirst(static::TYPE);
-            $plural   = $singular.'s';
+            $plural = $singular.'s';
 
             if (isset($config['labels'])) {
                 $singular = isset($config['labels']['singular_name'])
@@ -68,23 +68,22 @@ abstract class AbstractPostPostType
 
             $defaults = [
                 'labels' => [
-                    'name'               => _x($plural, static::TYPE.' general name'),
-                    'singular_name'      => _x($singular, static::TYPE.' singular name'),
-                    'add_new_item'       => __(sprintf('Add New %s', $singular), 'fire'),
-                    'edit_item'          => __(sprintf('Edit %s', $singular), 'fire'),
-                    'new_item'           => __(sprintf('New %s', $singular), 'fire'),
-                    'view_item'          => __(sprintf('View %s', $singular), 'fire'),
-                    'search_items'       => __(sprintf('Search %s', $plural), 'fire'),
-                    'not_found'          => __(sprintf('No %s found', strtolower($plural)), 'fire'),
+                    'name' => _x($plural, static::TYPE.' general name'),
+                    'singular_name' => _x($singular, static::TYPE.' singular name'),
+                    'add_new_item' => __(sprintf('Add New %s', $singular), 'fire'),
+                    'edit_item' => __(sprintf('Edit %s', $singular), 'fire'),
+                    'new_item' => __(sprintf('New %s', $singular), 'fire'),
+                    'view_item' => __(sprintf('View %s', $singular), 'fire'),
+                    'search_items' => __(sprintf('Search %s', $plural), 'fire'),
+                    'not_found' => __(sprintf('No %s found', strtolower($plural)), 'fire'),
                     'not_found_in_trash' => __(sprintf('No %s found in Trash', strtolower($plural)), 'fire'),
-                    'parent_item_colon'  => __(sprintf('Parent %s', $singular), 'fire'),
+                    'parent_item_colon' => __(sprintf('Parent %s', $singular), 'fire'),
                 ],
             ];
 
             $config = array_replace_recursive($defaults, $config);
             $config = apply_filters('fire/postType/config', $config, static::TYPE);
             $config = apply_filters(sprintf('fire/postType/%s/config', static::TYPE), $config);
-
             $this->config = register_post_type(static::TYPE, $config);
         });
 
@@ -94,7 +93,7 @@ abstract class AbstractPostPostType
     /**
      * Set the title placeholder on post edit screen
      *
-     * @param string  $placeholder
+     * @param string $placeholder
      */
     protected function setTitlePlaceholder($placeholder)
     {
@@ -116,7 +115,7 @@ abstract class AbstractPostPostType
      *         [column-key] => Heading Text
      *     ));
      *
-     * @param callable  $callback
+     * @param callable $callback
      */
     protected function modifyColumnHeadings(callable $callback)
     {
@@ -132,7 +131,7 @@ abstract class AbstractPostPostType
      *         [0] => 'column-key'
      *     ))
      *
-     * @param callable  $callback
+     * @param callable $callback
      */
     protected function modifySortableColumns(callable $callback)
     {
@@ -146,7 +145,7 @@ abstract class AbstractPostPostType
      *
      *     $callback(column-key, 12);
      *
-     * @param callable  $callback
+     * @param callable $callback
      */
     protected function modifyColumns(callable $callback)
     {
@@ -216,7 +215,7 @@ abstract class AbstractPostPostType
      * "Register" a built-in post type, this just adds our config to the default
      * already registered config
      *
-     * @param  array  $config
+     * @param array $config
      */
     protected function registerBuiltin($config)
     {

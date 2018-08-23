@@ -28,7 +28,7 @@ interface Term
     /**
      * Set the name
      *
-     * @param string  $name
+     * @param string $name
      */
     public function setName($name);
 
@@ -42,7 +42,7 @@ interface Term
     /**
      * Set the slug
      *
-     * @param string  $slug
+     * @param string $slug
      */
     public function setSlug($slug);
 
@@ -56,7 +56,7 @@ interface Term
     /**
      * Set the description
      *
-     * @param string  $description
+     * @param string $description
      */
     public function setDescription($description);
 
@@ -70,7 +70,7 @@ interface Term
     /**
      * Set the count
      *
-     * @param int  $count
+     * @param int $count
      */
     public function setCount($count);
 
@@ -84,7 +84,7 @@ interface Term
     /**
      * Set the taxonomy
      *
-     * @param string  $taxonomy
+     * @param string $taxonomy
      */
     public function setTaxonomy($taxonomy);
 
@@ -98,7 +98,7 @@ interface Term
     /**
      * Set the parent
      *
-     * @param Fire\Contracts\Model\Term\Term|Closure  $parent
+     * @param Fire\Contracts\Model\Term\Term|Closure $parent
      */
     public function setParent($parent);
 }

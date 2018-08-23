@@ -7,8 +7,8 @@
  * @version 2.2.0
  */
 
-define('FIRE_PATH', trailingslashit(__DIR__));
-define('FIRE_URL', trailingslashit(WP_PLUGIN_URL.basename(__DIR__)));
+define('FIRE_PATH', __DIR__.'/');
+define('FIRE_URL', WP_PLUGIN_URL.basename(__DIR__).'/');
 
 include __DIR__.'/src/Foundation/Psr4Autoloader.php';
 

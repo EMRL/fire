@@ -8,14 +8,14 @@ use Fire\Contracts\Model\Category\Category as CategoryContract;
 class Category extends Term implements CategoryContract
 {
     /**
-     * @var  Fire\Foundation\Collection
+     * @var Fire\Foundation\Collection
      */
     protected $posts;
 
     /**
      * Get posts
      *
-     * @return  Fire\Foundation\Collection
+     * @return Fire\Foundation\Collection
      */
     public function posts()
     {
@@ -25,8 +25,8 @@ class Category extends Term implements CategoryContract
     /**
      * Set posts
      *
-     * @param   $posts  Fire\Foundation\Collection|Closure
-     * @return  void
+     * @param Fire\Foundation\Collection|Closure $posts
+     * @return void
      */
     public function setPosts($posts)
     {

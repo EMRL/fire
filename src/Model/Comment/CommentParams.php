@@ -9,7 +9,7 @@ class CommentParams extends Params
     /**
      * Set param for comments for posts
      *
-     * @param  integer|array  $id
+     * @param integer|array $id
      * @return $this
      */
     public function forPost($id)
@@ -22,7 +22,7 @@ class CommentParams extends Params
     /**
      * Set param for comments by user
      *
-     * @param  integer|array  $id
+     * @param integer|array $id
      * @return $this
      */
     public function byUser($id)

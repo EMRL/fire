@@ -42,10 +42,8 @@ class Fire extends Container
     protected function registerBaseBindings()
     {
         static::setInstance($this);
-
         $this->instance('fire', $this);
         $this->instance('Fire\Container\Container', $this);
-
         $this->instance('path.fire', FIRE_PATH);
         $this->instance('url.fire',  FIRE_URL);
         $this->instance('path.parent', trailingslashit(get_template_directory()));

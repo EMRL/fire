@@ -12,7 +12,7 @@ class TermParams extends Params
     protected $taxonomy;
 
     /**
-     * @param string  $taxonomy
+     * @param string $taxonomy
      */
     public function __construct($taxonomy)
     {

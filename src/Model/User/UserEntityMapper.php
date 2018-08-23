@@ -30,8 +30,8 @@ class UserEntityMapper implements EntityMapperContract
         PageRepositoryContract $pageRepository,
         CommentRepositoryContract $commentRepository
     ) {
-        $this->postRepository    = $postRepository;
-        $this->pageRepository    = $pageRepository;
+        $this->postRepository = $postRepository;
+        $this->pageRepository = $pageRepository;
         $this->commentRepository = $commentRepository;
     }
 

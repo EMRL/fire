@@ -39,7 +39,6 @@ class UploadRepository extends AbstractPostRepository implements UploadRepositor
     public function videoUploads()
     {
         $args = $this->newParams()->videos();
-
         return $this->find($args);
     }
 
@@ -51,7 +50,6 @@ class UploadRepository extends AbstractPostRepository implements UploadRepositor
     public function textUploads()
     {
         $args = $this->newParams()->texts();
-
         return $this->find($args);
     }
 

@@ -20,14 +20,14 @@ class TagEntityMapper implements EntityMapperContract
     protected $postRepository;
 
     /**
-     * @param Fire\Contracts\Model\Tag\TagRepository    $tagRepository
-     * @param Fire\Contracts\Model\Post\PostRepository  $postRepository
+     * @param Fire\Contracts\Model\Tag\TagRepository $tagRepository
+     * @param Fire\Contracts\Model\Post\PostRepository $postRepository
      */
     public function __construct(
         TagRepositoryContract $tagRepository,
         PostRepositoryContract $postRepository
     ) {
-        $this->tagRepository  = $tagRepository;
+        $this->tagRepository = $tagRepository;
         $this->postRepository = $postRepository;
     }
 

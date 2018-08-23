@@ -27,18 +27,18 @@ class PostEntityMapper implements EntityMapperContract
     protected $tagRepository;
 
     /**
-     * @param Fire\Contracts\Model\Post\PostRepository          $postRepository
-     * @param Fire\Contracts\Model\Category\CategoryRepository  $categoryRepository
-     * @param Fire\Contracts\Model\Tag\TagRepository            $tagRepository
+     * @param Fire\Contracts\Model\Post\PostRepository $postRepository
+     * @param Fire\Contracts\Model\Category\CategoryRepository $categoryRepository
+     * @param Fire\Contracts\Model\Tag\TagRepository $tagRepository
      */
     public function __construct(
         PostRepositoryContract $postRepository,
         CategoryRepositoryContract $categoryRepository,
         TagRepositoryContract $tagRepository
     ) {
-        $this->postRepository     = $postRepository;
+        $this->postRepository = $postRepository;
         $this->categoryRepository = $categoryRepository;
-        $this->tagRepository      = $tagRepository;
+        $this->tagRepository = $tagRepository;
     }
 
     public function map(EntityContract $entity, array $data)

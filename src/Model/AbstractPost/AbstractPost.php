@@ -18,7 +18,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     protected $authorId;
 
     /**
-     * @var  Fire\Contracts\Model\Identity\User
+     * @var Fire\Contracts\Model\Identity\User
      */
     protected $author;
 
@@ -103,15 +103,15 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     protected $comments;
 
     /**
-     * @var  array
+     * @var array
      */
     protected $native;
 
     /**
      * Create a new post
      *
-     * @param   $data  array
-     * @return  void
+     * @param $data array
+     * @return void
      */
     public function __construct(array $data = [])
     {
@@ -157,7 +157,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Get the formatted date
      *
-     * @param  string  $format  http://php.net/date
+     * @param string $format http://php.net/date
      * @return string
      */
     public function date($format = 'F j, Y')
@@ -171,6 +171,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     }
 
     /**
+     * {@inheritdoc}
      * @filter the_content
      */
     public function content()
@@ -197,6 +198,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     }
 
     /**
+     * {@inheritdoc}
      * @filter the_title
      */
     public function title()
@@ -216,15 +218,15 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
      * @filter the_excerpt
      * @filter get_the_excerpt
      * @filter fire/model/post/excerpt
-     * @param  integer  $limit          Number of words/characters to limit to
-     * @param  string   $append         String to append to trimmed excerpt
-     * @param  boolean  $words          Whether to limit to words (true) or characters (false)
-     * @param  boolean  $preserveWords  Limit to character number, but preserve full words
-     * @param  boolean  $force          Use excerpt without stripping tags
+     * @param integer $limit Number of words/characters to limit to
+     * @param string $append String to append to trimmed excerpt
+     * @param boolean $words Whether to limit to words (true) or characters (false)
+     * @param boolean $preserveWords Limit to character number, but preserve full words
+     * @param boolean $force Use excerpt without stripping tags
      */
     public function excerpt($limit = null, $append = null, $words = true, $preserveWords = null, $force = false)
     {
-        if ($this->excerpt and ! $force) {
+        if ($this->excerpt && ! $force) {
             $excerpt = $this->excerpt;
         } else {
             $excerpt = $this->excerpt ? $this->excerpt : $this->content;
@@ -232,7 +234,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
             $excerpt = strip_tags(wp_kses_no_null(trim(strip_shortcodes($excerpt))));
         }
 
-        if ($limit and strlen($excerpt) > $limit) {
+        if ($limit && strlen($excerpt) > $limit) {
             $excerpt = $words
                      ? limitWords($excerpt, $limit, $append)
                      : limitChars($excerpt, $limit, $append, $preserveWords);
@@ -297,7 +299,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Get the comment status
      *
-     * @return  string
+     * @return string
      */
     public function commentStatus()
     {
@@ -307,8 +309,8 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Set the comment status
      *
-     * @param   $status  string
-     * @return  void
+     * @param string $status
+     * @return void
      */
     public function setCommentStatus($status)
     {
@@ -318,7 +320,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Get the ping status
      *
-     * @return  string
+     * @return string
      */
     public function pingStatus()
     {
@@ -328,8 +330,8 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Set the ping status
      *
-     * @param   $status  string
-     * @return  void
+     * @param string $status
+     * @return void
      */
     public function setPingStatus($status)
     {
@@ -359,8 +361,8 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Get the modified date
      *
-     * @param   $format  string  http://php.net/date
-     * @return  string
+     * @param string $format http://php.net/date
+     * @return string
      */
     public function modified($format = 'F j, Y')
     {
@@ -370,8 +372,8 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Set the modified date
      *
-     * @param   $date  string
-     * @return  void
+     * @param string $date
+     * @return void
      */
     public function setModified($date)
     {
@@ -401,7 +403,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Check if post has any children
      *
-     * @return  boolean
+     * @return boolean
      */
     public function hasChildren()
     {
@@ -419,7 +421,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Get the menu order
      *
-     * @return  string
+     * @return string
      */
     public function menuOrder()
     {
@@ -429,8 +431,8 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Set the menu order
      *
-     * @param   $order  string
-     * @return  void
+     * @param string $order
+     * @return void
      */
     public function setMenuOrder($order)
     {
@@ -470,7 +472,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Check if a featured image is set
      *
-     * @return  boolean
+     * @return boolean
      */
     public function hasFeaturedImage()
     {
@@ -490,7 +492,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Set the post comments
      *
-     * @param Fire\Foundation\Collection|Closure  $comments
+     * @param Fire\Foundation\Collection|Closure $comments
      */
     public function setComments($comments)
     {
@@ -500,7 +502,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Get the comment count
      *
-     * @return  integer
+     * @return integer
      */
     public function commentCount()
     {
@@ -510,7 +512,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Get the URL
      *
-     * @return  string
+     * @return string
      */
     public function url()
     {
@@ -520,7 +522,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Get the edit URL
      *
-     * @return  string
+     * @return string
      */
     public function editUrl()
     {
@@ -530,9 +532,9 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Get a list of terms for a taxonomy this post belongs to
      *
-     * @param   $taxonomy  string
-     * @param   $sep       string  List separator, commonly ", "
-     * @return  string
+     * @param string $taxonomy
+     * @param string $sep List separator, commonly ", "
+     * @return string
      */
     public function termList($taxonomy = 'category', $sep = null)
     {
@@ -542,9 +544,9 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Check if post belongs to term(s)
      *
-     * @param   $taxonomy  string
-     * @param   $terms     string|integer|array  Single term or array of term names, ids, or slugs
-     * @return  boolean
+     * @param string $taxonomy
+     * @param mixed $terms Single term or array of term names, ids, or slugs
+     * @return boolean
      */
     public function hasTerms($taxonomy = 'category', $terms = null)
     {
@@ -554,7 +556,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Check if comments are enabled
      *
-     * @return  boolean
+     * @return boolean
      */
     public function isCommentable()
     {
@@ -564,7 +566,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Check if pings are enabled
      *
-     * @return  boolean
+     * @return boolean
      */
     public function isPingable()
     {
@@ -574,8 +576,8 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Get a string of HTML classes
      *
-     * @param   $extra  string  Extra class names to add
-     * @return  string
+     * @param string $extra Extra class names to add
+     * @return string
      */
     public function htmlClasses($extra = null)
     {
@@ -585,7 +587,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Get the original post array returned by WordPress
      *
-     * @return  array
+     * @return array
      */
     public function getNative()
     {
@@ -595,7 +597,7 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
     /**
      * Set the original post array returned by WordPress
      *
-     * @param  $post  array
+     * @param array $post
      */
     public function setNative(array $post)
     {

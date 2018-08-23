@@ -7,11 +7,11 @@ trait TermMetaTrait
     /**
      * Get term meta values
      *
-     * @param  integer  $id
-     * @param  string   $taxonomy
-     * @param  string   $key
-     * @param  mixed    $default
-     * @param  boolean  $format
+     * @param integer $id
+     * @param string $taxonomy
+     * @param string $key
+     * @param mixed $default
+     * @param boolean $format
      * @return mixed
      */
     protected function meta($id, $taxonomy, $key, $default = null, $format = true)
@@ -22,7 +22,7 @@ trait TermMetaTrait
             $value = get_field($key, $taxonomy.'_'.$id, $format);
         }
 
-        if (is_null($value) or $value === false or $value === '') {
+        if (is_null($value) || $value === false || $value === '') {
             $value = $default;
         }
 

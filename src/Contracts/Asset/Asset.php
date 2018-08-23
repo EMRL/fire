@@ -7,7 +7,7 @@ interface Asset
     /**
      * Get the full path to an asset
      *
-     * @param  string  $key
+     * @param string $key
      * @return string
      */
     public function path($key);
@@ -18,7 +18,7 @@ interface Asset
      *     $asset->url('test.css')
      *     // could return "/wp-content/themes/theme/assets/test.css"
      *
-     * @param  string   $key
+     * @param string $key
      * @return string
      */
     public function url($key);

@@ -6,10 +6,11 @@ trait AbstractPostMetaTrait
 {
     /**
      * Get post meta value
-     * @param  integer  $id
-     * @param  string   $key
-     * @param  mixed    $default
-     * @param  boolean  $format
+     *
+     * @param integer $id
+     * @param string $key
+     * @param mixed $default
+     * @param boolean $format
      * @return mixed
      */
     protected function meta($id, $key, $default = null, $format = true)
@@ -20,7 +21,7 @@ trait AbstractPostMetaTrait
             $value = get_post_meta($id, $key, $format);
         }
 
-        if (is_null($value) or $value === false or $value === '') {
+        if (is_null($value) || $value === false || $value === '') {
             $value = $default;
         }
 

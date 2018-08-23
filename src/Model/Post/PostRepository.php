@@ -12,26 +12,24 @@ class PostRepository extends AbstractPostRepository implements PostRepositoryCon
     /**
      * Get posts in category or categories
      *
-     * @param  integer|array  $id
+     * @param integer|array $id
      * @return Fire\Foundation\Collection
      */
     public function postsInCategory($id)
     {
         $args = $this->newParams()->inCategory($id);
-
         return $this->find($args);
     }
 
     /**
      * Get posts tagged with this ID or IDs
      *
-     * @param  integer|array  $id
+     * @param integer|array $id
      * @return Fire\Foundation\Collection
      */
     public function postsTagged($id)
     {
         $args = $this->newParams()->tagged($id);
-
         return $this->find($args);
     }
 

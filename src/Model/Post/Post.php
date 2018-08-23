@@ -30,7 +30,7 @@ class Post extends AbstractPost implements PostContract
     /**
      * Set the post categories
      *
-     * @param Fire\Foundation\Collection|Closure  $categories
+     * @param Fire\Foundation\Collection|Closure $categories
      */
     public function setCategories($categories)
     {
@@ -50,7 +50,7 @@ class Post extends AbstractPost implements PostContract
     /**
      * Set the post tags
      *
-     * @param Fire\Foundation\Collection|Closure  $tags
+     * @param Fire\Foundation\Collection|Closure $tags
      */
     public function setTags($tags)
     {

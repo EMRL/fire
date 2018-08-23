@@ -28,7 +28,7 @@ interface Comment
     /**
      * Set the comment post ID
      *
-     * @param integer  $id
+     * @param integer $id
      */
     public function setPostId($id);
 
@@ -42,7 +42,7 @@ interface Comment
     /**
      * Set the comment post
      *
-     * @param Fire\Contracts\Model\AbstractPost\AbstractPost|Closure  $post
+     * @param Fire\Contracts\Model\AbstractPost\AbstractPost|Closure $post
      */
     public function setPost($post);
 
@@ -56,7 +56,7 @@ interface Comment
     /**
      * Set the author name
      *
-     * @param string  $name
+     * @param string $name
      */
     public function setAuthorName($name);
 
@@ -70,7 +70,7 @@ interface Comment
     /**
      * Set the author email
      *
-     * @param string  $email
+     * @param string $email
      */
     public function setAuthorEmail($email);
 
@@ -84,7 +84,7 @@ interface Comment
     /**
      * Set the author URL
      *
-     * @param string  $url
+     * @param string $url
      */
     public function setAuthorUrl($url);
 
@@ -98,7 +98,7 @@ interface Comment
     /**
      * Set the author IP address
      *
-     * @param string  $ip
+     * @param string $ip
      */
     public function setAuthorIp($ip);
 
@@ -112,7 +112,7 @@ interface Comment
     /**
      * Set the comment date
      *
-     * @param string  $date
+     * @param string $date
      */
     public function setDate($date);
 
@@ -126,7 +126,7 @@ interface Comment
     /**
      * Set the comment content
      *
-     * @param string  $content
+     * @param string $content
      */
     public function setContent($content);
 
@@ -140,7 +140,7 @@ interface Comment
     /**
      * Set comment status
      *
-     * @param integer|string  $status
+     * @param integer|string $status
      */
     public function setStatus($status);
 
@@ -168,7 +168,7 @@ interface Comment
     /**
      * Set the comment type
      *
-     * @param string  $type
+     * @param string $type
      */
     public function setType($type);
 
@@ -182,7 +182,7 @@ interface Comment
     /**
      * Set the parent ID
      *
-     * @param integer  $id
+     * @param integer $id
      */
     public function setParentId($id);
 
@@ -196,7 +196,7 @@ interface Comment
     /**
      * Set the parent
      *
-     * @param Fire\Contracts\Model\Comment\Comment|Closure  $parent
+     * @param Fire\Contracts\Model\Comment\Comment|Closure $parent
      */
     public function setParent($parent);
 
@@ -210,7 +210,7 @@ interface Comment
     /**
      * Set the registered user ID
      *
-     * @param integer  $id
+     * @param integer $id
      */
     public function setUserId($id);
 
@@ -224,7 +224,7 @@ interface Comment
     /**
      * Set the registered user
      *
-     * @param Fire\Contracts\Model\User\User|Closure  $user
+     * @param Fire\Contracts\Model\User\User|Closure $user
      */
     public function setUser($user);
 }

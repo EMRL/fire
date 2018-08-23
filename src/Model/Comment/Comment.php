@@ -237,7 +237,7 @@ class Comment extends Entity implements CommentContract
 
     /**
      * Test is comment is of a type or types
-     * @param  string|array  $type
+     * @param string|array $type
      * @return boolean
      */
     public function isType($type)

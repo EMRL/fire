@@ -25,35 +25,33 @@ class CommentRepository extends Repository implements CommentRepositoryContract
     /**
      * Return collection of comments for specific post
      *
-     * @param  integer  $id
+     * @param integer $id
      * @return Fire\Foundation\Collection
      */
     public function commentsForPost($id)
     {
         $args = $this->newParams()->forPost($id);
-
         return $this->find($args);
     }
 
     /**
      * Return collection of comments for specific user
      *
-     * @param  integer  $id
+     * @param integer $id
      * @return Fire\Foundation\Collection
      */
     public function commentsByUser($id)
     {
         $args = $this->newParams()->byUser($id);
-
         return $this->find($args);
     }
 
     public function find($args = null)
     {
-        if (is_null($args) or is_array($args)) {
+        if (is_null($args) || is_array($args)) {
             $defaults = $this->newParams();
             $defaults = ($defaults instanceof Arrayable) ? $defaults->toArray() : $defaults;
-            $args     = is_array($args) ? array_replace_recursive($defaults, $args) : $defaults;
+            $args = is_array($args) ? array_replace_recursive($defaults, $args) : $defaults;
         }
 
         $args = ($args instanceof Arrayable) ? $args->toArray() : $args;

@@ -73,7 +73,7 @@ class User extends WP_User implements EntityContract, UserContract, Arrayable
     /**
      * Set posts belonging to user
      *
-     * @param Fire\Foundation\Collection|Closure  $posts
+     * @param Fire\Foundation\Collection|Closure $posts
      */
     public function setPosts($posts)
     {
@@ -93,7 +93,7 @@ class User extends WP_User implements EntityContract, UserContract, Arrayable
     /**
      * Set pages belonging to user
      *
-     * @param Fire\Foundation\Collection|Closure  $pages
+     * @param Fire\Foundation\Collection|Closure $pages
      */
     public function setPages($pages)
     {
@@ -113,7 +113,7 @@ class User extends WP_User implements EntityContract, UserContract, Arrayable
     /**
      * Set comments belonging to user
      *
-     * @param Fire\Foundation\Collection|Closure  $comments
+     * @param Fire\Foundation\Collection|Closure $comments
      */
     public function setComments($comments)
     {
@@ -143,7 +143,7 @@ class User extends WP_User implements EntityContract, UserContract, Arrayable
     /**
      * Resolve a value from a Closure
      *
-     * @param  mixed  $property
+     * @param mixed $property
      * @return mixed
      */
     protected function lazyLoad(& $property)

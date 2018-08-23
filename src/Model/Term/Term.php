@@ -55,7 +55,7 @@ abstract class Term extends Entity implements TermContract
     /**
      * Create a new post
      *
-     * @param  array  $data
+     * @param array $data
      * @return void
      */
     public function __construct(array $data = [])
@@ -153,7 +153,7 @@ abstract class Term extends Entity implements TermContract
     /**
      * Get the URL to term archive
      *
-     * @return  string
+     * @return string
      */
     public function url()
     {
@@ -173,7 +173,7 @@ abstract class Term extends Entity implements TermContract
     /**
      * Set the original term array returned by WordPress
      *
-     * @param array  $term
+     * @param array $term
      */
     public function setNative(array $term)
     {

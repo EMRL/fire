@@ -26,18 +26,18 @@ class AbstractPostEntityMapper implements EntityMapperContract
     protected $commentRepository;
 
     /**
-     * @param Fire\Contracts\Model\User\UserRepository        $userRepository
-     * @param Fire\Contracts\Model\Upload\UploadRepository    $uploadRepository
-     * @param Fire\Contracts\Model\Comment\CommentRepository  $commentRepository
+     * @param Fire\Contracts\Model\User\UserRepository $userRepository
+     * @param Fire\Contracts\Model\Upload\UploadRepository $uploadRepository
+     * @param Fire\Contracts\Model\Comment\CommentRepository $commentRepository
      */
     public function __construct(
         UserRepositoryContract $userRepository,
         UploadRepositoryContract $uploadRepository,
         CommentRepositoryContract $commentRepository = null
     ) {
-        $this->userRepository     = $userRepository;
-        $this->uploadRepository   = $uploadRepository;
-        $this->commentRepository  = $commentRepository;
+        $this->userRepository = $userRepository;
+        $this->uploadRepository = $uploadRepository;
+        $this->commentRepository = $commentRepository;
     }
 
     public function map(EntityContract $entity, array $data)

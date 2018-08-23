@@ -18,7 +18,7 @@ class Template implements TemplateContract
     protected $partialPath = 'partials/';
 
     /**
-     * @param Fire\Contracts\Template\TemplateFinder  $finder
+     * @param Fire\Contracts\Template\TemplateFinder $finder
      */
     public function __construct(TemplateFinderContract $finder)
     {
@@ -31,7 +31,7 @@ class Template implements TemplateContract
                $wp_version, $wp, $id, $comment, $user_ID;
 
         if (is_array($suffix)) {
-            $data   = $suffix;
+            $data = $suffix;
             $suffix = null;
         }
 

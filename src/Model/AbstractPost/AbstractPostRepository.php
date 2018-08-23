@@ -20,17 +20,17 @@ class AbstractPostRepository extends Repository
     protected $entityClass;
 
     /**
-     * @var  Fire\Contracts\Model\AbstractPost\AbstractPost
+     * @var Fire\Contracts\Model\AbstractPost\AbstractPost
      */
     protected $currentPost;
 
     /**
-     * @var  Fire\Foundation\Collection
+     * @var Fire\Foundation\Collection
      */
     protected $currentPosts;
 
     /**
-     * @param string  $postType
+     * @param string $postType
      */
     public function __construct($postType)
     {
@@ -40,14 +40,14 @@ class AbstractPostRepository extends Repository
     /**
      * Return a post for the specified ID
      *
-     * @param  integer  $id
+     * @param integer $id
      * @return Fire\Contracts\AbstractPost\AbstractPost
      */
     public function postOfId($id)
     {
         $post = get_post($id, ARRAY_A);
 
-        if ($post and $post['post_type'] === $this->postType) {
+        if ($post && $post['post_type'] === $this->postType) {
             $post = $this->mapData($post);
         } else {
             $post = null;
@@ -59,7 +59,7 @@ class AbstractPostRepository extends Repository
     /**
      * Return a post for the specified slug
      *
-     * @param  string  $slug
+     * @param string $slug
      * @return Fire\Contracts\AbstractPost\AbstractPost
      */
     public function postOfSlug($slug)
@@ -76,15 +76,15 @@ class AbstractPostRepository extends Repository
     /**
      * Return a collection of posts
      *
-     * @param  Fire\Contracts\Foundation\Arrayable|array|null  $args
+     * @param Fire\Contracts\Foundation\Arrayable|array|null $args
      * @return Fire\Foundation\Collection
      */
     public function find($args = null)
     {
-        if (is_null($args) or is_array($args)) {
+        if (is_null($args) || is_array($args)) {
             $defaults = $this->newParams();
             $defaults = ($defaults instanceof Arrayable) ? $defaults->toArray() : $defaults;
-            $args     = is_array($args) ? array_replace_recursive($defaults, $args) : $defaults;
+            $args = is_array($args) ? array_replace_recursive($defaults, $args) : $defaults;
         }
 
         $args = ($args instanceof Arrayable) ? $args->toArray() : $args;
@@ -101,7 +101,7 @@ class AbstractPostRepository extends Repository
     /**
      * Get a post older than the given date
      *
-     * @param  string|integer  $date
+     * @param string|integer $date
      * @return Fire\Contracts\Model\AbstractPost\AbstractPost
      */
     public function postOlderThan($date)
@@ -111,7 +111,7 @@ class AbstractPostRepository extends Repository
 
             'date_query' => [
                 [
-                    'before'    => $date,
+                    'before' => $date,
                     'inclusive' => false,
                 ],
             ],
@@ -123,18 +123,18 @@ class AbstractPostRepository extends Repository
     /**
      * Get a post newer than the given date
      *
-     * @param  string|integer  $date
+     * @param string|integer $date
      * @return Fire\Contracts\Model\AbstractPost\AbstractPost
      */
     public function postNewerThan($date)
     {
         $args = $this->newParams()->add([
             'posts_per_page' => 1,
-            'order'          => 'asc',
+            'order' => 'asc',
 
             'date_query' => [
                 [
-                    'after'     => $date,
+                    'after' => $date,
                     'inclusive' => false,
                 ],
             ],
@@ -146,13 +146,12 @@ class AbstractPostRepository extends Repository
     /**
      * Get posts by author or authors
      *
-     * @param  integer|array  $id
+     * @param integer|array $id
      * @return Fire\Foundation\Collection
      */
     public function postsByAuthor($id)
     {
         $args = $this->newParams()->byAuthor($id);
-
         return $this->find($args);
     }
 
@@ -165,7 +164,7 @@ class AbstractPostRepository extends Repository
     }
 
     /**
-     * @param Fire\Contracts\Model\AbstractPost\AbstractPost  $post
+     * @param Fire\Contracts\Model\AbstractPost\AbstractPost $post
      */
     public function setCurrentPost(AbstractPostContract $post)
     {
@@ -181,7 +180,7 @@ class AbstractPostRepository extends Repository
     }
 
     /**
-     * @param Fire\Foundation\Collection  $posts
+     * @param Fire\Foundation\Collection $posts
      */
     public function setCurrentPosts($posts)
     {
@@ -199,7 +198,7 @@ class AbstractPostRepository extends Repository
     }
 
     /**
-     * @param string  $type
+     * @param string $type
      */
     public function setPostType($type)
     {

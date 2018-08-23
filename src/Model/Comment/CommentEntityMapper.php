@@ -21,9 +21,9 @@ class CommentEntityMapper implements EntityMapperContract
         CommentRepositoryContract $commentRepository,
         UserRepositoryContract $userRepository
     ) {
-        $this->postRepository    = $postRepository;
+        $this->postRepository = $postRepository;
         $this->commentRepository = $commentRepository;
-        $this->userRepository    = $userRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function map(EntityContract $entity, array $data)

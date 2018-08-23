@@ -16,8 +16,8 @@ class Params implements Arrayable
     /**
      * Add params, overwriting previous values with same keys
      *
-     * @param  string|array  $params
-     * @param  mixed         $value
+     * @param string|array $params
+     * @param mixed $value
      * @return $this
      */
     public function add($params, $value = null)
@@ -33,8 +33,9 @@ class Params implements Arrayable
 
     /**
      * Add params, but merge previous values with same keys
-     * @param  string|array  $params
-     * @param  mixed         $value
+     *
+     * @param string|array $params
+     * @param mixed $value
      * @return $this
      */
     public function merge($params, $value = null)

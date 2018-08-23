@@ -27,7 +27,7 @@ abstract class TermRepository extends Repository
     protected $currentTerm;
 
     /**
-     * @param string  $taxonomy
+     * @param string $taxonomy
      */
     public function __construct($taxonomy)
     {
@@ -37,14 +37,14 @@ abstract class TermRepository extends Repository
     /**
      * Return a term for the specified ID
      *
-     * @param  integer  $id
+     * @param integer $id
      * @return Fire\Contracts\Term\Term
      */
     public function termOfId($id)
     {
         $term = get_term($id, $this->taxonomy, ARRAY_A);
 
-        if ($term and ! $term instanceof WP_Error) {
+        if ($term && ! $term instanceof WP_Error) {
             $term = $this->mapData($term);
         }
 
@@ -54,7 +54,7 @@ abstract class TermRepository extends Repository
     /**
      * Return a term for the specified slug
      *
-     * @param  string  $slug
+     * @param string $slug
      * @return Fire\Contracts\Term\Term
      */
     public function termOfSlug($slug)
@@ -71,15 +71,15 @@ abstract class TermRepository extends Repository
     /**
      * Return a collection of terms
      *
-     * @param  Fire\Contracts\Foundation\Arrayable|array|null  $args
+     * @param Fire\Contracts\Foundation\Arrayable|array|null $args
      * @return Fire\Foundation\Collection
      */
     public function find($args = null)
     {
-        if (is_null($args) or is_array($args)) {
+        if (is_null($args) || is_array($args)) {
             $defaults = $this->newParams();
             $defaults = ($defaults instanceof Arrayable) ? $defaults->toArray() : $defaults;
-            $args     = is_array($args) ? array_replace_recursive($defaults, $args) : $defaults;
+            $args = is_array($args) ? array_replace_recursive($defaults, $args) : $defaults;
         }
 
         $args = ($args instanceof Arrayable) ? $args->toArray() : $args;
@@ -102,7 +102,7 @@ abstract class TermRepository extends Repository
     }
 
     /**
-     * @param Fire\Contracts\Model\Term\Term  $term
+     * @param Fire\Contracts\Model\Term\Term $term
      */
     public function setCurrentTerm(TermContract $term)
     {
@@ -120,7 +120,7 @@ abstract class TermRepository extends Repository
     }
 
     /**
-     * @param string  $tax
+     * @param string $tax
      */
     public function setTaxonomy($tax)
     {

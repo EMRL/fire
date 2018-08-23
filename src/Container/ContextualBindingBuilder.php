@@ -53,8 +53,8 @@ class ContextualBindingBuilder implements ContextualBindingBuilderContract
     /**
      * Create a new contextual binding builder.
      *
-     * @param  \Fire\Container\Container  $container
-     * @param  string  $concrete
+     * @param \Fire\Container\Container $container
+     * @param string $concrete
      * @return void
      */
     public function __construct(Container $container, $concrete)
@@ -66,7 +66,6 @@ class ContextualBindingBuilder implements ContextualBindingBuilderContract
     public function needs($abstract)
     {
         $this->needs = $abstract;
-
         return $this;
     }
 

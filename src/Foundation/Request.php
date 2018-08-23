@@ -35,7 +35,6 @@ class Request
     ) {
         $this->postRepository = $postRepository;
         $this->pageRepository = $pageRepository;
-
         add_action('template_redirect', function () { $this->resolve404s(); });
         add_action('template_redirect', function () { $this->setCurrentEntities(); });
     }
@@ -43,7 +42,7 @@ class Request
     /**
      * Set WordPress conditionals that should resolve as 404s
      *
-     * @param string|array  $param,...
+     * @param string|array $param,...
      */
     public function resolveAs404()
     {

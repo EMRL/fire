@@ -12,7 +12,7 @@ class AbstractPostParams extends Params
     protected $postType;
 
     /**
-     * @param string  $postType
+     * @param string $postType
      */
     public function __construct($postType)
     {
@@ -22,7 +22,7 @@ class AbstractPostParams extends Params
     /**
      * Set param for author
      *
-     * @param  integer
+     * @param integer $id
      * @return $this
      */
     public function byAuthor($id)
@@ -35,8 +35,8 @@ class AbstractPostParams extends Params
     protected function defaultParams()
     {
         return [
-            'post_type'        => $this->postType,
-            'posts_per_page'   => -1,
+            'post_type' => $this->postType,
+            'posts_per_page' => -1,
             'suppress_filters' => false,
         ];
     }

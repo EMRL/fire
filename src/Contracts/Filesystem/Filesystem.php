@@ -7,7 +7,7 @@ interface Filesystem
 	/**
      * Determine if a file exists.
      *
-     * @param  string  $path
+     * @param string $path
      * @return bool
      */
     public function exists($path);
@@ -15,9 +15,8 @@ interface Filesystem
     /**
      * Get the contents of a file.
      *
-     * @param  string  $path
+     * @param string $path
      * @return string
-     *
      * @throws \ErrorException
      */
     public function get($path);
@@ -25,9 +24,9 @@ interface Filesystem
     /**
      * Write the contents of a file.
      *
-     * @param  string  $path
-     * @param  string|resource  $contents
-     * @param  boolean  $lock
+     * @param string $path
+     * @param string|resource $contents
+     * @param boolean $lock
      * @return bool
      */
     public function put($path, $contents, $lock = false);
@@ -35,8 +34,8 @@ interface Filesystem
     /**
      * Prepend to a file.
      *
-     * @param  string  $path
-     * @param  string  $data
+     * @param string $path
+     * @param string $data
      * @return int
      */
     public function prepend($path, $data);
@@ -44,8 +43,8 @@ interface Filesystem
     /**
      * Append to a file.
      *
-     * @param  string  $path
-     * @param  string  $data
+     * @param string $path
+     * @param string $data
      * @return int
      */
     public function append($path, $data);
@@ -53,7 +52,7 @@ interface Filesystem
     /**
      * Delete the file at a given path.
      *
-     * @param  string|array  $paths
+     * @param string|array $paths
      * @return bool
      */
     public function delete($paths);
@@ -61,8 +60,8 @@ interface Filesystem
     /**
      * Move a file to a new location.
      *
-     * @param  string  $from
-     * @param  string  $to
+     * @param string $from
+     * @param string $to
      * @return bool
      */
     public function move($from, $to);
@@ -70,8 +69,8 @@ interface Filesystem
     /**
      * Copy a file to a new location.
      *
-     * @param  string  $from
-     * @param  string  $to
+     * @param string $from
+     * @param string $to
      * @return bool
      */
     public function copy($from, $to);
@@ -79,7 +78,7 @@ interface Filesystem
     /**
      * Get the file size of a given file.
      *
-     * @param  string  $path
+     * @param string $path
      * @return int
      */
     public function size($path);
@@ -87,7 +86,7 @@ interface Filesystem
     /**
      * Get the file's last modification time.
      *
-     * @param  string  $path
+     * @param string $path
      * @return int
      */
     public function lastModified($path);
@@ -95,7 +94,7 @@ interface Filesystem
     /**
      * Get an array of all files in a directory.
      *
-     * @param  string  $directory
+     * @param string $directory
      * @return array
      */
     public function files($directory);
@@ -103,7 +102,7 @@ interface Filesystem
     /**
      * Get all of the files from the given directory (recursive).
      *
-     * @param  string  $directory
+     * @param string $directory
      * @return array
      */
     public function allFiles($directory);
@@ -111,7 +110,7 @@ interface Filesystem
     /**
      * Get all of the directories within a given directory.
      *
-     * @param  string  $directory
+     * @param string $directory
      * @return array
      */
     public function directories($directory);
@@ -119,7 +118,7 @@ interface Filesystem
     /**
      * Get all (recursive) of the directories within a given directory.
      *
-     * @param  string  $directory
+     * @param string $directory
      * @return array
      */
     public function allDirectories($directory);
@@ -127,7 +126,7 @@ interface Filesystem
     /**
      * Create a directory.
      *
-     * @param  string  $path
+     * @param string $path
      * @return bool
      */
     public function makeDirectory($path);
@@ -135,7 +134,7 @@ interface Filesystem
     /**
      * Recursively delete a directory.
      *
-     * @param  string  $directory
+     * @param string $directory
      * @return bool
      */
     public function deleteDirectory($directory);

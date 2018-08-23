@@ -20,15 +20,15 @@ class CategoryEntityMapper implements EntityMapperContract
     protected $postRepository;
 
     /**
-     * @param Fire\Contracts\Model\Category\CategoryRepository  $categoryRepository
-     * @param Fire\Contracts\Model\Post\PostRepository          $postRepository
+     * @param Fire\Contracts\Model\Category\CategoryRepository $categoryRepository
+     * @param Fire\Contracts\Model\Post\PostRepository $postRepository
      */
     public function __construct(
         CategoryRepositoryContract $categoryRepository,
         PostRepositoryContract $postRepository
     ) {
         $this->categoryRepository = $categoryRepository;
-        $this->postRepository     = $postRepository;
+        $this->postRepository = $postRepository;
     }
 
     public function map(EntityContract $entity, array $data)

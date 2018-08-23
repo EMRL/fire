@@ -70,8 +70,7 @@ class Psr4Autoloader
      * Adds a base directory for a namespace prefix.
      *
      * @param string $prefix The namespace prefix.
-     * @param string $base_dir A base directory for class files in the
-     * namespace.
+     * @param string $base_dir A base directory for class files in the namespace.
      * @param bool $prepend If true, prepend the base directory to the stack
      * instead of appending it; this causes it to be searched first rather
      * than last.

@@ -14,7 +14,7 @@ interface AbstractPost
     /**
      * Set the ID
      *
-     * @param string|integer  $id
+     * @param string|integer $id
      */
     public function setId($id);
 
@@ -28,7 +28,7 @@ interface AbstractPost
     /**
      * Set the author ID
      *
-     * @param integer  $id
+     * @param integer $id
      */
     public function setAuthorId($id);
 
@@ -56,21 +56,21 @@ interface AbstractPost
     /**
      * Set the date
      *
-     * @param string  $date
+     * @param string $date
      */
     public function setDate($date);
 
     /**
      * Get the content
      *
-     * @return  string
+     * @return string
      */
     public function content();
 
     /**
      * Set the content
      *
-     * @param string  $content
+     * @param string $content
      */
     public function setContent($content);
 
@@ -98,7 +98,7 @@ interface AbstractPost
     /**
      * Set the excerpt
      *
-     * @param string  $excerpt
+     * @param string $excerpt
      */
     public function setExcerpt($excerpt);
 
@@ -112,7 +112,7 @@ interface AbstractPost
     /**
      * Set the status
      *
-     * @param string  $status
+     * @param string $status
      */
     public function setStatus($status);
 
@@ -140,7 +140,7 @@ interface AbstractPost
     /**
      * Set the slug
      *
-     * @param string  $slug
+     * @param string $slug
      */
     public function setSlug($slug);
 
@@ -154,7 +154,7 @@ interface AbstractPost
     /**
      * Set the parent ID
      *
-     * @param integer  $id
+     * @param integer $id
      */
     public function setParentId($id);
 
@@ -168,7 +168,7 @@ interface AbstractPost
     /**
      * Set the parent post
      *
-     * @param Fire\Contracts\Model\Post\Post|Closure  $parent
+     * @param Fire\Contracts\Model\Post\Post|Closure $parent
      */
     public function setParent($parent);
 
@@ -182,7 +182,7 @@ interface AbstractPost
     /**
      * Set the type
      *
-     * @param string  $type
+     * @param string $type
      */
     public function setType($type);
 }

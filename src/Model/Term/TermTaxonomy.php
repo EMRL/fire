@@ -36,8 +36,8 @@ abstract class TermTaxonomy
     /**
      * Register the taxonomy
      *
-     * @param  string|array    $postTypes
-     * @param  array|callable  $config
+     * @param string|array $postTypes
+     * @param array|callable $config
      * @return $this
      */
     protected function register($postTypes, $config)
@@ -55,7 +55,7 @@ abstract class TermTaxonomy
             }
 
             $singular = ucfirst(static::NAME);
-            $plural   = $singular.'s';
+            $plural = $singular.'s';
 
             if (isset($config['labels'])) {
                 $singular = isset($config['labels']['singular_name'])
@@ -69,22 +69,22 @@ abstract class TermTaxonomy
 
             $defaults = [
                 'labels' => [
-                    'name'                       => _x($plural, static::NAME.' general name'),
-                    'singular_name'              => _x($singular, static::NAME.' singular name'),
-                    'all_items'                  => __(sprintf('All %s', $plural), 'fire'),
-                    'edit_item'                  => __(sprintf('Edit %s', $singular), 'fire'),
-                    'view_item'                  => __(sprintf('View %s', $singular), 'fire'),
-                    'update_item'                => __(sprintf('Update %s', $singular), 'fire'),
-                    'add_new_item'               => __(sprintf('Add New %s', $singular), 'fire'),
-                    'new_item_name'              => __(sprintf('New %s Name', $singular), 'fire'),
-                    'parent_item'                => __(sprintf('Parent %s', $singular), 'fire'),
-                    'parent_item_colon'          => __(sprintf('Parent %s:', $singular), 'fire'),
-                    'search_items'               => __(sprintf('Search %s', $plural), 'fire'),
-                    'popular_items'              => __(sprintf('Popular %s', $plural), 'fire'),
+                    'name' => _x($plural, static::NAME.' general name'),
+                    'singular_name' => _x($singular, static::NAME.' singular name'),
+                    'all_items' => __(sprintf('All %s', $plural), 'fire'),
+                    'edit_item' => __(sprintf('Edit %s', $singular), 'fire'),
+                    'view_item' => __(sprintf('View %s', $singular), 'fire'),
+                    'update_item' => __(sprintf('Update %s', $singular), 'fire'),
+                    'add_new_item' => __(sprintf('Add New %s', $singular), 'fire'),
+                    'new_item_name' => __(sprintf('New %s Name', $singular), 'fire'),
+                    'parent_item' => __(sprintf('Parent %s', $singular), 'fire'),
+                    'parent_item_colon' => __(sprintf('Parent %s:', $singular), 'fire'),
+                    'search_items' => __(sprintf('Search %s', $plural), 'fire'),
+                    'popular_items' => __(sprintf('Popular %s', $plural), 'fire'),
                     'separate_items_with_commas' => __(sprintf('Separate %s with commas', strtolower($plural)), 'fire'),
-                    'add_or_remove_items'        => __(sprintf('Add or remove %s', strtolower($plural)), 'fire'),
-                    'choose_from_most_used'      => __(sprintf('Choose from the most used %s', strtolower($plural)), 'fire'),
-                    'not_found'                  => __(sprintf('No %s found', strtolower($plural)), 'fire'),
+                    'add_or_remove_items' => __(sprintf('Add or remove %s', strtolower($plural)), 'fire'),
+                    'choose_from_most_used' => __(sprintf('Choose from the most used %s', strtolower($plural)), 'fire'),
+                    'not_found' => __(sprintf('No %s found', strtolower($plural)), 'fire'),
                 ],
             ];
 
@@ -93,7 +93,6 @@ abstract class TermTaxonomy
             $config = apply_filters(sprintf('fire/taxonomy/%s/config', static::NAME), $config);
 
             register_taxonomy(static::NAME, $postTypes, $config);
-
             $this->config = $wp_taxonomies[static::NAME];
         });
 
@@ -109,7 +108,7 @@ abstract class TermTaxonomy
      *         [column-key] => Heading Text
      *     ));
      *
-     * @param callable  $callback
+     * @param callable $callback
      */
     protected function modifyColumnHeadings(callable $callback)
     {
@@ -125,7 +124,7 @@ abstract class TermTaxonomy
      *         [0] => 'column-key'
      *     ))
      *
-     * @param callable  $callback
+     * @param callable $callback
      */
     protected function modifySortableColumns(callable $callback)
     {
@@ -139,7 +138,7 @@ abstract class TermTaxonomy
      *
      *     $callback($content, column-key, 12);
      *
-     * @param callable  $callback
+     * @param callable $callback
      */
     protected function modifyColumns(callable $callback)
     {
@@ -150,7 +149,7 @@ abstract class TermTaxonomy
      * "Register" a built-in taxonomy, this just adds our config to the default
      * already registered config
      *
-     * @param  array  $config
+     * @param  array $config
      */
     protected function registerBuiltin($config)
     {

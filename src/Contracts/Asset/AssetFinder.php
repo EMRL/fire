@@ -7,7 +7,7 @@ interface AssetFinder
     /**
      * Find an asset file
      *
-     * @param  string  $key
+     * @param string $key
      * @return string
      */
     public function find($path);
@@ -15,7 +15,7 @@ interface AssetFinder
     /**
      * Add a new path to search for asset files in
      *
-     * @param  string  $path
+     * @param string $path
      * @return void
      */
     public function addPath($path);

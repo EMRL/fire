@@ -26,7 +26,7 @@ class Layout
     protected $layouts = [];
 
     /**
-     * @param string  $themePath
+     * @param string $themePath
      */
     public function __construct($themePath)
     {
@@ -38,9 +38,7 @@ class Layout
             }
 
             $this->template = $template;
-
             $name = str_replace($this->themePath, '', $template);
-
             $layouts = ['layout.php'];
 
             if (isset($this->layouts[$name])) {
@@ -66,8 +64,8 @@ class Layout
     /**
      * Add a layout for a template
      *
-     * @param string  $template
-     * @param string  $layout
+     * @param string $template
+     * @param string $layout
      */
     public function addLayout($template, $layout = null)
     {

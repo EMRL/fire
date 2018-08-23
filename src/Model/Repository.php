@@ -20,7 +20,7 @@ abstract class Repository implements RepositoryContract
     /**
      * Add an entity mapper to the registry
      *
-     * @param  Closure  $closure
+     * @param Closure $closure
      */
     public function registerEntityMapper(Closure $closure)
     {
@@ -30,7 +30,7 @@ abstract class Repository implements RepositoryContract
     /**
      * Map data array to the new entity object
      *
-     * @param  array  $data
+     * @param array $data
      * @return Fire\Contracts\Model\Entity
      */
     protected function mapData(array $data)
@@ -51,7 +51,7 @@ abstract class Repository implements RepositoryContract
     /**
      * Create a new entity object
      *
-     * @return  Fire\Contracts\Model\Entity
+     * @return Fire\Contracts\Model\Entity
      */
     protected function createEntity()
     {
@@ -61,7 +61,7 @@ abstract class Repository implements RepositoryContract
     /**
      * Set the entity class
      *
-     * @param string  $class
+     * @param string $class
      */
     public function setEntityClass($class)
     {

@@ -9,7 +9,7 @@ class PostParams extends AbstractPostParams
     /**
      * Set param for posts in category
      *
-     * @param  integer|array  $id
+     * @param integer|array $id
      * @return $this
      */
     public function inCategory($id)
@@ -22,7 +22,7 @@ class PostParams extends AbstractPostParams
     /**
      * Set param for posts with tags
      *
-     * @param  integer|array  $id
+     * @param integer|array $id
      * @return $this
      */
     public function tagged($id)

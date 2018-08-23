@@ -38,7 +38,7 @@ class PageRepository extends AbstractPostRepository implements PageRepositoryCon
     /**
      * Set the current requested page
      *
-     * @param Fire\Contract\Model\Page\Page  $page
+     * @param Fire\Contract\Model\Page\Page $page
      */
     public function setCurrentPage(Page $page)
     {

@@ -46,10 +46,10 @@ class UserRepository extends Repository implements UserRepositoryContract
 
     public function find($args = null)
     {
-        if (is_null($args) or is_array($args)) {
+        if (is_null($args) || is_array($args)) {
             $defaults = $this->newParams();
             $defaults = ($defaults instanceof Arrayable) ? $defaults->toArray() : $defaults;
-            $args     = is_array($args) ? array_replace_recursive($defaults, $args) : $defaults;
+            $args = is_array($args) ? array_replace_recursive($defaults, $args) : $defaults;
         }
 
         $args = ($args instanceof Arrayable) ? $args->toArray() : $args;

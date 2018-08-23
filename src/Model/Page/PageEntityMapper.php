@@ -14,7 +14,7 @@ class PageEntityMapper implements EntityMapperContract
     protected $pageRepository;
 
     /**
-     * @param Fire\Contracts\Model\Page\PageRepository  $pageRepository
+     * @param Fire\Contracts\Model\Page\PageRepository $pageRepository
      */
     public function __construct(PageRepositoryContract $pageRepository)
     {

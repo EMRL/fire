@@ -25,7 +25,7 @@ class Tag extends Term implements TagContract
     /**
      * Set posts
      *
-     * @param  Fire\Foundation\Collection|Closure  $posts
+     * @param Fire\Foundation\Collection|Closure $posts
      * @return void
      */
     public function setPosts($posts)

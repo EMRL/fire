@@ -14,10 +14,7 @@ class TermEntityMapper implements EntityMapperContract
         $entity->setSlug($data['slug']);
         $entity->setDescription($data['description']);
         $entity->setCount($data['count']);
-
-        // Relationships
         $entity->setTaxonomy(get_taxonomy($data['taxonomy']));
-
         $entity->setNative($data);
     }
 }

@@ -32,7 +32,7 @@ class Upload extends AbstractPost implements UploadContract
 
     public function filePath($size = null)
     {
-        if ($this->isImage() and ! is_null($size)) {
+        if ($this->isImage() && ! is_null($size)) {
             if ($size === 'thumb') {
                 $size = 'thumbnail';
             }
@@ -51,7 +51,7 @@ class Upload extends AbstractPost implements UploadContract
     /**
      * Get the `srcset` attribute value
      *
-     * @param  string  $size  Size to determine ratio from
+     * @param  string $size Size to determine ratio from
      * @return string
      */
     public function srcset($size = null)

@@ -49,9 +49,8 @@ class Filesystem implements FilesystemContract
     /**
      * Get the returned value of a file.
      *
-     * @param  string  $path
+     * @param string $path
      * @return mixed
-     *
      * @throws \ErrorException
      */
     public function getRequire($path)
@@ -66,7 +65,7 @@ class Filesystem implements FilesystemContract
     /**
      * Require the given file once.
      *
-     * @param  string  $file
+     * @param string $file
      * @return mixed
      */
     public function requireOnce($file)
@@ -126,7 +125,7 @@ class Filesystem implements FilesystemContract
     /**
      * Extract the file name from a file path.
      *
-     * @param  string  $path
+     * @param string $path
      * @return string
      */
     public function name($path)
@@ -137,7 +136,7 @@ class Filesystem implements FilesystemContract
     /**
      * Extract the file extension from a file path.
      *
-     * @param  string  $path
+     * @param string $path
      * @return string
      */
     public function extension($path)
@@ -148,7 +147,7 @@ class Filesystem implements FilesystemContract
     /**
      * Get the file type of a given file.
      *
-     * @param  string  $path
+     * @param string $path
      * @return string
      */
     public function type($path)
@@ -159,7 +158,7 @@ class Filesystem implements FilesystemContract
     /**
      * Get the mime-type of a given file.
      *
-     * @param  string  $path
+     * @param string $path
      * @return string|false
      */
     public function mimeType($path)
@@ -180,7 +179,7 @@ class Filesystem implements FilesystemContract
     /**
      * Determine if the given path is a directory.
      *
-     * @param  string  $directory
+     * @param string $directory
      * @return bool
      */
     public function isDirectory($directory)
@@ -191,7 +190,7 @@ class Filesystem implements FilesystemContract
     /**
      * Determine if the given path is writable.
      *
-     * @param  string  $path
+     * @param string $path
      * @return bool
      */
     public function isWritable($path)
@@ -202,7 +201,7 @@ class Filesystem implements FilesystemContract
     /**
      * Determine if the given path is a file.
      *
-     * @param  string  $file
+     * @param string $file
      * @return bool
      */
     public function isFile($file)
@@ -213,8 +212,8 @@ class Filesystem implements FilesystemContract
     /**
      * Find path names matching a given pattern.
      *
-     * @param  string  $pattern
-     * @param  int     $flags
+     * @param string $pattern
+     * @param int $flags
      * @return array
      */
     public function glob($pattern, $flags = 0)
@@ -261,14 +260,14 @@ class Filesystem implements FilesystemContract
 
         return array_filter($glob, function ($file) {
             $base = basename($file);
-            return (filetype($file) === 'dir' and $base !== '.' and $base !== '..');
+            return (filetype($file) === 'dir' && $base !== '.' && $base !== '..');
         });
     }
 
     /**
      * Get all (recursive) of the directories within a given directory.
      *
-     * @param  string  $directory
+     * @param string $directory
      * @return array
      */
     public function allDirectories($directory)
@@ -296,10 +295,10 @@ class Filesystem implements FilesystemContract
     /**
      * Create a directory.
      *
-     * @param  string  $path
-     * @param  int     $mode
-     * @param  bool    $recursive
-     * @param  bool    $force
+     * @param string $path
+     * @param int $mode
+     * @param bool $recursive
+     * @param bool $force
      * @return bool
      */
     public function makeDirectory($path, $mode = 0755, $recursive = false, $force = false)
@@ -314,9 +313,9 @@ class Filesystem implements FilesystemContract
     /**
      * Copy a directory from one location to another.
      *
-     * @param  string  $directory
-     * @param  string  $destination
-     * @param  int     $options
+     * @param string $directory
+     * @param string $destination
+     * @param int $options
      * @return bool
      */
     public function copyDirectory($directory, $destination, $options = null)
@@ -368,8 +367,8 @@ class Filesystem implements FilesystemContract
      *
      * The directory itself may be optionally preserved.
      *
-     * @param  string  $directory
-     * @param  bool    $preserve
+     * @param string $directory
+     * @param bool $preserve
      * @return bool
      */
     public function deleteDirectory($directory, $preserve = false)
@@ -384,7 +383,7 @@ class Filesystem implements FilesystemContract
             // If the item is a directory, we can just recurse into the function and
             // delete that sub-directory otherwise we'll just delete the file and
             // keep iterating through each file until the directory is cleaned.
-            if ($item->isDir() and ! $item->isLink()) {
+            if ($item->isDir() && ! $item->isLink()) {
                 $this->deleteDirectory($item->getPathname());
             }
 
@@ -406,7 +405,7 @@ class Filesystem implements FilesystemContract
     /**
      * Empty the specified directory of all files and folders.
      *
-     * @param  string  $directory
+     * @param string $directory
      * @return bool
      */
     public function cleanDirectory($directory)
