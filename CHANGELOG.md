@@ -1,9 +1,15 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+
+## [2.3.0] - 2018-08-23
 ### Added
 - Added `AbstractPostType::modifyPostUrl`
 - Added `AbstractPostType::modifyArchiveTitle`
+- Added manifest.json support for assets
+
+### Fixed
+- Whitespace and comments, general syntax improvements
 
 ## [2.2.0] - 2018-05-25
 ### Added
@@ -97,6 +103,7 @@
 ### Added
 - Initial public release
 
+[2.3.0]: https://github.com/emrl/fire/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/emrl/fire/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/emrl/fire/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/emrl/fire/compare/2.0.6...2.1.0

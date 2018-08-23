@@ -48,7 +48,7 @@ class Asset implements AssetContract
 
         $dir = wp_normalize_path(WP_CONTENT_DIR);
         $url = content_url();
-        $file = wp_normalize_path($this->path($key));
+        $file = wp_normalize_path($this->path($key) ?: $key);
 
         return str_replace($dir, $url, $file);
     }
