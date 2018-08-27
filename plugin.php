@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Fire WordPress Framework
  *
- * @author  Corey Worrell, EMRL
- * @link    http://emrl.com
+ * @author Corey Worrell, EMRL
+ * @link http://emrl.com
  * @version 2.3.0
  */
 

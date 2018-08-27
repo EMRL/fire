@@ -1,0 +1,11 @@
+{
+    "name": "emrl/fire",
+    "autoload": {
+        "psr-4": {
+            "Fire\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.1"
+    }
+}
