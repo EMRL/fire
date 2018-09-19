@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+
+## [2.3.1] - 2018-09-19
 ### Changed
 - `Asset::url` returns root-relative path if file does not exist
 
