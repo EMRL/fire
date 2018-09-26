@@ -5,6 +5,7 @@
 ## [2.3.1] - 2018-09-19
 ### Changed
 - `Asset::url` returns root-relative path if file does not exist
+- `AbstractPost::summary` handles Relevanssi better
 
 ## [2.3.0] - 2018-08-23
 ### Added

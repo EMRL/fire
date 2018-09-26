@@ -180,13 +180,12 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
             // This is why I hate WordPress
             setup_postdata((object) $native);
             $GLOBALS['post'] = (object) $native;
-            the_post();
             ob_start();
             the_content();
             $content = ob_get_clean();
             wp_reset_postdata();
         } else {
-            $content = str_replace(']]>', ']]&gt;', apply_filters('the_content', $this->content));;
+            $content = str_replace(']]>', ']]&gt;', apply_filters('the_content', $this->content));
         }
 
         return $content;
@@ -272,13 +271,21 @@ abstract class AbstractPost extends Entity implements AbstractPostContract
             add_filter('excerpt_more', $appendFilter);
         }
 
-        setup_postdata((object) $this->getNative());
-        $GLOBALS['post'] = (object) $this->getNative();
-        the_post();
-        ob_start();
-        the_excerpt();
-        $excerpt = ob_get_clean();
-        wp_reset_postdata();
+        // Relevanssi fix
+        if (
+            apply_filters('fire/is_search', is_search()) &&
+            function_exists('relevanssi_do_excerpt') &&
+            get_option('relevanssi_excerpts') === 'on'
+        ) {
+            $excerpt = relevanssi_do_excerpt((object) $this->getNative(), get_search_query());
+        } else {
+            setup_postdata((object) $this->getNative());
+            $GLOBALS['post'] = (object) $this->getNative();
+            ob_start();
+            the_excerpt();
+            $excerpt = ob_get_clean();
+            wp_reset_postdata();
+        }
 
         remove_filter('excerpt_length', $limitFilter);
         remove_filter('excerpt_more', $appendFilter);
