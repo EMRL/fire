@@ -6,6 +6,7 @@
 ### Changed
 - `Asset::url` returns root-relative path if file does not exist
 - `AbstractPost::summary` handles Relevanssi better
+- `AbstractPostParams` now includes flag for ignoring sticky posts by default
 
 ## [2.3.0] - 2018-08-23
 ### Added

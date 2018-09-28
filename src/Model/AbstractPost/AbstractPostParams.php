@@ -38,6 +38,7 @@ class AbstractPostParams extends Params
             'post_type' => $this->postType,
             'posts_per_page' => -1,
             'suppress_filters' => false,
+            'ignore_sticky_posts' => true,
         ];
     }
 }
