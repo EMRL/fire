@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased][unreleased]
+### Fixed
+- Added missing `Container::missingLeadingSlash` method
 
 ## [2.3.1] - 2018-09-19
 ### Changed

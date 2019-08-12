@@ -622,6 +622,17 @@ class Container implements ArrayAccess, ContainerContract
     }
 
     /**
+     * Determine if the given abstract has a leading slash.
+     *
+     * @param string $abstract
+     * @return bool
+     */
+    protected function missingLeadingSlash($abstract)
+    {
+        return is_string($abstract) && strpos($abstract, '\\') !== 0;
+    }
+
+    /**
      * Normalize the given class name by removing leading slashes
      *
      * @param mixed $service
