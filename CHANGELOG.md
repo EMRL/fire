@@ -4,6 +4,9 @@
 ### Fixed
 - Added missing `Container::missingLeadingSlash` method
 
+### Added
+- Added `TermTaxonomy::modifyTermUrl` method
+
 ## [2.3.1] - 2018-09-19
 ### Changed
 - `Asset::url` returns root-relative path if file does not exist

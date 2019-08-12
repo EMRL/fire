@@ -146,6 +146,26 @@ abstract class TermTaxonomy
     }
 
     /**
+     * Modify the term taxonomy link
+     *
+     * Callback gets passed the default URL and the term object
+     *
+     *    $callback($url, $term);
+     *
+     * @param callable $callback
+     */
+    protected function modifyTermUrl(callable $callback)
+    {
+        add_filter('term_link', function ($url, $term) use ($callback) {
+            if ($term->taxonomy === static::NAME) {
+                $url = $callback($url, $term);
+            }
+
+            return $url;
+        }, 10, 2);
+    }
+
+    /**
      * "Register" a built-in taxonomy, this just adds our config to the default
      * already registered config
      *
