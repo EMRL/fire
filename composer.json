@@ -1,12 +1,35 @@
 {
-    "name": "emrl/fire",
+    "name": "cworrell/fire-new",
     "type": "wordpress-muplugin",
+    "license": "MIT",
+    "description": "WordPress utilities and helpers",
+    "authors": [
+        {
+            "name": "Corey Worrell",
+            "email": "cworrell@emrl.com"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Fire\\": "src/"
+        },
+        "files": [
+            "src/Core/functions.php",
+            "src/Path/functions.php",
+            "src/Template/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fire\\Tests\\": "tests/",
+            "": "tests/stubs"
         }
     },
-    "require": {
-        "php": ">=7.1"
+    "require-dev": {
+        "brain/monkey": "^2",
+        "phpunit/phpunit": "^8"
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }
