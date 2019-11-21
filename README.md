@@ -5,7 +5,7 @@ and themes.
 
 ## Installation
 
-`composer require emrl/fire ^1`
+`composer require emrl/fire ^3`
 
 ### Manual installation
 
