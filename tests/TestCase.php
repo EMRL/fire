@@ -38,6 +38,7 @@ abstract class TestCase extends PHPUnitTestCase
 
     protected function emptyFn(): Closure
     {
-        return function (): void {};
+        return function (): void {
+        };
     }
 }

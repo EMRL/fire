@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Fire\Tests\Core;
 
+use Closure;
+use PHPUnit\Framework\TestCase;
+
 use function Fire\Core\array_insert;
 use function Fire\Core\filter_insert;
 use function Fire\Core\filter_merge;
@@ -12,9 +15,6 @@ use function Fire\Core\filter_remove_key;
 use function Fire\Core\filter_value;
 use function Fire\Core\parse_hosts;
 use function Fire\Core\value;
-
-use Closure;
-use PHPUnit\Framework\TestCase;
 
 final class FunctionsTest extends TestCase
 {
@@ -28,13 +28,17 @@ final class FunctionsTest extends TestCase
 
         $this->assertSame(
             'hello world',
-            value(function (): string { return 'hello world'; }),
+            value(function (): string {
+                return 'hello world';
+            }),
             'Closure value'
         );
 
         $this->assertSame(
             'hello world',
-            value(function (string $who): string { return 'hello '.$who; }, 'world'),
+            value(function (string $who): string {
+                return 'hello '.$who;
+            }, 'world'),
             'Passes arguments if callable'
         );
 

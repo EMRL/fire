@@ -20,7 +20,8 @@ class ArchiveTitle extends Hook
         return $this;
     }
 
-    public function run(string $title): string {
+    public function run(string $title): string
+    {
         $term = get_queried_object();
 
         if (isset($term->taxonomy) && $this->isTaxonomy($term->taxonomy)) {

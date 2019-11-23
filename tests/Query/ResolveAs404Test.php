@@ -26,8 +26,12 @@ final class ResolveAs404Test extends TestCase
         $query->shouldReceive('init', 'parse_query', 'set_404');
 
         $resolve = new ResolveAs404(
-            function (): bool { return false; },
-            function (): bool { return true; }
+            function (): bool {
+                return false;
+            },
+            function (): bool {
+                return true;
+            }
         );
 
         $resolve->parse($query);
@@ -55,8 +59,12 @@ final class ResolveAs404Test extends TestCase
         $query->shouldReceive('is_main_query')->andReturn(true);
 
         $resolve = new ResolveAs404(
-            function (): bool { return false; },
-            function (): int { return 0; }
+            function (): bool {
+                return false;
+            },
+            function (): int {
+                return 0;
+            }
         );
 
         $resolve->parse($query);

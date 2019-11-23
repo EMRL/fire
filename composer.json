@@ -27,9 +27,15 @@
     },
     "require-dev": {
         "brain/monkey": "^2",
-        "phpunit/phpunit": "^8"
+        "phpunit/phpunit": "^8",
+        "friendsofphp/php-cs-fixer": "^2",
+        "squizlabs/php_codesniffer": "^3"
     },
     "scripts": {
-        "test": "phpunit"
+        "test": "phpunit",
+        "lint": [
+            "php-cs-fixer fix --dry-run --diff .",
+            "phpcs --standard=PSR12 --exclude=PSR12.Operators.OperatorSpacing --ignore=tests/stubs -s src tests"
+        ]
     }
 }

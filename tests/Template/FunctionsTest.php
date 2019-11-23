@@ -15,7 +15,9 @@ final class FunctionsTest extends TestCase
     public function testBuffer(): void
     {
         $this->assertSame(
-            buffer(function (): void { echo 'hello world'; }),
+            buffer(function (): void {
+                echo 'hello world';
+            }),
             'hello world',
             'Buffer returns string'
         );

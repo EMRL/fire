@@ -12,7 +12,8 @@ class ArchiveTitle extends Hook
         return $this;
     }
 
-    public function run(string $title, string $type): string {
+    public function run(string $title, string $type): string
+    {
         if ($this->isType($type)) {
             $title = $this->fn($title);
         }

@@ -24,8 +24,7 @@ class Query extends Hook
 
     public static function set(array $data): Closure
     {
-        return function (WP_Query $query) use ($data): void
-        {
+        return function (WP_Query $query) use ($data): void {
             foreach ($data as $key => $value) {
                 $query->set($key, $value);
             }
