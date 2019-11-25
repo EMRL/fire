@@ -34,8 +34,8 @@
     "scripts": {
         "test": "phpunit",
         "lint": [
-            "php-cs-fixer fix --dry-run --diff .",
-            "phpcs --standard=PSR12 --exclude=PSR12.Operators.OperatorSpacing --ignore=tests/stubs -s src tests"
+            "php-cs-fixer fix --dry-run --diff --verbose",
+            "phpcs"
         ]
     }
 }

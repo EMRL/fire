@@ -27,7 +27,7 @@ class WP_Query
 
     public function the_post(): void
     {
-        $this->current++;
+        ++$this->current;
         $this->post = $this->posts[$this->current];
         static::$globalPost = $this->current;
     }

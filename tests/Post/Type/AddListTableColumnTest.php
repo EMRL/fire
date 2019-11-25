@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Fire\Tests\Post\Type;
 
 use DownloadColumn;
-use SortableDownloadColumn;
 use Fire\Post\Type\AddListTableColumn;
 use Fire\Tests\TestCase;
+use SortableDownloadColumn;
 
 use function Brain\Monkey\Functions\when;
 use function Fire\Template\buffer;

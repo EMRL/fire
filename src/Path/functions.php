@@ -14,5 +14,5 @@ function join_path(string ...$pieces): string
     });
 
     $sep = preg_quote(DIRECTORY_SEPARATOR);
-    return preg_replace("~$sep+~", DIRECTORY_SEPARATOR, join(DIRECTORY_SEPARATOR, $pieces));
+    return preg_replace("~$sep+~", DIRECTORY_SEPARATOR, implode(DIRECTORY_SEPARATOR, $pieces));
 }

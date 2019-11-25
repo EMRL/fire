@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Fire\Tests\Path;
 
-use Fire\Path\JoinManifest;
 use Fire\Path\Join;
+use Fire\Path\JoinManifest;
 use PHPUnit\Framework\TestCase;
 
 final class JoinTest extends TestCase

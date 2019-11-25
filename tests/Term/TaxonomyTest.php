@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Fire\Tests\Term;
 
+use DownloadColumn;
 use Fire\Term\Taxonomy;
 use Fire\Tests\TestCase;
 use Mockery;
-use DownloadColumn;
 
 final class TaxonomyTest extends TestCase
 {

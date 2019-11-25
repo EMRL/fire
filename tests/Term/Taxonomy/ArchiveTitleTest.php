@@ -7,7 +7,6 @@ namespace Fire\Tests\Term\Taxonomy;
 use Fire\Term\Category;
 use Fire\Term\Taxonomy\ArchiveTitle;
 use Fire\Tests\TestCase;
-use stdClass;
 
 use function Brain\Monkey\Functions\when;
 use function Fire\Core\filter_value;

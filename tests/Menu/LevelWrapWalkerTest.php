@@ -58,7 +58,7 @@ final class LevelWrapWalkerTest extends TestCase
         $walker->end_lvl($output);
 
         $this->assertSame(
-            "0Start1StartEnd>End>",
+            '0Start1StartEnd>End>',
             $output
         );
     }

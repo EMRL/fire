@@ -16,7 +16,7 @@ function array_insert(array $arr, array $value, $key, bool $after = true): array
     $pos = array_search($key, array_keys($arr), true);
 
     if ($after) {
-        $pos++;
+        ++$pos;
     }
 
     if ($pos !== false) {
@@ -89,9 +89,6 @@ function filter_remove_key(array $arr): Closure
  */
 function filter_value($value): Closure
 {
-    /**
-     * @return mixed
-     */
     return function () use ($value) {
         return $value;
     };
@@ -103,12 +100,12 @@ function filter_value($value): Closure
 function parse_hosts(array $hosts): array
 {
     return array_filter(array_map(function ($i) {
-        return parse_url((strpos($i, '//') === false ? '//' : '').$i, PHP_URL_HOST);
+        return parse_url(((strpos($i, '//') === false) ? '//' : '').$i, PHP_URL_HOST);
     }, $hosts));
 }
 
 /**
- * Return a value that may be defined as a callback.
+ * Return a value that may be defined as a callback
  *
  * @param mixed $value
  * @param mixed ...$args
