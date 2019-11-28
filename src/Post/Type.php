@@ -6,15 +6,9 @@ namespace Fire\Post;
 
 use Fire\Admin\ListTableColumn;
 use Fire\Post\Type\AddListTableColumn;
-use Fire\Post\Type\ArchiveTitle;
-use Fire\Post\Type\Link;
-use Fire\Post\Type\Modify;
 use Fire\Post\Type\Query;
 use Fire\Post\Type\Register;
-use Fire\Post\Type\SortableListTableColumn;
-use Fire\Post\Type\TitlePlaceholder;
 use WP_Post;
-use WP_Post_Type;
 use WP_Query;
 
 use function Fire\Core\filter_replace;
@@ -22,11 +16,10 @@ use function Fire\Core\filter_value;
 
 abstract class Type
 {
-    /** @var string TYPE */
     public const TYPE = '';
 
     /**
-     * Setup post type
+     * Register
      */
     public function register(): self
     {
@@ -34,7 +27,7 @@ abstract class Type
     }
 
     /**
-     * Return post type config
+     * Get post type config
      */
     public function config(): WP_Post_Type
     {
@@ -44,19 +37,19 @@ abstract class Type
     /**
      * Register post type
      */
-    public function registerType(array $config): self
+    protected function registerType(array $config): self
     {
-        return $this->registerTypeFrom(filter_value($config));
+        return $this->registerFrom(filter_value($config));
     }
 
     /**
      * Register post type from callable
      *
-     * @param callable():array $fn
+     * @param callable():array<string,mixed> $fn
      */
-    public function registerTypeFrom(callable $fn): self
+    protected function registerTypeFrom(callable $fn): self
     {
-        (new Register(static::TYPE, $fn))->register();
+        add_action('init', new Register(static::TYPE, $fn));
         return $this;
     }
 
@@ -65,26 +58,26 @@ abstract class Type
      *
      * @param array<string,mixed> $config
      */
-    public function mergeType(array $config): self
+    protected function mergeType(array $config): self
     {
-        return $this->modifyType(filter_replace($config));
+        return $this->modify(filter_replace($config));
     }
 
     /**
      * Modify post type from callable
      *
-     * @param callable(array):array $fn
+     * @param callable(array<string,mixed>):array<string,mixed> $fn
      */
-    public function modifyType(callable $fn): self
+    protected function modifyType(callable $fn): self
     {
-        (new Modify(static::TYPE, $fn))->register();
+        add_filter('fire/register_post_type_args/'.static::TYPE, $fn);
         return $this;
     }
 
     /**
      * Set title input placeholder
      */
-    public function setTitlePlaceholder(string $value): self
+    protected function setTitlePlaceholder(string $value): self
     {
         return $this->modifyTitlePlaceholder(filter_value($value));
     }
@@ -94,16 +87,16 @@ abstract class Type
      *
      * @param callable(string,WP_Post):string $fn
      */
-    public function modifyTitlePlaceholder(callable $fn): self
+    protected function modifyTitlePlaceholder(callable $fn): self
     {
-        (new TitlePlaceholder(static::TYPE, $fn))->register();
+        add_filter('fire/enter_title_here/'.static::TYPE, $fn, 10, 2);
         return $this;
     }
 
     /**
      * Set archive title
      */
-    public function setArchiveTitle(string $value): self
+    protected function setArchiveTitle(string $value): self
     {
         return $this->modifyArchiveTitle(filter_value($value));
     }
@@ -113,9 +106,9 @@ abstract class Type
      *
      * @param callable(string):string $fn
      */
-    public function modifyArchiveTitle(callable $fn): self
+    protected function modifyArchiveTitle(callable $fn): self
     {
-        (new ArchiveTitle(static::TYPE, $fn))->register();
+        add_filter('fire/post_type_archive_title/'.static::TYPE, $fn);
         return $this;
     }
 
@@ -124,18 +117,20 @@ abstract class Type
      *
      * @param callable(string,WP_Post):string $fn
      */
-    public function modifyLink(callable $fn): self
+    protected function modifyLink(callable $fn): self
     {
-        (new Link(static::TYPE, $fn))->register();
+        add_filter('fire/post_type_link/'.static::TYPE, $fn, 10, 2);
         return $this;
     }
 
     /**
      * Set vars on query
+     *
+     * @param array<string,mixed> $data
      */
-    public function setOnQuery(array $data): self
+    protected function setOnQuery(array $data): self
     {
-        return $this->modifyQuery(Query::set($data));
+        return $this->modifyQuery(new Query($data));
     }
 
     /**
@@ -143,18 +138,18 @@ abstract class Type
      *
      * @param callable(WP_Query):void $fn
      */
-    public function modifyQuery(callable $fn): self
+    protected function modifyQuery(callable $fn): self
     {
-        (new Query(static::TYPE, $fn))->register();
+        add_action('fire/pre_get_posts/'.static::TYPE, $fn);
         return $this;
     }
 
     /**
      * Modify list table columns
      *
-     * @param callable(array):array $fn
+     * @param callable(array<string,string>):array<string,string> $fn
      */
-    public function modifyListTableColumns(callable $fn): self
+    protected function modifyListTableColumns(callable $fn): self
     {
         add_filter(sprintf('manage_%s_posts_columns', static::TYPE), $fn);
         return $this;
@@ -163,9 +158,9 @@ abstract class Type
     /**
      * Modify sortable list table columns
      *
-     * @param callable(array):array $fn
+     * @param callable(array<string,mixed>):array<string,mixed> $fn
      */
-    public function modifySortableListTableColumns(callable $fn): self
+    protected function modifySortableListTableColumns(callable $fn): self
     {
         add_filter(sprintf('manage_edit-%s_sortable_columns', static::TYPE), $fn);
         return $this;
@@ -176,7 +171,7 @@ abstract class Type
      *
      * @param callable(string,int):void $fn
      */
-    public function modifyListTableColumnDisplay(callable $fn): self
+    protected function modifyListTableColumnDisplay(callable $fn): self
     {
         add_action(sprintf('manage_%s_posts_custom_column', static::TYPE), $fn, 10, 2);
         return $this;
@@ -185,7 +180,7 @@ abstract class Type
     /**
      * Add list table column before another
      */
-    public function addListTableColumnBefore(ListTableColumn $column, string $ref): self
+    protected function addListTableColumnBefore(ListTableColumn $column, string $ref): self
     {
         return $this->addListTableColumn($column, $ref, false);
     }
@@ -193,7 +188,7 @@ abstract class Type
     /**
      * Add list table column after another
      */
-    public function addListTableColumnAfter(ListTableColumn $column, string $ref): self
+    protected function addListTableColumnAfter(ListTableColumn $column, string $ref): self
     {
         return $this->addListTableColumn($column, $ref, true);
     }
@@ -201,7 +196,7 @@ abstract class Type
     /**
      * Add list table column
      */
-    public function addListTableColumn(ListTableColumn $column, string $ref = '', bool $after = true): self
+    protected function addListTableColumn(ListTableColumn $column, string $ref = '', bool $after = true): self
     {
         $add = new AddListTableColumn($column);
         $this->modifyListTableColumns($add->columns($ref, $after));
@@ -215,6 +210,9 @@ abstract class Type
         return $this;
     }
 
+    /**
+     * Check if type is equal
+     */
     protected function isType(string $type): bool
     {
         return $type === static::TYPE;

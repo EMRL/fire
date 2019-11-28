@@ -4,30 +4,25 @@ declare(strict_types=1);
 
 namespace Fire\Post\Type;
 
-use Closure;
 use WP_Query;
 
-class Query extends Hook
+class Query
 {
-    public function register(): Hook
+    /** @var array<string,mixed> $data */
+    protected $data;
+
+    /**
+     * @param array<string,mixed> $data
+     */
+    public function __construct(array $data)
     {
-        add_action('pre_get_posts', [$this, 'run']);
-        return $this;
+        $this->data = $data;
     }
 
-    public function run(WP_Query $query): void
+    public function __invoke(WP_Query $query): void
     {
-        if ($query->is_main_query() && $this->isType($query->get('post_type'))) {
-            $this->fn($query);
+        foreach ($this->data as $key => $value) {
+            $query->set($key, $value);
         }
-    }
-
-    public static function set(array $data): Closure
-    {
-        return function (WP_Query $query) use ($data): void {
-            foreach ($data as $key => $value) {
-                $query->set($key, $value);
-            }
-        };
     }
 }

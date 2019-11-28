@@ -4,16 +4,25 @@ declare(strict_types=1);
 
 namespace Fire\Post\Type;
 
-class Register extends Hook
+class Register
 {
-    public function register(): Hook
+    /** @var string $type */
+    protected $type;
+
+    /** @var callable():array<string,mixed> $fn */
+    protected $fn;
+
+    /**
+     * @param callable():array<string,mixed> $fn
+     */
+    public function __construct(string $type, callable $fn)
     {
-        add_action('init', [$this, 'run']);
-        return $this;
+        $this->type = $type;
+        $this->fn = $fn;
     }
 
-    public function run(): void
+    public function __invoke(): void
     {
-        register_post_type($this->type, $this->fn());
+        register_post_type($this->type, ($this->fn)());
     }
 }
