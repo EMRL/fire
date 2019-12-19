@@ -12,12 +12,6 @@ use function Fire\Core\filter_value;
 
 final class RegisterTest extends TestCase
 {
-    public function testAddsActions(): void
-    {
-        $instance = (new Register('', filter_value([])))->register();
-        $this->assertTrue(has_action('init', [$instance, 'run']));
-    }
-
     public function testRegister(): void
     {
         $type = 'post';
@@ -27,6 +21,6 @@ final class RegisterTest extends TestCase
             ->once()
             ->with($type, $config);
 
-        (new Register($type, filter_value($config)))->run();
+        (new Register($type, filter_value($config)))();
     }
 }

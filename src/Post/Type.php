@@ -8,7 +8,9 @@ use Fire\Admin\ListTableColumn;
 use Fire\Post\Type\AddListTableColumn;
 use Fire\Post\Type\Query;
 use Fire\Post\Type\Register;
+use Fire\Post\Type\SortableListTableColumn;
 use WP_Post;
+use WP_Post_Type;
 use WP_Query;
 
 use function Fire\Core\filter_replace;
@@ -39,7 +41,7 @@ abstract class Type
      */
     protected function registerType(array $config): self
     {
-        return $this->registerFrom(filter_value($config));
+        return $this->registerTypeFrom(filter_value($config));
     }
 
     /**
@@ -60,7 +62,7 @@ abstract class Type
      */
     protected function mergeType(array $config): self
     {
-        return $this->modify(filter_replace($config));
+        return $this->modifyType(filter_replace($config));
     }
 
     /**

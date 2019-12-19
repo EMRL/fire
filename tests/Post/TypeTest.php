@@ -8,9 +8,29 @@ use Fire\Post\Type;
 use Fire\Tests\TestCase;
 use Mockery;
 use SortableDownloadColumn;
+use WP_Post_Type;
+
+use function Brain\Monkey\Functions\expect;
 
 final class TypeTest extends TestCase
 {
+    public function testConfig(): void
+    {
+        /** @var WP_Post_Type $type */
+        $type = Mockery::mock('WP_Post_Type');
+
+        expect('get_post_type_object')
+            ->once()
+            ->with('')
+            ->andReturn($type);
+
+        $this->assertSame(
+            $type,
+            $this->type()->config()
+        );
+    }
+
+    /*
     public function testRegisterType(): void
     {
         $this->type()->registerType(['label' => 'Resource']);
@@ -106,7 +126,7 @@ final class TypeTest extends TestCase
         $this->assertTrue(has_action('manage__posts_custom_column'));
         $this->assertTrue(has_filter('manage_edit-_sortable_columns'));
         $this->assertTrue(has_action('pre_get_posts'));
-    }
+    }*/
 
     protected function type(): Type
     {
