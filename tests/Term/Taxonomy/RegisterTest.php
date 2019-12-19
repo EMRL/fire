@@ -12,12 +12,6 @@ use function Fire\Core\filter_value;
 
 final class RegisterTest extends TestCase
 {
-    public function testAddsActions(): void
-    {
-        $instance = (new Register('', filter_value([])))->register();
-        $this->assertTrue(has_action('init', [$instance, 'run']));
-    }
-
     public function testRegister(): void
     {
         $taxonomy = 'cat';
@@ -28,6 +22,6 @@ final class RegisterTest extends TestCase
             ->once()
             ->with($taxonomy, $types, $config);
 
-        (new Register($taxonomy, filter_value($config)))->setTypes(...$types)->run();
+        (new Register($taxonomy, filter_value($config), ...$types))();
     }
 }

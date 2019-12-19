@@ -6,9 +6,6 @@ namespace Fire\Term;
 
 use Fire\Admin\ListTableColumn;
 use Fire\Term\Taxonomy\AddListTableColumn;
-use Fire\Term\Taxonomy\ArchiveTitle;
-use Fire\Term\Taxonomy\Link;
-use Fire\Term\Taxonomy\Modify;
 use Fire\Term\Taxonomy\Register;
 use Fire\Term\Taxonomy\RegisterForType;
 use WP_Taxonomy;
@@ -22,11 +19,8 @@ abstract class Taxonomy
     /** @var string TAXONOMY */
     public const TAXONOMY = '';
 
-    /** @var WP_Taxonomy $config */
-    protected $config;
-
     /**
-     * Setup taxonomy
+     * Register
      */
     public function register(): self
     {
@@ -34,39 +28,31 @@ abstract class Taxonomy
     }
 
     /**
-     * Return taxonomy configuration
+     * Get taxonomy config
      */
     public function config(): WP_Taxonomy
     {
-        if (!$this->config) {
-            $this->config = get_taxonomy(static::TAXONOMY);
-        }
-
-        return $this->config;
+        return get_taxonomy(static::TAXONOMY);
     }
 
     /**
      * Register taxonomy
      *
-     * @param string[] $types
      * @param array<string,mixed> $config
      */
-    public function registerTaxonomy(array $types, array $config): self
+    protected function registerTaxonomy(array $config, string ...$types): self
     {
-        return $this->registerTaxonomyFrom($types, filter_value($config));
+        return $this->registerTaxonomyFrom(filter_value($config), ...$types);
     }
 
     /**
      * Register taxonomy from callable
      *
-     * @param string[] $types
      * @param callable():array $fn
      */
-    public function registerTaxonomyFrom(array $types, callable $fn): self
+    protected function registerTaxonomyFrom(callable $fn, string ...$types): self
     {
-        (new Register(static::TAXONOMY, $fn))
-            ->setTypes(...$types)
-            ->register();
+        add_action('init', new Register(static::TAXONOMY, $fn, ...$types));
         return $this;
     }
 
@@ -75,7 +61,7 @@ abstract class Taxonomy
      *
      * @param array<string,mixed> $config
      */
-    public function mergeTaxonomy(array $config): self
+    protected function mergeTaxonomy(array $config): self
     {
         return $this->modifyTaxonomy(filter_replace($config));
     }
@@ -85,37 +71,18 @@ abstract class Taxonomy
      *
      * @param callable(array,array):array $fn
      */
-    public function modifyTaxonomy(callable $fn): self
+    protected function modifyTaxonomy(callable $fn): self
     {
-        (new Modify(static::TAXONOMY, $fn))->register();
+        add_filter('fire/register_taxonomy_args/'.static::TAXONOMY, $fn, 10, 2);
         return $this;
     }
 
     /**
      * Register taxonomy for post type
      */
-    public function registerForType(string $type): self
+    protected function registerForType(string $type): self
     {
-        (new RegisterForType(static::TAXONOMY, filter_value($type)));
-        return $this;
-    }
-
-    /**
-     * Set archive title
-     */
-    public function setArchiveTitle(string $title): self
-    {
-        return $this->modifyArchiveTitle(filter_value($title));
-    }
-
-    /**
-     * Modify archive title
-     *
-     * @param callable(string):string $fn
-     */
-    public function modifyArchiveTitle(callable $fn): self
-    {
-        (new ArchiveTitle(static::TAXONOMY, $fn))->register();
+        add_action('init', new RegisterForType(static::TAXONOMY, $type));
         return $this;
     }
 
@@ -124,9 +91,9 @@ abstract class Taxonomy
      *
      * @param callable(string,WP_Term):string $fn
      */
-    public function modifyLink(callable $fn): self
+    protected function modifyLink(callable $fn): self
     {
-        (new Link(static::TAXONOMY, $fn))->register();
+        add_filter('fire/term_link/'.static::TAXONOMY, $fn, 10, 2);
         return $this;
     }
 
@@ -135,7 +102,7 @@ abstract class Taxonomy
      *
      * @param callable(array):array $fn
      */
-    public function modifyListTableColumns(callable $fn): self
+    protected function modifyListTableColumns(callable $fn): self
     {
         add_filter(sprintf('manage_edit-%s_columns', static::TAXONOMY), $fn);
         return $this;
@@ -146,7 +113,7 @@ abstract class Taxonomy
      *
      * @param callable(array:):array $fn
      */
-    public function modifySortableListTableColumns(callable $fn): self
+    protected function modifySortableListTableColumns(callable $fn): self
     {
         add_filter(sprintf('manage_edit-%s_sortable_columns', static::TAXONOMY), $fn);
         return $this;
@@ -157,7 +124,7 @@ abstract class Taxonomy
      *
      * @param callable(int):void $fn
      */
-    public function modifyListTableColumnDisplay(callable $fn): self
+    protected function modifyListTableColumnDisplay(callable $fn): self
     {
         add_action(sprintf('manage_%s_custom_column', static::TAXONOMY), $fn, 10, 3);
         return $this;
@@ -166,7 +133,7 @@ abstract class Taxonomy
     /**
      * Add list table column before another
      */
-    public function addListTableColumnBefore(ListTableColumn $column, string $ref): self
+    protected function addListTableColumnBefore(ListTableColumn $column, string $ref): self
     {
         return $this->addListTableColumn($column, $ref, false);
     }
@@ -174,7 +141,7 @@ abstract class Taxonomy
     /**
      * Add list table column after another
      */
-    public function addListTableColumnAfter(ListTableColumn $column, string $ref): self
+    protected function addListTableColumnAfter(ListTableColumn $column, string $ref): self
     {
         return $this->addListTableColumn($column, $ref, true);
     }
@@ -182,7 +149,7 @@ abstract class Taxonomy
     /**
      * Add list table column
      */
-    public function addListTableColumn(ListTableColumn $column, string $ref = '', bool $after = true): self
+    protected function addListTableColumn(ListTableColumn $column, string $ref = '', bool $after = true): self
     {
         $add = new AddListTableColumn($column);
         $this->modifyListTableColumns($add->columns($ref, $after));

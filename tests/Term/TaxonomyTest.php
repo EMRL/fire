@@ -5,87 +5,91 @@ declare(strict_types=1);
 namespace Fire\Tests\Term;
 
 use DownloadColumn;
-use Fire\Term\Taxonomy;
+use Fire\Term\Taxonomy\Register;
+use Fire\Term\Taxonomy\RegisterForType;
 use Fire\Tests\TestCase;
 use Mockery;
+use WP_Taxonomy;
+
+use function Brain\Monkey\Actions\expectAdded;
+use function Brain\Monkey\Functions\expect;
 
 final class TaxonomyTest extends TestCase
 {
-    public function testRegisterTaxonomy(): void
+    public function testConfig(): void
     {
-        $this->taxonomy()->registerTaxonomy([], []);
-        $this->assertTrue(has_action('init'));
+        /** @var WP_Taxonomy $taxonomy */
+        $taxonomy = Mockery::mock('WP_Taxonomy');
+
+        expect('get_taxonomy')
+            ->once()
+            ->with('test')
+            ->andReturn($taxonomy);
+
+        $this->assertSame(
+            $taxonomy,
+            $this->taxonomy()->config()
+        );
     }
 
     public function testRegisterTaxonomyFrom(): void
     {
-        $this->taxonomy()->registerTaxonomyFrom([], $this->emptyFn());
-        $this->assertTrue(has_action('init'));
-    }
-
-    public function testMergeTaxonomy(): void
-    {
-        $this->taxonomy()->mergeTaxonomy([]);
-        $this->assertTrue(has_filter('register_taxonomy_args'));
+        $types = ['post'];
+        expectAdded('init')->with(Mockery::type(Register::class));
+        $this->taxonomy()->doRegisterTaxonomyFrom($this->emptyFn(), ...$types);
     }
 
     public function testModifyTaxonomy(): void
     {
-        $this->taxonomy()->modifyTaxonomy($this->emptyFn());
-        $this->assertTrue(has_filter('register_taxonomy_args'));
+        $fn = $this->emptyFn();
+        $this->taxonomy()->doModifyTaxonomy($fn);
+        $this->assertTrue(has_filter('fire/register_taxonomy_args/test', $fn));
     }
 
-    public function testSetArchiveTitle(): void
+    public function testRegisterForType(): void
     {
-        $this->taxonomy()->setArchiveTitle('');
-        $this->assertTrue(has_filter('single_term_title'));
-    }
-
-    public function testModifyArchiveTitle(): void
-    {
-        $this->taxonomy()->modifyArchiveTitle($this->emptyFn());
-        $this->assertTrue(has_filter('single_term_title'));
+        expectAdded('init')->with(Mockery::type(RegisterForType::class));
+        $this->taxonomy()->doRegisterForType('post');
     }
 
     public function testModifyLink(): void
     {
-        $this->taxonomy()->modifyLink($this->emptyFn());
-        $this->assertTrue(has_filter('term_link'));
+        $fn = $this->emptyFn();
+        $this->taxonomy()->doModifyLink($fn);
+        $this->assertTrue(has_filter('fire/term_link/test', $fn));
     }
 
     public function testModifyListTableColumns(): void
     {
         $fn = $this->emptyFn();
-        $this->taxonomy()->modifyListTableColumns($fn);
-        $this->assertTrue(has_filter('manage_edit-_columns', $fn));
+        $this->taxonomy()->doModifyListTableColumns($fn);
+        $this->assertTrue(has_filter('manage_edit-test_columns', $fn));
     }
 
     public function testModifySortableListTableColumns(): void
     {
         $fn = $this->emptyFn();
-        $this->taxonomy()->modifySortableListTableColumns($fn);
-        $this->assertTrue(has_filter('manage_edit-_sortable_columns', $fn));
+        $this->taxonomy()->doModifySortableListTableColumns($fn);
+        $this->assertTrue(has_filter('manage_edit-test_sortable_columns', $fn));
     }
 
     public function testModifyListTableColumnDisplay(): void
     {
         $fn = $this->emptyFn();
-        $this->taxonomy()->modifyListTableColumnDisplay($fn);
-        $this->assertTrue(has_action('manage__custom_column', $fn));
+        $this->taxonomy()->doModifyListTableColumnDisplay($fn);
+        $this->assertTrue(has_action('manage_test_custom_column', $fn));
     }
 
     public function testAddListTableColumn(): void
     {
         $column = new DownloadColumn();
-        $this->taxonomy()->addListTableColumn($column);
-        $this->assertTrue(has_filter('manage_edit-_columns'));
-        $this->assertTrue(has_action('manage__custom_column'));
+        $this->taxonomy()->doAddListTableColumn($column);
+        $this->assertTrue(has_filter('manage_edit-test_columns'));
+        $this->assertTrue(has_action('manage_test_custom_column'));
     }
 
-    protected function taxonomy(): Taxonomy
+    protected function taxonomy(): TaxonomyStub
     {
-        /** @var Taxonomy $taxonomy */
-        $taxonomy = Mockery::mock(Taxonomy::class)->makePartial();
-        return $taxonomy;
+        return new TaxonomyStub();
     }
 }

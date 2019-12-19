@@ -4,25 +4,29 @@ declare(strict_types=1);
 
 namespace Fire\Term\Taxonomy;
 
-class Register extends Hook
+class Register
 {
+    /** @var string $taxonomy */
+    protected $taxonomy;
+
+    /** @var callable():array<string,mixed> $fn */
+    protected $fn;
+
     /** @var string[] $types */
     protected $types = [];
 
-    public function register(): Hook
+    /**
+     * @param callable():array<string,mixed> $fn
+     */
+    public function __construct(string $taxonomy, callable $fn, string ...$types)
     {
-        add_action('init', [$this, 'run']);
-        return $this;
-    }
-
-    public function setTypes(string ...$types): self
-    {
+        $this->taxonomy = $taxonomy;
+        $this->fn = $fn;
         $this->types = $types;
-        return $this;
     }
 
-    public function run(): void
+    public function __invoke(): void
     {
-        register_taxonomy($this->taxonomy, $this->types, $this->fn());
+        register_taxonomy($this->taxonomy, $this->types, ($this->fn)());
     }
 }
