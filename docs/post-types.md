@@ -11,7 +11,7 @@ use DownloadColumn;
 
 class Resource extends Type
 {
-    const TYPE = 'resource';
+    public const TYPE = 'resource';
 
     public function register(): self
     {
@@ -72,11 +72,11 @@ class DownloadColumn extends SortableListTableColumn
 ```php
 use Fire\Post\Type\Hooks;
 
-// This must be called first to setup the neccessary
+// This must be called first to setup neccessary
 // WordPress filters and actions for post types
 (new Hooks())->register();
 
-// Register the post type
+// Register post type
 (new Resource())->register();
 ```
 

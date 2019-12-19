@@ -7,28 +7,29 @@ The `Taxonomy` class provides some helpful methods to make creating a new taxono
 **Country.php**
 ```php
 use Fire\Post\Post;
+use Fire\Post\Page;
 use Fire\Term\Taxonomy;
 use DownloadColumn;
 
 class Country extends Taxonomy
 {
-    const TAXONOMY = 'country';
+    public const TAXONOMY = 'country';
 
     public function register(): self
     {
         // Register via array
-        $this->registerTaxonomy([Post::TYPE], [
+        $this->registerTaxonomy([
             'label' => 'Countries',
             'public' => true,
             'show_admin_column' => true,
-        ]);
+        ], Post::TYPE, Page::TYPE);
 
         // Or via callable that executes during `init` actions. More functions
         // are available and the main query has been parsed
-        $this->registerTaxonomyFrom([Post::TYPE], [$this, 'args']);
+        $this->registerTaxonomyFrom([$this, 'args'], Post::TYPE);
 
         // Closure example
-        $this->registerTaxonomyFrom([Post::TYPE], function () { return [...] });
+        $this->registerTaxonomyFrom(function () { return [...] }, Post::TYPE);
 
         $this->addListTableColumnAfter(new DownloadColumn(), 'title');
 
@@ -69,7 +70,14 @@ class DownloadColumn extends ListTableColumn
 
 **functions.php**
 ```php
-(new Country)->register();
+use Fire\Term\Taxonomy\Hooks;
+
+// This must be called first to setup neccessary
+// WordPress filters and actions for taxonomies
+(new Hooks())->register();
+
+// Register taxonomy
+(new Country())->register();
 ```
 
 ## Modify existing taxonomies
@@ -85,7 +93,7 @@ class Category extends \Fire\Term\Category
         ]);
 
         // Or use a callback to modify or use existing args
-        $this->modifyTaxonomy(function (array $args): array {
+        $this->modifyTaxonomy(function (array $args, array $types): array {
             $args['labels']['menu_name'] = $args['label'];
             return $args;
         });
@@ -95,20 +103,29 @@ class Category extends \Fire\Term\Category
 }
 ```
 
-## Available methods
+## Public methods
+
+### `register()`
+
+Responsible for adding all hooks for taxonomy. See examples above.
+
+```php
+(new Country)->register();
+```
 
 ### `config()`
 
-Return the taxonomy object/configuration.
+Return taxonomy object/configuration.
 
 Uses: [`get_taxonomy`](https://developer.wordpress.org/reference/functions/get_taxonomy/)
 
 ```php
-use Fire\Term\Category;
-
-$type = new Category();
 echo $type->config()->public;
 ```
+
+## Protected methods
+
+The following are helper methods to be used by the taxonomy class itself.
 
 ### `registerTaxonomy()`
 
@@ -117,10 +134,10 @@ Register taxonomy.
 Uses: [`register_taxonomy`](https://developer.wordpress.org/reference/functions/register_taxonomy/)
 
 ```php
-$this->registerTaxonomy([Post::TYPE], [
+$this->registerTaxonomy([
     'label' => 'Country',
     'public' => true,
-]);
+], 'post', 'page');
 ```
 
 ### `registerTaxonomyFrom()`
@@ -130,8 +147,8 @@ Register taxonomy via callable.
 Uses: [`register_taxonomy`](https://developer.wordpress.org/reference/functions/register_taxonomy/)
 
 ```php
-$this->registerTaxonomyFrom(['page'], [$this, 'args']);
-$this->registerTaxonomyFrom(['post'], function (): array { return [...]; });
+$this->registerTaxonomyFrom([$this, 'args'], Post::TYPE);
+$this->registerTaxonomyFrom(function (): array { return [...]; }, 'page');
 ```
 
 ### `mergeTaxonomy()`
@@ -159,32 +176,6 @@ $this->modifyTaxonomy(function (array $args, array $types): array {
     $args['public'] = false;
     return $args;
 };
-```
-
-### `setArchiveTitle()`
-
-Sets archive page title.
-
-Adds filters: [`single_cat_title`](https://developer.wordpress.org/reference/hooks/single_cat_title/)  
-Adds filters: [`single_tag_title`](https://developer.wordpress.org/reference/hooks/single_tag_title/)  
-Adds filters: [`single_term_title`](https://developer.wordpress.org/reference/hooks/single_term_title/)
-
-```php
-$this->setArchiveTitle('Countries');
-```
-
-
-### `modifyArchiveTitle()`
-
-Modifies archive page title.
-
-Adds filters: [`single_cat_title`](https://developer.wordpress.org/reference/hooks/single_cat_title/)  
-Adds filters: [`single_tag_title`](https://developer.wordpress.org/reference/hooks/single_tag_title/)  
-Adds filters: [`single_term_title`](https://developer.wordpress.org/reference/hooks/single_term_title/)
-
-```php
-$this->modifyArchiveTitle('My Archive Page');
-$this->modifyArchiveTitle(function (string $title): string { ... });
 ```
 
 ### `modifyLink()`
