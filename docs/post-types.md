@@ -70,6 +70,13 @@ class DownloadColumn extends SortableListTableColumn
 
 **functions.php**
 ```php
+use Fire\Post\Type\Hooks;
+
+// This must be called first to setup the neccessary
+// WordPress filters and actions for post types
+(new Hooks())->register();
+
+// Register the post type
 (new Resource())->register();
 ```
 
@@ -78,7 +85,7 @@ class DownloadColumn extends SortableListTableColumn
 ```php
 class Page extends \Fire\Post\Page
 {
-    public function __construct()
+    public function register(): self
     {
         // These args will be merged with existing
         $this->mergeType([
@@ -90,11 +97,21 @@ class Page extends \Fire\Post\Page
             $args['labels']['menu_name'] = $args['label'];
             return $args;
         });
+
+        return $this;
     }
 }
 ```
 
-## Available methods
+## Public methods
+
+### `register()`
+
+Responsible for adding all hooks for post type. See examples above.
+
+```php
+(new Resource)->register();
+```
 
 ### `config()`
 
@@ -105,6 +122,10 @@ Uses: [`get_post_type_object`](https://developer.wordpress.org/reference/functio
 ```php
 echo $this->config()->public;
 ```
+
+## Protected methods
+
+The following are helper methods to be used by the post type class itself.
 
 ### `registerType()`
 
@@ -126,8 +147,8 @@ Register post type via callable
 Uses: [`register_post_type`](https://developer.wordpress.org/reference/functions/register_post_type/)
 
 ```php
-$this->registerType([$this, 'args']);
-$this->registerType(function (): array { return [...]; })
+$this->registerTypeFrom([$this, 'args']);
+$this->registerTypeFrom(function (): array { return [...]; })
 ```
 
 ### `mergeType()`
@@ -149,9 +170,9 @@ Argument reference: [`register_post_type`](https://developer.wordpress.org/refer
 Adds filters: [`register_post_type_args`](https://developer.wordpress.org/reference/hooks/register_post_type_args/)
 
 ```php
-$this->modify([$this, 'makePrivate']);
+$this->modifyType([$this, 'makePrivate']);
 
-$this->modify(function (array $args): array {
+$this->modifyType(function (array $args): array {
     $args['public'] = false;
     return $args;
 };
