@@ -1,6 +1,5 @@
 {
     "name": "emrl/fire",
-    "type": "wordpress-muplugin",
     "license": "MIT",
     "description": "WordPress utilities and helpers",
     "authors": [
