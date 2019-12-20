@@ -42,8 +42,10 @@ function nav_menu_items(array $args): string
         'items_wrap' => '%3$s',
         'container' => false,
         'fallback_cb' => false,
-        'echo' => false,
     ], $args);
 
-    return wp_nav_menu($args);
+    // Never echo
+    $args['echo'] = false;
+
+    return (string) wp_nav_menu($args);
 }
