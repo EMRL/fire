@@ -24,5 +24,6 @@ final class FunctionsTest extends TestCase
         $this->assertSame('/abc/def', join_path('/abc', 'def'));
         $this->assertSame('foo.jpg', join_path('', 'foo.jpg'));
         $this->assertSame('dir/0/a.jpg', join_path('dir', '0', 'a.jpg'));
+        $this->assertSame('http://domain.com/a.jpg', join_path('http://domain.com/', '/a.jpg'));
     }
 }

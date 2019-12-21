@@ -19,7 +19,7 @@ final class JoinTest extends TestCase
     public function testManifest(): void
     {
         $dir = __DIR__;
-        $join = new JoinManifest(new Join($dir), 'fixtures/manifest.json');
+        $join = new JoinManifest(new Join($dir), $dir.'/fixtures/manifest.json');
         $this->assertSame($dir.'/file.12345.jpg', $join->path('file.jpg'));
         $this->assertSame($dir.'/dist/missing.txt', $join->path('/dist/missing.txt'), 'Missing file');
     }

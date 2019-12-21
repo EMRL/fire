@@ -34,11 +34,6 @@ class JoinManifest extends JoinSearch
      */
     protected function readManifest()
     {
-        return json_decode((string) @file_get_contents($this->manifestPath()), true);
-    }
-
-    protected function manifestPath(): string
-    {
-        return $this->join->path($this->manifestPath);
+        return json_decode((string) @file_get_contents($this->manifestPath), true);
     }
 }
