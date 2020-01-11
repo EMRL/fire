@@ -6,6 +6,7 @@ namespace Fire\Post;
 
 use Fire\Admin\ListTableColumn;
 use Fire\Post\Type\AddListTableColumn;
+use Fire\Post\Type\ArchivePageSetting;
 use Fire\Post\Type\Query;
 use Fire\Post\Type\Register;
 use Fire\Post\Type\SortableListTableColumn;
@@ -209,6 +210,17 @@ abstract class Type
             $this->modifyQuery($add->query());
         }
 
+        return $this;
+    }
+
+    /**
+     * Register setting to assign archive page
+     */
+    protected function registerArchivePageSetting(): self
+    {
+        $setting = new ArchivePageSetting($this);
+        add_action('admin_init', $setting->register());
+        add_filter('display_post_states', $setting->states(), 10, 2);
         return $this;
     }
 

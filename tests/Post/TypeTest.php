@@ -109,6 +109,13 @@ final class TypeTest extends TestCase
         $this->assertTrue(has_action('fire/pre_get_posts/test'));
     }
 
+    public function testRegisterArchivePageSettting(): void
+    {
+        $this->type()->doRegisterArchivePageSetting();
+        $this->assertTrue(has_action('admin_init'));
+        $this->assertTrue(has_filter('display_post_states'));
+    }
+
     protected function type(): TypeStub
     {
         return new TypeStub();

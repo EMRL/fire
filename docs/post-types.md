@@ -340,4 +340,12 @@ This is a shortcut that combines `modifyQuery()`, `modifyListTableColumns()`, `m
 $this->addListTableColumnAfter(new DownloadColumn(), 'title');
 ```
 
+### `registerArchivePageSetting()`
+
+Registers setting field on Reading options page to allow assigning a page to post type.
+
+```php
+$this->registerArchivePageSetting();
+```
+
 Next: [Query](query.md)

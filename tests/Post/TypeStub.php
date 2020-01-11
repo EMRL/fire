@@ -60,4 +60,9 @@ final class TypeStub extends Type
     {
         $this->addListTableColumn($column, $ref, $after);
     }
+
+    public function doRegisterArchivePageSetting(): void
+    {
+        $this->registerArchivePageSetting();
+    }
 }
