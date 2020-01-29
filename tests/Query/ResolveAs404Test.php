@@ -36,6 +36,7 @@ final class ResolveAs404Test extends TestCase
 
         $resolve->parse($query);
         $this->assertTrue($resolve->is404());
+        $this->assertFalse(has_action('parse_query', [$resolve, 'parse']));
     }
 
     public function testReturnIfNotMainQuery(): void

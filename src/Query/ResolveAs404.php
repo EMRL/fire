@@ -46,6 +46,9 @@ class ResolveAs404
 
     protected function set404(WP_Query $query): void
     {
+        // Prevent endless loop
+        remove_action('parse_query', [$this, 'parse']);
+
         $this->is404 = true;
         status_header(404);
         $query->init();
