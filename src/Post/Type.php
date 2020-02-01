@@ -216,11 +216,15 @@ abstract class Type
     /**
      * Register setting to assign archive page
      */
-    protected function registerArchivePageSetting(): self
+    protected function registerArchivePageSetting(callable $label = null): self
     {
-        $setting = new ArchivePageSetting($this);
+        $setting = new ArchivePageSetting(static::TYPE, $label);
         add_action('admin_init', $setting->register());
+        add_action('post_updated', $setting->permalinks(), 10, 3);
+        add_action('before_delete_post', $setting->delete());
         add_filter('display_post_states', $setting->states(), 10, 2);
+        $this->modifyType($setting->slug());
+        $this->modifyArchiveTitle($setting->archiveTitle());
         return $this;
     }
 

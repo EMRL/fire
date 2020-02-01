@@ -6,24 +6,38 @@ namespace Fire\Post\Type;
 
 use Closure;
 use Fire\Post\Page;
-use Fire\Post\Type;
 use WP_Post;
+use WP_Post_Type;
+
+use function Fire\Post\page_id_for_type;
 
 class ArchivePageSetting
 {
     /** @var string GROUP */
-    public const GROUP = 'reading';
+    protected const GROUP = 'reading';
 
-    /** @var Type $type */
+    /** @var string OPTION_NAME */
+    public const OPTION_NAME = 'page_for_%s';
+
+    /** @var string $type */
     protected $type;
+
+    /** @var callable(WP_Post_Type):string $label */
+    protected $label;
 
     /** @var string $key */
     protected $key;
 
-    public function __construct(Type $type)
+    public function __construct(string $type, ?callable $label)
     {
         $this->type = $type;
-        $this->key = 'page_for_'.$type::TYPE;
+        $this->label = $label ?: [$this, 'defaultLabel'];
+        $this->key = static::optionName($type);
+    }
+
+    public static function optionName(string $type): string
+    {
+        return sprintf(static::OPTION_NAME, $type);
     }
 
     public function register(): Closure
@@ -37,7 +51,7 @@ class ArchivePageSetting
 
             add_settings_field(
                 $this->key,
-                "{$this->type->config()->label} page",
+                "{$this->label()} page",
                 [$this, 'field'],
                 static::GROUP,
                 'default',
@@ -56,16 +70,71 @@ class ArchivePageSetting
         ]);
     }
 
+    public function slug(): Closure
+    {
+        return function (array $args): array {
+            if ($id = page_id_for_type($this->type)) {
+                if (!isset($args['rewrite'])) {
+                    $args['rewrite'] = [];
+                }
+
+                $args['rewrite']['slug'] = get_post_field('post_name', $id);
+            }
+
+            return $args;
+        };
+    }
+
+    public function permalinks(): Closure
+    {
+        return function (int $id, WP_Post $new, WP_Post $old): void {
+            if (page_id_for_type($this->type) === $id && $new->post_name !== $old->post_name) {
+                flush_rewrite_rules();
+            }
+        };
+    }
+
+    public function delete(): Closure
+    {
+        return function (int $id): void {
+            if (page_id_for_type($this->type) === $id) {
+                update_option($this->key, 0);
+                flush_rewrite_rules();
+            }
+        };
+    }
+
     public function states(): Closure
     {
         return function (array $states, WP_Post $post): array {
             $id = (int) get_option($this->key);
 
             if ($post->post_type === Page::TYPE && $post->ID === $id) {
-                $states[$this->type::TYPE] = "{$this->type->config()->label} Page";
+                $states[$this->type] = "{$this->label()} Page";
             }
 
             return $states;
         };
+    }
+
+    public function archiveTitle(): Closure
+    {
+        return function (string $title): string {
+            if ($id = page_id_for_type($this->type)) {
+                $title = get_post_field('post_title', $id);
+            }
+
+            return $title;
+        };
+    }
+
+    protected function defaultLabel(WP_Post_Type $type): string
+    {
+        return $type->label;
+    }
+
+    protected function label(): string
+    {
+        return ($this->label)(get_post_type_object($this->type));
     }
 }

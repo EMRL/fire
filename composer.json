@@ -15,6 +15,7 @@
         "files": [
             "src/Core/functions.php",
             "src/Path/functions.php",
+            "src/Post/functions.php",
             "src/Template/functions.php"
         ]
     },

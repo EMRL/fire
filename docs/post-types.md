@@ -346,6 +346,75 @@ Registers setting field on Reading options page to allow assigning a page to pos
 
 ```php
 $this->registerArchivePageSetting();
+
+$this->registerArchivePageSetting(function (WP_Post_Type $type): string {
+    return $type->labels->singular_name;
+});
+```
+
+## Functions
+
+### `is_type()`
+
+Test if current post's type matches passed type.
+
+```php
+if (Fire\Post\is_type('page')) {
+    // This post belongs to the `page` post type
+}
+```
+
+### `page_for_type()`
+
+Get the page assigned for the type (or currently queried type) as an iterator ready to loop.
+
+```php
+<?php foreach (Fire\Post\page_for_type() as $archive): ?>
+    <h1><?php the_title() ?></h1>
+<?php endforeach ?>
+
+<?php foreach (Fire\Post\page_for_type('portfolio') as $archive): ?>
+    <h1><?php the_title() ?></h1>
+<?php endforeach ?>
+```
+
+### `page_id_for_type()`
+
+Get the page ID for the type (or currently queried type).
+
+```php
+$id = Fire\Post\page_id_for_type();
+$id = Fire\Post\page_id_for_type('portfolio');
+```
+
+### `has_page_for_type()`
+
+Test whether the post type has a page assigned to it.
+
+```php
+<?php if (Fire\Post\has_page_for_type()): ?>
+    <?php foreach (Fire\Post\page_for_type() as $archive): ?>
+        <div>
+            <?php the_content() ?>
+        </div>
+    <?php endforeach ?>
+<?php endforeach ?>
+
+<?php if (Fire\Post\has_page_for_type('portfolio')): ?>
+    <?php foreach (Fire\Post\page_for_type('portfolio') as $archive): ?>
+        <div>
+            <?php the_content() ?>
+        </div>
+    <?php endforeach ?>
+<?php endforeach ?>
+```
+
+### `id()`
+
+Gets the ID of the current post or the ID of the assigned post type page if you are viewing a post type archive.
+
+```php
+$show_title = get_post_meta(Fire\Post\id(), 'page_show_title', true);
 ```
 
 Next: [Query](query.md)
