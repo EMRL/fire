@@ -53,8 +53,8 @@ use Fire\Path\Join;
 use Fire\Query\Inject;
 
 (new Inject([
-    'path' => new Join(get_stylesheet_directory()),
-    'url' => new Join(get_stylesheet_directory_uri()),
+    'path' => new Join(get_theme_file_path()),
+    'url' => new Join(get_theme_file_uri()),
 ]))->register();
 ```
 
@@ -86,9 +86,11 @@ use Fire\Path\Join;
 use Fire\Path\JoinManifest;
 use Fire\Query\Inject;
 
+$manifest = get_theme_file_path('assets/manifest.json');
+
 (new Inject([
-    'path' => new JoinManifest(new Join(get_stylesheet_directory()), 'manifest.json'),
-    'url' => new JoinManifest(new Join(get_stylesheet_directory_uri()), 'manifest.json'),
+    'path' => new JoinManifest(new Join(get_theme_file_path()), $manifest),
+    'url' => new JoinManifest(new Join(get_theme_file_uri()), $manifest),
 ]))->register();
 ```
 

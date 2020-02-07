@@ -7,10 +7,6 @@ and themes.
 
 `composer require emrl/fire ^3`
 
-### Manual installation
-
-Place folder in the must-use plugins directory (`wp-content/mu-plugins`).
-
 ## Usage
 
 Utilities are meant to be used inside your plugin or theme's bootstrap file
