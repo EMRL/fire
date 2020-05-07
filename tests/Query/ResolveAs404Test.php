@@ -14,7 +14,7 @@ final class ResolveAs404Test extends TestCase
     public function testActionsAdded(): void
     {
         $instance = (new ResolveAs404())->register();
-        $this->assertTrue(has_action('parse_query', [$instance, 'parse']));
+        $this->assertTrue(has_action('wp', [$instance, 'parse']));
     }
 
     public function testResolves(): void
@@ -22,8 +22,8 @@ final class ResolveAs404Test extends TestCase
         when('status_header')->justReturn();
 
         $query = $this->wpQuery();
-        $query->shouldReceive('is_main_query')->andReturn(true);
         $query->shouldReceive('init', 'parse_query', 'set_404');
+        $GLOBALS['wp_query'] = $query;
 
         $resolve = new ResolveAs404(
             function (): bool {
@@ -34,31 +34,13 @@ final class ResolveAs404Test extends TestCase
             }
         );
 
-        $resolve->parse($query);
+        $resolve->parse();
         $this->assertTrue($resolve->is404());
         $this->assertFalse(has_action('parse_query', [$resolve, 'parse']));
     }
 
-    public function testReturnIfNotMainQuery(): void
-    {
-        $query = $this->wpQuery();
-        $query->shouldReceive('is_main_query')->andReturn(false);
-
-        $called = false;
-
-        $test = function () use (&$called): void {
-            $called = true;
-        };
-
-        (new ResolveAs404($test))->parse($query);
-        $this->assertFalse($called);
-    }
-
     public function testDoesNotResolve(): void
     {
-        $query = $this->wpQuery();
-        $query->shouldReceive('is_main_query')->andReturn(true);
-
         $resolve = new ResolveAs404(
             function (): bool {
                 return false;
@@ -68,7 +50,7 @@ final class ResolveAs404Test extends TestCase
             }
         );
 
-        $resolve->parse($query);
+        $resolve->parse();
         $this->assertFalse($resolve->is404());
     }
 }

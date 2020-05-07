@@ -21,19 +21,17 @@ class ResolveAs404
 
     public function register(): self
     {
-        add_action('parse_query', [$this, 'parse']);
+        add_action('wp', [$this, 'parse']);
         return $this;
     }
 
-    public function parse(WP_Query $query): void
+    public function parse(): void
     {
-        if (!$query->is_main_query()) {
-            return;
-        }
+        global $wp_query;
 
         foreach ($this->tests as $test) {
-            if ($test($query)) {
-                $this->set404($query);
+            if ($test($wp_query)) {
+                $this->set404($wp_query);
                 break;
             }
         }
@@ -46,9 +44,6 @@ class ResolveAs404
 
     protected function set404(WP_Query $query): void
     {
-        // Prevent endless loop
-        remove_action('parse_query', [$this, 'parse']);
-
         $this->is404 = true;
         status_header(404);
         $query->init();
