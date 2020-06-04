@@ -11,8 +11,7 @@ use function Fire\Core\filter_insert;
 
 class AddListTableColumn
 {
-    /** @var ListTableColumn $column */
-    protected $column;
+    protected ListTableColumn $column;
 
     public function __construct(ListTableColumn $column)
     {

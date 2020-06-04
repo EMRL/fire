@@ -18,7 +18,7 @@ final class TaxonomyTest extends TestCase
 {
     public function testConfig(): void
     {
-        /** @var WP_Taxonomy $taxonomy */
+        /** @var WP_Taxonomy */
         $taxonomy = Mockery::mock('WP_Taxonomy');
 
         expect('get_taxonomy')

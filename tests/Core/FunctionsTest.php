@@ -28,17 +28,13 @@ final class FunctionsTest extends TestCase
 
         $this->assertSame(
             'hello world',
-            value(function (): string {
-                return 'hello world';
-            }),
+            value(fn (): string => 'hello world'),
             'Closure value'
         );
 
         $this->assertSame(
             'hello world',
-            value(function (string $who): string {
-                return 'hello '.$who;
-            }, 'world'),
+            value(fn (string $who): string => 'hello '.$who, 'world'),
             'Passes arguments if callable'
         );
 
@@ -165,7 +161,7 @@ final class FunctionsTest extends TestCase
     {
         $this->assertSame(
             ['a.co', 'b.com'],
-            parse_hosts(['http://a.co', 'b.com', '//']),
+            parse_hosts('http://a.co', 'b.com', '//'),
         );
     }
 }

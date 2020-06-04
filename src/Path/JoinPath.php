@@ -6,7 +6,7 @@ namespace Fire\Path;
 
 interface JoinPath
 {
-    public function path(string $key = ''): string;
+    public function path(string ...$paths): string;
 
-    public function __invoke(string $key = ''): string;
+    public function __invoke(string ...$paths): string;
 }

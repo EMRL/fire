@@ -6,9 +6,9 @@ use Fire\Admin\ListTableColumn;
 
 final class DownloadColumn extends ListTableColumn
 {
-    protected $key = 'download';
+    protected string $key = 'download';
 
-    protected $label = 'Download';
+    protected string $label = 'Download';
 
     public function display(int $id): void
     {

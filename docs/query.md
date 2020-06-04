@@ -15,14 +15,14 @@ This class acts as a simple wrapper to allow iteration of `WP_Query->posts` via 
 
 ## 404 Resolver
 
-Sometimes it is useful and necessary to force WordPress to render a 404 error response. For example, if you want to prevent WordPress' default behavior of showing author archives, you can use this class to return a 404 when an author archive page is requested. Pass callables which will receive the main `WP_Query` instance.
+Sometimes it is useful and necessary to force WordPress to render a 404 error response. For example, if you want to prevent WordPress' default behavior of showing author archives, you can use this class to return a 404 when an author archive page is requested.
 
 ```php
 use Fire\Query\ResolveAs404;
 
 (new ResolveAs404(
     'is_author',
-    function (WP_Query $query): bool { return $query->is_author(4); }
+    fn (): bool => is_author(4),
 ))->register();
 ```
 

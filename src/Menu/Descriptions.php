@@ -9,7 +9,7 @@ use WP_Post;
 
 class Descriptions
 {
-    protected $keys = ['before', 'link_before', 'link_after', 'after'];
+    protected array $keys = ['before', 'link_before', 'link_after', 'after'];
 
     public function register(): self
     {

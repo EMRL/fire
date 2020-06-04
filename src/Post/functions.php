@@ -38,7 +38,7 @@ function page_id_for_type(string $type = ''): int
         $type .= 's';
     }
 
-    return (int) get_option(sprintf(ArchivePageSetting::OPTION_NAME, $type));
+    return (int) get_option(ArchivePageSetting::optionName($type));
 }
 
 /**

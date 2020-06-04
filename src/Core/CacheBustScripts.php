@@ -8,15 +8,14 @@ use InvalidArgumentException;
 
 class CacheBustScripts
 {
-    /** @var int $hashLength */
-    protected $hashLength = 10;
+    protected int $hashLength = 10;
 
-    /** @var string[] $validHosts */
-    protected $validHosts;
+    /** @var string[] */
+    protected array $validHosts;
 
     public function __construct(string ...$validHosts)
     {
-        $this->validHosts = parse_hosts($validHosts ?: [home_url()]);
+        $this->validHosts = parse_hosts(...$validHosts ?: [home_url()]);
 
         if (empty($this->validHosts)) {
             throw new InvalidArgumentException('No valid hosts for `CacheBustScripts`');

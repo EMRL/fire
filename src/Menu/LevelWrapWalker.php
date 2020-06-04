@@ -8,13 +8,11 @@ use Walker_Nav_Menu;
 
 class LevelWrapWalker extends Walker_Nav_Menu
 {
-    /** @var string $openTag */
-    protected $openTag = '<div>';
+    protected string $openTag = '<div>';
 
-    /** @var string $closeTag */
-    protected $closeTag = '</div>';
+    protected string $closeTag = '</div>';
 
-    /** @var callable(callable,int,array):void $fn */
+    /** @var callable(callable,int,array):void */
     protected $fn;
 
     public function setTags(string $openTag, string $closeTag): self

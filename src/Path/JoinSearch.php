@@ -6,23 +6,22 @@ namespace Fire\Path;
 
 abstract class JoinSearch implements JoinPath
 {
-    /** @var JoinPath $join */
-    protected $join;
+    protected JoinPath $join;
 
     public function __construct(JoinPath $join)
     {
         $this->join = $join;
     }
 
-    public function path(string $key = ''): string
+    public function path(string ...$paths): string
     {
-        return $this->join->path($this->search($key));
+        return $this->join->path($this->search(join_path(...$paths)));
     }
 
-    public function __invoke(string $key = ''): string
+    public function __invoke(string ...$paths): string
     {
-        return $this->path($key);
+        return $this->path(...$paths);
     }
 
-    abstract protected function search(string $key): string;
+    abstract protected function search(string $path): string;
 }

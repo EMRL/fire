@@ -13,7 +13,7 @@ use function Fire\Core\parse_hosts;
 
 final class CacheBustScriptsTest extends TestCase
 {
-    protected $current = 'https://domain.com';
+    protected string $current = 'https://domain.com';
 
     public function testFiltersAdded(): void
     {
@@ -40,7 +40,7 @@ final class CacheBustScriptsTest extends TestCase
     public function testFallbackHosts(): void
     {
         when('home_url')->justReturn($this->current);
-        $this->assertSame(parse_hosts([$this->current]), (new CacheBustScripts())->validHosts());
+        $this->assertSame(parse_hosts($this->current), (new CacheBustScripts())->validHosts());
     }
 
     public function testLocal(): void

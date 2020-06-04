@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace Fire\Query;
 
-use WP_Query;
-
 class ResolveAs404
 {
-    /** @var callable[] $args */
-    protected $tests = [];
+    /** @var callable[] */
+    protected array $tests = [];
 
-    /** @var bool $is404 */
-    protected $is404 = false;
+    protected bool $is404 = false;
 
     public function __construct(callable ...$tests)
     {
@@ -27,11 +24,9 @@ class ResolveAs404
 
     public function parse(): void
     {
-        global $wp_query;
-
         foreach ($this->tests as $test) {
-            if ($test($wp_query)) {
-                $this->set404($wp_query);
+            if ($test()) {
+                $this->set404();
                 break;
             }
         }
@@ -42,12 +37,14 @@ class ResolveAs404
         return $this->is404;
     }
 
-    protected function set404(WP_Query $query): void
+    protected function set404(): void
     {
+        global $wp_query;
+
         $this->is404 = true;
         status_header(404);
-        $query->init();
-        $query->parse_query(['post' => 0]);
-        $query->set_404();
+        $wp_query->init();
+        $wp_query->parse_query(['post' => 0]);
+        $wp_query->set_404();
     }
 }

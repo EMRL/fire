@@ -69,7 +69,7 @@ use Fire\Query\Inject;
 
 #### Using a manifest file
 
-If you compile files using a bundler (Webpack, rollup, etc) and enable filename
+If you compile files using a bundler (webpack, Rollup, etc) and enable filename
 hashing, you can link to the hashed version based on a manifest file lookup. If
 a file is found in the manifest, its hashed filename will be used.
 

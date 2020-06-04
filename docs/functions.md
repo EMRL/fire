@@ -7,6 +7,8 @@ Useful utilities to write less code.
 Insert array into another array before or after another key.
 
 ```php
+use function Fire\Core\array_insert;
+
 $arr = [
     'a' => 'One',
     'c' => 'Three',
@@ -31,6 +33,8 @@ $arr = array_insert($a, $b, 'c', false);
 Shortcut for using `array_insert` as filter.
 
 ```php
+use function Fire\Core\filter_insert;
+
 // Add our custom column after the existing `title` column
 add_filter('manage_pages_columns', filter_insert(['custom' => 'Custom'], 'title'));
 ```
@@ -40,6 +44,8 @@ add_filter('manage_pages_columns', filter_insert(['custom' => 'Custom'], 'title'
 Shortcut for using `array_merge` as filter.
 
 ```php
+use function Fire\Core\filter_merge;
+
 add_filter('body_class', filter_merge(['class-name']));
 ```
 
@@ -48,6 +54,8 @@ add_filter('body_class', filter_merge(['class-name']));
 Shortcut for removing elements from array as filter.
 
 ```php
+use function Fire\Core\filter_remove;
+
 add_filter('body_class', filter_remove(['class-name']));
 ```
 
@@ -56,6 +64,8 @@ add_filter('body_class', filter_remove(['class-name']));
 Shortcut for removing elements from array by key as filter.
 
 ```php
+use function Fire\Core\filter_remove_key;
+
 // Remove `title` column
 add_filter('manage_pages_columns', filter_remove_key(['title']));
 ```
@@ -65,6 +75,8 @@ add_filter('manage_pages_columns', filter_remove_key(['title']));
 Shortcut for returning value as filter.
 
 ```php
+use function Fire\Core\filter_value;
+
 add_filter('login_headertext', filter_value('Website Login'));
 ```
 
@@ -73,7 +85,9 @@ add_filter('login_headertext', filter_value('Website Login'));
 Parse list of hosts to return only valid hosts.
 
 ```php
-$hosts = parse_hosts(['http://website.com/page/', 'test.com', '//']);
+use function Fire\Core\parse_hosts;
+
+$hosts = parse_hosts('http://website.com/page/', 'test.com', '//');
 // ['website.com', 'test.com']
 ```
 
@@ -82,9 +96,11 @@ $hosts = parse_hosts(['http://website.com/page/', 'test.com', '//']);
 Returns value that may be wrapped inside callback function. Optionally pass parameters to the callback.
 
 ```php
+use function Fire\Core\value;
+
 $now = 1;
-$lazy = function (): int { return 1; };
-$another = function (int $a, int $b): int { return $a + $b; }
+$lazy = fn (): int => 1;
+$another = fn (int $a, int $b): int => $a + $b;
 $three = 3;
 
 value($now);

@@ -9,7 +9,7 @@ use WP_Query;
 class Inject
 {
     /** @var array<string,mixed> $values */
-    protected $values;
+    protected array $values;
 
     /**
      * @param array<string,mixed> $values

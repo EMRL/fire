@@ -6,14 +6,12 @@ namespace Fire\Template;
 
 class Layout
 {
-    /** @var string $default */
-    protected $default;
+    protected string $default;
 
     /** @var array<string,string> $layouts */
-    protected $layouts = [];
+    protected array $layouts = [];
 
-    /** @var string $current */
-    protected $current;
+    protected string $current;
 
     public function __construct(string $default = 'layout.php')
     {

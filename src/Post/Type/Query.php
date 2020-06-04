@@ -8,8 +8,8 @@ use WP_Query;
 
 class Query
 {
-    /** @var array<string,mixed> $data */
-    protected $data;
+    /** @var array<string,mixed> */
+    protected array $data;
 
     /**
      * @param array<string,mixed> $data

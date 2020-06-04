@@ -36,9 +36,34 @@ final class TypeStub extends Type
         $this->modifyLink($fn);
     }
 
+    public function doSetOnQuery(array $data): void
+    {
+        $this->setOnQuery($data);
+    }
+
+    public function doSetOnFrontendQuery(array $data): void
+    {
+        $this->setOnFrontendQuery($data);
+    }
+
+    public function doSetOnAdminQuery(array $data): void
+    {
+        $this->setOnAdminQuery($data);
+    }
+
     public function doModifyQuery(callable $fn): void
     {
         $this->modifyQuery($fn);
+    }
+
+    public function doModifyFrontendQuery(callable $fn): void
+    {
+        $this->modifyFrontendQuery($fn);
+    }
+
+    public function doModifyAdminQuery(callable $fn): void
+    {
+        $this->modifyAdminQuery($fn);
     }
 
     public function doModifyListTableColumns(callable $fn): void

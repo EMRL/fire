@@ -6,17 +6,13 @@ namespace Fire\ValueObject;
 
 class Address
 {
-    /** @var string $street */
-    protected $street;
+    protected string $street;
 
-    /** @var string $city */
-    protected $city;
+    protected string $city;
 
-    /** @var string $state */
-    protected $state;
+    protected string $state;
 
-    /** @var string $zip */
-    protected $zip;
+    protected string $zip;
 
     public function __construct(
         string $street = '',

@@ -16,7 +16,6 @@ use function Fire\Core\filter_value;
 
 abstract class Taxonomy
 {
-    /** @var string TAXONOMY */
     public const TAXONOMY = '';
 
     /**

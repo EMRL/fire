@@ -18,56 +18,54 @@ final class ArchivePageSettingTest extends TestCase
     public function testStates(): void
     {
         $this->typeObject();
-        $this->getOption(1);
+        $this->getPageOption(1);
 
         $this->assertSame(
             ['one', 'test' => 'Tests Page'],
-            (new ArchivePageSetting('test', null))->states()(['one'], $this->post())
+            $this->setting()->states()(['one'], $this->post())
         );
     }
 
     public function testStatesLabel(): void
     {
         $this->typeObject();
-        $this->getOption(1);
+        $this->getPageOption(1);
 
         $this->assertSame(
             ['one', 'test' => 'Tests Custom Page'],
             (new ArchivePageSetting(
                 'test',
-                function (WP_Post_Type $type): string {
-                    return $type->label.' Custom';
-                }
+                fn (WP_Post_Type $type): string => $type->label.' Custom',
             ))->states()(['one'], $this->post())
         );
     }
 
     public function testStatesOtherPostType(): void
     {
-        $this->getOption(1);
+        $this->getPageOption(1);
 
         $post = $this->post();
         $post->post_type = 'post';
 
         $this->assertSame(
             ['one'],
-            (new ArchivePageSetting('test', null))->states()(['one'], $post)
+            $this->setting()->states()(['one'], $post)
         );
     }
 
     public function testStatesOtherPostId(): void
     {
-        $this->getOption(2);
+        $this->getPageOption(2);
 
         $this->assertSame(
             ['one'],
-            (new ArchivePageSetting('test', null))->states()(['one'], $this->post())
+            $this->setting()->states()(['one'], $this->post())
         );
     }
 
     public function testSlug(): void
     {
-        $this->getOption(1);
+        $this->getPageOption(1);
 
         expect('get_post_field')
             ->once()
@@ -76,24 +74,24 @@ final class ArchivePageSettingTest extends TestCase
 
         $this->assertSame(
             ['rewrite' => ['slug' => 'test']],
-            (new ArchivePageSetting('test', null))->slug()([])
+            $this->setting()->slug()([])
         );
     }
 
     public function testSlugNoPage(): void
     {
-        $this->getOption(0);
+        $this->getPageOption(0);
 
         $this->assertSame(
             [],
-            (new ArchivePageSetting('test', null))->slug()([])
+            $this->setting()->slug()([])
         );
     }
 
     public function testPermalinks(): void
     {
         $id = 1;
-        $this->getOption($id);
+        $this->getPageOption($id);
 
         $new = $this->post();
         $new->post_name = 'new-slug';
@@ -101,17 +99,17 @@ final class ArchivePageSettingTest extends TestCase
         $old = $this->post();
         $old->post_name = 'old-slug';
 
-        expect('flush_rewrite_rules')
+        expect('update_option')
             ->once()
-            ->withNoArgs();
+            ->with('fire_flush_rewrite', 1);
 
-        (new ArchivePageSetting('test', null))->permalinks()($id, $new, $old);
+        $this->setting()->permalinks()($id, $new, $old);
     }
 
     public function testPermalinksNoChange(): void
     {
         $id = 1;
-        $this->getOption($id);
+        $this->getPageOption($id);
 
         $new = $this->post();
         $new->post_name = 'slug';
@@ -119,81 +117,112 @@ final class ArchivePageSettingTest extends TestCase
         $old = $this->post();
         $old->post_name = 'slug';
 
-        expect('flush_rewrite_rules')
+        expect('update_option')
             ->never();
 
-        (new ArchivePageSetting('test', null))->permalinks()($id, $new, $old);
+        $this->setting()->permalinks()($id, $new, $old);
     }
 
     public function testPermalinksOtherPage(): void
     {
-        $this->getOption(1);
+        $this->getPageOption(1);
 
         $new = $this->post();
         $old = $this->post();
 
-        expect('flush_rewrite_rules')
+        expect('update_option')
             ->never();
 
-        (new ArchivePageSetting('test', null))->permalinks()(2, $new, $old);
+        $this->setting()->permalinks()(2, $new, $old);
     }
 
     public function testDelete(): void
     {
         $id = 1;
-        $this->getOption($id);
+        $this->getPageOption($id);
 
         expect('update_option')
             ->once()
             ->with('page_for_test', 0);
 
-        expect('flush_rewrite_rules')
+        expect('update_option')
             ->once()
-            ->withNoArgs();
+            ->with('fire_flush_rewrite', 1);
 
-        (new ArchivePageSetting('test', null))->delete()($id);
+        $this->setting()->delete()($id);
     }
 
     public function testDeleteOtherPost(): void
     {
-        $this->getOption(2);
+        $this->getPageOption(2);
 
         expect('update_option')
             ->never();
 
-        (new ArchivePageSetting('test', null))->delete()(1);
+        $this->setting()->delete()(1);
     }
 
     public function testArchiveTitle(): void
     {
-        $this->getOption(1);
+        $this->getPageOption(1);
 
         $post = $this->post();
 
         when('get_post_field')
-            ->alias(function ($key) use ($post) {
-                return $post->$key;
-            });
+            ->alias(fn ($key) => $post->$key);
 
         $this->assertSame(
             'Tests Page',
-            (new ArchivePageSetting('test', null))->archiveTitle()('Tests')
+            $this->setting()->archiveTitle()('Tests')
         );
     }
 
     public function testArchiveTitleNoPage(): void
     {
-        $this->getOption(0);
+        $this->getPageOption(0);
 
         $title = 'Tests';
 
         $this->assertSame(
             $title,
-            (new ArchivePageSetting('test', null))->archiveTitle()('Tests')
+            $this->setting()->archiveTitle()('Tests')
         );
     }
 
-    protected function getOption(int $value): void
+    public function testFlush(): void
+    {
+        expect('get_option')
+            ->once()
+            ->with('fire_flush_rewrite')
+            ->andReturn('1');
+
+        expect('flush_rewrite_rules')
+            ->once()
+            ->withNoArgs();
+
+        expect('update_option')
+            ->once()
+            ->with('fire_flush_rewrite', 0);
+
+        $this->setting()->flush()();
+    }
+
+    public function testFlushNotNeeded(): void
+    {
+        expect('get_option')
+            ->once()
+            ->with('fire_flush_rewrite')
+            ->andReturn('0');
+
+        $this->setting()->flush()();
+    }
+
+    protected function setting(): ArchivePageSetting
+    {
+        return new ArchivePageSetting('test', null);
+    }
+
+    protected function getPageOption(int $value): void
     {
         expect('get_option')
             ->once()
@@ -203,7 +232,7 @@ final class ArchivePageSettingTest extends TestCase
 
     protected function typeObject(): WP_Post_Type
     {
-        /** @var WP_Post_Type $type */
+        /** @var WP_Post_Type */
         $type = Mockery::mock('WP_Post_Type');
         $type->label = 'Tests';
 
@@ -217,7 +246,7 @@ final class ArchivePageSettingTest extends TestCase
 
     protected function post(): WP_Post
     {
-        /** @var WP_Post $post */
+        /** @var WP_Post */
         $post = Mockery::mock('WP_Post');
         $post->post_title = 'Tests Page';
         $post->post_type = 'page';

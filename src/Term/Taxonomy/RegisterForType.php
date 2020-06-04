@@ -6,11 +6,9 @@ namespace Fire\Term\Taxonomy;
 
 class RegisterForType
 {
-    /** @var string $taxonomy */
-    protected $taxonomy;
+    protected string $taxonomy;
 
-    /** @var string $type */
-    protected $type;
+    protected string $type;
 
     public function __construct(string $taxonomy, string $type)
     {

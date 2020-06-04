@@ -6,14 +6,13 @@ namespace Fire\Term\Taxonomy;
 
 class Register
 {
-    /** @var string $taxonomy */
-    protected $taxonomy;
+    protected string $taxonomy;
 
     /** @var callable():array<string,mixed> $fn */
     protected $fn;
 
     /** @var string[] $types */
-    protected $types = [];
+    protected array $types = [];
 
     /**
      * @param callable():array<string,mixed> $fn

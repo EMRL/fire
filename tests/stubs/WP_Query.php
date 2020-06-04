@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 class WP_Query
 {
-    protected static $globalPost = -1;
+    protected static int $globalPost = -1;
 
-    protected $posts = [];
+    protected array $posts = [];
 
-    protected $count = 0;
+    protected int $count = 0;
 
-    protected $current = -1;
+    protected int $current = -1;
 
-    public $post;
+    public string $post;
 
     public function __construct(array $posts)
     {

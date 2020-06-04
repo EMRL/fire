@@ -27,7 +27,7 @@ class Resource extends Type
         $this->registerTypeFrom([$this, 'args']);
 
         // Closure example
-        $this->registerTypeFrom(function () { return [...] });
+        $this->registerTypeFrom(fn (): array => [...]);
 
         $this->setTitlePlaceholder('Custom Input Placeholder');
 
@@ -53,9 +53,9 @@ use Fire\Post\Type\SortableListTableColumn;
 
 class DownloadColumn extends SortableListTableColumn
 {
-    protected $key = 'download';
+    protected string $key = 'download';
 
-    protected $label = 'Download';
+    protected string $label = 'Download';
 
     public function display(int $id): void
     {
@@ -72,7 +72,7 @@ class DownloadColumn extends SortableListTableColumn
 ```php
 use Fire\Post\Type\Hooks;
 
-// This must be called first to setup neccessary
+// This must be called first to setup necessary
 // WordPress filters and actions for post types
 (new Hooks())->register();
 
@@ -148,7 +148,7 @@ Uses: [`register_post_type`](https://developer.wordpress.org/reference/functions
 
 ```php
 $this->registerTypeFrom([$this, 'args']);
-$this->registerTypeFrom(function (): array { return [...]; })
+$this->registerTypeFrom(fn (): array => [...]);
 ```
 
 ### `mergeType()`
@@ -221,7 +221,7 @@ Modifies archive page title.
 Adds filters: [`post_type_archive_title`](https://developer.wordpress.org/reference/hooks/post_type_archive_title/)
 
 ```php
-$this->modifyArchiveTitle(function (string $title): string { ... });
+$this->modifyArchiveTitle(fn (string $title): string => '...');
 ```
 
 ### `modifyLink()`
@@ -231,7 +231,7 @@ Modifies post type link (URL).
 Adds filters: [`post_type_link`](https://developer.wordpress.org/reference/hooks/post_type_link/)
 
 ```php
-$this->modifyLink(function (string $url, WP_Post $post): string { ... });
+$this->modifyLink(fn (string $url, WP_Post $post): string => '...');
 ```
 
 ### `setOnQuery()`
@@ -244,6 +244,26 @@ Adds actions: [`pre_get_posts`](https://developer.wordpress.org/reference/hooks/
 $this->setOnQuery(['key' => 'value']);
 ```
 
+### `setOnFrontendQuery()`
+
+Hooks into frontend query for post type (archive and single) and sets query vars.
+
+Adds actions: [`pre_get_posts`](https://developer.wordpress.org/reference/hooks/pre_get_posts/)
+
+```php
+$this->setOnFrontendQuery(['key' => 'value']);
+```
+
+### `setOnAdminQuery()`
+
+Hooks into admin query for post type (archive and single) and sets query vars.
+
+Adds actions: [`pre_get_posts`](https://developer.wordpress.org/reference/hooks/pre_get_posts/)
+
+```php
+$this->setOnAdminQuery(['key' => 'value']);
+```
+
 ### `modifyQuery()`
 
 Hooks into query for post type (archive and single) to allow for modification.
@@ -252,6 +272,30 @@ Adds actions: [`pre_get_posts`](https://developer.wordpress.org/reference/hooks/
 
 ```php
 $this->modifyQuery(function (WP_Query $query): void {
+    $query->set('posts_per_page', 20);
+});
+```
+
+### `modifyFrontendQuery()`
+
+Hooks into frontend query for post type (archive and single) to allow for modification.
+
+Adds actions: [`pre_get_posts`](https://developer.wordpress.org/reference/hooks/pre_get_posts/)
+
+```php
+$this->modifyFrontendQuery(function (WP_Query $query): void {
+    $query->set('posts_per_page', 20);
+});
+```
+
+### `modifyAdminQuery()`
+
+Hooks into admin query for post type (archive and single) to allow for modification.
+
+Adds actions: [`pre_get_posts`](https://developer.wordpress.org/reference/hooks/pre_get_posts/)
+
+```php
+$this->modifyAdminQuery(function (WP_Query $query): void {
     $query->set('posts_per_page', 20);
 });
 ```

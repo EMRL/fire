@@ -31,7 +31,7 @@ abstract class TestCase extends PHPUnitTestCase
 
     protected function wpQuery(): WP_Query
     {
-        /** @var WP_Query $query */
+        /** @var WP_Query */
         $query = Mockery::mock('WP_Query');
         return $query;
     }

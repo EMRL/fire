@@ -34,6 +34,8 @@ function array_insert(array $arr, array $value, $key, bool $after = true): array
 /**
  * Returns a callback that inserts an array into another array before
  * or after specified key
+ *
+ * @param mixed $key
  */
 function filter_insert(array $arr, $key, bool $after = true): Closure
 {
@@ -97,7 +99,7 @@ function filter_value($value): Closure
 /**
  * Return a list of valid hosts
  */
-function parse_hosts(array $hosts): array
+function parse_hosts(string ...$hosts): array
 {
     return array_filter(array_map(function ($i) {
         return parse_url(((strpos($i, '//') === false) ? '//' : '').$i, PHP_URL_HOST);

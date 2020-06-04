@@ -26,12 +26,8 @@ final class ResolveAs404Test extends TestCase
         $GLOBALS['wp_query'] = $query;
 
         $resolve = new ResolveAs404(
-            function (): bool {
-                return false;
-            },
-            function (): bool {
-                return true;
-            }
+            fn (): bool => false,
+            fn (): bool => true,
         );
 
         $resolve->parse();
@@ -42,12 +38,8 @@ final class ResolveAs404Test extends TestCase
     public function testDoesNotResolve(): void
     {
         $resolve = new ResolveAs404(
-            function (): bool {
-                return false;
-            },
-            function (): int {
-                return 0;
-            }
+            fn (): bool => false,
+            fn (): int => 0,
         );
 
         $resolve->parse();

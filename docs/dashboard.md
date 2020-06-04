@@ -8,7 +8,7 @@ use Fire\Admin\RemoveDashboardWidgets;
 (new RemoveDashboardWidgets(
     'widget_id',
     'other_widget',
-    'more_widget_ids'
+    'more_widget_ids',
 ))->register();
 ```
 

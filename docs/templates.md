@@ -13,7 +13,7 @@ $content = (new Layout())->register();
 // to a string (echo'd)
 ```
 
-This would typically be used in conjuction with the [`Inject()`](query.md) class.
+This would typically be used in conjunction with the [`Inject()`](query.md) class.
 
 ```php
 use Fire\Query\Inject;
@@ -59,11 +59,16 @@ $content = (new Layout('layout.default.php')
 
 ### `buffer()`
 
-Uses output beffering to return output from callable.
+Uses output buffering to return output from callable.
 
 ```php
+use function Fire\Template\buffer;
+
 $content = buffer('the_content');
-$content = buffer(function (): void { echo 'Hello world!'; });
+
+$content = buffer(function (): void {
+    echo 'Hello world!';
+});
 ```
 
 ### `html_attributes`
@@ -71,6 +76,8 @@ $content = buffer(function (): void { echo 'Hello world!'; });
 Transforms associative array into string of HTML attributes. If boolean `true` is passed as value, only the attribute name will be included. All values will be escaped.
 
 ```php
+use function Fire\Template\html_attributes;
+
 $attrs = html_attributes([
     'required' => true,
     'width' => 50,
@@ -88,7 +95,7 @@ Returns HTML for list items in menu. This is a shortcut to remove the default wr
 ```php
 <nav class="primary-menu">
     <ul>
-        <?php echo nav_menu_items(['theme_location' => 'primary']) ?>
+        <?php echo Fire\Template\nav_menu_items(['theme_location' => 'primary']) ?>
         <li>
             Static item at the end
         </li>

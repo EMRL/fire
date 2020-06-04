@@ -6,17 +6,13 @@ namespace Fire\ValueObject;
 
 class GoogleMapAddress extends Address
 {
-    /** @var string DIRECTIONS_URL */
     public const DIRECTIONS_URL = 'https://www.google.com/maps/dir/?api=1';
 
-    /** @var string EMBED_URL */
     public const EMBED_URL = 'https://www.google.com/maps/embed/v1/%s';
 
-    /** @var string $apiKey */
-    protected static $apiKey;
+    protected static string $apiKey = '';
 
-    /** @var string $placeId */
-    protected $placeId;
+    protected string $placeId;
 
     public function __construct(
         string $street = '',

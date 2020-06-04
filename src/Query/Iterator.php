@@ -10,8 +10,7 @@ use WP_Query;
 
 class Iterator implements IteratorAggregate
 {
-    /** @var WP_Query $query */
-    protected $query;
+    protected WP_Query $query;
 
     public function __construct(WP_Query $query)
     {

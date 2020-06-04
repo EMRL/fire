@@ -6,11 +6,9 @@ namespace Fire\Admin;
 
 abstract class ListTableColumn
 {
-    /** @var string $key */
-    protected $key;
+    protected string $key;
 
-    /** @var string $label */
-    protected $label;
+    protected string $label;
 
     public function key(): string
     {

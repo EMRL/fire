@@ -6,7 +6,7 @@ use Fire\Post\Type\SortableListTableColumn;
 
 final class SortableDownloadColumn extends SortableListTableColumn
 {
-    protected $key = 'download';
+    protected string $key = 'download';
 
-    protected $label = 'Download';
+    protected string $label = 'Download';
 }

@@ -6,10 +6,9 @@ namespace Fire\Post\Type;
 
 class Register
 {
-    /** @var string $type */
-    protected $type;
+    protected string $type;
 
-    /** @var callable():array<string,mixed> $fn */
+    /** @var callable():array<string,mixed> */
     protected $fn;
 
     /**

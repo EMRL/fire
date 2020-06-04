@@ -6,11 +6,10 @@ namespace Fire\Path;
 
 class JoinManifest extends JoinSearch
 {
-    /** @var string $manifestPath */
-    protected $manifestPath;
+    protected string $manifestPath;
 
-    /** @var array<string,string> $manifest */
-    protected $manifest;
+    /** @var array<string,string> */
+    protected array $manifest = [];
 
     public function __construct(JoinPath $join, string $manifestPath)
     {

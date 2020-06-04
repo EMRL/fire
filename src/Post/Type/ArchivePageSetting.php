@@ -13,20 +13,18 @@ use function Fire\Post\page_id_for_type;
 
 class ArchivePageSetting
 {
-    /** @var string GROUP */
     protected const GROUP = 'reading';
 
-    /** @var string OPTION_NAME */
-    public const OPTION_NAME = 'page_for_%s';
+    protected const OPTION_NAME = 'page_for_%s';
 
-    /** @var string $type */
-    protected $type;
+    protected const FLUSH_OPTION_NAME = 'fire_flush_rewrite';
 
-    /** @var callable(WP_Post_Type):string $label */
+    protected string $type;
+
+    /** @var callable(WP_Post_Type):string */
     protected $label;
 
-    /** @var string $key */
-    protected $key;
+    protected string $key;
 
     public function __construct(string $type, ?callable $label)
     {
@@ -70,6 +68,18 @@ class ArchivePageSetting
         ]);
     }
 
+    public function flush(): Closure
+    {
+        return function (): void {
+            $flush = (int) get_option(static::FLUSH_OPTION_NAME);
+
+            if ($flush === 1) {
+                flush_rewrite_rules();
+                update_option(static::FLUSH_OPTION_NAME, 0);
+            }
+        };
+    }
+
     public function slug(): Closure
     {
         return function (array $args): array {
@@ -89,8 +99,15 @@ class ArchivePageSetting
     {
         return function (int $id, WP_Post $new, WP_Post $old): void {
             if (page_id_for_type($this->type) === $id && $new->post_name !== $old->post_name) {
-                flush_rewrite_rules();
+                update_option(static::FLUSH_OPTION_NAME, 1);
             }
+        };
+    }
+
+    public function optionUpdate(): Closure
+    {
+        return function (): void {
+            update_option(static::FLUSH_OPTION_NAME, 1);
         };
     }
 
@@ -99,7 +116,7 @@ class ArchivePageSetting
         return function (int $id): void {
             if (page_id_for_type($this->type) === $id) {
                 update_option($this->key, 0);
-                flush_rewrite_rules();
+                update_option(static::FLUSH_OPTION_NAME, 1);
             }
         };
     }

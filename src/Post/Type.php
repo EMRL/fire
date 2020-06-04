@@ -137,6 +137,34 @@ abstract class Type
     }
 
     /**
+     * Set vars on frontend query
+     *
+     * @param array<string,mixed> $data
+     */
+    protected function setOnFrontendQuery(array $data): self
+    {
+        if (!is_admin()) {
+            $this->setOnQuery($data);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set vars on admin query
+     *
+     * @param array<string,mixed> $data
+     */
+    protected function setOnAdminQuery(array $data): self
+    {
+        if (is_admin()) {
+            $this->setOnQuery($data);
+        }
+
+        return $this;
+    }
+
+    /**
      * Modify query
      *
      * @param callable(WP_Query):void $fn
@@ -144,6 +172,34 @@ abstract class Type
     protected function modifyQuery(callable $fn): self
     {
         add_action('fire/pre_get_posts/'.static::TYPE, $fn);
+        return $this;
+    }
+
+    /**
+     * Modify frontend query
+     *
+     * @param callable(WP_Query):void $fn
+     */
+    protected function modifyFrontendQuery(callable $fn): self
+    {
+        if (!is_admin()) {
+            $this->modifyQuery($fn);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Modify admin query
+     *
+     * @param callable(WP_Query):void $fn
+     */
+    protected function modifyAdminQuery(callable $fn): self
+    {
+        if (is_admin()) {
+            $this->modifyQuery($fn);
+        }
+
         return $this;
     }
 
@@ -219,9 +275,13 @@ abstract class Type
     protected function registerArchivePageSetting(callable $label = null): self
     {
         $setting = new ArchivePageSetting(static::TYPE, $label);
+        add_action('init', $setting->flush());
         add_action('admin_init', $setting->register());
         add_action('post_updated', $setting->permalinks(), 10, 3);
-        add_action('before_delete_post', $setting->delete());
+        add_action('update_option_'.ArchivePageSetting::optionName(static::TYPE), $setting->optionUpdate());
+        add_action('add_option_'.ArchivePageSetting::optionName(static::TYPE), $setting->optionUpdate());
+        add_action('trashed_post', $setting->delete());
+        add_action('deleted_post', $setting->delete());
         add_filter('display_post_states', $setting->states(), 10, 2);
         $this->modifyType($setting->slug());
         $this->modifyArchiveTitle($setting->archiveTitle());

@@ -29,7 +29,7 @@ class Country extends Taxonomy
         $this->registerTaxonomyFrom([$this, 'args'], Post::TYPE);
 
         // Closure example
-        $this->registerTaxonomyFrom(function () { return [...] }, Post::TYPE);
+        $this->registerTaxonomyFrom(fn () => [...], Post::TYPE);
 
         $this->addListTableColumnAfter(new DownloadColumn(), 'title');
 
@@ -53,9 +53,9 @@ use Fire\Admin\ListTableColumn;
 
 class DownloadColumn extends ListTableColumn
 {
-    protected $key = 'download';
+    protected string $key = 'download';
 
-    protected $label = 'Download';
+    protected string $label = 'Download';
 
     public function display(int $id): void
     {
@@ -72,7 +72,7 @@ class DownloadColumn extends ListTableColumn
 ```php
 use Fire\Term\Taxonomy\Hooks;
 
-// This must be called first to setup neccessary
+// This must be called first to setup necessary
 // WordPress filters and actions for taxonomies
 (new Hooks())->register();
 
@@ -148,7 +148,7 @@ Uses: [`register_taxonomy`](https://developer.wordpress.org/reference/functions/
 
 ```php
 $this->registerTaxonomyFrom([$this, 'args'], Post::TYPE);
-$this->registerTaxonomyFrom(function (): array { return [...]; }, 'page');
+$this->registerTaxonomyFrom(fn (): array => [...], 'page');
 ```
 
 ### `mergeTaxonomy()`
@@ -185,7 +185,7 @@ Modifies term link (URL).
 Adds filters: [`term_link`](https://developer.wordpress.org/reference/hooks/term_link/)
 
 ```php
-$this->modifyLink(function (string $url, WP_Term $term): string { ... });
+$this->modifyLink(fn (string $url, WP_Term $term): string => '...');
 ```
 
 ### `modifyListTableColumns()`
