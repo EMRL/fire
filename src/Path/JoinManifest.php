@@ -28,11 +28,9 @@ class JoinManifest extends JoinSearch
 
     /**
      * Attempts to read and decode manifest file
-     *
-     * @return mixed
      */
-    protected function readManifest()
+    protected function readManifest(): array
     {
-        return json_decode((string) @file_get_contents($this->manifestPath), true);
+        return (array) json_decode((string) @file_get_contents($this->manifestPath), true);
     }
 }

@@ -2,6 +2,10 @@
 
 ## [Unreleased][unreleased]
 
+## [3.2.1] - 2020-06-08
+### Fixed
+- Fixed return type error for `Fire\Path\JoinManifest::readManifest()`
+
 ## [3.2.0] - 2020-05-27
 ### Changed
 - PHP 7.4 required, syntax updates
@@ -29,7 +33,8 @@
 Complete rewrite  
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
-[unreleased]: https://github.com/emrl/fire/compare/3.2.0...master
+[unreleased]: https://github.com/emrl/fire/compare/3.2.1...master
+[3.2.1]: https://github.com/emrl/fire/compare/3.2.0...3.2.1
 [3.2.0]: https://github.com/emrl/fire/compare/3.1.1...3.2.0
 [3.1.1]: https://github.com/emrl/fire/compare/3.1.0...3.1.1
 [3.1.0]: https://github.com/emrl/fire/compare/3.0.1...3.1.0
