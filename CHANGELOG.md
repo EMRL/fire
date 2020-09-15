@@ -37,7 +37,8 @@
 Complete rewrite  
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
-[unreleased]: https://github.com/emrl/fire/compare/3.2.1...master
+[unreleased]: https://github.com/emrl/fire/compare/3.2.2...master
+[3.2.2]: https://github.com/emrl/fire/compare/3.2.1...3.2.2
 [3.2.1]: https://github.com/emrl/fire/compare/3.2.0...3.2.1
 [3.2.0]: https://github.com/emrl/fire/compare/3.1.1...3.2.0
 [3.1.1]: https://github.com/emrl/fire/compare/3.1.0...3.1.1
