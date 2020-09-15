@@ -2,6 +2,10 @@
 
 ## [Unreleased][unreleased]
 
+## [3.2.2] - 2020-09-14
+### Fixed
+- Set `Fire\Term\Tag::TAXONOMY` to the correct value
+
 ## [3.2.1] - 2020-06-08
 ### Fixed
 - Fixed return type error for `Fire\Path\JoinManifest::readManifest()`

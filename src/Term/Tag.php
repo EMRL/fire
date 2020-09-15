@@ -6,5 +6,5 @@ namespace Fire\Term;
 
 class Tag extends Taxonomy
 {
-    public const TAXONOMY = 'tag';
+    public const TAXONOMY = 'post_tag';
 }
