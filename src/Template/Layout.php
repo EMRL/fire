@@ -32,7 +32,7 @@ class Layout
 
     public function register(): self
     {
-        add_filter('template_include', [$this, 'include']);
+        add_filter('template_include', [$this, 'include'], 11);
         return $this;
     }
 
