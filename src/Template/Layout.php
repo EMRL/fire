@@ -8,6 +8,8 @@ class Layout
 {
     protected string $default;
 
+    protected int $priority = 999;
+
     /** @var array<string,string> $layouts */
     protected array $layouts = [];
 
@@ -24,6 +26,12 @@ class Layout
         return $this;
     }
 
+    public function setPriority(int $value): self
+    {
+        $this->priority = $value;
+        return $this;
+    }
+
     public function setLayoutFor(string $template, string $layout): self
     {
         $this->layouts[$template] = $layout;
@@ -32,7 +40,7 @@ class Layout
 
     public function register(): self
     {
-        add_filter('template_include', [$this, 'include'], 11);
+        add_filter('template_include', [$this, 'include'], $this->priority);
         return $this;
     }
 

@@ -1,8 +1,11 @@
 # Changelog
 
 ## [Unreleased][unreleased]
+
+## [3.2.4] - 2020-10-07
 ### Changed
 - Add check for existing file to `Fire\Path\JoinManifest`
+- Bump priority and make it configurable in `Fire\Template\Layout`
 
 ## [3.2.3] - 2020-10-05
 ### Changed
@@ -43,7 +46,8 @@
 Complete rewrite  
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
-[unreleased]: https://github.com/emrl/fire/compare/3.2.3...master
+[unreleased]: https://github.com/emrl/fire/compare/3.2.4...master
+[3.2.4]: https://github.com/emrl/fire/compare/3.2.3...3.2.4
 [3.2.3]: https://github.com/emrl/fire/compare/3.2.2...3.2.3
 [3.2.2]: https://github.com/emrl/fire/compare/3.2.1...3.2.2
 [3.2.1]: https://github.com/emrl/fire/compare/3.2.0...3.2.1
