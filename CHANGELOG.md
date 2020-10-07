@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased][unreleased]
+### Changed
+- Add check for existing file to `Fire\Path\JoinManifest`
 
 ## [3.2.3] - 2020-10-05
 ### Changed

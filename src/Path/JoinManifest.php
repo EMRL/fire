@@ -31,6 +31,16 @@ class JoinManifest extends JoinSearch
      */
     protected function readManifest(): array
     {
+        // WordPress now checks for PHP errors/warnings and adjusts the admin
+        // screen to allow space for them to show (which is nice). Our use of
+        // error suppression on `file_get_contents` does not prevent this from
+        // happening, but it does hide the warning, so user is left with a
+        // confusing empty space. So let's just add a check if the file exists
+        // first.
+        if (!is_file($this->manifestPath)) {
+            return [];
+        }
+
         return (array) json_decode((string) @file_get_contents($this->manifestPath), true);
     }
 }
