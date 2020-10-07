@@ -55,6 +55,16 @@ $content = (new Layout('layout.default.php')
     ->register();
 ```
 
+Some plugins also filter the WordPress template, and this may cause conflicts with the layout. If you need to adjust the priority of the template filter you can use the `setPriority()` method.
+
+```php
+use Fire\Template\Layout;
+
+$content = (new Layout())
+    ->setPriority(50)
+    ->register();
+```
+
 ## Functions
 
 ### `buffer()`
