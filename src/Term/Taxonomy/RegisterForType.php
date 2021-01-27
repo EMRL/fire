@@ -8,16 +8,21 @@ class RegisterForType
 {
     protected string $taxonomy;
 
-    protected string $type;
+    /**
+     * @var string[] $types
+     */
+    protected array $types;
 
-    public function __construct(string $taxonomy, string $type)
+    public function __construct(string $taxonomy, string ...$types)
     {
         $this->taxonomy = $taxonomy;
-        $this->type = $type;
+        $this->types = $types;
     }
 
     public function __invoke(): void
     {
-        register_taxonomy_for_object_type($this->taxonomy, $this->type);
+        foreach ($this->types as $type) {
+            register_taxonomy_for_object_type($this->taxonomy, $type);
+        }
     }
 }

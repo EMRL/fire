@@ -2,6 +2,20 @@
 
 ## [Unreleased][unreleased]
 
+## [3.3.0] - 2021-01-26
+### Added
+- Added `Fire\Post\Type\generate_labels()`
+- Added `Fire\Term\Taxonomy\generate_labels()`
+- Added `Fire\Post\Type::object()`
+- Added `Fire\Term\Taxonomy::object()`
+
+### Changed
+- `Fire\Term\Taxonomy::registerForType()` accepts variadic strings
+
+### Deprecated
+- Deprecated `Fire\Post\Type::config()` in favor of static `Fire\Post\Type::object()`
+- Deprecated `Fire\Term\Taxonomy::config()` in favor of static `Fire\Term\Taxonomy::object()`
+
 ## [3.2.4] - 2020-10-07
 ### Changed
 - Add check for existing file to `Fire\Path\JoinManifest`
@@ -25,10 +39,10 @@
 - `Fire\Core\parse_hosts()` accepts variadic strings
 
 ### Added
-- Added `Fire\Post\Type\setOnFrontendQuery()`
-- Added `Fire\Post\Type\setOnAdminQuery()`
-- Added `Fire\Post\Type\modifyFrontendQuery()`
-- Added `Fire\Post\Type\modifyAdminQuery()`
+- Added `Fire\Post\Type::setOnFrontendQuery()`
+- Added `Fire\Post\Type::setOnAdminQuery()`
+- Added `Fire\Post\Type::modifyFrontendQuery()`
+- Added `Fire\Post\Type::modifyAdminQuery()`
 
 ## [3.1.1] - 2020-05-07
 ### Changed
@@ -46,7 +60,8 @@
 Complete rewrite  
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
-[unreleased]: https://github.com/emrl/fire/compare/3.2.4...master
+[unreleased]: https://github.com/emrl/fire/compare/3.3.0...master
+[3.3.0]: https://github.com/emrl/fire/compare/3.2.4...3.3.0
 [3.2.4]: https://github.com/emrl/fire/compare/3.2.3...3.2.4
 [3.2.3]: https://github.com/emrl/fire/compare/3.2.2...3.2.3
 [3.2.2]: https://github.com/emrl/fire/compare/3.2.1...3.2.2

@@ -23,8 +23,8 @@ final class DescriptionsTest extends TestCase
     public function testFiltersAdded(): void
     {
         $instance = (new Descriptions())->register();
-        $this->assertTrue(has_filter('wp_nav_menu_args', [$instance, 'args']));
-        $this->assertTrue(has_filter('nav_menu_item_args', [$instance, 'item']));
+        $this->assertIsInt(has_filter('wp_nav_menu_args', [$instance, 'args']));
+        $this->assertIsInt(has_filter('nav_menu_item_args', [$instance, 'item']));
     }
 
     public function testArgs(): void

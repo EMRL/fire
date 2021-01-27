@@ -113,14 +113,14 @@ Responsible for adding all hooks for post type. See examples above.
 (new Resource)->register();
 ```
 
-### `config()`
+### `object()`
 
 Return post type object/configuration.
 
 Uses: [`get_post_type_object`](https://developer.wordpress.org/reference/functions/get_post_type_object/)
 
 ```php
-echo $this->config()->public;
+echo Resource::object()->public;
 ```
 
 ## Protected methods
@@ -459,6 +459,18 @@ Gets the ID of the current post or the ID of the assigned post type page if you 
 
 ```php
 $show_title = get_post_meta(Fire\Post\id(), 'page_show_title', true);
+```
+
+### `generate_labels()`
+
+Generate labels for post types.
+
+```php
+$this->registerType([
+    'labels' => Fire\Post\Type\generate_labels('Resources', 'Resource', [
+        'all_items' => 'All types of resources',
+    ]),
+]);
 ```
 
 Next: [Query](query.md)

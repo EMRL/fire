@@ -14,7 +14,18 @@ final class LayoutTest extends TestCase
     public function testAddsFilters(): void
     {
         $instance = (new Layout())->register();
-        $this->assertTrue(has_filter('template_include', [$instance, 'include']));
+        $this->assertNotFalse(has_filter('template_include', [$instance, 'include']));
+    }
+
+    public function testPriority(): void
+    {
+        $priority = 50;
+
+        $instance = (new Layout())
+            ->setPriority($priority)
+            ->register();
+
+        $this->assertSame($priority, has_filter('template_include', [$instance, 'include']));
     }
 
     public function testDefaultLayoutReturned(): void

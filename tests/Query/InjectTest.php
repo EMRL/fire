@@ -15,7 +15,7 @@ final class InjectTest extends TestCase
     {
         when('is_admin')->justReturn(false);
         $instance = (new Inject([]))->register();
-        $this->assertTrue(has_action('parse_query', [$instance, 'parse']));
+        $this->assertIsInt(has_action('parse_query', [$instance, 'parse']));
     }
 
     public function testActionsNotAddedWhenAdmin(): void

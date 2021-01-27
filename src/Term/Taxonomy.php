@@ -28,8 +28,23 @@ abstract class Taxonomy
 
     /**
      * Get taxonomy config
+     *
+     * @deprecated since version 3.3.0. Use static `object()` instead.
      */
     public function config(): WP_Taxonomy
+    {
+        @trigger_error(
+            'config() method is deprecated since 3.3.0. Use static object() method instead',
+            E_USER_DEPRECATED,
+        );
+
+        return get_taxonomy(static::TAXONOMY);
+    }
+
+    /**
+     * Get taxonomy object
+     */
+    public static function object(): WP_Taxonomy
     {
         return get_taxonomy(static::TAXONOMY);
     }
@@ -79,9 +94,9 @@ abstract class Taxonomy
     /**
      * Register taxonomy for post type
      */
-    protected function registerForType(string $type): self
+    protected function registerForType(string ...$types): self
     {
-        add_action('init', new RegisterForType(static::TAXONOMY, $type));
+        add_action('init', new RegisterForType(static::TAXONOMY, ...$types));
         return $this;
     }
 

@@ -270,4 +270,18 @@ This is a shortcut that combines `modifyListTableColumns()` and `modifyListTable
 $this->addListTableColumnAfter(new DownloadColumn(), 'title');
 ```
 
+## Functions
+
+### `generate_labels()`
+
+Generate labels for taxonomies.
+
+```php
+$this->registerTaxonomy([
+    'labels' => Fire\Term\Taxonomy\generate_labels('Countries', 'Country', [
+        'all_items' => 'All types of countries',
+    ]),
+]);
+```
+
 Next: [Templates](templates.md)

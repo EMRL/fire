@@ -116,4 +116,4 @@ value($three, 1, 2);
 // 3
 ```
 
-Next: [Post Types](post-types.md)
+Next: [Menus](menus.md)

@@ -16,7 +16,7 @@ use function Brain\Monkey\Functions\expect;
 
 final class TaxonomyTest extends TestCase
 {
-    public function testConfig(): void
+    public function testObject(): void
     {
         /** @var WP_Taxonomy */
         $taxonomy = Mockery::mock('WP_Taxonomy');
@@ -28,7 +28,7 @@ final class TaxonomyTest extends TestCase
 
         $this->assertSame(
             $taxonomy,
-            $this->taxonomy()->config()
+            TaxonomyStub::object(),
         );
     }
 
@@ -43,41 +43,41 @@ final class TaxonomyTest extends TestCase
     {
         $fn = $this->emptyFn();
         $this->taxonomy()->doModifyTaxonomy($fn);
-        $this->assertTrue(has_filter('fire/register_taxonomy_args/test', $fn));
+        $this->assertIsInt(has_filter('fire/register_taxonomy_args/test', $fn));
     }
 
     public function testRegisterForType(): void
     {
         expectAdded('init')->with(Mockery::type(RegisterForType::class));
-        $this->taxonomy()->doRegisterForType('post');
+        $this->taxonomy()->doRegisterForType('post', 'page');
     }
 
     public function testModifyLink(): void
     {
         $fn = $this->emptyFn();
         $this->taxonomy()->doModifyLink($fn);
-        $this->assertTrue(has_filter('fire/term_link/test', $fn));
+        $this->assertIsInt(has_filter('fire/term_link/test', $fn));
     }
 
     public function testModifyListTableColumns(): void
     {
         $fn = $this->emptyFn();
         $this->taxonomy()->doModifyListTableColumns($fn);
-        $this->assertTrue(has_filter('manage_edit-test_columns', $fn));
+        $this->assertIsInt(has_filter('manage_edit-test_columns', $fn));
     }
 
     public function testModifySortableListTableColumns(): void
     {
         $fn = $this->emptyFn();
         $this->taxonomy()->doModifySortableListTableColumns($fn);
-        $this->assertTrue(has_filter('manage_edit-test_sortable_columns', $fn));
+        $this->assertIsInt(has_filter('manage_edit-test_sortable_columns', $fn));
     }
 
     public function testModifyListTableColumnDisplay(): void
     {
         $fn = $this->emptyFn();
         $this->taxonomy()->doModifyListTableColumnDisplay($fn);
-        $this->assertTrue(has_action('manage_test_custom_column', $fn));
+        $this->assertIsInt(has_action('manage_test_custom_column', $fn));
     }
 
     public function testAddListTableColumn(): void

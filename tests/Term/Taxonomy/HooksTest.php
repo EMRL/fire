@@ -16,8 +16,8 @@ final class HooksTest extends TestCase
     public function testRegisterAddsHooks(): void
     {
         $instance = $this->hooks()->register();
-        $this->assertTrue(has_filter('register_taxonomy_args', [$instance, 'registerTaxonomyArgs']));
-        $this->assertTrue(has_filter('term_link', [$instance, 'termLink']));
+        $this->assertIsInt(has_filter('register_taxonomy_args', [$instance, 'registerTaxonomyArgs']));
+        $this->assertIsInt(has_filter('term_link', [$instance, 'termLink']));
     }
 
     public function testRegisterTaxonomyArgs(): void

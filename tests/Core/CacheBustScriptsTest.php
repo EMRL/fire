@@ -19,8 +19,8 @@ final class CacheBustScriptsTest extends TestCase
     {
         when('is_admin')->justReturn(false);
         $instance = (new CacheBustScripts($this->current))->register();
-        $this->assertTrue(has_filter('script_loader_src', [$instance, 'src']));
-        $this->assertTrue(has_filter('style_loader_src', [$instance, 'src']));
+        $this->assertIsInt(has_filter('script_loader_src', [$instance, 'src']));
+        $this->assertIsInt(has_filter('style_loader_src', [$instance, 'src']));
     }
 
     public function testFiltersNotAddedForAdmin(): void

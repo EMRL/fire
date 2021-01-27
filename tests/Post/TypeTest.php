@@ -16,7 +16,7 @@ use function Brain\Monkey\Functions\expect;
 
 final class TypeTest extends TestCase
 {
-    public function testConfig(): void
+    public function testObject(): void
     {
         /** @var WP_Post_Type */
         $type = Mockery::mock('WP_Post_Type');
@@ -28,7 +28,7 @@ final class TypeTest extends TestCase
 
         $this->assertSame(
             $type,
-            $this->type()->config()
+            TypeStub::object(),
         );
     }
 
@@ -42,28 +42,28 @@ final class TypeTest extends TestCase
     {
         $fn = $this->emptyFn();
         $this->type()->doModifyType($fn);
-        $this->assertTrue(has_filter('fire/register_post_type_args/test', $fn));
+        $this->assertIsInt(has_filter('fire/register_post_type_args/test', $fn));
     }
 
     public function testModifyTitlePlaceholder(): void
     {
         $fn = $this->emptyFn();
         $this->type()->doModifyTitlePlaceholder($fn);
-        $this->assertTrue(has_filter('fire/enter_title_here/test', $fn));
+        $this->assertIsInt(has_filter('fire/enter_title_here/test', $fn));
     }
 
     public function testModifyArchiveTitle(): void
     {
         $fn = $this->emptyFn();
         $this->type()->doModifyArchiveTitle($fn);
-        $this->assertTrue(has_filter('fire/post_type_archive_title/test', $fn));
+        $this->assertIsInt(has_filter('fire/post_type_archive_title/test', $fn));
     }
 
     public function testModifyLink(): void
     {
         $fn = $this->emptyFn();
         $this->type()->doModifyLink($fn);
-        $this->assertTrue(has_filter('fire/post_type_link/test', $fn));
+        $this->assertIsInt(has_filter('fire/post_type_link/test', $fn));
     }
 
     public function testSetOnQuery(): void
@@ -102,7 +102,7 @@ final class TypeTest extends TestCase
     {
         $fn = $this->emptyFn();
         $this->type()->doModifyQuery($fn);
-        $this->assertTrue(has_action('fire/pre_get_posts/test', $fn));
+        $this->assertIsInt(has_action('fire/pre_get_posts/test', $fn));
     }
 
     public function testModifyFrontendQuery(): void
@@ -117,7 +117,7 @@ final class TypeTest extends TestCase
         $this->assertFalse(has_action('fire/pre_get_posts/test', $fn));
 
         $this->type()->doModifyFrontendQuery($fn);
-        $this->assertTrue(has_action('fire/pre_get_posts/test', $fn));
+        $this->assertIsInt(has_action('fire/pre_get_posts/test', $fn));
     }
 
     public function testModifyAdminQuery(): void
@@ -132,28 +132,28 @@ final class TypeTest extends TestCase
         $this->assertFalse(has_action('fire/pre_get_posts/test', $fn));
 
         $this->type()->doModifyAdminQuery($fn);
-        $this->assertTrue(has_action('fire/pre_get_posts/test', $fn));
+        $this->assertIsInt(has_action('fire/pre_get_posts/test', $fn));
     }
 
     public function testModifyListTableColumns(): void
     {
         $fn = $this->emptyFn();
         $this->type()->doModifyListTableColumns($fn);
-        $this->assertTrue(has_filter('manage_test_posts_columns', $fn));
+        $this->assertIsInt(has_filter('manage_test_posts_columns', $fn));
     }
 
     public function testModifySortableListTableColumns(): void
     {
         $fn = $this->emptyFn();
         $this->type()->doModifySortableListTableColumns($fn);
-        $this->assertTrue(has_filter('manage_edit-test_sortable_columns', $fn));
+        $this->assertIsInt(has_filter('manage_edit-test_sortable_columns', $fn));
     }
 
     public function testModifyListTableColumnDisplay(): void
     {
         $fn = $this->emptyFn();
         $this->type()->doModifyListTableColumnDisplay($fn);
-        $this->assertTrue(has_action('manage_test_posts_custom_column', $fn));
+        $this->assertIsInt(has_action('manage_test_posts_custom_column', $fn));
     }
 
     public function testAddListTableColumn(): void

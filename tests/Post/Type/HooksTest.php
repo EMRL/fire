@@ -17,11 +17,11 @@ final class HooksTest extends TestCase
     public function testRegisterAddsHooks(): void
     {
         $instance = $this->hooks()->register();
-        $this->assertTrue(has_filter('register_post_type_args', [$instance, 'registerPostTypeArgs']));
-        $this->assertTrue(has_filter('enter_title_here', [$instance, 'enterTitleHere']));
-        $this->assertTrue(has_filter('post_type_archive_title', [$instance, 'postTypeArchiveTitle']));
-        $this->assertTrue(has_filter('post_type_link', [$instance, 'postTypeLink']));
-        $this->assertTrue(has_action('pre_get_posts', [$instance, 'preGetPosts']));
+        $this->assertIsInt(has_filter('register_post_type_args', [$instance, 'registerPostTypeArgs']));
+        $this->assertIsInt(has_filter('enter_title_here', [$instance, 'enterTitleHere']));
+        $this->assertIsInt(has_filter('post_type_archive_title', [$instance, 'postTypeArchiveTitle']));
+        $this->assertIsInt(has_filter('post_type_link', [$instance, 'postTypeLink']));
+        $this->assertIsInt(has_action('pre_get_posts', [$instance, 'preGetPosts']));
     }
 
     public function testRegisterPostTypeArgs(): void

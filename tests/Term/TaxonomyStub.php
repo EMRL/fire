@@ -21,9 +21,9 @@ final class TaxonomyStub extends Taxonomy
         $this->modifyTaxonomy($fn);
     }
 
-    public function doRegisterForType(string $type): void
+    public function doRegisterForType(string ...$types): void
     {
-        $this->registerForType($type);
+        $this->registerForType(...$types);
     }
 
     public function doModifyLink(callable $fn): void

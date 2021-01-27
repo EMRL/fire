@@ -14,7 +14,7 @@ final class ResolveAs404Test extends TestCase
     public function testActionsAdded(): void
     {
         $instance = (new ResolveAs404())->register();
-        $this->assertTrue(has_action('wp', [$instance, 'parse']));
+        $this->assertIsInt(has_action('wp', [$instance, 'parse']));
     }
 
     public function testResolves(): void

@@ -31,8 +31,23 @@ abstract class Type
 
     /**
      * Get post type config
+     *
+     * @deprecated since version 3.3.0. Use static `object()` instead.
      */
     public function config(): WP_Post_Type
+    {
+        @trigger_error(
+            'config() method is deprecated since 3.3.0. Use static object() method instead',
+            E_USER_DEPRECATED,
+        );
+
+        return get_post_type_object(static::TYPE);
+    }
+
+    /**
+     * Get post type object
+     */
+    public static function object(): WP_Post_Type
     {
         return get_post_type_object(static::TYPE);
     }
