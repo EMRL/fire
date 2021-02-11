@@ -2,6 +2,9 @@
 
 ## [Unreleased][unreleased]
 
+## [3.3.1] - 2021-02-11
+- Fixed `Fire\Post\Type\Hooks::preGetPosts()` to handle multiple types
+
 ## [3.3.0] - 2021-01-26
 ### Added
 - Added `Fire\Post\Type\generate_labels()`
@@ -60,7 +63,8 @@
 Complete rewrite  
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
-[unreleased]: https://github.com/emrl/fire/compare/3.3.0...master
+[unreleased]: https://github.com/emrl/fire/compare/3.3.1...master
+[3.3.1]: https://github.com/emrl/fire/compare/3.3.0...3.3.1
 [3.3.0]: https://github.com/emrl/fire/compare/3.2.4...3.3.0
 [3.2.4]: https://github.com/emrl/fire/compare/3.2.3...3.2.4
 [3.2.3]: https://github.com/emrl/fire/compare/3.2.2...3.2.3
