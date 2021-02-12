@@ -51,11 +51,16 @@ class Layout
 
     public function layoutsForTemplate(string $template): array
     {
+        $base = $template;
         $layouts = [$this->default];
-        $this->current = basename($template);
+        $this->current = $template;
 
-        if (isset($this->layouts[$this->current])) {
-            array_unshift($layouts, $this->layouts[$this->current]);
+        if (strpos($template, get_theme_file_path()) === 0) {
+            $base = basename($template);
+        }
+
+        if (isset($this->layouts[$base])) {
+            array_unshift($layouts, $this->layouts[$base]);
         }
 
         return $layouts;
@@ -69,7 +74,7 @@ class Layout
     public function __toString(): string
     {
         return buffer(function (): void {
-            locate_template([$this->current()], true);
+            load_template($this->current());
         });
     }
 }
