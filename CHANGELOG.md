@@ -2,6 +2,9 @@
 
 ## [Unreleased][unreleased]
 
+## [3.3.3] - 2021-02-18
+- Fixed `Fire\Template\Layout` to only buffer template if one has been set for plugin compatability
+
 ## [3.3.2] - 2021-02-12
 - Fixed `Fire\Template\Layout` to allow for templates outside of theme for plugin compatibility
 
@@ -67,6 +70,7 @@ Complete rewrite
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
 [unreleased]: https://github.com/emrl/fire/compare/3.3.2...master
+[3.3.3]: https://github.com/emrl/fire/compare/3.3.2...3.3.3
 [3.3.2]: https://github.com/emrl/fire/compare/3.3.1...3.3.2
 [3.3.1]: https://github.com/emrl/fire/compare/3.3.0...3.3.1
 [3.3.0]: https://github.com/emrl/fire/compare/3.2.4...3.3.0

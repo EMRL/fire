@@ -73,6 +73,10 @@ class Layout
 
     public function __toString(): string
     {
+        if (!isset($this->current)) {
+            return '';
+        }
+
         return buffer(function (): void {
             load_template($this->current());
         });
