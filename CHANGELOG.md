@@ -4,6 +4,7 @@
 
 ## [3.3.4] - 2021-04-08
 - Fixed `Fire\Post\page_for_type()` to work with native Blog page
+- Improved label generation for Post Types and Taxonomies
 
 ## [3.3.3] - 2021-02-18
 - Fixed `Fire\Template\Layout` to only buffer template if one has been set for plugin compatability
