@@ -2,6 +2,9 @@
 
 ## [Unreleased][unreleased]
 
+## [3.3.4] - 2021-04-08
+- Fixed `Fire\Post\page_for_type()` to work with native Blog page
+
 ## [3.3.3] - 2021-02-18
 - Fixed `Fire\Template\Layout` to only buffer template if one has been set for plugin compatability
 
@@ -69,7 +72,8 @@
 Complete rewrite  
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
-[unreleased]: https://github.com/emrl/fire/compare/3.3.2...master
+[unreleased]: https://github.com/emrl/fire/compare/3.3.4...master
+[3.3.4]: https://github.com/emrl/fire/compare/3.3.3...3.3.4
 [3.3.3]: https://github.com/emrl/fire/compare/3.3.2...3.3.3
 [3.3.2]: https://github.com/emrl/fire/compare/3.3.1...3.3.2
 [3.3.1]: https://github.com/emrl/fire/compare/3.3.0...3.3.1

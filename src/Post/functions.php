@@ -22,7 +22,8 @@ function is_type(string $type): bool
 function page_for_type(string $type = ''): Iterator
 {
     return new Iterator(new WP_Query([
-        'page_id' => page_id_for_type($type),
+        'p' => page_id_for_type($type),
+        'post_type' => Page::TYPE,
     ]));
 }
 
