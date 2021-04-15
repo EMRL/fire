@@ -32,7 +32,7 @@ function page_for_type(string $type = ''): Iterator
  */
 function page_id_for_type(string $type = ''): int
 {
-    $type = $type ?: get_post_type();
+    $type = $type ?: get_query_var('post_type');
 
     // Adjust for `page_for_posts` option
     if ($type === Post::TYPE) {

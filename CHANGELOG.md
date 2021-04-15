@@ -2,6 +2,9 @@
 
 ## [Unreleased][unreleased]
 
+## [3.3.5] - 2021-04-15
+- Fixed `Fire\Post\page_id_for_type()` to get correct type even if no posts exist
+
 ## [3.3.4] - 2021-04-08
 - Fixed `Fire\Post\page_for_type()` to work with native Blog page
 - Improved label generation for Post Types and Taxonomies
@@ -73,7 +76,8 @@
 Complete rewrite  
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
-[unreleased]: https://github.com/emrl/fire/compare/3.3.4...master
+[unreleased]: https://github.com/emrl/fire/compare/3.3.5...master
+[3.3.5]: https://github.com/emrl/fire/compare/3.3.4...3.3.5
 [3.3.4]: https://github.com/emrl/fire/compare/3.3.3...3.3.4
 [3.3.3]: https://github.com/emrl/fire/compare/3.3.2...3.3.3
 [3.3.2]: https://github.com/emrl/fire/compare/3.3.1...3.3.2
