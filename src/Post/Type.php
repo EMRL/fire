@@ -309,16 +309,22 @@ abstract class Type
     protected function registerArchivePageSetting(callable $label = null): self
     {
         $setting = new ArchivePageSetting(static::TYPE, $label);
-        add_action('init', $setting->flush());
-        add_action('admin_init', $setting->register());
-        add_action('post_updated', $setting->permalinks(), 10, 3);
-        add_action('update_option_'.ArchivePageSetting::optionName(static::TYPE), $setting->optionUpdate());
-        add_action('add_option_'.ArchivePageSetting::optionName(static::TYPE), $setting->optionUpdate());
-        add_action('trashed_post', $setting->delete());
-        add_action('deleted_post', $setting->delete());
-        add_filter('display_post_states', $setting->states(), 10, 2);
-        $this->modifyType($setting->slug());
+
+        // Default `post` type already handles all this
+        if (static::TYPE !== Post::TYPE) {
+            add_action('init', $setting->flush());
+            add_action('admin_init', $setting->register());
+            add_action('post_updated', $setting->permalinks(), 10, 3);
+            add_action('update_option_'.ArchivePageSetting::optionName(static::TYPE), $setting->optionUpdate());
+            add_action('add_option_'.ArchivePageSetting::optionName(static::TYPE), $setting->optionUpdate());
+            add_action('trashed_post', $setting->delete());
+            add_action('deleted_post', $setting->delete());
+            add_filter('display_post_states', $setting->states(), 10, 2);
+            $this->modifyType($setting->slug());
+        }
+
         $this->modifyArchiveTitle($setting->archiveTitle());
+        $this->addSupport([Support::ARCHIVE_PAGE]);
         return $this;
     }
 

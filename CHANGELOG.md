@@ -5,6 +5,9 @@
 - Added `Fire\Post\Type::addSupport()`
 - Added `Fire\Post\Type::removeSupport()`
 
+### Fixed
+- Fixed `Fire\Post\page_id_for_type()` to better handle default `post` type
+
 ## [3.3.5] - 2021-04-15
 - Fixed `Fire\Post\page_id_for_type()` to get correct type even if no posts exist
 

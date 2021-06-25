@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Fire\Post;
 
 use Fire\Post\Type\ArchivePageSetting;
+use Fire\Post\Type\Support;
 use Fire\Query\Iterator;
 use WP_Query;
 
@@ -33,6 +34,16 @@ function page_for_type(string $type = ''): Iterator
 function page_id_for_type(string $type = ''): int
 {
     $type = $type ?: get_query_var('post_type');
+
+    // Blog page has empty post type query var
+    if (empty($type) && is_home()) {
+        $type = Post::TYPE;
+    }
+
+    // Make sure post type supports an archive page
+    if (!post_type_supports($type, Support::ARCHIVE_PAGE)) {
+        return 0;
+    }
 
     // Adjust for `page_for_posts` option
     if ($type === Post::TYPE) {

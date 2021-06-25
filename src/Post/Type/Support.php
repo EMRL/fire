@@ -6,6 +6,8 @@ namespace Fire\Post\Type;
 
 class Support
 {
+    public const ARCHIVE_PAGE = 'fire/archive-page';
+
     protected string $type;
 
     protected array $supports;

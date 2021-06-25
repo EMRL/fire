@@ -198,6 +198,14 @@ final class TypeTest extends TestCase
         $this->assertTrue(has_filter('fire/post_type_archive_title/test'));
     }
 
+    public function testRegisterArchivePageSettingForPost(): void
+    {
+        (new PostStub())->doRegisterArchivePageSetting();
+        $this->assertFalse(has_action('admin_init'));
+        $this->assertTrue(has_filter('fire/post_type_archive_title/post'));
+        $this->assertTrue(has_action('init'));
+    }
+
     protected function type(): TypeStub
     {
         return new TypeStub();
