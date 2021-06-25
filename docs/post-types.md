@@ -257,22 +257,32 @@ $this->modifyLink(fn (string $url, WP_Post $post): string => '...');
 
 ### `setOnQuery()`
 
-Hooks into query for post type (archive and single) and sets query vars.
+Hooks into the main query for post type (archive and single) and sets query vars.
+
+If you would rather hook into all queries (not just the main) for this post type, pass `false` as the second argument.
 
 Adds actions: [`pre_get_posts`](https://developer.wordpress.org/reference/hooks/pre_get_posts/)
 
 ```php
 $this->setOnQuery(['key' => 'value']);
+
+// Set for main query and other queries
+$this->setOnQuery(['key' => 'value'], false);
 ```
 
 ### `setOnFrontendQuery()`
 
 Hooks into frontend query for post type (archive and single) and sets query vars.
 
+If you would rather hook into all queries (not just the main) for this post type, pass `false` as the second argument.
+
 Adds actions: [`pre_get_posts`](https://developer.wordpress.org/reference/hooks/pre_get_posts/)
 
 ```php
 $this->setOnFrontendQuery(['key' => 'value']);
+
+// Set for main query and other queries
+$this->setOnFrontendQuery(['key' => 'value'], false);
 ```
 
 ### `setOnAdminQuery()`
@@ -289,17 +299,28 @@ $this->setOnAdminQuery(['key' => 'value']);
 
 Hooks into query for post type (archive and single) to allow for modification.
 
+If you would rather hook into all queries (not just the main) for this post type, pass `false` as the second argument.
+
 Adds actions: [`pre_get_posts`](https://developer.wordpress.org/reference/hooks/pre_get_posts/)
 
 ```php
 $this->modifyQuery(function (WP_Query $query): void {
     $query->set('posts_per_page', 20);
 });
+
+// Sets the default order for main and other queries together
+$this->modifyQuery(function (WP_Query $query): void {
+    if (!$query->get('orderby')) {
+        $query->set('orderby', ['title' => 'asc']);
+    }
+}, false);
 ```
 
 ### `modifyFrontendQuery()`
 
 Hooks into frontend query for post type (archive and single) to allow for modification.
+
+If you would rather hook into all queries (not just the main) for this post type, pass `false` as the second argument.
 
 Adds actions: [`pre_get_posts`](https://developer.wordpress.org/reference/hooks/pre_get_posts/)
 
@@ -307,6 +328,11 @@ Adds actions: [`pre_get_posts`](https://developer.wordpress.org/reference/hooks/
 $this->modifyFrontendQuery(function (WP_Query $query): void {
     $query->set('posts_per_page', 20);
 });
+
+// Set for main query and other queries
+$this->modifyFrontendQuery(function (WP_Query $query): void {
+    $query->set('posts_per_page', 20);
+}, false);
 ```
 
 ### `modifyAdminQuery()`

@@ -4,6 +4,10 @@
 ### Added
 - Added `Fire\Post\Type::addSupport()`
 - Added `Fire\Post\Type::removeSupport()`
+- Added `$main` argument to `Fire\Post\Type::modifyQuery()`
+- Added `$main` argument to `Fire\Post\Type::modifyFrontendQuery()`
+- Added `$main` argument to `Fire\Post\Type::setOnQuery()`
+- Added `$main` argument to `Fire\Post\Type::setOnFrontendQuery()`
 
 ### Fixed
 - Fixed `Fire\Post\page_id_for_type()` to better handle default `post` type

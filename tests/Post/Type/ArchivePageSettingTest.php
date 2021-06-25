@@ -67,6 +67,8 @@ final class ArchivePageSettingTest extends TestCase
     {
         $this->getPageOption(1);
 
+        when('post_type_supports')->justReturn(true);
+
         expect('get_post_field')
             ->once()
             ->with('post_name', 1)
@@ -82,6 +84,8 @@ final class ArchivePageSettingTest extends TestCase
     {
         $this->getPageOption(0);
 
+        when('post_type_supports')->justReturn(true);
+
         $this->assertSame(
             [],
             $this->setting()->slug()([])
@@ -92,6 +96,8 @@ final class ArchivePageSettingTest extends TestCase
     {
         $id = 1;
         $this->getPageOption($id);
+
+        when('post_type_supports')->justReturn(true);
 
         $new = $this->post();
         $new->post_name = 'new-slug';
@@ -111,6 +117,8 @@ final class ArchivePageSettingTest extends TestCase
         $id = 1;
         $this->getPageOption($id);
 
+        when('post_type_supports')->justReturn(true);
+
         $new = $this->post();
         $new->post_name = 'slug';
 
@@ -127,6 +135,8 @@ final class ArchivePageSettingTest extends TestCase
     {
         $this->getPageOption(1);
 
+        when('post_type_supports')->justReturn(true);
+
         $new = $this->post();
         $old = $this->post();
 
@@ -140,6 +150,8 @@ final class ArchivePageSettingTest extends TestCase
     {
         $id = 1;
         $this->getPageOption($id);
+
+        when('post_type_supports')->justReturn(true);
 
         expect('update_option')
             ->once()
@@ -156,6 +168,8 @@ final class ArchivePageSettingTest extends TestCase
     {
         $this->getPageOption(2);
 
+        when('post_type_supports')->justReturn(true);
+
         expect('update_option')
             ->never();
 
@@ -165,6 +179,8 @@ final class ArchivePageSettingTest extends TestCase
     public function testArchiveTitle(): void
     {
         $this->getPageOption(1);
+
+        when('post_type_supports')->justReturn(true);
 
         $post = $this->post();
 
@@ -180,6 +196,8 @@ final class ArchivePageSettingTest extends TestCase
     public function testArchiveTitleNoPage(): void
     {
         $this->getPageOption(0);
+
+        when('post_type_supports')->justReturn(true);
 
         $title = 'Tests';
 

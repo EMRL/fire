@@ -165,9 +165,9 @@ abstract class Type
      *
      * @param array<string,mixed> $data
      */
-    protected function setOnQuery(array $data): self
+    protected function setOnQuery(array $data, bool $main = true): self
     {
-        return $this->modifyQuery(new Query($data));
+        return $this->modifyQuery(new Query($data), $main);
     }
 
     /**
@@ -175,10 +175,10 @@ abstract class Type
      *
      * @param array<string,mixed> $data
      */
-    protected function setOnFrontendQuery(array $data): self
+    protected function setOnFrontendQuery(array $data, bool $main = true): self
     {
         if (!is_admin()) {
-            $this->setOnQuery($data);
+            $this->setOnQuery($data, $main);
         }
 
         return $this;
@@ -203,9 +203,10 @@ abstract class Type
      *
      * @param callable(WP_Query):void $fn
      */
-    protected function modifyQuery(callable $fn): self
+    protected function modifyQuery(callable $fn, bool $main = true): self
     {
-        add_action('fire/pre_get_posts/'.static::TYPE, $fn);
+        $main = $main ? '/main' : '';
+        add_action('fire/pre_get_posts/'.static::TYPE.$main, $fn);
         return $this;
     }
 
@@ -214,10 +215,10 @@ abstract class Type
      *
      * @param callable(WP_Query):void $fn
      */
-    protected function modifyFrontendQuery(callable $fn): self
+    protected function modifyFrontendQuery(callable $fn, bool $main = true): self
     {
         if (!is_admin()) {
-            $this->modifyQuery($fn);
+            $this->modifyQuery($fn, $main);
         }
 
         return $this;

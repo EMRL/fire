@@ -46,14 +46,14 @@ final class TypeStub extends Type
         $this->modifyLink($fn);
     }
 
-    public function doSetOnQuery(array $data): void
+    public function doSetOnQuery(array $data, bool $main = true): void
     {
-        $this->setOnQuery($data);
+        $this->setOnQuery($data, $main);
     }
 
-    public function doSetOnFrontendQuery(array $data): void
+    public function doSetOnFrontendQuery(array $data, bool $main = true): void
     {
-        $this->setOnFrontendQuery($data);
+        $this->setOnFrontendQuery($data, $main);
     }
 
     public function doSetOnAdminQuery(array $data): void
@@ -61,14 +61,14 @@ final class TypeStub extends Type
         $this->setOnAdminQuery($data);
     }
 
-    public function doModifyQuery(callable $fn): void
+    public function doModifyQuery(callable $fn, bool $main = true): void
     {
-        $this->modifyQuery($fn);
+        $this->modifyQuery($fn, $main);
     }
 
-    public function doModifyFrontendQuery(callable $fn): void
+    public function doModifyFrontendQuery(callable $fn, bool $main = true): void
     {
-        $this->modifyFrontendQuery($fn);
+        $this->modifyFrontendQuery($fn, $main);
     }
 
     public function doModifyAdminQuery(callable $fn): void

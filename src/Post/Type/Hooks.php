@@ -41,9 +41,11 @@ class Hooks
 
     public function preGetPosts(WP_Query $query): void
     {
-        if ($query->is_main_query() && $types = (array) $query->get('post_type')) {
-            foreach (array_filter($types) as $type) {
-                do_action("fire/pre_get_posts/$type", $query);
+        if (($type = $query->get('post_type')) && is_string($type)) {
+            do_action("fire/pre_get_posts/$type", $query);
+
+            if ($query->is_main_query()) {
+                do_action("fire/pre_get_posts/$type/main", $query);
             }
         }
     }

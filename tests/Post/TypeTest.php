@@ -81,7 +81,7 @@ final class TypeTest extends TestCase
     public function testSetOnQuery(): void
     {
         $this->type()->doSetOnQuery([]);
-        $this->assertTrue(has_action('fire/pre_get_posts/test'));
+        $this->assertTrue(has_action('fire/pre_get_posts/test/main'));
     }
 
     public function testSetOnFrontendQuery(): void
@@ -91,10 +91,10 @@ final class TypeTest extends TestCase
             ->andReturn(true, false);
 
         $this->type()->doSetOnFrontendQuery([]);
-        $this->assertFalse(has_action('fire/pre_get_posts/test'));
+        $this->assertFalse(has_action('fire/pre_get_posts/test/main'));
 
         $this->type()->doSetOnFrontendQuery([]);
-        $this->assertTrue(has_action('fire/pre_get_posts/test'));
+        $this->assertTrue(has_action('fire/pre_get_posts/test/main'));
     }
 
     public function testSetOnAdminQuery(): void
@@ -104,17 +104,25 @@ final class TypeTest extends TestCase
             ->andReturn(false, true);
 
         $this->type()->doSetOnAdminQuery([]);
-        $this->assertFalse(has_action('fire/pre_get_posts/test'));
+        $this->assertFalse(has_action('fire/pre_get_posts/test/main'));
 
         $this->type()->doSetOnAdminQuery([]);
-        $this->assertTrue(has_action('fire/pre_get_posts/test'));
+        $this->assertTrue(has_action('fire/pre_get_posts/test/main'));
     }
 
     public function testModifyQuery(): void
     {
         $fn = $this->emptyFn();
         $this->type()->doModifyQuery($fn);
+        $this->assertIsInt(has_action('fire/pre_get_posts/test/main', $fn));
+    }
+
+    public function testModifyQueryNotMain(): void
+    {
+        $fn = $this->emptyFn();
+        $this->type()->doModifyQuery($fn, false);
         $this->assertIsInt(has_action('fire/pre_get_posts/test', $fn));
+        $this->assertFalse(has_action('fire/pre_get_posts/test/main'));
     }
 
     public function testModifyFrontendQuery(): void
@@ -126,10 +134,10 @@ final class TypeTest extends TestCase
         $fn = $this->emptyFn();
 
         $this->type()->doModifyFrontendQuery($fn);
-        $this->assertFalse(has_action('fire/pre_get_posts/test', $fn));
+        $this->assertFalse(has_action('fire/pre_get_posts/test/main', $fn));
 
         $this->type()->doModifyFrontendQuery($fn);
-        $this->assertIsInt(has_action('fire/pre_get_posts/test', $fn));
+        $this->assertIsInt(has_action('fire/pre_get_posts/test/main', $fn));
     }
 
     public function testModifyAdminQuery(): void
@@ -141,10 +149,10 @@ final class TypeTest extends TestCase
         $fn = $this->emptyFn();
 
         $this->type()->doModifyAdminQuery($fn);
-        $this->assertFalse(has_action('fire/pre_get_posts/test', $fn));
+        $this->assertFalse(has_action('fire/pre_get_posts/test/main', $fn));
 
         $this->type()->doModifyAdminQuery($fn);
-        $this->assertIsInt(has_action('fire/pre_get_posts/test', $fn));
+        $this->assertIsInt(has_action('fire/pre_get_posts/test/main', $fn));
     }
 
     public function testModifyListTableColumns(): void
@@ -180,7 +188,7 @@ final class TypeTest extends TestCase
         $column = new SortableDownloadColumn();
         $this->type()->doAddListTableColumn($column);
         $this->assertTrue(has_filter('manage_edit-test_sortable_columns'));
-        $this->assertTrue(has_action('fire/pre_get_posts/test'));
+        $this->assertTrue(has_action('fire/pre_get_posts/test/main'));
     }
 
     public function testRegisterArchivePageSetting(): void

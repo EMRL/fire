@@ -74,16 +74,20 @@ final class HooksTest extends TestCase
     {
         $query = $this->wpQuery();
 
-        $query->shouldReceive('is_main_query')
-            ->once()
-            ->andReturn(true);
-
         $query->shouldReceive('get')
             ->once()
             ->with('post_type')
             ->andReturn('post');
 
+        $query->shouldReceive('is_main_query')
+            ->once()
+            ->andReturn(true);
+
         expectDone('fire/pre_get_posts/post')
+            ->once()
+            ->with($query);
+
+        expectDone('fire/pre_get_posts/post/main')
             ->once()
             ->with($query);
 
@@ -94,27 +98,28 @@ final class HooksTest extends TestCase
     {
         $query = $this->wpQuery();
 
+        $query->shouldReceive('get')
+            ->once()
+            ->with('post_type')
+            ->andReturn('post');
+
         $query->shouldReceive('is_main_query')
             ->once()
             ->andReturn(false);
 
         $this->hooks()->preGetPosts($query);
 
-        $this->assertSame(0, did_action('fire/pre_get_posts/post'));
+        $this->assertSame(0, did_action('fire/pre_get_posts/post/main'));
     }
 
     public function testPreGetPostsNoPostType(): void
     {
         $query = $this->wpQuery();
 
-        $query->shouldReceive('is_main_query')
-            ->once()
-            ->andReturn(true);
-
         $query->shouldReceive('get')
             ->once()
             ->with('post_type')
-            ->andReturn(false);
+            ->andReturn('');
 
         $this->hooks()->preGetPosts($query);
 
