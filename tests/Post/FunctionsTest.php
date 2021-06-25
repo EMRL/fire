@@ -73,7 +73,7 @@ final class FunctionsTest extends TestCase
             ->once()
             ->andReturn(true);
 
-        expect('get_post_type')
+        expect('get_query_var')
             ->once()
             ->andReturn('post');
 

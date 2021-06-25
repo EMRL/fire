@@ -33,6 +33,7 @@ final class FunctionsTest extends TestCase
             'items_list_navigation' => 'Resources list navigation',
             'items_list' => 'Resources list',
             'back_to_items' => '← Go to Resources',
+            'filter_by_item' => 'Filter by resource',
         ], generate_labels('Resources', 'Resource', [
             'all_items' => 'Something different',
         ]));
