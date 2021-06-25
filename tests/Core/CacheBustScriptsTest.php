@@ -50,25 +50,25 @@ final class CacheBustScriptsTest extends TestCase
 
         $this->assertSame(
             'https://domain.com/file.aa8f289ebe.js?a=b&ver=1.5&c=d',
-            $bust->src('https://domain.com/file.js?a=b&ver=1.5&c=d')
+            $bust->src('https://domain.com/file.js?a=b&ver=1.5&c=d'),
         );
 
         $this->assertSame(
             '//domain.com/file.aa8f289ebe.css?a=b&ver=1.5',
             $bust->src('//domain.com/file.css?a=b&ver=1.5'),
-            'Protocol relative'
+            'Protocol relative',
         );
 
         $this->assertSame(
             $src = 'https://domain.com/file.js',
             $bust->src($src),
-            'Without query'
+            'Without query',
         );
 
         $this->assertSame(
             $src = 'https://domain.com/file.js?a=b',
             $bust->src($src),
-            'Without version'
+            'Without version',
         );
     }
 
@@ -93,7 +93,7 @@ final class CacheBustScriptsTest extends TestCase
 
         $this->assertSame(
             'http://domain.com/file.aa8f2.css?ver=1.5',
-            $bust->src('http://domain.com/file.css?ver=1.5')
+            $bust->src('http://domain.com/file.css?ver=1.5'),
         );
     }
 

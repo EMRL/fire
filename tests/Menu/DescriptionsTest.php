@@ -41,7 +41,7 @@ final class DescriptionsTest extends TestCase
                 '__after' => '',
                 'descriptions' => '<div>%s</div>',
             ],
-            (new Descriptions())->args($this->args)
+            (new Descriptions())->args($this->args),
         );
     }
 
@@ -62,13 +62,13 @@ final class DescriptionsTest extends TestCase
         $this->assertSame(
             '<div>This is description</div>',
             $instance->item($args, $item)->after,
-            'Sets description'
+            'Sets description',
         );
 
         $this->assertSame(
             '',
             $instance->item($args, $item)->before,
-            'Arguments without placeholder remain'
+            'Arguments without placeholder remain',
         );
 
         $item = $this->item();
@@ -77,7 +77,7 @@ final class DescriptionsTest extends TestCase
         $this->assertSame(
             '',
             $instance->item($args, $item)->after,
-            'Items without description remain empty'
+            'Items without description remain empty',
         );
 
         $args = (object) $instance->args([
@@ -88,7 +88,7 @@ final class DescriptionsTest extends TestCase
         $this->assertSame(
             'After',
             $instance->item($args, $item)->after,
-            'Multiple menus continue to work'
+            'Multiple menus continue to work',
         );
     }
 

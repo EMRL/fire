@@ -22,7 +22,7 @@ final class ArchivePageSettingTest extends TestCase
 
         $this->assertSame(
             ['one', 'test' => 'Tests Page'],
-            $this->setting()->states()(['one'], $this->post())
+            $this->setting()->states()(['one'], $this->post()),
         );
     }
 
@@ -36,7 +36,7 @@ final class ArchivePageSettingTest extends TestCase
             (new ArchivePageSetting(
                 'test',
                 fn (WP_Post_Type $type): string => $type->label.' Custom',
-            ))->states()(['one'], $this->post())
+            ))->states()(['one'], $this->post()),
         );
     }
 
@@ -49,7 +49,7 @@ final class ArchivePageSettingTest extends TestCase
 
         $this->assertSame(
             ['one'],
-            $this->setting()->states()(['one'], $post)
+            $this->setting()->states()(['one'], $post),
         );
     }
 
@@ -59,7 +59,7 @@ final class ArchivePageSettingTest extends TestCase
 
         $this->assertSame(
             ['one'],
-            $this->setting()->states()(['one'], $this->post())
+            $this->setting()->states()(['one'], $this->post()),
         );
     }
 
@@ -76,7 +76,7 @@ final class ArchivePageSettingTest extends TestCase
 
         $this->assertSame(
             ['rewrite' => ['slug' => 'test']],
-            $this->setting()->slug()([])
+            $this->setting()->slug()([]),
         );
     }
 
@@ -88,7 +88,7 @@ final class ArchivePageSettingTest extends TestCase
 
         $this->assertSame(
             [],
-            $this->setting()->slug()([])
+            $this->setting()->slug()([]),
         );
     }
 
@@ -189,7 +189,7 @@ final class ArchivePageSettingTest extends TestCase
 
         $this->assertSame(
             'Tests Page',
-            $this->setting()->archiveTitle()('Tests')
+            $this->setting()->archiveTitle()('Tests'),
         );
     }
 
@@ -203,7 +203,7 @@ final class ArchivePageSettingTest extends TestCase
 
         $this->assertSame(
             $title,
-            $this->setting()->archiveTitle()('Tests')
+            $this->setting()->archiveTitle()('Tests'),
         );
     }
 

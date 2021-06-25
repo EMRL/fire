@@ -38,7 +38,7 @@ final class GoogleMapAddressTest extends TestCase
 
         $this->assertSame(
             GoogleMapAddress::DIRECTIONS_URL.'&destination=123+Fake+St',
-            (new GoogleMapAddress('123 Fake St'))->directionsUrl()
+            (new GoogleMapAddress('123 Fake St'))->directionsUrl(),
         );
     }
 
@@ -48,7 +48,7 @@ final class GoogleMapAddressTest extends TestCase
 
         $this->assertSame(
             GoogleMapAddress::DIRECTIONS_URL.'&destination=&destination_place_id=abcde',
-            (new GoogleMapAddress('', '', '', '', 'abcde'))->directionsUrl()
+            (new GoogleMapAddress('', '', '', '', 'abcde'))->directionsUrl(),
         );
     }
 
@@ -65,7 +65,7 @@ final class GoogleMapAddressTest extends TestCase
 
         $this->assertSame(
             sprintf(GoogleMapAddress::EMBED_URL, 'place').'?key=abcde&q=123+Fake+St',
-            (new GoogleMapAddress('123 Fake St'))->embedUrl()
+            (new GoogleMapAddress('123 Fake St'))->embedUrl(),
         );
     }
 
@@ -78,7 +78,7 @@ final class GoogleMapAddressTest extends TestCase
         $this->assertSame(
             sprintf(GoogleMapAddress::EMBED_URL, 'directions')
                 .'?key=abcde&origin=Current+Location&destination=place_id%3Afghij',
-            (new GoogleMapAddress('', '', '', '', 'fghij'))->embedUrl('directions')
+            (new GoogleMapAddress('', '', '', '', 'fghij'))->embedUrl('directions'),
         );
     }
 
@@ -90,7 +90,7 @@ final class GoogleMapAddressTest extends TestCase
 
         $this->assertSame(
             sprintf(GoogleMapAddress::EMBED_URL, 'place').'?key=abcde&q=123+Fake+St',
-            (new GoogleMapAddress('123 Fake St'))->embedUrl('invalid-mode')
+            (new GoogleMapAddress('123 Fake St'))->embedUrl('invalid-mode'),
         );
     }
 

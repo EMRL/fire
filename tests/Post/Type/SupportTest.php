@@ -54,7 +54,7 @@ final class SupportTest extends TestCase
 
         $supports = ['test1', 'test2'];
 
-        when('remove_post_type_support')->alias(function (string $type, string $feature) use(&$support): void {
+        when('remove_post_type_support')->alias(function (string $type, string $feature) use (&$support): void {
             unset($support[$type][$feature]);
         });
 
@@ -64,7 +64,7 @@ final class SupportTest extends TestCase
             [
                 $type => [
                     'test3' => true,
-                ]
+                ],
             ],
             $support,
         );

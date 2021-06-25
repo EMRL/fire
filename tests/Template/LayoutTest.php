@@ -40,7 +40,7 @@ final class LayoutTest extends TestCase
         $this->assertSame(
             ['layout.php'],
             $layout->layoutsForTemplate(static::TEMPLATE_PATH.'/index.php'),
-            'Default layout is returned for template'
+            'Default layout is returned for template',
         );
     }
 
@@ -54,7 +54,7 @@ final class LayoutTest extends TestCase
         $this->assertSame(
             static::TEMPLATE_PATH.'/index.php',
             $layout->current(),
-            'Current template is returned'
+            'Current template is returned',
         );
     }
 
@@ -86,7 +86,7 @@ final class LayoutTest extends TestCase
         $this->assertSame(
             ['layout.page.php', 'layout.php'],
             $layout->layoutsForTemplate(static::TEMPLATE_PATH.'/page.php'),
-            'Other layout is returned for template'
+            'Other layout is returned for template',
         );
 
         $this->assertSame(
@@ -109,7 +109,7 @@ final class LayoutTest extends TestCase
 
         $this->assertSame(
             static::TEMPLATE_PATH.'/index.php',
-            (string) $layout
+            (string) $layout,
         );
     }
 

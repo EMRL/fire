@@ -39,49 +39,42 @@ function array_insert(array $arr, array $value, $key, bool $after = true): array
  */
 function filter_insert(array $arr, $key, bool $after = true): Closure
 {
-    return function (array $orig) use ($arr, $key, $after): array {
-        return array_insert($orig, $arr, $key, $after);
-    };
+    return fn (array $orig): array => array_insert($orig, $arr, $key, $after);
 }
 
 /**
- * Returns a callback that merges a supplied array
+ * Returns a callback that recursively merges a supplied array
  */
-function filter_merge(array $arr): Closure
+function filter_merge(array ...$arr): Closure
 {
-    return function (array $orig) use ($arr): array {
-        return array_merge($orig, $arr);
-    };
+    return fn (array $orig): array => array_merge_recursive($orig, ...$arr);
 }
 
 /**
  * Returns a callback that recursively replaces a supplied array
  */
-function filter_replace(array $arr): Closure
+function filter_replace(array ...$arr): Closure
 {
-    return function (array $orig) use ($arr): array {
-        return array_replace_recursive($orig, $arr);
-    };
+    return fn (array $orig): array => array_replace_recursive($orig, ...$arr);
 }
 
 /**
  * Returns a callback that removes items from a supplied array
  */
-function filter_remove(array $arr): Closure
+function filter_remove(array ...$arr): Closure
 {
-    return function (array $orig) use ($arr): array {
-        return array_diff($orig, $arr);
-    };
+    return fn (array $orig): array => array_diff($orig, ...$arr);
 }
 
 /**
  * Return a callback that removes items by key from a supplied array
  */
-function filter_remove_key(array $arr): Closure
+function filter_remove_key(array ...$arr): Closure
 {
-    return function (array $orig) use ($arr): array {
-        return array_diff_key($orig, array_flip($arr));
-    };
+    return fn (array $orig): array => array_diff_key(
+        $orig,
+        ...array_map(fn (array $i): array => array_flip($i), $arr)
+    );
 }
 
 /**
@@ -91,9 +84,7 @@ function filter_remove_key(array $arr): Closure
  */
 function filter_value($value): Closure
 {
-    return function () use ($value) {
-        return $value;
-    };
+    return fn () => $value;
 }
 
 /**
@@ -101,9 +92,10 @@ function filter_value($value): Closure
  */
 function parse_hosts(string ...$hosts): array
 {
-    return array_filter(array_map(function ($i) {
-        return parse_url(((strpos($i, '//') === false) ? '//' : '').$i, PHP_URL_HOST);
-    }, $hosts));
+    return array_filter(array_map(
+        fn ($i) => parse_url(((strpos($i, '//') === false) ? '//' : '').$i, PHP_URL_HOST),
+        $hosts,
+    ));
 }
 
 /**

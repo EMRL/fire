@@ -16,7 +16,7 @@ final class LevelWrapWalkerTest extends TestCase
 
         $this->assertSame(
             '<div>Start',
-            $output
+            $output,
         );
     }
 
@@ -27,7 +27,7 @@ final class LevelWrapWalkerTest extends TestCase
 
         $this->assertSame(
             'End</div>',
-            $output
+            $output,
         );
     }
 
@@ -40,7 +40,7 @@ final class LevelWrapWalkerTest extends TestCase
 
         $this->assertSame(
             '<StartEnd>',
-            $output
+            $output,
         );
     }
 
@@ -59,7 +59,7 @@ final class LevelWrapWalkerTest extends TestCase
 
         $this->assertSame(
             '0Start1StartEnd>End>',
-            $output
+            $output,
         );
     }
 }

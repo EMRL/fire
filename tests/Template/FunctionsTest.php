@@ -19,7 +19,7 @@ final class FunctionsTest extends TestCase
                 echo 'hello world';
             }),
             'hello world',
-            'Buffer returns string'
+            'Buffer returns string',
         );
     }
 
@@ -38,13 +38,13 @@ final class FunctionsTest extends TestCase
                 'five' => true,
             ]),
             ' one="wide&tall" two="55" three="" four="" five',
-            'String, integer, null, and boolean attributes'
+            'String, integer, null, and boolean attributes',
         );
 
         $this->assertSame(
             html_attributes([]),
             '',
-            'Empty array'
+            'Empty array',
         );
     }
 }

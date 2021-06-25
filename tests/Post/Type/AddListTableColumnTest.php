@@ -20,13 +20,13 @@ final class AddListTableColumnTest extends TestCase
 
         $this->assertSame(
             ['title' => 'Title', $column->key() => $column->label()],
-            (new AddListTableColumn($column))->columns('', true)(['title' => 'Title'])
+            (new AddListTableColumn($column))->columns('', true)(['title' => 'Title']),
         );
 
         $this->assertSame(
             [$column->key() => $column->label(), 'title' => 'Title'],
             (new AddListTableColumn($column))->columns('title', false)(['title' => 'Title']),
-            'Insert before'
+            'Insert before',
         );
     }
 
@@ -36,7 +36,7 @@ final class AddListTableColumnTest extends TestCase
             'id:1',
             buffer(function (): void {
                 (new AddListTableColumn(new DownloadColumn()))->display()('download', 1);
-            })
+            }),
         );
     }
 
@@ -46,7 +46,7 @@ final class AddListTableColumnTest extends TestCase
             '',
             buffer(function (): void {
                 (new AddListTableColumn(new DownloadColumn()))->display()('other', 1);
-            })
+            }),
         );
     }
 
@@ -56,7 +56,7 @@ final class AddListTableColumnTest extends TestCase
 
         $this->assertSame(
             ['title' => 'title', $column->key() => $column->key()],
-            (new AddListTableColumn($column))->sortableColumns()(['title' => 'title'])
+            (new AddListTableColumn($column))->sortableColumns()(['title' => 'title']),
         );
     }
 

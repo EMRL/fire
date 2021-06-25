@@ -23,25 +23,25 @@ final class FunctionsTest extends TestCase
         $this->assertSame(
             'hello world',
             value('hello world'),
-            'String value'
+            'String value',
         );
 
         $this->assertSame(
             'hello world',
             value(fn (): string => 'hello world'),
-            'Closure value'
+            'Closure value',
         );
 
         $this->assertSame(
             'hello world',
             value(fn (string $who): string => 'hello '.$who, 'world'),
-            'Passes arguments if callable'
+            'Passes arguments if callable',
         );
 
         $this->assertSame(
             'hello',
             value('hello', 'world'),
-            'Ignores arguments if not callable'
+            'Ignores arguments if not callable',
         );
     }
 
@@ -50,25 +50,25 @@ final class FunctionsTest extends TestCase
         $this->assertSame(
             [1, 2, 3],
             array_insert([1, 3], [2], 0),
-            'Insert after, numeric index'
+            'Insert after, numeric index',
         );
 
         $this->assertSame(
             [1, 2, 3],
             array_insert([1, 3], [2], 1, false),
-            'Insert before, numeric index'
+            'Insert before, numeric index',
         );
 
         $this->assertSame(
             [1, 3, 2],
             array_insert([1, 3], [2], -1),
-            'Appends if key not found'
+            'Appends if key not found',
         );
 
         $this->assertSame(
             ['a' => 'A', 'b' => 'B', 'c' => 'C', 'd' => 'D'],
             array_insert(['a' => 'A', 'd' => 'D'], ['b' => 'B', 'c' => 'C'], 'a'),
-            'Insert multiple after'
+            'Insert multiple after',
         );
     }
 
@@ -79,13 +79,13 @@ final class FunctionsTest extends TestCase
         $this->assertInstanceOf(
             Closure::class,
             $value,
-            'Expect instance of Closure'
+            'Expect instance of Closure',
         );
 
         $this->assertSame(
             [1, 2, 3],
             $value([1, 3]),
-            'Returns value'
+            'Returns value',
         );
     }
 
@@ -96,13 +96,13 @@ final class FunctionsTest extends TestCase
         $this->assertInstanceOf(
             Closure::class,
             $value,
-            'Expect instance of Closure'
+            'Expect instance of Closure',
         );
 
         $this->assertSame(
             'hello world',
             $value('ignored'),
-            'Returns value'
+            'Returns value',
         );
     }
 
@@ -113,13 +113,19 @@ final class FunctionsTest extends TestCase
         $this->assertInstanceOf(
             Closure::class,
             $merge,
-            'Expect instance of Closure'
+            'Expect instance of Closure',
         );
 
         $this->assertSame(
             ['a' => 'b', 'c' => 'd'],
             $merge(['a' => 'b']),
-            'Returns merged array'
+            'Returns merged array',
+        );
+
+        $this->assertSame(
+            ['a' => 'b', 'c' => 'd', 'e' => 'f'],
+            filter_merge(['c' => 'd'], ['e' => 'f'])(['a' => 'b']),
+            'Multiple arrays are merged',
         );
     }
 
@@ -130,13 +136,13 @@ final class FunctionsTest extends TestCase
         $this->assertInstanceOf(
             Closure::class,
             $remove,
-            'Expect instance of Closure'
+            'Expect instance of Closure',
         );
 
         $this->assertSame(
             ['a', 'b', 'e'],
             array_values($remove(['a', 'b', 'c', 'd', 'e'])),
-            'Returns array without values'
+            'Returns array without values',
         );
     }
 
@@ -147,13 +153,13 @@ final class FunctionsTest extends TestCase
         $this->assertInstanceOf(
             Closure::class,
             $remove,
-            'Expect instance of Closure'
+            'Expect instance of Closure',
         );
 
         $this->assertSame(
             ['a' => 'A', 'b' => 'B', 'e' => 'E'],
             $remove(['a' => 'A', 'b' => 'B', 'c' => 'C', 'd' => 'D', 'e' => 'E']),
-            'Returns array without values'
+            'Returns array without values',
         );
     }
 
