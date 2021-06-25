@@ -178,6 +178,27 @@ $this->modifyType(function (array $args): array {
 };
 ```
 
+### `addSupport()`
+
+Add post type support. Matches format used by `supports` argument in `register_post_type()`.
+
+Argument reference: [`register_post_type`](https://developer.wordpress.org/reference/functions/register_post_type/)  
+Uses: [`add_post_type_support`](https://developer.wordpress.org/reference/functions/add_post_type_support/)
+
+```php
+$this->addSupport(['title', 'example' => ['that' => 'uses array']]);
+```
+
+### `removeSupport()`
+
+Remove post type support. Accepts variadic list of strings (features) to remove from post type.
+
+Uses: [`remove_post_type_support`](https://developer.wordpress.org/reference/functions/remove_post_type_support/)
+
+```php
+$this->removeSupport('editor', 'comments');
+```
+
 ### `setTitlePlaceholder()`
 
 Sets placeholder for post title input field (admin screen) when creating or editing post.
