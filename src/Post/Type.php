@@ -15,7 +15,7 @@ use WP_Post;
 use WP_Post_Type;
 use WP_Query;
 
-use function Fire\Core\filter_replace;
+use function Fire\Core\filter_merge;
 use function Fire\Core\filter_value;
 
 abstract class Type
@@ -79,7 +79,7 @@ abstract class Type
      */
     protected function mergeType(array $config): self
     {
-        return $this->modifyType(filter_replace($config));
+        return $this->modifyType(filter_merge($config));
     }
 
     /**

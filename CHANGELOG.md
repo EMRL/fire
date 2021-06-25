@@ -12,6 +12,9 @@
 ### Fixed
 - Fixed `Fire\Post\page_id_for_type()` to better handle default `post` type
 
+### Changed
+- Changed `Fire\Post\Type` and `Fire\Term\Taxonomy` to use `filter_merge` instead of `filter_replace`
+
 ## [3.3.5] - 2021-04-15
 - Fixed `Fire\Post\page_id_for_type()` to get correct type even if no posts exist
 

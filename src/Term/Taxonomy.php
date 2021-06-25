@@ -11,7 +11,7 @@ use Fire\Term\Taxonomy\RegisterForType;
 use WP_Taxonomy;
 use WP_Term;
 
-use function Fire\Core\filter_replace;
+use function Fire\Core\filter_merge;
 use function Fire\Core\filter_value;
 
 abstract class Taxonomy
@@ -77,7 +77,7 @@ abstract class Taxonomy
      */
     protected function mergeTaxonomy(array $config): self
     {
-        return $this->modifyTaxonomy(filter_replace($config));
+        return $this->modifyTaxonomy(filter_merge($config));
     }
 
     /**
