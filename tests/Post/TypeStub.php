@@ -21,6 +21,16 @@ final class TypeStub extends Type
         $this->modifyType($fn);
     }
 
+    public function doAddSupport(array $supports): void
+    {
+        $this->addSupport($supports);
+    }
+
+    public function doRemoveSupport(string ...$supports): void
+    {
+        $this->removeSupport(...$supports);
+    }
+
     public function doModifyTitlePlaceholder(callable $fn): void
     {
         $this->modifyTitlePlaceholder($fn);

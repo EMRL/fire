@@ -45,6 +45,18 @@ final class TypeTest extends TestCase
         $this->assertIsInt(has_filter('fire/register_post_type_args/test', $fn));
     }
 
+    public function testAddSupport(): void
+    {
+        $this->type()->doAddSupport(['test']);
+        $this->assertTrue(has_action('init'));
+    }
+
+    public function testRemoveSupport(): void
+    {
+        $this->type()->doRemoveSupport('test1', 'test2');
+        $this->assertTrue(has_action('init'));
+    }
+
     public function testModifyTitlePlaceholder(): void
     {
         $fn = $this->emptyFn();

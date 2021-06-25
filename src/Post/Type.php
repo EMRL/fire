@@ -10,6 +10,7 @@ use Fire\Post\Type\ArchivePageSetting;
 use Fire\Post\Type\Query;
 use Fire\Post\Type\Register;
 use Fire\Post\Type\SortableListTableColumn;
+use Fire\Post\Type\Support;
 use WP_Post;
 use WP_Post_Type;
 use WP_Query;
@@ -89,6 +90,24 @@ abstract class Type
     protected function modifyType(callable $fn): self
     {
         add_filter('fire/register_post_type_args/'.static::TYPE, $fn);
+        return $this;
+    }
+
+    /**
+     * Add post type support
+     */
+    protected function addSupport(array $supports): self
+    {
+        add_action('init', new Support(static::TYPE, $supports), 11);
+        return $this;
+    }
+
+    /**
+     * Remove post type support
+     */
+    protected function removeSupport(string ...$supports): self
+    {
+        add_action('init', [new Support(static::TYPE, $supports), 'remove'], 11);
         return $this;
     }
 
