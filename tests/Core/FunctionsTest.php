@@ -8,6 +8,7 @@ use Closure;
 use PHPUnit\Framework\TestCase;
 
 use function Fire\Core\array_insert;
+use function Fire\Core\array_smart_merge;
 use function Fire\Core\filter_insert;
 use function Fire\Core\filter_merge;
 use function Fire\Core\filter_remove;
@@ -72,6 +73,67 @@ final class FunctionsTest extends TestCase
         );
     }
 
+    public function testArraySmartMerge(): void
+    {
+        $this->assertSame(
+            [1, 2, 3],
+            array_smart_merge([1, 2], [3]),
+        );
+
+        $this->assertSame(
+            ['a' => 'A', 'b' => 'B'],
+            array_smart_merge(['a' => 'A'], ['b' => 'B']),
+        );
+
+        $this->assertSame(
+            ['a' => ['A', 'B'], 'b' => 'C'],
+            array_smart_merge(['a' => ['A'], 'b' => 'B'], ['a' => ['B']], ['b' => 'C']),
+        );
+
+        $this->assertSame(
+            ['a' => ['a' => 'A', 'b' => 'B']],
+            array_smart_merge(['a' => ['a' => 'A']], ['a' => ['b' => 'B']]),
+        );
+
+        $this->assertSame(
+            [
+                'title' => 'Test',
+                'supports' => [
+                    'one',
+                    'two' => [
+                        'three' => 'four',
+                        'five' => 'six',
+                    ],
+                    'seven',
+                ],
+                'another' => 'test',
+            ],
+            array_smart_merge([
+                'title' => 'Original',
+                'supports' => [
+                    'one',
+                    'two' => [
+                        'three' => 'four',
+                    ],
+                ],
+            ], [
+                'title' => 'Test',
+                'supports' => [
+                    'two' => [
+                        'five' => 'six',
+                    ],
+                    'seven',
+                ],
+                'another' => 'test',
+            ]),
+        );
+
+        $this->assertSame(
+            ['a' => true, 'b' => ['c' => ['d']]],
+            array_smart_merge(['a' => ['a'], 'b' => 'test'], ['a' => true, 'b' => ['c' => ['d']]]),
+        );
+    }
+
     public function testFilterInsert(): void
     {
         $value = filter_insert([2], 0);
@@ -131,7 +193,7 @@ final class FunctionsTest extends TestCase
 
     public function testFilterRemove(): void
     {
-        $remove = filter_remove(['c', 'd']);
+        $remove = filter_remove(['c'], ['d']);
 
         $this->assertInstanceOf(
             Closure::class,
@@ -148,7 +210,7 @@ final class FunctionsTest extends TestCase
 
     public function testFilterRemoveKey(): void
     {
-        $remove = filter_remove_key(['c', 'd']);
+        $remove = filter_remove_key(['c'], ['d']);
 
         $this->assertInstanceOf(
             Closure::class,

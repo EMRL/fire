@@ -32,6 +32,34 @@ function array_insert(array $arr, array $value, $key, bool $after = true): array
 }
 
 /**
+ * Smart array merge
+ *
+ * Overwrites simple values, and merges array values
+ */
+function array_smart_merge(array ...$arrays): array
+{
+    $res = [];
+
+    foreach ($arrays as $array) {
+        foreach ($array as $key => $value) {
+            if (is_int($key)) {
+                if (array_key_exists($key, $res)) {
+                    $res[] = $value;
+                } else {
+                    $res[$key] = $value;
+                }
+            } elseif (is_array($value) && isset($res[$key]) && is_array($res[$key])) {
+                $res[$key] = array_smart_merge($res[$key], $value);
+            } else {
+                $res[$key] = $value;
+            }
+        }
+    }
+
+    return $res;
+}
+
+/**
  * Returns a callback that inserts an array into another array before
  * or after specified key
  *
@@ -47,14 +75,21 @@ function filter_insert(array $arr, $key, bool $after = true): Closure
  */
 function filter_merge(array ...$arr): Closure
 {
-    return fn (array $orig): array => array_merge_recursive($orig, ...$arr);
+    return fn (array $orig): array => array_smart_merge($orig, ...$arr);
 }
 
 /**
  * Returns a callback that recursively replaces a supplied array
+ *
+ * @deprecated since version 3.4.0, will be removed in version 4
  */
 function filter_replace(array ...$arr): Closure
 {
+    @trigger_error(
+        'filter_replace() is deprecated since 3.4.0 and will be removed in version 4',
+        E_USER_DEPRECATED,
+    );
+
     return fn (array $orig): array => array_replace_recursive($orig, ...$arr);
 }
 

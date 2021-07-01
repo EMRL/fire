@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased][unreleased]
+
+## [3.4.0] - 2021-07-01
 ### Added
 - Added `Fire\Post\Type::addSupport()`
 - Added `Fire\Post\Type::removeSupport()`
@@ -8,6 +10,7 @@
 - Added `$main` argument to `Fire\Post\Type::modifyFrontendQuery()`
 - Added `$main` argument to `Fire\Post\Type::setOnQuery()`
 - Added `$main` argument to `Fire\Post\Type::setOnFrontendQuery()`
+- Added `Fire\Core\array_smart_merge()`
 
 ### Fixed
 - Fixed `Fire\Post\page_id_for_type()` to better handle default `post` type
@@ -89,7 +92,8 @@
 Complete rewrite  
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
-[unreleased]: https://github.com/emrl/fire/compare/3.3.5...master
+[unreleased]: https://github.com/emrl/fire/compare/3.4.0...master
+[3.4.0]: https://github.com/emrl/fire/compare/3.3.5...3.4.0
 [3.3.5]: https://github.com/emrl/fire/compare/3.3.4...3.3.5
 [3.3.4]: https://github.com/emrl/fire/compare/3.3.3...3.3.4
 [3.3.3]: https://github.com/emrl/fire/compare/3.3.2...3.3.3

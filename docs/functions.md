@@ -28,6 +28,30 @@ $arr = array_insert($a, $b, 'a');
 $arr = array_insert($a, $b, 'c', false);
 ```
 
+## `array_smart_merge()`
+
+Overwrites simple values, and merges array values.
+
+```php
+use function Fire\Core\array_smart_merge;
+
+$arr = [
+    'a' => 'A',
+    'b' => ['B'],
+];
+
+$arr2 = [
+    'a' => 'AAA',
+    'b' => ['BBB'],
+];
+
+$arr = array_smart_merge($arr, $arr2);
+// [
+//     'a' => 'AAA',
+//     'b' => ['B', 'BBB'],
+// ]
+```
+
 ## `filter_insert()`
 
 Shortcut for using `array_insert` as filter.
