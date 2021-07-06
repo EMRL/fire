@@ -98,7 +98,7 @@ abstract class Type
      */
     protected function addSupport(array $supports): self
     {
-        add_action('init', new Support(static::TYPE, $supports), 11);
+        add_action('init', new Support(static::TYPE, $supports), 9);
         return $this;
     }
 

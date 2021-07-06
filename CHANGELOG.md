@@ -2,6 +2,11 @@
 
 ## [Unreleased][unreleased]
 
+## [3.4.1] - 2021-07-06
+### Fixed
+- Fixed priority of `Fire\Post\Type::addSupport()` to be before type is registered
+  This fixes issue with the post type archive setting post type support
+
 ## [3.4.0] - 2021-07-01
 ### Added
 - Added `Fire\Post\Type::addSupport()`
@@ -92,7 +97,8 @@
 Complete rewrite  
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
-[unreleased]: https://github.com/emrl/fire/compare/3.4.0...master
+[unreleased]: https://github.com/emrl/fire/compare/3.4.1...master
+[3.4.1]: https://github.com/emrl/fire/compare/3.4.0...3.4.1
 [3.4.0]: https://github.com/emrl/fire/compare/3.3.5...3.4.0
 [3.3.5]: https://github.com/emrl/fire/compare/3.3.4...3.3.5
 [3.3.4]: https://github.com/emrl/fire/compare/3.3.3...3.3.4
