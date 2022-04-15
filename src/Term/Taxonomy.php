@@ -27,21 +27,6 @@ abstract class Taxonomy
     }
 
     /**
-     * Get taxonomy config
-     *
-     * @deprecated since version 3.3.0. Use static `object()` instead.
-     */
-    public function config(): WP_Taxonomy
-    {
-        @trigger_error(
-            'config() method is deprecated since 3.3.0. Use static object() method instead',
-            E_USER_DEPRECATED,
-        );
-
-        return get_taxonomy(static::TAXONOMY);
-    }
-
-    /**
      * Get taxonomy object
      */
     public static function object(): WP_Taxonomy

@@ -6,17 +6,13 @@ namespace Fire\Post\Type;
 
 class Register
 {
-    protected string $type;
-
-    /** @var callable():array<string,mixed> */
+    /** @var callable():array */
     protected $fn;
 
-    /**
-     * @param callable():array<string,mixed> $fn
-     */
-    public function __construct(string $type, callable $fn)
-    {
-        $this->type = $type;
+    public function __construct(
+        protected readonly string $type,
+        callable $fn,
+    ) {
         $this->fn = $fn;
     }
 

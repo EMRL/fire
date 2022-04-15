@@ -66,7 +66,7 @@ class CacheBustScripts
         return $this;
     }
 
-    public function validHosts()
+    public function validHosts(): array
     {
         return $this->validHosts;
     }

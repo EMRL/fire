@@ -6,16 +6,15 @@ namespace Fire\Term\Taxonomy;
 
 class RegisterForType
 {
-    protected string $taxonomy;
-
     /**
      * @var string[] $types
      */
     protected array $types;
 
-    public function __construct(string $taxonomy, string ...$types)
-    {
-        $this->taxonomy = $taxonomy;
+    public function __construct(
+        protected readonly string $taxonomy,
+        string ...$types,
+    ) {
         $this->types = $types;
     }
 

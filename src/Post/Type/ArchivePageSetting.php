@@ -19,16 +19,15 @@ class ArchivePageSetting
 
     protected const FLUSH_OPTION_NAME = 'fire_flush_rewrite';
 
-    protected string $type;
-
     /** @var callable(WP_Post_Type):string */
     protected $label;
 
     protected string $key;
 
-    public function __construct(string $type, ?callable $label)
-    {
-        $this->type = $type;
+    public function __construct(
+        protected readonly string $type,
+        ?callable $label,
+    ) {
         $this->label = $label ?: [$this, 'defaultLabel'];
         $this->key = static::optionName($type);
     }
@@ -53,7 +52,7 @@ class ArchivePageSetting
                 [$this, 'field'],
                 static::GROUP,
                 'default',
-                ['label_for' => $this->key]
+                ['label_for' => $this->key],
             );
         };
     }

@@ -19,7 +19,7 @@ class GoogleMapAddress extends Address
         string $city = '',
         string $state = '',
         string $zip = '',
-        string $placeId = ''
+        string $placeId = '',
     ) {
         parent::__construct($street, $city, $state, $zip);
         $this->placeId = $placeId;

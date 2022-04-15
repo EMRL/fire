@@ -28,18 +28,17 @@ final class AddressTest extends TestCase
 
         $this->assertSame(
             "123 Fake St\nCity ST. 99999",
-            $address->format(
-                (new AddressFormat())
-                    ->setStreetSeparator("\n")
-                    ->setCitySeparator(' ')
-                    ->setStateSeparator('. ')
-            ),
+            $address->format(new AddressFormat(
+                streetSeparator: "\n",
+                citySeparator: ' ',
+                stateSeparator: '. ',
+            )),
             'Full address with custom separators',
         );
 
         $this->assertSame(
             '123 Fake St, City, ST, 99999',
-            $address->format((new AddressFormat())->setSeparator(', ')),
+            $address->format(new AddressFormat(separator: ', ')),
             'Full address with global separator',
         );
 
@@ -53,7 +52,7 @@ final class AddressTest extends TestCase
 
         $this->assertSame(
             'City',
-            $address->format((new AddressFormat())->setZip(false)),
+            $address->format(new AddressFormat(zip: false)),
             'Partial without zip',
         );
     }

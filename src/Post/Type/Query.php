@@ -8,15 +8,9 @@ use WP_Query;
 
 class Query
 {
-    /** @var array<string,mixed> */
-    protected array $data;
-
-    /**
-     * @param array<string,mixed> $data
-     */
-    public function __construct(array $data)
-    {
-        $this->data = $data;
+    public function __construct(
+        protected readonly array $data,
+    ) {
     }
 
     public function __invoke(WP_Query $query): void

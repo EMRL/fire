@@ -6,14 +6,9 @@ namespace Fire\Path;
 
 class Join implements JoinPath
 {
-    /**
-     * The base path
-     */
-    protected string $path;
-
-    public function __construct(string $path)
-    {
-        $this->path = $path;
+    public function __construct(
+        protected readonly string $path,
+    ) {
     }
 
     public function path(string ...$paths): string

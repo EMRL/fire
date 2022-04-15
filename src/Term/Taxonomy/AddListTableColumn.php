@@ -11,11 +11,9 @@ use function Fire\Core\filter_insert;
 
 class AddListTableColumn
 {
-    protected ListTableColumn $column;
-
-    public function __construct(ListTableColumn $column)
-    {
-        $this->column = $column;
+    public function __construct(
+        protected readonly ListTableColumn $column,
+    ) {
     }
 
     public function columns(string $ref, bool $after): Closure

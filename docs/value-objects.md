@@ -79,14 +79,13 @@ Return the full address with optional formatting between each component.
 ```php
 echo $address->format();
 
-echo $address->format(
-    (new AddressFormat())
-        ->setZip(false)
-        ->setSeparator(' ')
-        ->setStreetSeparator("\n")
-        ->setCitySeparator(', ')
-        ->setStateSeparator('. ')
-);
+echo $address->format(new AddressFormat(
+    zip: false,
+    separator: ' ',
+    streetSeparator: "\n",
+    citySeparator: ', ',
+    stateSeparator: '. ',
+));
 ```
 
 ## Google Map Address

@@ -8,14 +8,10 @@ class Support
 {
     public const ARCHIVE_PAGE = 'fire/archive-page';
 
-    protected string $type;
-
-    protected array $supports;
-
-    public function __construct(string $type, array $supports)
-    {
-        $this->type = $type;
-        $this->supports = $supports;
+    public function __construct(
+        protected readonly string $type,
+        protected readonly array $supports,
+    ) {
     }
 
     public function __invoke(): void

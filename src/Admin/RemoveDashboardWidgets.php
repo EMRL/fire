@@ -6,7 +6,6 @@ namespace Fire\Admin;
 
 class RemoveDashboardWidgets
 {
-    /** @var string[] */
     protected array $ids = [];
 
     public function __construct(string ...$ids)

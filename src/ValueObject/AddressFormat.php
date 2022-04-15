@@ -6,15 +6,14 @@ namespace Fire\ValueObject;
 
 class AddressFormat
 {
-    protected bool $zip = true;
-
-    protected string $separator = '';
-
-    protected string $streetSeparator = '<br>';
-
-    protected string $citySeparator = ', ';
-
-    protected string $stateSeparator = ' ';
+    public function __construct(
+        protected bool $zip = true,
+        protected string $separator = '',
+        protected string $streetSeparator = '<br>',
+        protected string $citySeparator = ', ',
+        protected string $stateSeparator = ' ',
+    ) {
+    }
 
     public function zip(): bool
     {

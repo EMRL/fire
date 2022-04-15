@@ -9,10 +9,7 @@ namespace Fire\Path;
  */
 function join_path(string ...$pieces): string
 {
-    $pieces = array_filter($pieces, function (string $i): bool {
-        return $i !== '';
-    });
-
+    $pieces = array_filter($pieces, fn (string $i): bool => $i !== '');
     $sep = preg_quote(DIRECTORY_SEPARATOR);
     return preg_replace("~(?<!:)$sep+~", DIRECTORY_SEPARATOR, implode(DIRECTORY_SEPARATOR, $pieces));
 }

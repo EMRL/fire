@@ -10,11 +10,9 @@ use WP_Query;
 
 class Iterator implements IteratorAggregate
 {
-    protected WP_Query $query;
-
-    public function __construct(WP_Query $query)
-    {
-        $this->query = $query;
+    public function __construct(
+        protected readonly WP_Query $query,
+    ) {
     }
 
     public function getIterator(): Generator

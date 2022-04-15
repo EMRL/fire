@@ -8,15 +8,9 @@ use WP_Query;
 
 class Inject
 {
-    /** @var array<string,mixed> $values */
-    protected array $values;
-
-    /**
-     * @param array<string,mixed> $values
-     */
-    public function __construct(array $values)
-    {
-        $this->values = $values;
+    public function __construct(
+        protected readonly array $values,
+    ) {
     }
 
     public function register(): self

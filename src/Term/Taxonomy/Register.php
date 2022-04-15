@@ -6,20 +6,17 @@ namespace Fire\Term\Taxonomy;
 
 class Register
 {
-    protected string $taxonomy;
-
     /** @var callable():array<string,mixed> $fn */
     protected $fn;
 
     /** @var string[] $types */
     protected array $types = [];
 
-    /**
-     * @param callable():array<string,mixed> $fn
-     */
-    public function __construct(string $taxonomy, callable $fn, string ...$types)
-    {
-        $this->taxonomy = $taxonomy;
+    public function __construct(
+        protected readonly string $taxonomy,
+        callable $fn,
+        string ...$types,
+    ) {
         $this->fn = $fn;
         $this->types = $types;
     }

@@ -7,7 +7,7 @@ namespace Fire\Query;
 class ResolveAs404
 {
     /** @var callable[] */
-    protected array $tests = [];
+    protected readonly array $tests;
 
     protected bool $is404 = false;
 
