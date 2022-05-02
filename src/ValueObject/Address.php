@@ -39,10 +39,8 @@ class Address
         return $this->street() || $this->city() || $this->state() || $this->zip();
     }
 
-    public function format(AddressFormat $format = null): string
+    public function format(AddressFormat $format = new AddressFormat()): string
     {
-        $format = $format ?: new AddressFormat();
-
         return implode($format->streetSeparator(), array_filter([
             $this->street(),
             implode($format->citySeparator(), array_filter([
