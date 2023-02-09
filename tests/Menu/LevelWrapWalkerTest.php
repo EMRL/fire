@@ -49,7 +49,7 @@ final class LevelWrapWalkerTest extends TestCase
         $output = '';
 
         $walker = (new LevelWrapWalker())->setTagsFrom(function (callable $setTags, int $depth): void {
-            $setTags("$depth", '>');
+            $setTags("$depth", "$depth");
         });
 
         $walker->start_lvl($output);
@@ -58,7 +58,7 @@ final class LevelWrapWalkerTest extends TestCase
         $walker->end_lvl($output);
 
         $this->assertSame(
-            '0Start1StartEnd>End>',
+            '0Start1StartEnd1End0',
             $output,
         );
     }

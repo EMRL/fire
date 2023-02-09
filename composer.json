@@ -37,10 +37,10 @@
         "squizlabs/php_codesniffer": "^3"
     },
     "scripts": {
-        "test": "phpunit",
+        "test": "@php phpunit",
         "lint": [
-            "php-cs-fixer fix --dry-run --diff --verbose",
-            "phpcs"
+            "@php php-cs-fixer fix --dry-run --diff --verbose",
+            "@php phpcs"
         ]
     }
 }
