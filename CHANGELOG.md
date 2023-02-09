@@ -2,6 +2,10 @@
 
 ## [Unreleased][unreleased]
 
+## [4.0.1] - 2023-02-08
+### Fixed
+- Added `.gitattributes` file to ignore test and configuration files on export
+
 ## [4.0.0] - 2022-04-15
 ### Breaking changes
 - Updated minimum PHP version to 8.1
@@ -101,7 +105,8 @@
 Complete rewrite  
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
-[unreleased]: https://github.com/emrl/fire/compare/4.0.0...master
+[unreleased]: https://github.com/emrl/fire/compare/4.0.1...master
+[4.0.0]: https://github.com/emrl/fire/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/emrl/fire/compare/3.4.1...4.0.0
 [3.4.1]: https://github.com/emrl/fire/compare/3.4.0...3.4.1
 [3.4.0]: https://github.com/emrl/fire/compare/3.3.5...3.4.0
