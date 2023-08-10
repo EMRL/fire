@@ -4,6 +4,9 @@
 ### Added
 - Added `item_trashed` to `\Fire\Post\Type\generate_labels()` for WordPress 6.3
 
+### Changed
+- Update dependencies
+
 ## [4.0.1] - 2023-02-08
 ### Fixed
 - Added `.gitattributes` file to ignore test and configuration files on export
