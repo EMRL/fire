@@ -102,7 +102,7 @@ final class GoogleMapAddressTest extends TestCase
     protected function functions(): void
     {
         when('add_query_arg')->alias(function (array $params, string $url) {
-            return $url.(strpos($url, '?') === false ? '?' : '&').http_build_query($params);
+            return $url.(!str_contains($url, '?') ? '?' : '&').http_build_query($params);
         });
     }
 }

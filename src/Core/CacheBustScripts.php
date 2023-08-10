@@ -39,9 +39,9 @@ class CacheBustScripts
 
         // Return if host does not match
         if (
-            empty($url['host']) ||
-            empty($url['query']) ||
-            !in_array($url['host'], $this->validHosts(), true)
+            empty($url['host'])
+            || empty($url['query'])
+            || !in_array($url['host'], $this->validHosts(), true)
         ) {
             return $src;
         }

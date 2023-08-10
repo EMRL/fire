@@ -11,6 +11,11 @@ return (new Config())
         '@Symfony' => true,
         '@Symfony:risky' => true,
         'blank_line_before_statement' => false,
+        'global_namespace_import' => [
+            'import_constants' => null,
+            'import_functions' => null,
+            'import_classes' => true,
+        ],
         'native_constant_invocation' => false,
         'native_function_invocation' => false,
         'no_extra_blank_lines' => [

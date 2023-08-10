@@ -55,7 +55,7 @@ class Layout
         $layouts = [$this->default];
         $this->current = $template;
 
-        if (strpos($template, get_theme_file_path()) === 0) {
+        if (str_starts_with($template, get_theme_file_path())) {
             $base = basename($template);
         }
 
