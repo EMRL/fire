@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased][unreleased]
+
+## [4.0.2] - 2023-08-10
 ### Added
 - Added `item_trashed` to `\Fire\Post\Type\generate_labels()` for WordPress 6.3
 
@@ -110,8 +112,9 @@
 Complete rewrite  
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
-[unreleased]: https://github.com/emrl/fire/compare/4.0.1...master
-[4.0.0]: https://github.com/emrl/fire/compare/4.0.0...4.0.1
+[unreleased]: https://github.com/emrl/fire/compare/4.0.2...master
+[4.0.2]: https://github.com/emrl/fire/compare/4.0.1...4.0.2
+[4.0.1]: https://github.com/emrl/fire/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/emrl/fire/compare/3.4.1...4.0.0
 [3.4.1]: https://github.com/emrl/fire/compare/3.4.0...3.4.1
 [3.4.0]: https://github.com/emrl/fire/compare/3.3.5...3.4.0
