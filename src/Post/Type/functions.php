@@ -35,6 +35,7 @@ function generate_labels(string $plural, string $singular, array $labels = []): 
         'item_published' => "$singular published.",
         'item_published_privately' => "$singular published privately.",
         'item_reverted_to_draft' => "$singular reverted to draft.",
+        'item_trashed' => "$singular trashed.",
         'item_scheduled' => "$singular scheduled.",
         'item_updated' => "$singular updated.",
     ], $labels);

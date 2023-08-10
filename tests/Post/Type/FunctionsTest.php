@@ -35,6 +35,7 @@ final class FunctionsTest extends TestCase
             'item_published' => 'Resource published.',
             'item_published_privately' => 'Resource published privately.',
             'item_reverted_to_draft' => 'Resource reverted to draft.',
+            'item_trashed' => 'Resource trashed.',
             'item_scheduled' => 'Resource scheduled.',
             'item_updated' => 'Resource updated.',
         ], generate_labels('Resources', 'Resource', [

@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased][unreleased]
+### Added
+- Added `item_trashed` to `\Fire\Post\Type\generate_labels()` for WordPress 6.3
 
 ## [4.0.1] - 2023-02-08
 ### Fixed
