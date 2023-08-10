@@ -98,7 +98,7 @@ function filter_remove_key(array ...$arr): Closure
  */
 function filter_value(mixed $value): Closure
 {
-    return fn () => $value;
+    return fn (): mixed => $value;
 }
 
 /**
