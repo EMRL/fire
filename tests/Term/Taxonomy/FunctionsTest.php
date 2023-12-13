@@ -30,10 +30,12 @@ final class FunctionsTest extends TestCase
             'choose_from_most_used' => 'Choose from the most used resources',
             'not_found' => 'No resources found',
             'no_terms' => 'No resources',
+            'filter_by_item' => 'Filter by resource',
             'items_list_navigation' => 'Resources list navigation',
             'items_list' => 'Resources list',
             'back_to_items' => '← Go to Resources',
-            'filter_by_item' => 'Filter by resource',
+            'item_link' => 'Resource Link',
+            'item_link_description' => 'A link to a resource.',
         ], generate_labels('Resources', 'Resource', [
             'all_items' => 'Something different',
         ]));

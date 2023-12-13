@@ -15,6 +15,7 @@ final class FunctionsTest extends TestCase
         $this->assertSame([
             'name' => 'Resources',
             'singular_name' => 'Resource',
+            'add_new' => 'Add New Resource',
             'add_new_item' => 'Add New Resource',
             'edit_item' => 'Edit Resource',
             'new_item' => 'New Resource',
@@ -38,6 +39,8 @@ final class FunctionsTest extends TestCase
             'item_trashed' => 'Resource trashed.',
             'item_scheduled' => 'Resource scheduled.',
             'item_updated' => 'Resource updated.',
+            'item_link' => 'Resource Link',
+            'item_link_description' => 'A link to a resource.',
         ], generate_labels('Resources', 'Resource', [
             'all_items' => 'Something different',
         ]));

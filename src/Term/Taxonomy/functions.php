@@ -30,9 +30,11 @@ function generate_labels(string $plural, string $singular, array $labels = []): 
         'choose_from_most_used' => "Choose from the most used $plural_lower",
         'not_found' => "No $plural_lower found",
         'no_terms' => "No $plural_lower",
+        'filter_by_item' => "Filter by $singular_lower",
         'items_list_navigation' => "$plural list navigation",
         'items_list' => "$plural list",
         'back_to_items' => "← Go to $plural",
-        'filter_by_item' => "Filter by $singular_lower",
+        'item_link' => "$singular Link",
+        'item_link_description' => "A link to a $singular_lower.",
     ], $labels);
 }

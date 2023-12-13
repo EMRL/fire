@@ -15,6 +15,7 @@ function generate_labels(string $plural, string $singular, array $labels = []): 
     return array_merge([
         'name' => $plural,
         'singular_name' => $singular,
+        'add_new' => "Add New $singular",
         'add_new_item' => "Add New $singular",
         'edit_item' => "Edit $singular",
         'new_item' => "New $singular",
@@ -38,5 +39,7 @@ function generate_labels(string $plural, string $singular, array $labels = []): 
         'item_trashed' => "$singular trashed.",
         'item_scheduled' => "$singular scheduled.",
         'item_updated' => "$singular updated.",
+        'item_link' => "$singular Link",
+        'item_link_description' => "A link to a $singular_lower.",
     ], $labels);
 }
