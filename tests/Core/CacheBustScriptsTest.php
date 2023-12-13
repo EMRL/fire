@@ -18,7 +18,9 @@ final class CacheBustScriptsTest extends TestCase
     public function testFiltersAdded(): void
     {
         when('is_admin')->justReturn(false);
+
         $instance = (new CacheBustScripts($this->current))->register();
+
         $this->assertIsInt(has_filter('script_loader_src', [$instance, 'src']));
         $this->assertIsInt(has_filter('style_loader_src', [$instance, 'src']));
     }
@@ -26,7 +28,9 @@ final class CacheBustScriptsTest extends TestCase
     public function testFiltersNotAddedForAdmin(): void
     {
         when('is_admin')->justReturn(true);
+
         $instance = (new CacheBustScripts($this->current))->register();
+
         $this->assertFalse(has_filter('script_loader_src', [$instance, 'src']));
         $this->assertFalse(has_filter('style_loader_src', [$instance, 'src']));
     }
@@ -34,18 +38,21 @@ final class CacheBustScriptsTest extends TestCase
     public function testNoValidHosts(): void
     {
         $this->expectException(InvalidArgumentException::class);
+
         new CacheBustScripts('//');
     }
 
     public function testFallbackHosts(): void
     {
         when('home_url')->justReturn($this->current);
+
         $this->assertSame(parse_hosts($this->current), (new CacheBustScripts())->validHosts());
     }
 
     public function testLocal(): void
     {
         $this->functions();
+
         $bust = new CacheBustScripts($this->current);
 
         $this->assertSame(
@@ -75,20 +82,25 @@ final class CacheBustScriptsTest extends TestCase
     public function testLocalWithoutVersion(): void
     {
         $this->functions();
+
         $bust = new CacheBustScripts($this->current);
+
         $this->assertSame($src = 'https://domain.com/file.js?a=b&c=d', $bust->src($src));
     }
 
     public function testExternal(): void
     {
         $this->functions();
+
         $bust = new CacheBustScripts($this->current);
+
         $this->assertSame($src = 'https://google.com/fonts.css', $bust->src($src));
     }
 
     public function testLength(): void
     {
         $this->functions();
+
         $bust = (new CacheBustScripts($this->current))->setHashLength(5);
 
         $this->assertSame(
@@ -100,7 +112,9 @@ final class CacheBustScriptsTest extends TestCase
     public function testBadSrc(): void
     {
         $this->functions();
+
         $bust = new CacheBustScripts($this->current);
+
         $this->assertSame($src = '//', $bust->src($src));
     }
 

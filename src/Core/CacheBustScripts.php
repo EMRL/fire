@@ -6,12 +6,12 @@ namespace Fire\Core;
 
 use InvalidArgumentException;
 
-class CacheBustScripts
+final class CacheBustScripts
 {
     protected int $hashLength = 10;
 
     /** @var string[] */
-    protected array $validHosts;
+    protected readonly array $validHosts;
 
     public function __construct(string ...$validHosts)
     {
@@ -30,6 +30,7 @@ class CacheBustScripts
 
         add_filter('script_loader_src', [$this, 'src']);
         add_filter('style_loader_src', [$this, 'src']);
+
         return $this;
     }
 
@@ -57,12 +58,14 @@ class CacheBustScripts
         // Remove version and append to filename
         $src = remove_query_arg('ver', $src);
         $ver = substr(sha1($ver), 0, $this->hashLength);
+
         return preg_replace('/\.(js|css)(\?.*)?$/', ".$ver.\$1\$2", $src);
     }
 
     public function setHashLength(int $length): self
     {
         $this->hashLength = $length;
+
         return $this;
     }
 

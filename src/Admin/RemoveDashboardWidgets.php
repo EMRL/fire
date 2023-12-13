@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Fire\Admin;
 
-class RemoveDashboardWidgets
+final class RemoveDashboardWidgets
 {
-    protected array $ids = [];
+    /** @var string[] */
+    protected readonly array $ids;
 
     public function __construct(string ...$ids)
     {
@@ -16,6 +17,7 @@ class RemoveDashboardWidgets
     public function register(): self
     {
         add_action('wp_dashboard_setup', [$this, 'remove']);
+
         return $this;
     }
 

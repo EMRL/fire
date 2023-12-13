@@ -14,6 +14,7 @@ final class RemoveDashboardWidgetsTest extends TestCase
     public function testActionsAdded(): void
     {
         $instance = (new RemoveDashboardWidgets())->register();
+
         $this->assertIsInt(has_action('wp_dashboard_setup', [$instance, 'remove']));
     }
 
