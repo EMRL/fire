@@ -2,6 +2,15 @@
 
 ## [Unreleased][unreleased]
 
+## [4.0.3] - 2023-12-12
+### Added
+- Added `add_new`, `item_link`, and `item_link_description` to `Fire\Post\Type\generate_labels()`
+- Added `item_link` and `item_link_description` to `Fire\Term\Taxonomy\generate_labels()`
+
+### Changed
+- Added `readonly` to several class properties
+- Formatting in tests
+
 ## [4.0.2] - 2023-08-10
 ### Added
 - Added `item_trashed` to `\Fire\Post\Type\generate_labels()` for WordPress 6.3
@@ -112,7 +121,8 @@
 Complete rewrite  
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
-[unreleased]: https://github.com/emrl/fire/compare/4.0.2...master
+[unreleased]: https://github.com/emrl/fire/compare/4.0.3...master
+[4.0.3]: https://github.com/emrl/fire/compare/4.0.2...4.0.3
 [4.0.2]: https://github.com/emrl/fire/compare/4.0.1...4.0.2
 [4.0.1]: https://github.com/emrl/fire/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/emrl/fire/compare/3.4.1...4.0.0
