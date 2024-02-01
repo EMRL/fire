@@ -1,11 +1,14 @@
 # Changelog
 
 ## [Unreleased][unreleased]
+
+## [4.0.4] - 2024-02-01
 ### Added
 - Added the `Fire\Query\PostQuery` class to extend `WP_Query`
 
 ### Changed
 - Deprecated the `Fire\Query\Iterator` class in favor of simpler `Fire\Query\PostQuery` class.
+- Update to PHPUnit 10
 
 ## [4.0.3] - 2023-12-12
 ### Added
@@ -126,7 +129,8 @@
 Complete rewrite  
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
-[unreleased]: https://github.com/emrl/fire/compare/4.0.3...master
+[unreleased]: https://github.com/emrl/fire/compare/4.0.4...master
+[4.0.4]: https://github.com/emrl/fire/compare/4.0.3...4.0.4
 [4.0.3]: https://github.com/emrl/fire/compare/4.0.2...4.0.3
 [4.0.2]: https://github.com/emrl/fire/compare/4.0.1...4.0.2
 [4.0.1]: https://github.com/emrl/fire/compare/4.0.0...4.0.1
