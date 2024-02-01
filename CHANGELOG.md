@@ -1,6 +1,11 @@
 # Changelog
 
 ## [Unreleased][unreleased]
+### Added
+- Added the `Fire\Query\PostQuery` class to extend `WP_Query`
+
+### Changed
+- Deprecated the `Fire\Query\Iterator` class in favor of simpler `Fire\Query\PostQuery` class.
 
 ## [4.0.3] - 2023-12-12
 ### Added

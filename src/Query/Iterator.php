@@ -8,6 +8,10 @@ use Generator;
 use IteratorAggregate;
 use WP_Query;
 
+/**
+ * @deprecated 4.0.4
+ * @see \Fire\Query\PostQuery
+ */
 class Iterator implements IteratorAggregate
 {
     public function __construct(

@@ -2,7 +2,33 @@
 
 Utilities to work with [`WP_Query`](https://developer.wordpress.org/reference/classes/wp_query/)
 
+## Post Query
+
+This class extends `WP_Query` to allow iteration of posts (via `foreach` for example). All WordPress loop functions will work correctly.
+
+```php
+<?php
+$results = new PostQuery([
+    'post_type' => 'page',
+    'posts_per_page' => -1,
+]);
+
+if (!$results->have_posts()) {
+    echo 'No posts';
+
+    return;
+}
+
+foreach ($results as $article) {
+    the_title();
+    echo date('F j, Y', strtotime($article->post_date));
+}
+```
+
 ## Iterator
+
+> [!WARNING]
+> This class is deprecated in favor of using the simpler `Fire\Query\PostQuery` class.
 
 This class acts as a simple wrapper to allow iteration of `WP_Query->posts` via `foreach`. It returns a `Generator`, so all WordPress loop functions will work correctly.
 
