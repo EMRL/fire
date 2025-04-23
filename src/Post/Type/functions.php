@@ -15,8 +15,8 @@ function generate_labels(string $plural, string $singular, array $labels = []): 
     return array_merge([
         'name' => $plural,
         'singular_name' => $singular,
-        'add_new' => "Add New $singular",
-        'add_new_item' => "Add New $singular",
+        'add_new' => 'Add',
+        'add_new_item' => "Add $singular",
         'edit_item' => "Edit $singular",
         'new_item' => "New $singular",
         'view_item' => "View $singular",

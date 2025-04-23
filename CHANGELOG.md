@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased][unreleased]
+### Changed
+- Match WordPress 6.8 "Add New" -> "Add" wording change for post type and taxonomy labels
 
 ## [4.0.4] - 2024-02-01
 ### Added
