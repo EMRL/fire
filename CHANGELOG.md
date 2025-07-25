@@ -2,6 +2,13 @@
 
 ## [Unreleased][unreleased]
 
+## [2.3.2] - 2025-07-25
+### Changed
+- `Container` PHP 8.3 compatability
+
+### Fixed
+- `Container::missingLeadingSlash` was missing, method added
+
 ## [2.3.1] - 2018-09-19
 ### Changed
 - `Asset::url` returns root-relative path if file does not exist
@@ -109,6 +116,7 @@
 ### Added
 - Initial public release
 
+[2.3.2]: https://github.com/emrl/fire/compare/2.3.1...2.3.2
 [2.3.1]: https://github.com/emrl/fire/compare/2.3.0...2.3.1
 [2.3.0]: https://github.com/emrl/fire/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/emrl/fire/compare/2.1.1...2.2.0
