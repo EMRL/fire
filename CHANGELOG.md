@@ -2,6 +2,10 @@
 
 ## [Unreleased][unreleased]
 
+## [2.3.3] - 2025-07-27
+### Fixed
+- `Container::offsetGet` return type compatability
+
 ## [2.3.2] - 2025-07-25
 ### Changed
 - `Container` PHP 8.3 compatability
