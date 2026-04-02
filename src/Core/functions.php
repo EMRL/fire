@@ -107,7 +107,15 @@ function filter_value(mixed $value): Closure
 function parse_hosts(string ...$hosts): array
 {
     return array_filter(array_map(
-        fn ($i): mixed => parse_url(((!str_contains($i, '//')) ? '//' : '').$i, PHP_URL_HOST),
+        function (string $i): string|bool {
+            $parts = parse_url(((!str_contains($i, '//')) ? '//' : '').$i);
+
+            if (isset($parts['host'])) {
+                return $parts['host'].(isset($parts['port']) ? ':'.$parts['port'] : '');
+            }
+
+            return false;
+        },
         $hosts,
     ));
 }

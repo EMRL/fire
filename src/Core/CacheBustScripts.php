@@ -42,7 +42,7 @@ final class CacheBustScripts
         if (
             empty($url['host'])
             || empty($url['query'])
-            || !in_array($url['host'], $this->validHosts(), true)
+            || !in_array($url['host'].(isset($url['port']) ? ':'.$url['port'] : ''), $this->validHosts(), true)
         ) {
             return $src;
         }
