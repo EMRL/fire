@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased][unreleased]
+
+## [4.0.5] - 2026-04-02
 ### Changed
 - Match WordPress 6.8 "Add New" -> "Add" wording change for post type and taxonomy labels
 - Compare host and port for comparing valid hosts
@@ -133,6 +135,7 @@ Complete rewrite
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
 [unreleased]: https://github.com/emrl/fire/compare/4.0.4...master
+[4.0.5]: https://github.com/emrl/fire/compare/4.0.4...4.0.5
 [4.0.4]: https://github.com/emrl/fire/compare/4.0.3...4.0.4
 [4.0.3]: https://github.com/emrl/fire/compare/4.0.2...4.0.3
 [4.0.2]: https://github.com/emrl/fire/compare/4.0.1...4.0.2
