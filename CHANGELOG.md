@@ -2,6 +2,10 @@
 
 ## [Unreleased][unreleased]
 
+## [4.0.6] - 2026-04-02
+### Fixed
+- Fix PHP 8.5 deprecation for implicit null in `Fire\Post\Type::registerArchivePageSetting()`
+
 ## [4.0.5] - 2026-04-02
 ### Changed
 - Match WordPress 6.8 "Add New" -> "Add" wording change for post type and taxonomy labels
@@ -135,6 +139,7 @@ Complete rewrite
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
 [unreleased]: https://github.com/emrl/fire/compare/4.0.4...master
+[4.0.6]: https://github.com/emrl/fire/compare/4.0.5...4.0.6
 [4.0.5]: https://github.com/emrl/fire/compare/4.0.4...4.0.5
 [4.0.4]: https://github.com/emrl/fire/compare/4.0.3...4.0.4
 [4.0.3]: https://github.com/emrl/fire/compare/4.0.2...4.0.3

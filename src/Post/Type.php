@@ -307,7 +307,7 @@ abstract class Type
     /**
      * Register setting to assign archive page
      */
-    protected function registerArchivePageSetting(callable $label = null): self
+    protected function registerArchivePageSetting(?callable $label = null): self
     {
         $setting = new ArchivePageSetting(static::TYPE, $label);
 
