@@ -143,6 +143,7 @@ Complete rewrite
 [Changelog for previous versions](https://github.com/EMRL/fire/blob/2.3.1/CHANGELOG.md)
 
 [unreleased]: https://github.com/emrl/fire/compare/4.0.4...master
+[4.0.6]: https://github.com/emrl/fire/compare/4.0.6...4.0.7
 [4.0.6]: https://github.com/emrl/fire/compare/4.0.5...4.0.6
 [4.0.5]: https://github.com/emrl/fire/compare/4.0.4...4.0.5
 [4.0.4]: https://github.com/emrl/fire/compare/4.0.3...4.0.4
