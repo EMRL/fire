@@ -56,9 +56,9 @@ abstract class Type
     /**
      * Register post type
      */
-    protected function registerType(array $config): self
+    protected function registerType(array $config, ...$args): self
     {
-        return $this->registerTypeFrom(filter_value($config));
+        return $this->registerTypeFrom(filter_value($config), ...$args);
     }
 
     /**
@@ -66,9 +66,9 @@ abstract class Type
      *
      * @param callable():array<string,mixed> $fn
      */
-    protected function registerTypeFrom(callable $fn): self
+    protected function registerTypeFrom(callable $fn, ...$args): self
     {
-        add_action('init', new Register(static::TYPE, $fn));
+        add_action('init', new Register(static::TYPE, $fn), ...$args);
         return $this;
     }
 
@@ -87,9 +87,9 @@ abstract class Type
      *
      * @param callable(array<string,mixed>):array<string,mixed> $fn
      */
-    protected function modifyType(callable $fn): self
+    protected function modifyType(callable $fn, ...$args): self
     {
-        add_filter('fire/register_post_type_args/'.static::TYPE, $fn);
+        add_filter('fire/register_post_type_args/'.static::TYPE, $fn, ...$args);
         return $this;
     }
 

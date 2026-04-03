@@ -46,6 +46,9 @@ return (new Config())
         'phpdoc_var_without_name' => false,
         'strict_param' => true,
         'yoda_style' => false,
+        'nullable_type_declaration_for_default_null_value' => [
+            'use_nullable_type_declaration' => true,
+        ],
     ])
     ->setRiskyAllowed(true)
     ->setFinder(

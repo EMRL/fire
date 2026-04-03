@@ -10,7 +10,7 @@ use WP_Query;
 
 /**
  * @deprecated 4.0.4
- * @see \Fire\Query\PostQuery
+ * @see PostQuery
  */
 class Iterator implements IteratorAggregate
 {

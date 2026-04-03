@@ -2,6 +2,10 @@
 
 ## [Unreleased][unreleased]
 
+## [4.0.7] - 2026-04-03
+### Added
+- Allow passing additional args down to WordPress functions where useful
+
 ## [4.0.6] - 2026-04-02
 ### Fixed
 - Fix PHP 8.5 deprecation for implicit null in `Fire\Post\Type::registerArchivePageSetting()`

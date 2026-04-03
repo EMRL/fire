@@ -15,8 +15,8 @@ final class FunctionsTest extends TestCase
         $this->assertSame([
             'name' => 'Resources',
             'singular_name' => 'Resource',
-            'add_new' => 'Add New Resource',
-            'add_new_item' => 'Add New Resource',
+            'add_new' => 'Add',
+            'add_new_item' => 'Add Resource',
             'edit_item' => 'Edit Resource',
             'new_item' => 'New Resource',
             'view_item' => 'View Resource',

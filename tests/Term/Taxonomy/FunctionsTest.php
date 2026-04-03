@@ -23,7 +23,7 @@ final class FunctionsTest extends TestCase
             'edit_item' => 'Edit Resource',
             'view_item' => 'View Resource',
             'update_item' => 'Update Resource',
-            'add_new_item' => 'Add New Resource',
+            'add_new_item' => 'Add Resource',
             'new_item_name' => 'New Resource Name',
             'separate_items_with_commas' => 'Separate resources with commas',
             'add_or_remove_items' => 'Add or remove resources',
