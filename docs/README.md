@@ -5,6 +5,11 @@ and themes.
 
 ## Installation
 
+### For PHP 8.1
+
+`composer require emrl/fire ^4`
+
+### For PHP 7.4
 `composer require emrl/fire ^3`
 
 ## Usage
